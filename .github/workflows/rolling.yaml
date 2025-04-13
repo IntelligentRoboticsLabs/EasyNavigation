@@ -1,0 +1,45 @@
+name: rolling
+
+on:
+  pull_request:
+    branches:
+      - rolling
+  push:
+    branches:
+      - rolling
+  schedule:
+      - cron: '0 0 * * 6'     
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-24.04]
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup ROS 2
+        uses: ros-tooling/setup-ros@0.7.9
+        with:
+          required-ros-distributions: rolling
+      - name: build and test
+        uses: ros-tooling/action-ros-ci@0.3.15
+        with:
+          package-name: easynav_core
+          target-ros2-distro: rolling
+          colcon-defaults: |
+            {
+              "test": {
+                "parallel-workers" : 1
+              }
+            }
+          colcon-mixin-name: coverage-gcc
+          colcon-mixin-repository: https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml
+      - name: Codecov
+        uses: codecov/codecov-action@v1.2.1
+        with:
+          file: ros_ws/lcov/total_coverage.info
+          flags: unittests
+          name: codecov-umbrella
+          # yml: ./codecov.yml
+          fail_ci_if_error: false
