@@ -35,62 +35,74 @@ ConfigurationValue::ConfigurationValue()
 {
 }
 
-bool ConfigurationValue::is_string() const
+bool
+ConfigurationValue::is_string() const
 {
   return std::holds_alternative<std::string>(value_);
 }
 
-bool ConfigurationValue::is_string_vector() const
+bool
+ConfigurationValue::is_string_vector() const
 {
   return std::holds_alternative<std::vector<std::string>>(value_);
 }
 
-bool ConfigurationValue::is_double() const
+bool
+ConfigurationValue::is_double() const
 {
   return std::holds_alternative<double>(value_);
 }
 
-bool ConfigurationValue::is_double_vector() const
+bool
+ConfigurationValue::is_double_vector() const
 {
   return std::holds_alternative<std::vector<double>>(value_);
 }
 
-const std::string & ConfigurationValue::as_string() const
+const
+std::string & ConfigurationValue::as_string() const
 {
   return std::get<std::string>(value_);
 }
 
-const std::vector<std::string> & ConfigurationValue::as_string_vector() const
+const
+std::vector<std::string> & ConfigurationValue::as_string_vector() const
 {
   return std::get<std::vector<std::string>>(value_);
 }
 
-double ConfigurationValue::as_double() const
+double
+ConfigurationValue::as_double() const
 {
   return std::get<double>(value_);
 }
 
-const std::vector<double> & ConfigurationValue::as_double_vector() const
+const
+std::vector<double> & ConfigurationValue::as_double_vector() const
 {
   return std::get<std::vector<double>>(value_);
 }
 
-const std::string * ConfigurationValue::try_string() const
+const
+std::string * ConfigurationValue::try_string() const
 {
   return std::get_if<std::string>(&value_);
 }
 
-const std::vector<std::string> * ConfigurationValue::try_string_vector() const
+const
+std::vector<std::string> * ConfigurationValue::try_string_vector() const
 {
   return std::get_if<std::vector<std::string>>(&value_);
 }
 
-const double * ConfigurationValue::try_double() const
+const double *
+ConfigurationValue::try_double() const
 {
   return std::get_if<double>(&value_);
 }
 
-const std::vector<double> * ConfigurationValue::try_double_vector() const
+const std::vector<double> *
+ConfigurationValue::try_double_vector() const
 {
   return std::get_if<std::vector<double>>(&value_);
 }

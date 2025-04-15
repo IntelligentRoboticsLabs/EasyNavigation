@@ -30,12 +30,23 @@
 namespace easynav_ros
 {
 
+using ConfigurationMap = std::map<std::string, easynav_core::ConfigurationValue>;
+
 EasyNavNode::EasyNavNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("easynav", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
-  declare_parameter("core.map_type", std::string());
+
   easynav_core_ = std::make_shared<easynav_core::EasyNav>();
+
+  const ConfigurationMap & config = easynav_core_->get_configuration();
+
+  for (const auto & [key, val] : config) {
+    std::visit([&](auto && v) {
+        using T = std::decay_t<decltype(v)>;
+        declare_parameter<T>(key, v);
+    }, val.get_variant());
+  }
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -46,8 +57,18 @@ EasyNavNode::on_configure(const rclcpp_lifecycle::State & state)
   (void)state;
 
   bool success = true;
-  std::string map_type;
-  get_parameter("core.map_type", map_type);
+
+  std::cerr << "Configured" << std::endl;
+  ConfigurationMap & config = easynav_core_->get_configuration();
+
+  for (const auto & [key, val] : config) {
+    std::visit([&](auto && example_value) {
+        using ParamT = std::decay_t<decltype(example_value)>;
+        ParamT param_value;
+        get_parameter<ParamT>(key, param_value);
+        config[key] = param_value;
+    }, val.get_variant());
+  }
 
   success = success && easynav_core_->configure();
 

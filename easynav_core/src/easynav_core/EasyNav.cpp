@@ -20,6 +20,7 @@
 /// \file
 /// \brief Implementation of the EasyNav class.
 
+#include <iostream>
 
 #include "easynav_core/EasyNav.hpp"
 
@@ -38,6 +39,9 @@ EasyNav::EasyNav()
 bool
 EasyNav::configure()
 {
+
+  std::cerr << "core.map_type = " << configuration_["core.map_type"].as_string() << std::endl;
+
   return true;
 }
 

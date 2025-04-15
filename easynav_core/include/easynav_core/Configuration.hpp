@@ -60,6 +60,12 @@ public:
   ConfigurationValue(T value)
   : value_(std::move(value)) {}
 
+  /**
+   * @brief Get the internal std::variant storing the value.
+   * @return A const reference to the underlying variant.
+   */
+  const ValueType & get_variant() const {return value_;}
+
   /// @brief Check if the stored value is a string.
   /// @return true if it is a string.
   bool is_string() const;
