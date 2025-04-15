@@ -1,0 +1,9 @@
+<map id="easynav_core/include/easynav_core/Configuration.hpp" name="easynav_core/include/easynav_core/Configuration.hpp">
+<area shape="rect" id="Node000001" title="Definition of the ConfigurationValue class used to store multiple types of configuration data." alt="" coords="95,5,304,46"/>
+<area shape="rect" id="Node000002" href="$EasyNav_8hpp.html" title="Declaration of the EasyNav class and associated data structures for robot navigation." alt="" coords="5,94,191,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,58,123,96,119,92,163,54"/>
+<area shape="rect" id="Node000004" href="$Configuration_8cpp.html" title="Implementation of the ConfigurationValue class." alt="" coords="214,94,390,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="236,54,281,92,277,96,233,58"/>
+<area shape="rect" id="Node000003" href="$EasyNav_8cpp.html" title="Implementation of the EasyNav class." alt="" coords="10,183,186,223"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="101,150,101,182,95,182,95,150"/>
+</map>

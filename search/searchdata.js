@@ -1,12 +1,13 @@
 var indexSectionsWithContent =
 {
-  0: "cegmor",
-  1: "e",
+  0: "acefgilmprstv",
+  1: "celmps",
   2: "e",
-  3: "er",
-  4: "egmo",
-  5: "c",
-  6: "e"
+  3: "celmpr",
+  4: "acegilmpt",
+  5: "aflpt",
+  6: "cv",
+  7: "e"
 };
 
 var indexSectionNames =
@@ -16,8 +17,9 @@ var indexSectionNames =
   2: "namespaces",
   3: "files",
   4: "functions",
-  5: "typedefs",
-  6: "pages"
+  5: "variables",
+  6: "typedefs",
+  7: "pages"
 };
 
 var indexSectionLabels =
@@ -27,7 +29,8 @@ var indexSectionLabels =
   2: "Namespaces",
   3: "Files",
   4: "Functions",
-  5: "Typedefs",
-  6: "Pages"
+  5: "Variables",
+  6: "Typedefs",
+  7: "Pages"
 };
 
