@@ -23,7 +23,7 @@
 #include "lifecycle_msgs/msg/transition.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
 
-#include "easynav_core/EasyNavNode.hpp"
+#include "easynav_ros/EasyNavNode.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
@@ -32,13 +32,11 @@ using namespace std::chrono_literals;
 
 int main(int argc, char ** argv)
 {
-  setvbuf(stdout, NULL, _IONBF, BUFSIZ);
-
   rclcpp::init(argc, argv);
 
   rclcpp::experimental::executors::EventsExecutor exe_nort, exe_rt;
 
-  auto easynav_node = easynav::EasyNavNode::make_shared();
+  auto easynav_node = easynav_ros::EasyNavNode::make_shared();
 
   exe_nort.add_node(easynav_node->get_node_base_interface());
   exe_rt.add_callback_group(easynav_node->get_real_time_cbg(),

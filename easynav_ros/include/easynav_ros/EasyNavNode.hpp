@@ -17,19 +17,27 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-#ifndef EASYNAV_CORE__EASYNAVNODE_HPP_
-#define EASYNAV_CORE__EASYNAVNODE_HPP_
+/// \file
+/// \brief Declaration of the EasyNavNode lifecycle node, ROS 2 interface for EasyNav core.
+
+#ifndef EASYNAV_ROS__EASYNAVNODE_HPP_
+#define EASYNAV_ROS__EASYNAVNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav
+#include "easynav_core/EasyNav.hpp"
+
+namespace easynav_ros
 {
 
 /**
  * @class EasyNavNode
  * @brief Represents the main node that manages navigation.
+ *
+ * This ROS 2 lifecycle node wraps the EasyNav core system, managing its lifecycle
+ * and integrating it with the ROS environment.
  */
 class EasyNavNode : public rclcpp_lifecycle::LifecycleNode
 {
@@ -93,15 +101,20 @@ public:
    *
    * @return Shared pointer to the real-time callback group.
    */
-  rclcpp::CallbackGroup::SharedPtr get_real_time_cbg() {return realtime_cbg_;}
+  rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
 private:
   /**
    * @brief Callback group intended for real-time tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
+
+  /**
+   * @brief Internal pointer to the EasyNav core logic.
+   */
+  std::shared_ptr<easynav_core::EasyNav> easynav_core_;
 };
 
-}  // namespace easynav
+}  // namespace easynav_ros
 
-#endif  // EASYNAV_CORE__EASYNAVNODE_HPP_
+#endif  // EASYNAV_ROS__EASYNAVNODE_HPP_

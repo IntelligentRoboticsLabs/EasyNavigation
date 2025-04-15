@@ -1,0 +1,9 @@
+easynav:
+  ros__parameters:
+    use_real_time: false
+    core:
+      map_type: costmap
+      mapper:
+        plugins: [costmap]
+        costmap:
+          plugin: "easynav_mapper::CostmapMapper"

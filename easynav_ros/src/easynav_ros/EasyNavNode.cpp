@@ -17,104 +17,86 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
+/// \file
+/// \brief Implementation of the EasyNavNode class.
+
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-#include "easynav_core/EasyNavNode.hpp"
+#include "easynav_ros/EasyNavNode.hpp"
+#include "easynav_core/EasyNav.hpp"
 
-namespace easynav
+namespace easynav_ros
 {
 
-/**
- * @brief Constructs a EasyNavNode lifecycle node with the specified options.
- * @param options Node options to configure the EasyNavNode node.
- */
 EasyNavNode::EasyNavNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("easynav", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
-
+  declare_parameter("core.map_type", std::string());
+  easynav_core_ = std::make_shared<easynav_core::EasyNav>();
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
-/**
- * @brief Configures the EasyNavNode node.
- * @param state The current lifecycle state.
- * @return CallbackReturnT::SUCCESS if configuration is successful.
- */
 CallbackReturnT
 EasyNavNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  return CallbackReturnT::SUCCESS;
+  bool success = true;
+  std::string map_type;
+  get_parameter("core.map_type", map_type);
+
+  success = success && easynav_core_->configure();
+
+  if (success) {
+    return CallbackReturnT::SUCCESS;
+  } else {
+    return CallbackReturnT::FAILURE;
+  }
 }
 
-/**
- * @brief Activates the EasyNavNode node.
- * @param state The current lifecycle state.
- * @return CallbackReturnT::SUCCESS if activation is successful.
- */
 CallbackReturnT
 EasyNavNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
   return CallbackReturnT::SUCCESS;
 }
 
-/**
- * @brief Deactivates the EasyNavNode node.
- * @param state The current lifecycle state.
- * @return CallbackReturnT::SUCCESS if deactivation is successful.
- */
 CallbackReturnT
 EasyNavNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
   return CallbackReturnT::SUCCESS;
 }
 
-/**
- * @brief Cleans up the EasyNavNode node.
- * @param state The current lifecycle state.
- * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
- */
 CallbackReturnT
 EasyNavNode::on_cleanup(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
   return CallbackReturnT::SUCCESS;
 }
 
-/**
- * @brief Shuts down the EasyNavNode node.
- * @param state The current lifecycle state.
- * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
- */
 CallbackReturnT
 EasyNavNode::on_shutdown(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
   return CallbackReturnT::SUCCESS;
 }
 
-/**
- * @brief Handles errors in the EasyNavNode node.
- * @param state The current lifecycle state.
- * @return CallbackReturnT::SUCCESS indicating error handling is complete.
- */
 CallbackReturnT
 EasyNavNode::on_error(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
   return CallbackReturnT::SUCCESS;
 }
 
-}  // namespace easynav
+rclcpp::CallbackGroup::SharedPtr
+EasyNavNode::get_real_time_cbg()
+{
+  return realtime_cbg_;
+}
+
+}  // namespace easynav_ros
