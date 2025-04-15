@@ -9,38 +9,43 @@
 <area shape="rect" id="Node000005" href="$EasyNavNode_8hpp.html" title="Declaration of the EasyNavNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="225,94,430,120"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="330,46,330,78,325,78,325,46"/>
 <area shape="rect" id="Node000006" href="$EasyNav_8hpp.html" title="Declaration of the EasyNav class and associated data structures for robot navigation." alt="" coords="486,175,668,201"/>
-<area shape="poly" id="edge24_Node000001_Node000006" title=" " alt="" coords="375,44,419,66,465,92,514,128,555,163,552,167,511,132,462,96,417,70,373,49"/>
+<area shape="poly" id="edge28_Node000001_Node000006" title=" " alt="" coords="375,44,419,66,465,92,514,128,555,163,552,167,511,132,462,96,417,70,373,49"/>
 <area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="288,123,120,173,119,168,286,118"/>
 <area shape="poly" id="edge6_Node000005_Node000003" title=" " alt="" coords="312,122,244,168,241,164,309,118"/>
 <area shape="poly" id="edge7_Node000005_Node000004" title=" " alt="" coords="338,119,361,153,357,156,334,122"/>
 <area shape="poly" id="edge8_Node000005_Node000006" title=" " alt="" coords="367,118,525,167,523,173,365,123"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="80,256,140,282"/>
-<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="514,204,475,211,316,232,246,242,156,258,155,253,245,237,315,227,474,206,513,199"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="164,256,238,282"/>
-<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="516,204,253,258,252,253,515,199"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="262,256,308,282"/>
-<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="528,204,324,258,323,253,527,199"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="333,256,400,282"/>
-<area shape="poly" id="edge12_Node000006_Node000010" title=" " alt="" coords="545,204,414,253,412,248,544,199"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="410,330,464,356"/>
-<area shape="poly" id="edge13_Node000006_Node000011" title=" " alt="" coords="544,204,502,225,482,240,464,258,450,286,442,316,437,314,445,284,460,255,478,236,499,221,541,199"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="704,256,882,282"/>
-<area shape="poly" id="edge14_Node000006_Node000012" title=" " alt="" coords="611,199,746,248,745,253,609,204"/>
-<area shape="rect" id="Node000013" href="$Configuration_8hpp.html" title="Definition of the ConfigurationValue class used to store multiple types of configuration data." alt="" coords="475,256,679,282"/>
-<area shape="poly" id="edge15_Node000006_Node000013" title=" " alt="" coords="580,201,580,240,574,240,574,201"/>
-<area shape="rect" id="Node000017" href="$Mapper_8hpp.html" title="Declaration of the Mapper class used in the Easy Navigation core module." alt="" coords="907,256,1079,282"/>
-<area shape="poly" id="edge20_Node000006_Node000017" title=" " alt="" coords="642,199,915,250,914,256,641,204"/>
-<area shape="rect" id="Node000018" href="$Localizer_8hpp.html" title="Declaration of the Localizer class used in the Easy Navigation core module." alt="" coords="1104,256,1285,282"/>
-<area shape="poly" id="edge21_Node000006_Node000018" title=" " alt="" coords="668,198,1089,252,1088,257,668,204"/>
-<area shape="rect" id="Node000019" href="$Planner_8hpp.html" title="Declaration of the Planner class used in the Easy Navigation core module." alt="" coords="1309,256,1482,282"/>
-<area shape="poly" id="edge22_Node000006_Node000019" title=" " alt="" coords="668,194,1294,253,1293,259,668,200"/>
-<area shape="rect" id="Node000020" href="$Controller_8hpp.html" title="Declaration of the Controller class used in the Easy Navigation core module." alt="" coords="1506,256,1690,282"/>
-<area shape="poly" id="edge23_Node000006_Node000020" title=" " alt="" coords="668,192,1024,216,1491,253,1491,259,1024,221,668,198"/>
-<area shape="poly" id="edge16_Node000013_Node000011" title=" " alt="" coords="554,285,475,325,473,320,552,280"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="488,330,546,356"/>
-<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="569,284,539,320,535,316,565,281"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="570,330,630,356"/>
-<area shape="poly" id="edge18_Node000013_Node000015" title=" " alt="" coords="583,281,594,314,589,316,578,283"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="654,330,732,356"/>
-<area shape="poly" id="edge19_Node000013_Node000016" title=" " alt="" coords="598,280,662,319,659,324,595,285"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="23,256,83,282"/>
+<area shape="poly" id="edge9_Node000006_Node000007" title=" " alt="" coords="515,204,475,211,371,225,288,232,205,241,99,259,98,253,204,236,287,227,370,219,474,206,514,199"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="107,256,154,282"/>
+<area shape="poly" id="edge10_Node000006_Node000008" title=" " alt="" coords="513,204,475,211,323,232,255,241,169,259,168,254,254,236,322,226,474,206,513,199"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="178,256,245,282"/>
+<area shape="poly" id="edge11_Node000006_Node000009" title=" " alt="" coords="520,204,264,259,261,260,260,254,263,254,519,199"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="266,330,320,356"/>
+<area shape="poly" id="edge12_Node000006_Node000010" title=" " alt="" coords="519,204,421,229,377,243,348,258,323,286,305,317,301,315,318,283,345,254,375,239,419,224,517,199"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="354,330,411,356"/>
+<area shape="poly" id="edge13_Node000006_Node000011" title=" " alt="" coords="508,204,419,227,383,241,360,258,355,271,355,286,368,316,363,318,350,287,350,270,356,255,380,237,417,222,507,199"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="789,256,968,282"/>
+<area shape="poly" id="edge14_Node000006_Node000012" title=" " alt="" coords="624,199,818,249,817,254,623,204"/>
+<area shape="rect" id="Node000013" href="$Configuration_8hpp.html" title="Definition of the ConfigurationValue class used to store multiple types of configuration data." alt="" coords="371,256,575,282"/>
+<area shape="poly" id="edge15_Node000006_Node000013" title=" " alt="" coords="563,203,502,249,499,245,560,199"/>
+<area shape="rect" id="Node000016" href="$Result_8hpp.html" title="Definition of the Result class, a generic outcome container inspired by Rust&#39;s Result&lt;T,..." alt="" coords="599,256,766,282"/>
+<area shape="poly" id="edge20_Node000006_Node000016" title=" " alt="" coords="595,199,656,245,653,249,591,203"/>
+<area shape="rect" id="Node000018" href="$Mapper_8hpp.html" title="Declaration of the Mapper class used in the Easy Navigation core module." alt="" coords="992,256,1164,282"/>
+<area shape="poly" id="edge24_Node000006_Node000018" title=" " alt="" coords="655,199,987,251,986,256,654,204"/>
+<area shape="rect" id="Node000019" href="$Localizer_8hpp.html" title="Declaration of the Localizer class used in the Easy Navigation core module." alt="" coords="1189,256,1370,282"/>
+<area shape="poly" id="edge25_Node000006_Node000019" title=" " alt="" coords="668,197,1174,253,1173,259,668,202"/>
+<area shape="rect" id="Node000020" href="$Planner_8hpp.html" title="Declaration of the Planner class used in the Easy Navigation core module." alt="" coords="1394,256,1568,282"/>
+<area shape="poly" id="edge26_Node000006_Node000020" title=" " alt="" coords="668,193,979,217,1379,253,1379,259,978,223,668,199"/>
+<area shape="rect" id="Node000021" href="$Controller_8hpp.html" title="Declaration of the Controller class used in the Easy Navigation core module." alt="" coords="1592,256,1776,282"/>
+<area shape="poly" id="edge27_Node000006_Node000021" title=" " alt="" coords="668,191,1058,215,1576,253,1576,259,1058,220,668,197"/>
+<area shape="poly" id="edge16_Node000013_Node000010" title=" " alt="" coords="443,285,335,328,333,323,441,280"/>
+<area shape="poly" id="edge17_Node000013_Node000011" title=" " alt="" coords="459,285,411,323,408,318,456,280"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="548,330,608,356"/>
+<area shape="poly" id="edge18_Node000013_Node000014" title=" " alt="" coords="492,280,549,319,546,323,489,285"/>
+<area shape="rect" id="Node000015" title=" " alt="" coords="440,330,517,356"/>
+<area shape="poly" id="edge19_Node000013_Node000015" title=" " alt="" coords="477,282,479,314,474,315,471,282"/>
+<area shape="poly" id="edge21_Node000016_Node000014" title=" " alt="" coords="666,285,610,323,607,319,663,280"/>
+<area shape="poly" id="edge23_Node000016_Node000015" title=" " alt="" coords="649,285,528,327,526,322,647,280"/>
+<area shape="rect" id="Node000017" title=" " alt="" coords="644,330,721,356"/>
+<area shape="poly" id="edge22_Node000016_Node000017" title=" " alt="" coords="685,282,685,314,680,314,680,282"/>
 </map>

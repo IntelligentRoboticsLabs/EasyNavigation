@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['speed_0',['Speed',['../structeasynav__core_1_1Speed.html',1,'easynav_core']]]
+  ['result_0',['Result',['../classeasynav__core_1_1Result.html',1,'easynav_core']]]
 ];

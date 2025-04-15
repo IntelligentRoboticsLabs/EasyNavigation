@@ -119,9 +119,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad2c752a704905d116b9a21972214668e" id="r_ad2c752a704905d116b9a21972214668e"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad2c752a704905d116b9a21972214668e">configure</a> ()</td></tr>
 <tr class="memdesc:ad2c752a704905d116b9a21972214668e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the system and its internal modules.  <br /></td></tr>
 <tr class="separator:ad2c752a704905d116b9a21972214668e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a42f68c67ed45423e4f6abc26b3683e38" id="r_a42f68c67ed45423e4f6abc26b3683e38"><td class="memItemLeft" align="right" valign="top">std::expected&lt; <a class="el" href="structeasynav__core_1_1Speed.html">Speed</a>, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42f68c67ed45423e4f6abc26b3683e38">control_cycle</a> ()</td></tr>
-<tr class="memdesc:a42f68c67ed45423e4f6abc26b3683e38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a control cycle.  <br /></td></tr>
-<tr class="separator:a42f68c67ed45423e4f6abc26b3683e38"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c9d3bea648fc8d5d1426b72bc4efe90" id="r_a9c9d3bea648fc8d5d1426b72bc4efe90"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classeasynav__core_1_1Result.html">Result</a>&lt; <a class="el" href="structeasynav__core_1_1Speed.html">Speed</a>, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9c9d3bea648fc8d5d1426b72bc4efe90">control_cycle</a> ()</td></tr>
+<tr class="memdesc:a9c9d3bea648fc8d5d1426b72bc4efe90"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes a full control cycle: localization, planning, control.  <br /></td></tr>
+<tr class="separator:a9c9d3bea648fc8d5d1426b72bc4efe90"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a392763c660d0f754ac106a702732a42c" id="r_a392763c660d0f754ac106a702732a42c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a392763c660d0f754ac106a702732a42c">EasyNav</a> ()</td></tr>
 <tr class="memdesc:a392763c660d0f754ac106a702732a42c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a392763c660d0f754ac106a702732a42c"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -193,7 +193,7 @@ Static Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>true if the perception was accepted. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the perception was accepted and stored. </dd></dl>
 
 </div>
 </div>
@@ -217,14 +217,14 @@ Static Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a42f68c67ed45423e4f6abc26b3683e38" name="a42f68c67ed45423e4f6abc26b3683e38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a42f68c67ed45423e4f6abc26b3683e38">&#9670;&#160;</a></span>control_cycle()</h2>
+<a id="a9c9d3bea648fc8d5d1426b72bc4efe90" name="a9c9d3bea648fc8d5d1426b72bc4efe90"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c9d3bea648fc8d5d1426b72bc4efe90">&#9670;&#160;</a></span>control_cycle()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">std::expected&lt; <a class="el" href="structeasynav__core_1_1Speed.html">Speed</a>, std::string &gt; control_cycle </td>
+          <td class="memname"><a class="el" href="classeasynav__core_1_1Result.html">Result</a>&lt; <a class="el" href="structeasynav__core_1_1Speed.html">Speed</a>, std::string &gt; control_cycle </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -232,8 +232,9 @@ Static Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes a control cycle. </p>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structeasynav__core_1_1Speed.html" title="Represents linear and angular velocity.">Speed</a> command on success, or an error string if the cycle fails. </dd></dl>
+<p>Executes a full control cycle: localization, planning, control. </p>
+<p>On success, returns a valid <a class="el" href="structeasynav__core_1_1Speed.html" title="Represents linear and angular velocity.">Speed</a> command to be sent to the robot. On failure, returns an error message with diagnostic information.</p>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="classeasynav__core_1_1Result.html" title="Generic result type that holds either a value (T) or an error (E).">Result&lt;Speed, std::string&gt;</a> containing either a valid speed command or an error string. </dd></dl>
 
 </div>
 </div>

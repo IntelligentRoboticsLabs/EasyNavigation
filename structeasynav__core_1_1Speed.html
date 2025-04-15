@@ -104,9 +104,13 @@ Collaboration diagram for Speed:</div>
 <div class="dyncontent">
 <div class="center"><img src="structeasynav__core_1_1Speed__coll__graph.png" border="0" usemap="#aSpeed_coll__map" alt="Collaboration graph"/></div>
 <map name="aSpeed_coll__map" id="aSpeed_coll__map">
-<area shape="rect" title="Represents linear and angular velocity." alt="" coords="9,109,68,135"/>
-<area shape="rect" title=" " alt="" coords="5,5,72,31"/>
-<area shape="poly" title=" " alt="" coords="41,47,41,109,36,109,36,47"/>
+<area shape="rect" title="Represents linear and angular velocity." alt="" coords="174,124,232,150"/>
+<area shape="rect" title=" " alt="" coords="5,5,153,46"/>
+<area shape="poly" title=" " alt="" coords="100,57,116,79,135,98,175,122,172,126,132,102,112,82,96,60"/>
+<area shape="rect" title=" " alt="" coords="176,13,230,38"/>
+<area shape="poly" title=" " alt="" coords="206,54,206,124,200,124,200,54"/>
+<area shape="rect" title=" " alt="" coords="254,13,320,38"/>
+<area shape="poly" title=" " alt="" coords="283,54,274,78,260,102,230,125,227,121,256,98,269,76,278,53"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -115,9 +119,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a0fa3c0d3b7d269325d8d01469f1d61d6" id="r_a0fa3c0d3b7d269325d8d01469f1d61d6"><td class="memItemLeft" align="right" valign="top">tf2::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0fa3c0d3b7d269325d8d01469f1d61d6">angular</a></td></tr>
 <tr class="memdesc:a0fa3c0d3b7d269325d8d01469f1d61d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Angular velocity.  <br /></td></tr>
 <tr class="separator:a0fa3c0d3b7d269325d8d01469f1d61d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aee63db9a1c81df1506964242aacdac88" id="r_aee63db9a1c81df1506964242aacdac88"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee63db9a1c81df1506964242aacdac88">frame_id</a></td></tr>
+<tr class="memdesc:aee63db9a1c81df1506964242aacdac88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reference frame ID of the perception data.  <br /></td></tr>
+<tr class="separator:aee63db9a1c81df1506964242aacdac88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e5634ffdfbf3835dc53f448c22e4553" id="r_a5e5634ffdfbf3835dc53f448c22e4553"><td class="memItemLeft" align="right" valign="top">tf2::Vector3&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e5634ffdfbf3835dc53f448c22e4553">linear</a></td></tr>
 <tr class="memdesc:a5e5634ffdfbf3835dc53f448c22e4553"><td class="mdescLeft">&#160;</td><td class="mdescRight">Linear velocity.  <br /></td></tr>
 <tr class="separator:a5e5634ffdfbf3835dc53f448c22e4553"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6838cb4444f7149632c3bf7fe87e72ad" id="r_a6838cb4444f7149632c3bf7fe87e72ad"><td class="memItemLeft" align="right" valign="top">std::chrono::sys_time&lt; std::chrono::nanoseconds &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6838cb4444f7149632c3bf7fe87e72ad">timestamp</a></td></tr>
+<tr class="memdesc:a6838cb4444f7149632c3bf7fe87e72ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp of the perception data.  <br /></td></tr>
+<tr class="separator:a6838cb4444f7149632c3bf7fe87e72ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents linear and angular velocity. </p>
@@ -139,6 +149,22 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="aee63db9a1c81df1506964242aacdac88" name="aee63db9a1c81df1506964242aacdac88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aee63db9a1c81df1506964242aacdac88">&#9670;&#160;</a></span>frame_id</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string frame_id</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Reference frame ID of the perception data. </p>
+
+</div>
+</div>
 <a id="a5e5634ffdfbf3835dc53f448c22e4553" name="a5e5634ffdfbf3835dc53f448c22e4553"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5e5634ffdfbf3835dc53f448c22e4553">&#9670;&#160;</a></span>linear</h2>
 
@@ -152,6 +178,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Linear velocity. </p>
+
+</div>
+</div>
+<a id="a6838cb4444f7149632c3bf7fe87e72ad" name="a6838cb4444f7149632c3bf7fe87e72ad"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6838cb4444f7149632c3bf7fe87e72ad">&#9670;&#160;</a></span>timestamp</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::chrono::sys_time&lt;std::chrono::nanoseconds&gt; timestamp</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Timestamp of the perception data. </p>
 
 </div>
 </div>

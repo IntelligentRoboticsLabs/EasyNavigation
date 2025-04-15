@@ -155,7 +155,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents the main node that manages navigation. </p>
-<p>This ROS 2 lifecycle node wraps the EasyNav core system, managing its lifecycle and integrating it with the ROS environment. </p>
+<p>This ROS 2 lifecycle node wraps the EasyNav core system, managing its lifecycle and integrating it with the ROS environment. It periodically executes a control cycle and interacts with the ROS parameter system and execution model. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ad09d90f1fe35c9e2f2fd7fc1902312f4" name="ad09d90f1fe35c9e2f2fd7fc1902312f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">&#9670;&#160;</a></span>CallbackReturnT</h2>
@@ -243,6 +243,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Activates the <a class="el" href="classeasynav__ros_1_1EasyNavNode.html" title="Represents the main node that manages navigation.">EasyNavNode</a> node. </p>
+<p>This starts periodic navigation control cycles.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -269,6 +270,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cleans up the <a class="el" href="classeasynav__ros_1_1EasyNavNode.html" title="Represents the main node that manages navigation.">EasyNavNode</a> node. </p>
+<p>Releases resources and resets the internal state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -295,6 +297,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Configures the <a class="el" href="classeasynav__ros_1_1EasyNavNode.html" title="Represents the main node that manages navigation.">EasyNavNode</a> node. </p>
+<p>This is typically where parameters and interfaces are declared.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -321,6 +324,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Deactivates the <a class="el" href="classeasynav__ros_1_1EasyNavNode.html" title="Represents the main node that manages navigation.">EasyNavNode</a> node. </p>
+<p>Control loops are stopped and interfaces are disabled.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -347,6 +351,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Handles errors in the <a class="el" href="classeasynav__ros_1_1EasyNavNode.html" title="Represents the main node that manages navigation.">EasyNavNode</a> node. </p>
+<p>This is called when a failure occurs during a lifecycle transition.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -373,6 +378,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shuts down the <a class="el" href="classeasynav__ros_1_1EasyNavNode.html" title="Represents the main node that manages navigation.">EasyNavNode</a> node. </p>
+<p>Called on final shutdown of the node's lifecycle.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>

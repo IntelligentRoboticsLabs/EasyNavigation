@@ -9,5 +9,7 @@ var searchData=
   ['easynavigation_6',['EasyNavigation',['../index.html',1,'']]],
   ['easynavnode_7',['EasyNavNode',['../classeasynav__ros_1_1EasyNavNode.html',1,'EasyNavNode'],['../classeasynav__ros_1_1EasyNavNode.html#a7432a38d3346324371dfe88b5953a8bd',1,'easynav_ros::EasyNavNode::EasyNavNode()']]],
   ['easynavnode_2ecpp_8',['EasyNavNode.cpp',['../EasyNavNode_8cpp.html',1,'']]],
-  ['easynavnode_2ehpp_9',['EasyNavNode.hpp',['../EasyNavNode_8hpp.html',1,'']]]
+  ['easynavnode_2ehpp_9',['EasyNavNode.hpp',['../EasyNavNode_8hpp.html',1,'']]],
+  ['err_10',['Err',['../classeasynav__core_1_1Result.html#a32d09532fa9d251a0ba1d29aa74c4f1b',1,'easynav_core::Result']]],
+  ['error_11',['error',['../classeasynav__core_1_1Result.html#a2c701edbd06d95945db2533ec27eeb1f',1,'easynav_core::Result']]]
 ];
