@@ -865,7 +865,8 @@ WARN_LOGFILE           =
 # Note: If this tag is empty the current directory is searched.
 
 INPUT                  = README.md \
-                         easynav_core 
+                         easynav_core \
+                         easynav_ros
 
 
 # This tag can be used to specify the character encoding of the source files
