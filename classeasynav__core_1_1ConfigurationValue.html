@@ -128,6 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a64a8e150f2feb20304d5e05b0acd17c2"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a64a8e150f2feb20304d5e05b0acd17c2">ConfigurationValue</a> (T value)</td></tr>
 <tr class="memdesc:a64a8e150f2feb20304d5e05b0acd17c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a <a class="el" href="classeasynav__core_1_1ConfigurationValue.html" title="Holds a configuration value that can be a string, vector of strings, double, or vector of doubles.">ConfigurationValue</a> from any supported type.  <br /></td></tr>
 <tr class="separator:a64a8e150f2feb20304d5e05b0acd17c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c05022f1a36069a31ee02de7d5d9282" id="r_a5c05022f1a36069a31ee02de7d5d9282"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="#a29e07af9c59ced9f0a8d5dcaafd33b90">ValueType</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5c05022f1a36069a31ee02de7d5d9282">get_variant</a> () const</td></tr>
+<tr class="memdesc:a5c05022f1a36069a31ee02de7d5d9282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the internal std::variant storing the value.  <br /></td></tr>
+<tr class="separator:a5c05022f1a36069a31ee02de7d5d9282"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab0447ed614cb207f6e585f673229fdbb" id="r_ab0447ed614cb207f6e585f673229fdbb"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab0447ed614cb207f6e585f673229fdbb">is_double</a> () const</td></tr>
 <tr class="memdesc:ab0447ed614cb207f6e585f673229fdbb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the stored value is a double.  <br /></td></tr>
 <tr class="separator:ab0447ed614cb207f6e585f673229fdbb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -310,6 +313,26 @@ template&lt;typename T&gt; </div>
 
 <p>Get the stored value as a vector of strings. </p>
 <dl class="section return"><dt>Returns</dt><dd>A const reference to the vector of strings. </dd></dl>
+
+</div>
+</div>
+<a id="a5c05022f1a36069a31ee02de7d5d9282" name="a5c05022f1a36069a31ee02de7d5d9282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c05022f1a36069a31ee02de7d5d9282">&#9670;&#160;</a></span>get_variant()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const <a class="el" href="#a29e07af9c59ced9f0a8d5dcaafd33b90">ValueType</a> &amp; get_variant </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Get the internal std::variant storing the value. </p>
+<dl class="section return"><dt>Returns</dt><dd>A const reference to the underlying variant. </dd></dl>
 
 </div>
 </div>
