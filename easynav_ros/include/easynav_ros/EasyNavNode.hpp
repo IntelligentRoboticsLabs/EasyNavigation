@@ -37,7 +37,8 @@ namespace easynav_ros
  * @brief Represents the main node that manages navigation.
  *
  * This ROS 2 lifecycle node wraps the EasyNav core system, managing its lifecycle
- * and integrating it with the ROS environment.
+ * and integrating it with the ROS environment. It periodically executes a control cycle
+ * and interacts with the ROS parameter system and execution model.
  */
 class EasyNavNode : public rclcpp_lifecycle::LifecycleNode
 {
@@ -53,6 +54,8 @@ public:
 
   /**
    * @brief Configures the EasyNavNode node.
+   * This is typically where parameters and interfaces are declared.
+   *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if configuration is successful.
    */
@@ -60,6 +63,8 @@ public:
 
   /**
    * @brief Activates the EasyNavNode node.
+   * This starts periodic navigation control cycles.
+   *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if activation is successful.
    */
@@ -67,6 +72,8 @@ public:
 
   /**
    * @brief Deactivates the EasyNavNode node.
+   * Control loops are stopped and interfaces are disabled.
+   *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if deactivation is successful.
    */
@@ -74,6 +81,8 @@ public:
 
   /**
    * @brief Cleans up the EasyNavNode node.
+   * Releases resources and resets the internal state.
+   *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
    */
@@ -81,6 +90,8 @@ public:
 
   /**
    * @brief Shuts down the EasyNavNode node.
+   * Called on final shutdown of the node's lifecycle.
+   *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
    */
@@ -88,6 +99,8 @@ public:
 
   /**
    * @brief Handles errors in the EasyNavNode node.
+   * This is called when a failure occurs during a lifecycle transition.
+   *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating error handling is complete.
    */
@@ -108,6 +121,19 @@ private:
    * @brief Callback group intended for real-time tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
+
+  /**
+   * @brief Timer that triggers the periodic navigation cycle.
+   */
+  rclcpp::TimerBase::SharedPtr nav_main_timer_;
+
+  /**
+   * @brief Executes a single navigation cycle.
+   *
+   * This method is periodically called by a timer to run the core logic,
+   * including localization, planning, and control.
+   */
+  void nav_cycle();
 
   /**
    * @brief Internal pointer to the EasyNav core logic.

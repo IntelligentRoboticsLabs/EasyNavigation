@@ -31,6 +31,7 @@ namespace easynav_ros
 {
 
 using ConfigurationMap = std::map<std::string, easynav_core::ConfigurationValue>;
+using namespace std::chrono_literals;
 
 EasyNavNode::EasyNavNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("easynav", options)
@@ -83,6 +84,9 @@ CallbackReturnT
 EasyNavNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
+
+  nav_main_timer_ = create_timer(1ms, std::bind(&EasyNavNode::nav_cycle, this), realtime_cbg_);
+
   return CallbackReturnT::SUCCESS;
 }
 
@@ -90,6 +94,9 @@ CallbackReturnT
 EasyNavNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
+
+  nav_main_timer_->cancel();
+
   return CallbackReturnT::SUCCESS;
 }
 
@@ -119,5 +126,20 @@ EasyNavNode::get_real_time_cbg()
 {
   return realtime_cbg_;
 }
+
+void
+EasyNavNode::nav_cycle()
+{
+  auto result = easynav_core_->control_cycle();
+
+  if (result.has_value()) {
+    std::cerr << "Ok " << std::endl;
+    // Transform  result.value() to geometry_::msgs::TwistStamped and publlish
+  } else {
+    RCLCPP_ERROR_STREAM(get_logger(), "Error: " << result.error());
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CALLBACK_ERROR);
+  }
+}
+
 
 }  // namespace easynav_ros

@@ -45,7 +45,7 @@ EasyNav::configure()
   return true;
 }
 
-std::expected<Speed, std::string>
+Result<Speed, std::string>
 EasyNav::control_cycle()
 {
   // mapper_->update_map(last_perceptions_);
@@ -53,7 +53,7 @@ EasyNav::control_cycle()
   // planner_->update_path(localizer_->get_pos(), mapper_->get_map(), get_goal());
   // controller_->get_speed(planner_->get_path());
 
-  return Speed();
+  return Result<Speed, std::string>::Ok(Speed());
 }
 
 bool

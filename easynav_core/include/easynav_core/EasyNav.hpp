@@ -24,15 +24,15 @@
 #define EASYNAV_CORE__EASYNAV_HPP_
 
 #include <chrono>
-#include <expected>
 #include <map>
 #include <memory>
 #include <string>
+#include <vector>
 
 #include "tf2/LinearMath/Vector3.hpp"
 
-// #include "pcl/point_types.h"
 #include "easynav_core/Configuration.hpp"
+#include "easynav_core/Result.hpp"
 #include "easynav_core/Mapper.hpp"
 #include "easynav_core/Localizer.hpp"
 #include "easynav_core/Planner.hpp"
@@ -62,11 +62,13 @@ struct Perception
  */
 struct Speed
 {
+  std::chrono::sys_time<std::chrono::nanoseconds> timestamp;  ///< Timestamp of the perception data.
+  std::string frame_id;  ///< Reference frame ID of the perception data.
   tf2::Vector3 linear;  ///< Linear velocity.
   tf2::Vector3 angular; ///< Angular velocity.
 };
 
-/// @brief Map that stores configuration parameters.
+/// @brief Map that stores configuration parameters as type-safe values.
 using ConfigurationMap = std::map<std::string, ConfigurationValue>;
 
 /**
@@ -108,15 +110,19 @@ public:
   bool configure();
 
   /**
-   * @brief Executes a control cycle.
-   * @return A Speed command on success, or an error string if the cycle fails.
+   * @brief Executes a full control cycle: localization, planning, control.
+   *
+   * On success, returns a valid Speed command to be sent to the robot.
+   * On failure, returns an error message with diagnostic information.
+   *
+   * @return Result<Speed, std::string> containing either a valid speed command or an error string.
    */
-  std::expected<Speed, std::string> control_cycle();
+  Result<Speed, std::string> control_cycle();
 
   /**
    * @brief Adds a perception entry to the internal buffer.
    * @param perception The new perception to store.
-   * @return true if the perception was accepted.
+   * @return true if the perception was accepted and stored.
    */
   bool add_perception(Perception & perception);
 
@@ -124,15 +130,15 @@ public:
   static const int PERCEPTION_BUFFER_SIZE = 100;
 
 private:
-  std::shared_ptr<Mapper> mapper_;       ///< Pointer to the mapper module.
-  std::shared_ptr<Localizer> localizer_; ///< Pointer to the localizer module.
-  std::shared_ptr<Planner> planner_;     ///< Pointer to the planner module.
-  std::shared_ptr<Controller> controller_; ///< Pointer to the controller module.
+  std::shared_ptr<Mapper> mapper_;           ///< Pointer to the mapper module.
+  std::shared_ptr<Localizer> localizer_;     ///< Pointer to the localizer module.
+  std::shared_ptr<Planner> planner_;         ///< Pointer to the planner module.
+  std::shared_ptr<Controller> controller_;   ///< Pointer to the controller module.
 
-  ConfigurationMap configuration_; ///< Stores runtime configuration.
+  ConfigurationMap configuration_;           ///< Stores runtime configuration parameters.
 
   std::vector<Perception> last_perceptions_; ///< Buffer of recent perception inputs.
-  int valid_perceptions_; ///< Number of valid perception entries in buffer.
+  int valid_perceptions_;                    ///< Number of valid perception entries in the buffer.
 };
 
 }  // namespace easynav_core
