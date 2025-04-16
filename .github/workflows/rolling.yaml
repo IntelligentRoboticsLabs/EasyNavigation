@@ -25,7 +25,7 @@ jobs:
       - name: build and test
         uses: ros-tooling/action-ros-ci@0.4.1
         with:
-          package-name: easynav_core
+          package-name: easynav_common easynav_controller easynav_localizer easynav_maps_manager easynav_planner easynav_sensors easynav_system
           target-ros2-distro: rolling
           colcon-defaults: |
             {
