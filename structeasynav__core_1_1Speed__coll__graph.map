@@ -1,9 +1,0 @@
-<map id="Speed" name="Speed">
-<area shape="rect" id="Node000001" title="Represents linear and angular velocity." alt="" coords="174,124,232,150"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,153,46"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="100,57,116,79,135,98,175,122,172,126,132,102,112,82,96,60"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="176,13,230,38"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="206,54,206,124,200,124,200,54"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="254,13,320,38"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="283,54,274,78,260,102,230,125,227,121,256,98,269,76,278,53"/>
-</map>
