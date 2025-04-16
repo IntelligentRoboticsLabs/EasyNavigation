@@ -1,0 +1,9 @@
+<map id="easynav_sensors/include/easynav_sensors/SensorsNode.hpp" name="easynav_sensors/include/easynav_sensors/SensorsNode.hpp">
+<area shape="rect" id="Node000001" title="Declaration of the SensorsNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="96,5,330,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,125,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="181,49,100,96,97,91,178,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="149,102,277,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="216,47,216,86,210,86,210,47"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="300,94,462,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="252,44,331,84,328,89,250,49"/>
+</map>

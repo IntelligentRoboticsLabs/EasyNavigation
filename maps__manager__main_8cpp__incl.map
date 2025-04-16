@@ -1,0 +1,19 @@
+<map id="easynav_maps_manager/src/maps_manager_main.cpp" name="easynav_maps_manager/src/maps_manager_main.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="265,5,460,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,102,59,127"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="265,46,170,67,72,97,69,97,67,92,70,91,169,62,264,41"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="82,94,219,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="316,49,214,90,212,85,314,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="242,94,379,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="353,48,332,82,328,79,349,45"/>
+<area shape="rect" id="Node000005" href="$MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="453,94,619,135"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="403,44,484,84,482,89,401,49"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="328,190,448,216"/>
+<area shape="poly" id="edge8_Node000001_Node000006" title=" " alt="" coords="376,45,393,93,397,136,395,175,389,175,392,136,388,95,371,47"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="623,183,785,223"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="461,32,504,40,548,52,592,69,632,92,651,108,668,128,692,167,687,170,663,131,648,112,629,96,590,74,547,57,503,45,460,37"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="504,137,423,184,420,180,501,133"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="472,190,600,216"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="539,135,539,175,533,175,533,135"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="575,133,654,173,651,178,573,138"/>
+</map>
