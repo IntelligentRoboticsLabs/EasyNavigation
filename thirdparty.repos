@@ -1,0 +1,5 @@
+repositories:
+  ThirdParty/grid_map:
+    type: git
+    url: https://github.com/ANYbotics/grid_map.git
+    version: rolling
