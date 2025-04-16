@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(easynav_maps)
+project(easynav_maps_manager)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -21,12 +21,12 @@ set(dependencies
 include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED
-  src/easynav_maps/MapsNode.cpp)
+  src/easynav_maps_manager/MapsManagerNode.cpp)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
-add_executable(maps_main src/maps_main.cpp)
-ament_target_dependencies(maps_main ${dependencies})
-target_link_libraries(maps_main ${PROJECT_NAME})
+add_executable(maps_manager_main src/maps_manager_main.cpp)
+ament_target_dependencies(maps_manager_main ${dependencies})
+target_link_libraries(maps_manager_main ${PROJECT_NAME})
 
 install(DIRECTORY include/
   DESTINATION include/
@@ -34,7 +34,7 @@ install(DIRECTORY include/
 
 install(TARGETS
   ${PROJECT_NAME}
-  maps_main
+  maps_manager_main
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

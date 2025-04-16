@@ -18,23 +18,23 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the MapsNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_MAPS__EASYNAVNODE_HPP_
-#define EASYNAV_MAPS__EASYNAVNODE_HPP_
+#ifndef EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
+#define EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_maps
+namespace easynav_maps_manager
 {
 
 /// \file
-/// \brief Declaration of the MapsNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.
+/// \brief Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.
 
 /**
- * @class MapsNode
+ * @class MapsManagerNode
  * @brief ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.
  *
  * This node is responsible for orchestrating the mapping functionality in the EasyNav architecture.
@@ -42,20 +42,20 @@ namespace easynav_maps
  * map-related operations such as updates, data fusion, and diagnostics.
  */
 
-class MapsNode : public rclcpp_lifecycle::LifecycleNode
+class MapsManagerNode : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  RCLCPP_SMART_PTR_DEFINITIONS(MapsNode)
+  RCLCPP_SMART_PTR_DEFINITIONS(MapsManagerNode)
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a MapsNode lifecycle node with the specified options.
-   * @param options Node options to configure the MapsNode node.
+   * @brief Constructs a MapsManagerNode lifecycle node with the specified options.
+   * @param options Node options to configure the MapsManagerNode node.
    */
-  explicit MapsNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit MapsManagerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
-   * @brief Configures the MapsNode node.
+   * @brief Configures the MapsManagerNode node.
    * This is typically where parameters and interfaces are declared.
    *
    * @param state The current lifecycle state.
@@ -64,7 +64,7 @@ public:
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the MapsNode node.
+   * @brief Activates the MapsManagerNode node.
    * This starts periodic navigation control cycles.
    *
    * @param state The current lifecycle state.
@@ -73,7 +73,7 @@ public:
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the MapsNode node.
+   * @brief Deactivates the MapsManagerNode node.
    * Control loops are stopped and interfaces are disabled.
    *
    * @param state The current lifecycle state.
@@ -82,7 +82,7 @@ public:
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the MapsNode node.
+   * @brief Cleans up the MapsManagerNode node.
    * Releases resources and resets the internal state.
    *
    * @param state The current lifecycle state.
@@ -91,7 +91,7 @@ public:
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the MapsNode node.
+   * @brief Shuts down the MapsManagerNode node.
    * Called on final shutdown of the node's lifecycle.
    *
    * @param state The current lifecycle state.
@@ -100,7 +100,7 @@ public:
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the MapsNode node.
+   * @brief Handles errors in the MapsManagerNode node.
    * This is called when a failure occurs during a lifecycle transition.
    *
    * @param state The current lifecycle state.
@@ -127,16 +127,16 @@ private:
   /**
    * @brief Timer that triggers the periodic map tasks cycle.
    */
-  rclcpp::TimerBase::SharedPtr maps_main_timer_;
+  rclcpp::TimerBase::SharedPtr maps_manager_main_timer_;
 
   /**
    * @brief Executes a single cycle.
    *
-   * This method is periodically called by a timer to run the maps logic
+   * This method is periodically called by a timer to run the maps_manager logic
    */
-  void maps_cycle();
+  void maps_manager_cycle();
 };
 
-}  // namespace easynav_maps
+}  // namespace easynav_maps_manager
 
-#endif  // EASYNAV_MAPS__EASYNAVNODE_HPP_
+#endif  // EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_

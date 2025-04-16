@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>easynav_maps</name>
+  <name>easynav_maps_manager</name>
   <version>0.0.1</version>
-  <description>Easy Navigation: Maps package.</description>
+  <description>Easy Navigation: MapsManager package.</description>
   <maintainer email="fmrico@gmail.com">fmrico</maintainer>
   <license>GPL-3.0-only</license>
 

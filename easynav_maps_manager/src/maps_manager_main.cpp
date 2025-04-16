@@ -23,7 +23,7 @@
 #include "lifecycle_msgs/msg/transition.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
 
-#include "easynav_maps/MapsNode.hpp"
+#include "easynav_maps_manager/MapsManagerNode.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
 
   rclcpp::experimental::executors::EventsExecutor exe_nort, exe_rt;
 
-  auto map_node = easynav_maps::MapsNode::make_shared();
+  auto map_node = easynav_maps_manager::MapsManagerNode::make_shared();
 
   exe_nort.add_node(map_node->get_node_base_interface());
   exe_rt.add_callback_group(map_node->get_real_time_cbg(),

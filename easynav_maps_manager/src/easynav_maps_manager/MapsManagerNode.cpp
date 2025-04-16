@@ -18,21 +18,21 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Implementation of the MapsNode class.
+/// \brief Implementation of the MapsManagerNode class.
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-#include "easynav_maps/MapsNode.hpp"
+#include "easynav_maps_manager/MapsManagerNode.hpp"
 
-namespace easynav_maps
+namespace easynav_maps_manager
 {
 
 using namespace std::chrono_literals;
 
-MapsNode::MapsNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("maps_node", options)
+MapsManagerNode::MapsManagerNode(const rclcpp::NodeOptions & options)
+: LifecycleNode("maps_manager_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 }
@@ -40,7 +40,7 @@ MapsNode::MapsNode(const rclcpp::NodeOptions & options)
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 CallbackReturnT
-MapsNode::on_configure(const rclcpp_lifecycle::State & state)
+MapsManagerNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
@@ -48,56 +48,57 @@ MapsNode::on_configure(const rclcpp_lifecycle::State & state)
 }
 
 CallbackReturnT
-MapsNode::on_activate(const rclcpp_lifecycle::State & state)
+MapsManagerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  maps_main_timer_ = create_timer(1ms, std::bind(&MapsNode::maps_cycle, this), realtime_cbg_);
+  maps_manager_main_timer_ = create_timer(1ms,
+    std::bind(&MapsManagerNode::maps_manager_cycle, this), realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-MapsNode::on_deactivate(const rclcpp_lifecycle::State & state)
+MapsManagerNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  maps_main_timer_->cancel();
+  maps_manager_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-MapsNode::on_cleanup(const rclcpp_lifecycle::State & state)
-{
-  (void)state;
-  return CallbackReturnT::SUCCESS;
-}
-
-CallbackReturnT
-MapsNode::on_shutdown(const rclcpp_lifecycle::State & state)
+MapsManagerNode::on_cleanup(const rclcpp_lifecycle::State & state)
 {
   (void)state;
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-MapsNode::on_error(const rclcpp_lifecycle::State & state)
+MapsManagerNode::on_shutdown(const rclcpp_lifecycle::State & state)
+{
+  (void)state;
+  return CallbackReturnT::SUCCESS;
+}
+
+CallbackReturnT
+MapsManagerNode::on_error(const rclcpp_lifecycle::State & state)
 {
   (void)state;
   return CallbackReturnT::SUCCESS;
 }
 
 rclcpp::CallbackGroup::SharedPtr
-MapsNode::get_real_time_cbg()
+MapsManagerNode::get_real_time_cbg()
 {
   return realtime_cbg_;
 }
 
 void
-MapsNode::maps_cycle()
+MapsManagerNode::maps_manager_cycle()
 {
 }
 
 
-}  // namespace easynav_maps
+}  // namespace easynav_maps_manager
