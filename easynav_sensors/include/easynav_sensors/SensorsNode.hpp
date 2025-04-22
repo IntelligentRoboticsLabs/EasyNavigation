@@ -20,8 +20,8 @@
 /// \file
 /// \brief Declaration of the SensorsNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_SENSORS__EASYNAVNODE_HPP_
-#define EASYNAV_SENSORS__EASYNAVNODE_HPP_
+#ifndef EASYNAV_SENSORS__SENSORNODE_HPP_
+#define EASYNAV_SENSORS__SENSORNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
@@ -138,4 +138,4 @@ private:
 
 }  // namespace easynav_sensors
 
-#endif  // EASYNAV_SENSORS__EASYNAVNODE_HPP_
+#endif  // EASYNAV_SENSORS__SENSORNODE_HPP_
