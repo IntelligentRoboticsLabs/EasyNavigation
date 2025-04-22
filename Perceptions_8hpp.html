@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Easy Navigation: easynav_sensors Namespace Reference</title>
+<title>Easy Navigation: easynav_sensors/include/easynav_sensors/Perceptions.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -81,66 +81,78 @@ $(function(){ initResizable(false); });
 </div>
 </div>
 
+<div id="nav-path" class="navpath">
+  <ul>
+<li class="navelem"><a class="el" href="dir_614ab350d9e5a7622e6a48999ce2a386.html">easynav_sensors</a></li><li class="navelem"><a class="el" href="dir_4659c21185412ae3e088e10890213fb4.html">include</a></li><li class="navelem"><a class="el" href="dir_b0c22edc73147f7d064879d2e88aaf25.html">easynav_sensors</a></li>  </ul>
+</div>
 </div><!-- top -->
 <div id="doc-content">
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
+<a href="#namespaces">Namespaces</a> &#124;
 <a href="#typedef-members">Typedefs</a>  </div>
-  <div class="headertitle"><div class="title">easynav_sensors Namespace Reference</div></div>
+  <div class="headertitle"><div class="title">Perceptions.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
+
+<p>Definition of the Perception struct and the Perceptions container used for sensor data input.  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;vector&gt;</code><br />
+<code>#include &quot;pcl/point_types.h&quot;</code><br />
+<code>#include &quot;pcl_conversions/pcl_conversions.h&quot;</code><br />
+<code>#include &quot;pcl/point_types_conversion.h&quot;</code><br />
+<code>#include &quot;rclcpp/rclcpp.hpp&quot;</code><br />
+<code>#include &quot;rclcpp/macros.hpp&quot;</code><br />
+<code>#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for Perceptions.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="Perceptions_8hpp__incl.png" border="0" usemap="#aeasynav__sensors_2include_2easynav__sensors_2Perceptions_8hpp" alt=""/></div>
+<map name="aeasynav__sensors_2include_2easynav__sensors_2Perceptions_8hpp" id="aeasynav__sensors_2include_2easynav__sensors_2Perceptions_8hpp">
+<area shape="rect" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="358,5,581,46"/>
+<area shape="rect" title=" " alt="" coords="5,102,59,127"/>
+<area shape="poly" title=" " alt="" coords="358,40,219,60,144,76,71,97,68,98,67,93,70,91,143,71,218,55,357,34"/>
+<area shape="rect" title=" " alt="" coords="83,102,141,127"/>
+<area shape="poly" title=" " alt="" coords="358,47,258,68,154,97,150,98,149,93,153,91,257,63,357,42"/>
+<area shape="rect" title=" " alt="" coords="165,102,283,127"/>
+<area shape="poly" title=" " alt="" coords="415,49,274,98,272,93,413,44"/>
+<area shape="rect" title=" " alt="" coords="308,94,444,135"/>
+<area shape="poly" title=" " alt="" coords="450,48,410,85,406,81,446,45"/>
+<area shape="rect" title=" " alt="" coords="468,102,657,127"/>
+<area shape="poly" title=" " alt="" coords="492,45,541,89,537,93,489,48"/>
+<area shape="rect" title=" " alt="" coords="680,102,800,127"/>
+<area shape="poly" title=" " alt="" coords="532,44,688,94,687,99,530,49"/>
+<area shape="rect" title=" " alt="" coords="824,102,952,127"/>
+<area shape="poly" title=" " alt="" coords="578,44,813,91,827,95,826,100,811,97,577,49"/>
+<area shape="rect" title=" " alt="" coords="975,94,1137,135"/>
+<area shape="poly" title=" " alt="" coords="582,37,756,60,960,91,959,96,755,65,581,43"/>
+</map>
+</div>
+</div>
+<p><a href="Perceptions_8hpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeasynav__sensors_1_1Perception.html">Perception</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single sensor perception used for mapping and localization.  <a href="structeasynav__sensors_1_1Perception.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav__sensors_1_1SensorsNode.html">SensorsNode</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS 2 lifecycle node that manages sensors for the Easy Navigation system.  <a href="classeasynav__sensors_1_1SensorsNode.html#details">More...</a><br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
+Namespaces</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">namespace &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceeasynav__sensors.html">easynav_sensors</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ad09d90f1fe35c9e2f2fd7fc1902312f4" id="r_ad09d90f1fe35c9e2f2fd7fc1902312f4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a> = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn</td></tr>
-<tr class="separator:ad09d90f1fe35c9e2f2fd7fc1902312f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a288500772f67d34ce87c1f0ebdb0d7ae" id="r_a288500772f67d34ce87c1f0ebdb0d7ae"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="structeasynav__sensors_1_1Perception.html">Perception</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a288500772f67d34ce87c1f0ebdb0d7ae">Perceptions</a></td></tr>
+<tr class="memitem:a288500772f67d34ce87c1f0ebdb0d7ae" id="r_a288500772f67d34ce87c1f0ebdb0d7ae"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="structeasynav__sensors_1_1Perception.html">Perception</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceeasynav__sensors.html#a288500772f67d34ce87c1f0ebdb0d7ae">Perceptions</a></td></tr>
 <tr class="memdesc:a288500772f67d34ce87c1f0ebdb0d7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">A container of multiple <a class="el" href="structeasynav__sensors_1_1Perception.html" title="Represents a single sensor perception used for mapping and localization.">Perception</a> entries.  <br /></td></tr>
 <tr class="separator:a288500772f67d34ce87c1f0ebdb0d7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Typedef Documentation</h2>
-<a id="ad09d90f1fe35c9e2f2fd7fc1902312f4" name="ad09d90f1fe35c9e2f2fd7fc1902312f4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">&#9670;&#160;</a></span>CallbackReturnT</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">using <a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a> = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a288500772f67d34ce87c1f0ebdb0d7ae" name="a288500772f67d34ce87c1f0ebdb0d7ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a288500772f67d34ce87c1f0ebdb0d7ae">&#9670;&#160;</a></span>Perceptions</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">typedef std::vector&lt;<a class="el" href="structeasynav__sensors_1_1Perception.html">Perception</a>&gt; <a class="el" href="#a288500772f67d34ce87c1f0ebdb0d7ae">Perceptions</a></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>A container of multiple <a class="el" href="structeasynav__sensors_1_1Perception.html" title="Represents a single sensor perception used for mapping and localization.">Perception</a> entries. </p>
-<p>This alias is used to represent a batch of sensor readings, usually for temporal integration or filtering. </p>
-
-</div>
-</div>
-</div><!-- contents -->
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Definition of the Perception struct and the Perceptions container used for sensor data input. </p>
+</div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.13.2
