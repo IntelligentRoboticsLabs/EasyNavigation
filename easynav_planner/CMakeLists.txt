@@ -24,17 +24,12 @@ add_library(${PROJECT_NAME} SHARED
   src/easynav_planner/PlannerNode.cpp)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
-add_executable(planner_main src/planner_main.cpp)
-ament_target_dependencies(planner_main ${dependencies})
-target_link_libraries(planner_main ${PROJECT_NAME})
-
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
   ${PROJECT_NAME}
-  planner_main
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
