@@ -27,6 +27,8 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "easynav_sensors/Perceptions.hpp"
+
 namespace easynav_sensors
 {
 
@@ -134,6 +136,8 @@ private:
    * This method is periodically called by a timer to run the sensors logic
    */
   void sensors_cycle();
+
+  Perceptions perceptions_;
 };
 
 }  // namespace easynav_sensors

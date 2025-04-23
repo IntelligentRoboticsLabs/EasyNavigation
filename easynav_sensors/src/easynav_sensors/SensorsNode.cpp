@@ -24,6 +24,9 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "sensor_msgs/msg/laser_scan.hpp"
+#include "sensor_msgs/msg/point_cloud2.hpp"
+
 #include "easynav_sensors/SensorsNode.hpp"
 
 namespace easynav_sensors
@@ -35,6 +38,8 @@ SensorsNode::SensorsNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("sensors_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+
+  declare_parameter("sensors", std::vector<std::string>());
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -43,6 +48,36 @@ CallbackReturnT
 SensorsNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
+
+  std::vector<std::string> sensors;
+  get_parameter("sensors", sensors);
+
+  for (const auto & sensor : sensors) {
+    std::string topic, msg_type;
+
+    declare_parameter(sensor + ".topic", topic);
+    declare_parameter(sensor + ".type", msg_type);
+
+    get_parameter(sensor + ".topic", topic);
+    get_parameter(sensor + ".type", msg_type);
+
+    std::cerr << "Sensor: {" << sensor << "} [" << topic << ", "<< msg_type << "]" << std::endl;
+
+    Perception perception_entry;
+
+    if (msg_type == "LaserScan") {
+      perception_entry.subscription = create_typed_subscription<sensor_msgs::msg::LaserScan>(
+        *this, topic, perception_entry);
+    } else if (msg_type == "PointCloud") {
+      perception_entry.subscription = create_typed_subscription<sensor_msgs::msg::PointCloud2>(
+        *this, topic, perception_entry);
+    } else {
+      RCLCPP_ERROR(get_logger(), "Sensor type [%s] not supported", msg_type.c_str());
+      return CallbackReturnT::FAILURE;
+    }
+
+    perceptions_.push_back(perception_entry);
+  }
 
   return CallbackReturnT::SUCCESS;
 }
