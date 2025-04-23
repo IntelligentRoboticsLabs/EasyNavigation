@@ -24,17 +24,12 @@ add_library(${PROJECT_NAME} SHARED
   src/easynav_controller/ControllerNode.cpp)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
-add_executable(controller_main src/controller_main.cpp)
-ament_target_dependencies(controller_main ${dependencies})
-target_link_libraries(controller_main ${PROJECT_NAME})
-
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
   ${PROJECT_NAME}
-  controller_main
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

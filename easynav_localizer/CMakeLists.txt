@@ -24,17 +24,12 @@ add_library(${PROJECT_NAME} SHARED
   src/easynav_localizer/LocalizerNode.cpp)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
-add_executable(localizer_main src/localizer_main.cpp)
-ament_target_dependencies(localizer_main ${dependencies})
-target_link_libraries(localizer_main ${PROJECT_NAME})
-
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
   ${PROJECT_NAME}
-  localizer_main
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

@@ -25,6 +25,7 @@
 
 #include "easynav_system/SystemNode.hpp"
 
+
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
@@ -35,12 +36,17 @@ int main(int argc, char ** argv)
   rclcpp::init(argc, argv);
 
   rclcpp::experimental::executors::EventsExecutor exe_nort, exe_rt;
-
   auto system_node = easynav_system::SystemNode::make_shared();
 
   exe_nort.add_node(system_node->get_node_base_interface());
   exe_rt.add_callback_group(system_node->get_real_time_cbg(),
     system_node->get_node_base_interface());
+
+  for (auto & node : system_node->get_system_nodes()) {
+    exe_nort.add_node(node.second.node_ptr->get_node_base_interface());
+    exe_rt.add_callback_group(node.second.realtime_cbg,
+      node.second.node_ptr->get_node_base_interface());
+  }
 
   system_node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
   if (system_node->get_current_state().id() !=

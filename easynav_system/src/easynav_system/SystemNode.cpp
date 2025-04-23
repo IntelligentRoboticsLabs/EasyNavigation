@@ -20,11 +20,21 @@
 /// \file
 /// \brief Implementation of the SystemNode class.
 
+#include "lifecycle_msgs/msg/transition.hpp"
+#include "lifecycle_msgs/msg/state.hpp"
+
+#include "easynav_system/SystemNode.hpp"
+
+#include "easynav_controller/ControllerNode.hpp"
+#include "easynav_localizer/LocalizerNode.hpp"
+#include "easynav_maps_manager/MapsManagerNode.hpp"
+#include "easynav_planner/PlannerNode.hpp"
+#include "easynav_sensors/SensorsNode.hpp"
+
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-#include "easynav_system/SystemNode.hpp"
 
 namespace easynav_system
 {
@@ -35,6 +45,12 @@ SystemNode::SystemNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("system_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+
+  controller_node_ = easynav_controller::ControllerNode::make_shared();
+  localizer_node_ = easynav_localizer::LocalizerNode::make_shared();
+  maps_manager_node_ = easynav_maps_manager::MapsManagerNode::make_shared();
+  planner_node_ = easynav_planner::PlannerNode::make_shared();
+  sensors_node_ = easynav_sensors::SensorsNode::make_shared();
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -44,6 +60,19 @@ SystemNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
+  for (auto & system_node : get_system_nodes()) {
+    RCLCPP_INFO(get_logger(), "Configuring [%s]", system_node.first.c_str());
+    system_node.second.node_ptr->trigger_transition(
+      lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
+
+    if (system_node.second.node_ptr->get_current_state().id() !=
+      lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE)
+    {
+      RCLCPP_ERROR(get_logger(), "Unable to configure [%s]", system_node.first.c_str());
+      return CallbackReturnT::FAILURE;
+    }
+  }
+
   return CallbackReturnT::SUCCESS;
 }
 
@@ -51,6 +80,19 @@ CallbackReturnT
 SystemNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
+
+  for (auto & system_node : get_system_nodes()) {
+    RCLCPP_INFO(get_logger(), "Activating [%s]", system_node.first.c_str());
+    system_node.second.node_ptr->trigger_transition(
+      lifecycle_msgs::msg::Transition::TRANSITION_ACTIVATE);
+
+    if (system_node.second.node_ptr->get_current_state().id() !=
+      lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE)
+    {
+      RCLCPP_ERROR(get_logger(), "Unable to activate [%s]", system_node.first.c_str());
+      return CallbackReturnT::FAILURE;
+    }
+  }
 
   system_main_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle, this),
     realtime_cbg_);
@@ -62,6 +104,19 @@ CallbackReturnT
 SystemNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
+
+  for (auto & system_node : get_system_nodes()) {
+    RCLCPP_INFO(get_logger(), "Deactivating [%s]", system_node.first.c_str());
+    system_node.second.node_ptr->trigger_transition(
+      lifecycle_msgs::msg::Transition::TRANSITION_DEACTIVATE);
+
+    if (system_node.second.node_ptr->get_current_state().id() !=
+      lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE)
+    {
+      RCLCPP_ERROR(get_logger(), "Unable to deactivate [%s]", system_node.first.c_str());
+      return CallbackReturnT::FAILURE;
+    }
+  }
 
   system_main_timer_->cancel();
 
@@ -100,5 +155,19 @@ SystemNode::system_cycle()
 {
 }
 
+std::map<std::string, SystemNodeInfo>
+SystemNode::get_system_nodes()
+{
+  std::map<std::string, SystemNodeInfo> ret;
+
+  ret[controller_node_->get_name()] = {controller_node_, controller_node_->get_real_time_cbg()};
+  ret[localizer_node_->get_name()] = {localizer_node_, localizer_node_->get_real_time_cbg()};
+  ret[maps_manager_node_->get_name()] = {maps_manager_node_,
+    maps_manager_node_->get_real_time_cbg()};
+  ret[planner_node_->get_name()] = {planner_node_, planner_node_->get_real_time_cbg()};
+  ret[sensors_node_->get_name()] = {sensors_node_, sensors_node_->get_real_time_cbg()};
+
+  return ret;
+}
 
 }  // namespace easynav_system
