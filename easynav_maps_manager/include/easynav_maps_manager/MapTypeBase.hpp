@@ -18,10 +18,10 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the MapsManagerBase template class, an abstract interface for managing static and dynamic maps.
+/// \brief Declaration of the MapsTypeBase template class, an abstract interface for managing static and dynamic maps.
 
-#ifndef EASYNAV_MAPSMANAGER__MAPSMANAGEBASE_HPP_
-#define EASYNAV_MAPSMANAGER__MAPSMANAGEBASE_HPP_
+#ifndef EASYNAV_MAPSMANAGER__MAPSTYPEBASE_HPP_
+#define EASYNAV_MAPSMANAGER__MAPSTYPEBASE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
@@ -33,23 +33,21 @@ namespace easynav_maps_manager
 {
 
 /**
- * @class MapsManagerBase
+ * @class MapsTypeBase
  * @brief Abstract base class for managing map data in Easy Navigation.
  * 
- * This template class defines an interface for modules responsible for maintaining
+ * This class defines an interface for modules responsible for maintaining
  * static and dynamic maps, including publishing and updating based on incoming perceptions.
  * 
- * @tparam T Type representing the internal map format to be managed.
  */
-template<class T>
-class MapsManagerBase
+class MapsTypeBase
 {
 public:
-  /**
-   * @brief Construct a new MapsManagerBase.
+  /**map_
+   * @brief Construct a new MapsTypeBase.
    * @param parent_node Lifecycle node that owns this manager and provides ROS interfaces.
    */
-  MapsManagerBase(rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node)
+  MapsTypeBase(rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node)
   : parent_node_(parent_node) {}
 
   /**
@@ -80,7 +78,8 @@ public:
    * 
    * @return std::shared_ptr<const T> Immutable pointer to the internal map.
    */
-  std::shared_ptr<const T> get_map() const { return map_; }
+  // We have to see how to do this without templates
+  // std::shared_ptr<const T> get_map() const { return map_; }
 
 private:
   rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_; ///< Owning node that provides lifecycle context.
@@ -89,4 +88,4 @@ private:
 
 }  // namespace easynav_maps_manager
 
-#endif  // EASYNAV_MAPSMANAGER__MAPSMANAGEBASE_HPP_
+#endif  // EASYNAV_MAPSMANAGER__MAPSTYPEBASE_HPP_
