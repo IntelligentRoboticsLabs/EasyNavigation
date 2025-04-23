@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['is_5fdouble_0',['is_double',['../classeasynav__common_1_1ConfigurationValue.html#ab0447ed614cb207f6e585f673229fdbb',1,'easynav_common::ConfigurationValue']]],
-  ['is_5fdouble_5fvector_1',['is_double_vector',['../classeasynav__common_1_1ConfigurationValue.html#a2badb62ef1b1a1e03b5a7a369eeaf8a7',1,'easynav_common::ConfigurationValue']]],
-  ['is_5fstring_2',['is_string',['../classeasynav__common_1_1ConfigurationValue.html#a4293e6e4ab9eedb048557be4900aa3af',1,'easynav_common::ConfigurationValue']]],
-  ['is_5fstring_5fvector_3',['is_string_vector',['../classeasynav__common_1_1ConfigurationValue.html#a6a933316e716dac220c07e77f218f7ba',1,'easynav_common::ConfigurationValue']]]
+  ['get_5freal_5ftime_5fcbg_0',['get_real_time_cbg',['../classeasynav__controller_1_1ControllerNode.html#a8366fef9515c0b0cd47949fbfc018641',1,'easynav_controller::ControllerNode::get_real_time_cbg()'],['../classeasynav__localizer_1_1LocalizerNode.html#a8366fef9515c0b0cd47949fbfc018641',1,'easynav_localizer::LocalizerNode::get_real_time_cbg()'],['../classeasynav__maps__manager_1_1MapsManagerNode.html#a8366fef9515c0b0cd47949fbfc018641',1,'easynav_maps_manager::MapsManagerNode::get_real_time_cbg()'],['../classeasynav__planner_1_1PlannerNode.html#a8366fef9515c0b0cd47949fbfc018641',1,'easynav_planner::PlannerNode::get_real_time_cbg()'],['../classeasynav__sensors_1_1SensorsNode.html#a8366fef9515c0b0cd47949fbfc018641',1,'easynav_sensors::SensorsNode::get_real_time_cbg()'],['../classeasynav__system_1_1SystemNode.html#a8366fef9515c0b0cd47949fbfc018641',1,'easynav_system::SystemNode::get_real_time_cbg()']]],
+  ['get_5fsystem_5fnodes_1',['get_system_nodes',['../classeasynav__system_1_1SystemNode.html#a514922ffaeaefa826c2d33243b19891f',1,'easynav_system::SystemNode']]],
+  ['get_5fvariant_2',['get_variant',['../classeasynav__common_1_1ConfigurationValue.html#a5c05022f1a36069a31ee02de7d5d9282',1,'easynav_common::ConfigurationValue']]]
 ];
