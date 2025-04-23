@@ -100,18 +100,48 @@ $(function(){ initResizable(false); });
 <div class="textblock"><code>#include &quot;rclcpp/rclcpp.hpp&quot;</code><br />
 <code>#include &quot;rclcpp/macros.hpp&quot;</code><br />
 <code>#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="ControllerNode_8hpp_source.html">easynav_controller/ControllerNode.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="LocalizerNode_8hpp_source.html">easynav_localizer/LocalizerNode.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="MapsManagerNode_8hpp_source.html">easynav_maps_manager/MapsManagerNode.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="PlannerNode_8hpp_source.html">easynav_planner/PlannerNode.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="SensorsNode_8hpp_source.html">easynav_sensors/SensorsNode.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for SystemNode.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="SystemNode_8hpp__incl.png" border="0" usemap="#aeasynav__system_2include_2easynav__system_2SystemNode_8hpp" alt=""/></div>
 <map name="aeasynav__system_2include_2easynav__system_2SystemNode_8hpp" id="aeasynav__system_2include_2easynav__system_2SystemNode_8hpp">
-<area shape="rect" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="100,5,326,46"/>
-<area shape="rect" title=" " alt="" coords="5,102,125,127"/>
-<area shape="poly" title=" " alt="" coords="181,49,100,96,97,91,178,44"/>
-<area shape="rect" title=" " alt="" coords="149,102,277,127"/>
-<area shape="poly" title=" " alt="" coords="216,47,216,86,210,86,210,47"/>
-<area shape="rect" title=" " alt="" coords="300,94,462,135"/>
-<area shape="poly" title=" " alt="" coords="252,44,331,84,328,89,250,49"/>
+<area shape="rect" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="408,5,634,46"/>
+<area shape="rect" title=" " alt="" coords="509,190,629,216"/>
+<area shape="poly" title=" " alt="" coords="503,48,487,67,474,88,468,111,473,134,495,161,525,181,522,185,492,165,468,136,463,111,469,86,483,64,498,45"/>
+<area shape="rect" title=" " alt="" coords="331,190,458,216"/>
+<area shape="poly" title=" " alt="" coords="408,37,291,46,168,60,67,76,34,86,16,96,10,105,8,114,16,133,35,148,64,160,142,179,231,191,315,197,315,202,231,196,141,185,62,166,32,152,12,136,3,115,5,103,12,92,32,81,66,71,167,54,290,41,408,31"/>
+<area shape="rect" title=" " alt="" coords="698,183,859,223"/>
+<area shape="poly" title=" " alt="" coords="634,29,774,37,925,50,1051,68,1093,79,1117,92,1128,107,1134,121,1133,134,1128,146,1105,165,1069,179,1025,189,975,196,874,203,874,198,974,191,1024,184,1068,173,1102,160,1124,143,1128,133,1128,122,1124,110,1114,96,1092,84,1049,73,924,55,774,43,634,34"/>
+<area shape="rect" href="ControllerNode_8hpp.html" title="Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="272,94,407,135"/>
+<area shape="poly" title=" " alt="" coords="481,49,395,89,393,85,479,44"/>
+<area shape="rect" href="LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="735,94,915,135"/>
+<area shape="poly" title=" " alt="" coords="591,44,742,87,741,92,589,49"/>
+<area shape="rect" href="MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="938,94,1104,135"/>
+<area shape="poly" title=" " alt="" coords="635,42,923,91,922,96,634,47"/>
+<area shape="rect" href="PlannerNode_8hpp.html" title="Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="26,102,248,127"/>
+<area shape="poly" title=" " alt="" coords="434,49,206,100,205,95,433,44"/>
+<area shape="rect" href="SensorsNode_8hpp.html" title="Declaration of the SensorsNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="482,102,712,127"/>
+<area shape="poly" title=" " alt="" coords="540,45,578,88,574,92,536,48"/>
+<area shape="poly" title=" " alt="" coords="392,133,524,182,522,187,391,138"/>
+<area shape="poly" title=" " alt="" coords="354,134,381,176,376,179,350,137"/>
+<area shape="poly" title=" " alt="" coords="408,126,683,180,682,185,407,132"/>
+<area shape="poly" title=" " alt="" coords="768,138,620,187,618,182,766,133"/>
+<area shape="poly" title=" " alt="" coords="735,136,470,189,469,184,734,131"/>
+<area shape="poly" title=" " alt="" coords="817,136,798,170,794,168,812,134"/>
+<area shape="poly" title=" " alt="" coords="938,135,927,137,644,191,643,185,926,132,937,130"/>
+<area shape="poly" title=" " alt="" coords="938,135,927,137,806,153,712,162,618,170,497,185,471,190,470,184,496,180,617,165,711,157,805,148,926,132,937,130"/>
+<area shape="poly" title=" " alt="" coords="967,138,849,179,847,174,965,133"/>
+<area shape="poly" title=" " alt="" coords="198,125,494,184,493,189,197,130"/>
+<area shape="poly" title=" " alt="" coords="174,125,345,182,343,187,172,130"/>
+<area shape="poly" title=" " alt="" coords="213,125,260,132,641,180,682,186,682,191,640,185,259,137,212,130"/>
+<area shape="poly" title=" " alt="" coords="595,128,580,176,575,175,590,127"/>
+<area shape="poly" title=" " alt="" coords="569,130,437,186,435,181,567,125"/>
+<area shape="poly" title=" " alt="" coords="624,125,724,173,722,178,621,130"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -133,6 +163,8 @@ This graph shows which files directly or indirectly include this file:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav__system_1_1SystemNode.html">SystemNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS 2 lifecycle node that manages localization for the Easy Navigation system.  <a href="classeasynav__system_1_1SystemNode.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeasynav__system_1_1SystemNodeInfo.html">SystemNodeInfo</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>

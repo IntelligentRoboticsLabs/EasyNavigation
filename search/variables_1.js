@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['frame_5fid_0',['frame_id',['../structeasynav__sensors_1_1Perception.html#aee63db9a1c81df1506964242aacdac88',1,'easynav_sensors::Perception']]]
+  ['realtime_5fcbg_0',['realtime_cbg',['../structeasynav__system_1_1SystemNodeInfo.html#a5aab17347096798b46e3925e6d931252',1,'easynav_system::SystemNodeInfo']]]
 ];

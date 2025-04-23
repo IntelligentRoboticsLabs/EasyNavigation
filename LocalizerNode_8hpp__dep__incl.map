@@ -1,7 +1,12 @@
 <map id="easynav_localizer/include/easynav_localizer/LocalizerNode.hpp" name="easynav_localizer/include/easynav_localizer/LocalizerNode.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="71,5,310,46"/>
+<area shape="rect" id="Node000001" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="107,5,346,46"/>
 <area shape="rect" id="Node000002" href="$LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="5,94,189,150"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="162,59,126,95,122,91,159,55"/>
-<area shape="rect" id="Node000003" href="$localizer__main_8cpp.html" title=" " alt="" coords="212,102,358,142"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="222,55,267,99,264,103,219,59"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="189,57,136,96,133,91,186,53"/>
+<area shape="rect" id="Node000003" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="264,102,490,142"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="272,52,347,99,344,103,269,57"/>
+<area shape="rect" id="Node000004" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="114,198,339,238"/>
+<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="229,62,229,197,224,197,224,62"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="334,153,259,199,256,195,331,148"/>
+<area shape="rect" id="Node000005" href="$system__main_8cpp.html" title=" " alt="" coords="363,198,503,238"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="399,154,424,196,419,199,394,157"/>
 </map>
