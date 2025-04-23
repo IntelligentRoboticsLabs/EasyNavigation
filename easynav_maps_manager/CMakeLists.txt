@@ -12,10 +12,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
+find_package(easynav_sensors REQUIRED)
+find_package(pluginlib REQUIRED)
 
 set(dependencies
   rclcpp
   rclcpp_lifecycle
+  easynav_sensors
+  pluginlib
 )
 
 include_directories(include)

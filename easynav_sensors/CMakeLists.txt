@@ -12,10 +12,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
+find_package(pcl_conversions REQUIRED)
+find_package(pcl_ros REQUIRED)
 
 set(dependencies
   rclcpp
   rclcpp_lifecycle
+  pcl_conversions
+  pcl_ros
 )
 
 include_directories(include)
