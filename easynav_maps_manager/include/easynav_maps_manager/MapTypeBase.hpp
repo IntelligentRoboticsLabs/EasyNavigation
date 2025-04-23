@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -35,10 +35,10 @@ namespace easynav_maps_manager
 /**
  * @class MapsTypeBase
  * @brief Abstract base class for managing map data in Easy Navigation.
- * 
+ *
  * This class defines an interface for modules responsible for maintaining
  * static and dynamic maps, including publishing and updating based on incoming perceptions.
- * 
+ *
  */
 class MapsTypeBase
 {
@@ -73,9 +73,9 @@ public:
 
   /**
    * @brief Get a read-only shared pointer to the internal map.
-   * 
+   *
    * The returned pointer is `const` to prevent external modification of the map content.
-   * 
+   *
    * @return std::shared_ptr<const T> Immutable pointer to the internal map.
    */
   // We have to see how to do this without templates
@@ -83,7 +83,7 @@ public:
 
 private:
   rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_; ///< Owning node that provides lifecycle context.
-  std::shared_ptr<T> map_; ///< Internal representation of the managed map.
+  // std::shared_ptr<T> map_; ///< Internal representation of the managed map.
 };
 
 }  // namespace easynav_maps_manager
