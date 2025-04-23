@@ -18,43 +18,44 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the SensorsNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the PlannerNodeBase lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_SENSORS__SENSORNODE_HPP_
-#define EASYNAV_SENSORS__SENSORNODE_HPP_
+#ifndef EASYNAV_PLANNER__PLANNER_NODE_BASE_HPP_
+#define EASYNAV_PLANNER__PLANNER_NODE_BASE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "nav_msgs/msg/path.hpp"
 
-namespace easynav_sensors
+namespace easynav_planner
 {
 
 /// \file
-/// \brief Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fussion tasks in Easy Navigation.
+/// \brief Declaration of the PlannerNodeBase class, a ROS 2 lifecycle node for calculating paths tasks in Easy Navigation.
 
 /**
- * @class SensorsNode
- * @brief ROS 2 lifecycle node that manages sensors for the Easy Navigation system.
+ * @class PlannerNodeBase
+ * @brief ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.
  *
- * This node provides the interface between the sensor module in EasyNav and the ROS 2 ecosystem.
+ * This node provides the interface between the planner module in EasyNav and the ROS 2 ecosystem.
  * It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup.
  */
 
-class SensorsNode : public rclcpp_lifecycle::LifecycleNode
+class PlannerNodeBase : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  RCLCPP_SMART_PTR_DEFINITIONS(SensorsNode)
+  // RCLCPP_SMART_PTR_DEFINITIONS(LocalizerNodeBase)  // Not possible with abstract classes
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a SensorsNode lifecycle node with the specified options.
-   * @param options Node options to configure the SensorsNode node.
+   * @brief Constructs a PlannerNodeBase lifecycle node with the specified options.
+   * @param options Node options to configure the PlannerNodeBase node.
    */
-  explicit SensorsNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit PlannerNodeBase(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
-   * @brief Configures the SensorsNode node.
+   * @brief Configures the PlannerNodeBase node.
    * This is typically where parameters and interfaces are declared.
    *
    * @param state The current lifecycle state.
@@ -63,7 +64,7 @@ public:
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the SensorsNode node.
+   * @brief Activates the PlannerNodeBase node.
    * This starts periodic navigation control cycles.
    *
    * @param state The current lifecycle state.
@@ -72,7 +73,7 @@ public:
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the SensorsNode node.
+   * @brief Deactivates the PlannerNodeBase node.
    * Control loops are stopped and interfaces are disabled.
    *
    * @param state The current lifecycle state.
@@ -81,7 +82,7 @@ public:
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the SensorsNode node.
+   * @brief Cleans up the PlannerNodeBase node.
    * Releases resources and resets the internal state.
    *
    * @param state The current lifecycle state.
@@ -90,7 +91,7 @@ public:
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the SensorsNode node.
+   * @brief Shuts down the PlannerNodeBase node.
    * Called on final shutdown of the node's lifecycle.
    *
    * @param state The current lifecycle state.
@@ -99,7 +100,7 @@ public:
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the SensorsNode node.
+   * @brief Handles errors in the PlannerNodeBase node.
    * This is called when a failure occurs during a lifecycle transition.
    *
    * @param state The current lifecycle state.
@@ -117,6 +118,26 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Returns the last navigation plan estimated by the Planner
+   *
+   * @return A plan object with the waypoints to follow
+   */
+  nav_msgs::msg::Path get_path() const;
+
+protected:
+  /**
+   * @brief Executes a single cycle. Must be implemented by derived classes
+   *
+   * This method is periodically called by a timer to run the planner logic
+   */
+  virtual void planner_cycle() = 0;
+
+  /**
+   * @brief The robot pose (pose + velocity) estimated by the planner
+   */
+  nav_msgs::msg::Path path_ {};
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -124,18 +145,35 @@ private:
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the periodic sensors tasks cycle.
+   * @brief Timer that triggers the periodic planner tasks cycle.
    */
-  rclcpp::TimerBase::SharedPtr sensors_main_timer_;
+  rclcpp::TimerBase::SharedPtr planner_main_timer_;
 
-  /**
-   * @brief Executes a single cycle.
-   *
-   * This method is periodically called by a timer to run the sensors logic
-   */
-  void sensors_cycle();
 };
 
-}  // namespace easynav_sensors
+/**
+ * @class SimplePlanner
+ * @brief This is only an example class that implements the interface defined in PlannerNodeBase
+ *
+ */
+class SimplePlanner : public PlannerNodeBase
+{
+protected:
+  /**
+  * @brief Executes a single cycle. Must be implemented by derived classes.
+  *
+  * This method should compute the actual path
+  */
+  virtual void planner_cycle() override
+  {
+    // Example implementation for the control cycle
+    geometry_msgs::msg::PoseStamped pose;
+    pose.pose.position.x = 10;
+    path_.poses.clear();
+    path_.poses.push_back(pose);
+  }
+};
 
-#endif  // EASYNAV_SENSORS__SENSORNODE_HPP_
+}  // namespace easynav_planner
+
+#endif  // EASYNAV_PLANNER__PLANNER_NODE_BASE_HPP_

@@ -18,43 +18,45 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the MapsManagerNodeBase lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_PLANNER__EASYNAVNODE_HPP_
-#define EASYNAV_PLANNER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_MAPSMANAGER__MAPS_MANAGER_NODE_BASE_HPP_
+#define EASYNAV_MAPSMANAGER__MAPS_MANAGER_NODE_BASE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "easynav_maps_manager/MapTypeBase.hpp"
 
-namespace easynav_planner
+namespace easynav_maps_manager
 {
 
 /// \file
-/// \brief Declaration of the PlannerNode class, a ROS 2 lifecycle node for calculating paths tasks in Easy Navigation.
+/// \brief Declaration of the MapsManagerNodeBase class, a ROS 2 lifecycle node for map handling in Easy Navigation.
 
 /**
- * @class PlannerNode
- * @brief ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.
+ * @class MapsManagerNodeBase
+ * @brief ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.
  *
- * This node provides the interface between the planner module in EasyNav and the ROS 2 ecosystem.
- * It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup.
+ * This node is responsible for orchestrating the mapping functionality in the EasyNav architecture.
+ * It includes lifecycle management, real-time callback group assignment, and periodic execution of
+ * map-related operations such as updates, data fusion, and diagnostics.
  */
 
-class PlannerNode : public rclcpp_lifecycle::LifecycleNode
+class MapsManagerNodeBase : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  RCLCPP_SMART_PTR_DEFINITIONS(PlannerNode)
+  // RCLCPP_SMART_PTR_DEFINITIONS(MapsManagerNodeBase)  // Not possible with abstract classes
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a PlannerNode lifecycle node with the specified options.
-   * @param options Node options to configure the PlannerNode node.
+   * @brief Constructs a MapsManagerNodeBase lifecycle node with the specified options.
+   * @param options Node options to configure the MapsManagerNodeBase node.
    */
-  explicit PlannerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit MapsManagerNodeBase(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
-   * @brief Configures the PlannerNode node.
+   * @brief Configures the MapsManagerNodeBase node.
    * This is typically where parameters and interfaces are declared.
    *
    * @param state The current lifecycle state.
@@ -63,7 +65,7 @@ public:
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the PlannerNode node.
+   * @brief Activates the MapsManagerNodeBase node.
    * This starts periodic navigation control cycles.
    *
    * @param state The current lifecycle state.
@@ -72,7 +74,7 @@ public:
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the PlannerNode node.
+   * @brief Deactivates the MapsManagerNodeBase node.
    * Control loops are stopped and interfaces are disabled.
    *
    * @param state The current lifecycle state.
@@ -81,7 +83,7 @@ public:
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the PlannerNode node.
+   * @brief Cleans up the MapsManagerNodeBase node.
    * Releases resources and resets the internal state.
    *
    * @param state The current lifecycle state.
@@ -90,7 +92,7 @@ public:
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the PlannerNode node.
+   * @brief Shuts down the MapsManagerNodeBase node.
    * Called on final shutdown of the node's lifecycle.
    *
    * @param state The current lifecycle state.
@@ -99,7 +101,7 @@ public:
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the PlannerNode node.
+   * @brief Handles errors in the MapsManagerNodeBase node.
    * This is called when a failure occurs during a lifecycle transition.
    *
    * @param state The current lifecycle state.
@@ -117,6 +119,28 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+
+  /**
+   * @brief Returns the last robot pose estimated by the Localizer
+   *
+   * @return An Odometry object representing the robot state in the global frame
+   */
+  std::shared_ptr<const MapsTypeBase> get_map() const;
+
+protected:
+  /**
+   * @brief Executes a single cycle. Must be implemented by derived classes
+   *
+   * This method is periodically called by a timer to run the maps_manager logic
+   */
+  virtual void maps_manager_cycle() = 0;
+
+  /**
+   * @brief The environment representation, as a pointer to the base type MapsTypeBase
+   * TODO: Handle both the static and the dynamic map
+   */
+  std::shared_ptr<MapsTypeBase> map_ {};
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -124,18 +148,34 @@ private:
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the periodic planner tasks cycle.
+   * @brief Timer that triggers the periodic map tasks cycle.
    */
-  rclcpp::TimerBase::SharedPtr planner_main_timer_;
-
-  /**
-   * @brief Executes a single cycle.
-   *
-   * This method is periodically called by a timer to run the planner logic
-   */
-  void planner_cycle();
+  rclcpp::TimerBase::SharedPtr maps_manager_main_timer_;
 };
 
-}  // namespace easynav_planner
+/**
+ * @class SimpleMapsManager
+ * @brief This is only an example class that implements
+ *        the interface defined in MapsManagerNodeBase
+ *
+ */
+class SimpleMapsManager : public MapsManagerNodeBase
+{
+protected:
+  /**
+  * @brief Executes a single cycle. Must be implemented by derived classes.
+  *
+  * This method should compute the actual pose of the robot and store it in robot_odom_
+  */
+  virtual void maps_manager_cycle() override
+  {
+    // Example implementation for the control cycle
+    // map_->update_dynamic_map(perceptions);
+    map_->publish_static_map();
+    map_->publish_dynamic_map();
+  }
+};
 
-#endif  // EASYNAV_PLANNER__EASYNAVNODE_HPP_
+}  // namespace easynav_maps_manager
+
+#endif  // EASYNAV_MAPSMANAGER__MAPS_MANAGER_NODE_BASE_HPP_

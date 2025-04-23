@@ -18,21 +18,22 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Implementation of the SensorsNode class.
+/// \brief Implementation of the ControllerNodeBase class.
 
+#include "geometry_msgs/msg/twist_stamped.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-#include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_controller/ControllerNodeBase.hpp"
 
-namespace easynav_sensors
+namespace easynav_controller
 {
 
 using namespace std::chrono_literals;
 
-SensorsNode::SensorsNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("sensors_node", options)
+ControllerNodeBase::ControllerNodeBase(const rclcpp::NodeOptions & options)
+: LifecycleNode("controller_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 }
@@ -40,7 +41,7 @@ SensorsNode::SensorsNode(const rclcpp::NodeOptions & options)
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 CallbackReturnT
-SensorsNode::on_configure(const rclcpp_lifecycle::State & state)
+ControllerNodeBase::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
@@ -48,57 +49,56 @@ SensorsNode::on_configure(const rclcpp_lifecycle::State & state)
 }
 
 CallbackReturnT
-SensorsNode::on_activate(const rclcpp_lifecycle::State & state)
+ControllerNodeBase::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  sensors_main_timer_ = create_timer(1ms, std::bind(&SensorsNode::sensors_cycle, this),
+  controller_main_timer_ = create_timer(1ms, std::bind(&ControllerNodeBase::controller_cycle, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-SensorsNode::on_deactivate(const rclcpp_lifecycle::State & state)
+ControllerNodeBase::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  sensors_main_timer_->cancel();
+  controller_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-SensorsNode::on_cleanup(const rclcpp_lifecycle::State & state)
-{
-  (void)state;
-  return CallbackReturnT::SUCCESS;
-}
-
-CallbackReturnT
-SensorsNode::on_shutdown(const rclcpp_lifecycle::State & state)
+ControllerNodeBase::on_cleanup(const rclcpp_lifecycle::State & state)
 {
   (void)state;
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-SensorsNode::on_error(const rclcpp_lifecycle::State & state)
+ControllerNodeBase::on_shutdown(const rclcpp_lifecycle::State & state)
+{
+  (void)state;
+  return CallbackReturnT::SUCCESS;
+}
+
+CallbackReturnT
+ControllerNodeBase::on_error(const rclcpp_lifecycle::State & state)
 {
   (void)state;
   return CallbackReturnT::SUCCESS;
 }
 
 rclcpp::CallbackGroup::SharedPtr
-SensorsNode::get_real_time_cbg()
+ControllerNodeBase::get_real_time_cbg()
 {
   return realtime_cbg_;
 }
 
-void
-SensorsNode::sensors_cycle()
+geometry_msgs::msg::TwistStamped ControllerNodeBase::get_cmd_vel() const
 {
+  return cmd_vel_;
 }
 
-
-}  // namespace easynav_sensors
+}  // namespace easynav_controller

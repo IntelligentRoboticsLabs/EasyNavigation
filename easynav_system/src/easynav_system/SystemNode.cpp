@@ -25,11 +25,11 @@
 
 #include "easynav_system/SystemNode.hpp"
 
-#include "easynav_controller/ControllerNode.hpp"
-#include "easynav_localizer/LocalizerNode.hpp"
-#include "easynav_maps_manager/MapsManagerNode.hpp"
-#include "easynav_planner/PlannerNode.hpp"
-#include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_controller/ControllerNodeBase.hpp"
+#include "easynav_localizer/LocalizerNodeBase.hpp"
+#include "easynav_maps_manager/MapsManagerNodeBase.hpp"
+#include "easynav_planner/PlannerNodeBase.hpp"
+#include "easynav_sensors/SensorsNodeBase.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
@@ -46,11 +46,16 @@ SystemNode::SystemNode(const rclcpp::NodeOptions & options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
-  controller_node_ = easynav_controller::ControllerNode::make_shared();
-  localizer_node_ = easynav_localizer::LocalizerNode::make_shared();
-  maps_manager_node_ = easynav_maps_manager::MapsManagerNode::make_shared();
-  planner_node_ = easynav_planner::PlannerNode::make_shared();
-  sensors_node_ = easynav_sensors::SensorsNode::make_shared();
+  /* TODO:
+   * Create nodes from implementation plugin classes, obtained from the system configuration.
+   * It is not possible to instantiate objects from abstract classes.
+   * Right now, a dummy Simple class is used to illustrate the usage
+   */
+  controller_node_ = std::make_shared<easynav_controller::SimpleController>();
+  localizer_node_ = std::make_shared<easynav_localizer::SimpleLocalizer>();
+  maps_manager_node_ = std::make_shared<easynav_maps_manager::SimpleMapsManager>();
+  planner_node_ = std::make_shared<easynav_planner::SimplePlanner>();
+  sensors_node_ = std::make_shared<easynav_sensors::SimpleSensors>();
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;

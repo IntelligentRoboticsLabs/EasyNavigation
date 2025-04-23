@@ -22,21 +22,25 @@ set(dependencies
   pluginlib
 )
 
-include_directories(include)
-
-add_library(${PROJECT_NAME} SHARED
-  src/easynav_maps_manager/MapsManagerNode.cpp)
-ament_target_dependencies(${PROJECT_NAME} ${dependencies})
+add_library(maps_manager_node_base SHARED
+  src/easynav_maps_manager/MapsManagerNodeBase.cpp
+)
+target_include_directories(maps_manager_node_base PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(maps_manager_node_base ${dependencies})
 
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
-  ${PROJECT_NAME}
+  maps_manager_node_base
+  EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
-  RUNTIME DESTINATION lib/${PROJECT_NAME}
+  RUNTIME DESTINATION bin
 )
 
 if(BUILD_TESTING)
@@ -47,6 +51,9 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME})
+ament_export_libraries(maps_manager_node_base)
 ament_export_dependencies(${dependencies})
+ament_export_targets(
+  export_${PROJECT_NAME}
+)
 ament_package()

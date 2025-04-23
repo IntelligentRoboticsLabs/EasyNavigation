@@ -27,11 +27,11 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-#include "easynav_controller/ControllerNode.hpp"
-#include "easynav_localizer/LocalizerNode.hpp"
-#include "easynav_maps_manager/MapsManagerNode.hpp"
-#include "easynav_planner/PlannerNode.hpp"
-#include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_controller/ControllerNodeBase.hpp"
+#include "easynav_localizer/LocalizerNodeBase.hpp"
+#include "easynav_maps_manager/MapsManagerNodeBase.hpp"
+#include "easynav_planner/PlannerNodeBase.hpp"
+#include "easynav_sensors/SensorsNodeBase.hpp"
 
 namespace easynav_system
 {
@@ -142,11 +142,11 @@ private:
    */
   rclcpp::TimerBase::SharedPtr system_main_timer_;
 
-  easynav_controller::ControllerNode::SharedPtr controller_node_;
-  easynav_localizer::LocalizerNode::SharedPtr localizer_node_;
-  easynav_maps_manager::MapsManagerNode::SharedPtr maps_manager_node_;
-  easynav_planner::PlannerNode::SharedPtr planner_node_;
-  easynav_sensors::SensorsNode::SharedPtr sensors_node_;
+  std::shared_ptr<easynav_controller::ControllerNodeBase> controller_node_;
+  std::shared_ptr<easynav_localizer::LocalizerNodeBase> localizer_node_;
+  std::shared_ptr<easynav_planner::PlannerNodeBase> planner_node_;
+  std::shared_ptr<easynav_sensors::SensorsNodeBase> sensors_node_;
+  std::shared_ptr<easynav_maps_manager::MapsManagerNodeBase> maps_manager_node_;
 
   /**
    * @brief Executes a single cycle.

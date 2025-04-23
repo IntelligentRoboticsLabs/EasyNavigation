@@ -18,21 +18,21 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Implementation of the ControllerNode class.
+/// \brief Implementation of the PlannerNode class.
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-#include "easynav_controller/ControllerNode.hpp"
+#include "easynav_planner/PlannerNodeBase.hpp"
 
-namespace easynav_controller
+namespace easynav_planner
 {
 
 using namespace std::chrono_literals;
 
-ControllerNode::ControllerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("controller_node", options)
+PlannerNodeBase::PlannerNodeBase(const rclcpp::NodeOptions & options)
+: LifecycleNode("planner_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 }
@@ -40,7 +40,7 @@ ControllerNode::ControllerNode(const rclcpp::NodeOptions & options)
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 CallbackReturnT
-ControllerNode::on_configure(const rclcpp_lifecycle::State & state)
+PlannerNodeBase::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
@@ -48,57 +48,57 @@ ControllerNode::on_configure(const rclcpp_lifecycle::State & state)
 }
 
 CallbackReturnT
-ControllerNode::on_activate(const rclcpp_lifecycle::State & state)
+PlannerNodeBase::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  controller_main_timer_ = create_timer(1ms, std::bind(&ControllerNode::controller_cycle, this),
+  planner_main_timer_ = create_timer(1ms, std::bind(&PlannerNodeBase::planner_cycle, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-ControllerNode::on_deactivate(const rclcpp_lifecycle::State & state)
+PlannerNodeBase::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  controller_main_timer_->cancel();
+  planner_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-ControllerNode::on_cleanup(const rclcpp_lifecycle::State & state)
-{
-  (void)state;
-  return CallbackReturnT::SUCCESS;
-}
-
-CallbackReturnT
-ControllerNode::on_shutdown(const rclcpp_lifecycle::State & state)
+PlannerNodeBase::on_cleanup(const rclcpp_lifecycle::State & state)
 {
   (void)state;
   return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT
-ControllerNode::on_error(const rclcpp_lifecycle::State & state)
+PlannerNodeBase::on_shutdown(const rclcpp_lifecycle::State & state)
+{
+  (void)state;
+  return CallbackReturnT::SUCCESS;
+}
+
+CallbackReturnT
+PlannerNodeBase::on_error(const rclcpp_lifecycle::State & state)
 {
   (void)state;
   return CallbackReturnT::SUCCESS;
 }
 
 rclcpp::CallbackGroup::SharedPtr
-ControllerNode::get_real_time_cbg()
+PlannerNodeBase::get_real_time_cbg()
 {
   return realtime_cbg_;
 }
 
-void
-ControllerNode::controller_cycle()
+nav_msgs::msg::Path PlannerNodeBase::get_path() const
 {
+  return path_;
 }
 
 
-}  // namespace easynav_controller
+}  // namespace easynav_planner

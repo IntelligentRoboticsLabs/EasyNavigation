@@ -18,43 +18,43 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the LocalizerNodeBase lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
-#define EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_LOCALIZER__LOCALIZER_NODE_BASE_HPP_
+#define EASYNAV_LOCALIZER__LOCALIZER_NODE_BASE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "nav_msgs/msg/odometry.hpp"
 
-namespace easynav_controller
+namespace easynav_localizer
 {
 
 /// \file
-/// \brief Declaration of the ControllerNode class, a ROS 2 lifecycle node for calculating speeds tasks in Easy Navigation.
+/// \brief Declaration of the LocalizerNodeBase class, a ROS 2 lifecycle node for localization tasks in Easy Navigation.
 
 /**
- * @class ControllerNode
- * @brief ROS 2 lifecycle node that manages calculating speeds for the Easy Navigation system.
+ * @class LocalizerNodeBase
+ * @brief ROS 2 lifecycle node that manages localization for the Easy Navigation system.
  *
- * This node provides the interface between the controller module in EasyNav and the ROS 2 ecosystem.
+ * This node provides the interface between the localization module in EasyNav and the ROS 2 ecosystem.
  * It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup.
  */
-
-class ControllerNode : public rclcpp_lifecycle::LifecycleNode
+class LocalizerNodeBase : public rclcpp_lifecycle::LifecycleNode
 {
 public:
-  RCLCPP_SMART_PTR_DEFINITIONS(ControllerNode)
+  // RCLCPP_SMART_PTR_DEFINITIONS(LocalizerNodeBase)  // Not possible with abstract classes
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a ControllerNode lifecycle node with the specified options.
-   * @param options Node options to configure the ControllerNode node.
+   * @brief Constructs a LocalizerNodeBase lifecycle node with the specified options.
+   * @param options Node options to configure the LocalizerNodeBase node.
    */
-  explicit ControllerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit LocalizerNodeBase(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
-   * @brief Configures the ControllerNode node.
+   * @brief Configures the LocalizerNodeBase node.
    * This is typically where parameters and interfaces are declared.
    *
    * @param state The current lifecycle state.
@@ -63,7 +63,7 @@ public:
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the ControllerNode node.
+   * @brief Activates the LocalizerNodeBase node.
    * This starts periodic navigation control cycles.
    *
    * @param state The current lifecycle state.
@@ -72,7 +72,7 @@ public:
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the ControllerNode node.
+   * @brief Deactivates the LocalizerNodeBase node.
    * Control loops are stopped and interfaces are disabled.
    *
    * @param state The current lifecycle state.
@@ -81,7 +81,7 @@ public:
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the ControllerNode node.
+   * @brief Cleans up the LocalizerNodeBase node.
    * Releases resources and resets the internal state.
    *
    * @param state The current lifecycle state.
@@ -90,7 +90,7 @@ public:
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the ControllerNode node.
+   * @brief Shuts down the LocalizerNodeBase node.
    * Called on final shutdown of the node's lifecycle.
    *
    * @param state The current lifecycle state.
@@ -99,7 +99,7 @@ public:
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the ControllerNode node.
+   * @brief Handles errors in the LocalizerNodeBase node.
    * This is called when a failure occurs during a lifecycle transition.
    *
    * @param state The current lifecycle state.
@@ -117,6 +117,26 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Returns the last robot pose estimated by the Localizer
+   *
+   * @return An Odometry object representing the robot state in the global frame
+   */
+  nav_msgs::msg::Odometry get_pose() const;
+
+protected:
+  /**
+   * @brief Executes a single cycle. Must be implemented by derived classes
+   *
+   * This method is periodically called by a timer to run the localizer logic
+   */
+  virtual void localizer_cycle() = 0;
+
+  /**
+   * @brief The robot pose (pose + velocity) estimated by the localizer
+   */
+  nav_msgs::msg::Odometry robot_odom_ {};
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -124,18 +144,31 @@ private:
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the periodic controller tasks cycle.
+   * @brief Timer that triggers the periodic localizer tasks cycle.
    */
-  rclcpp::TimerBase::SharedPtr controller_main_timer_;
-
-  /**
-   * @brief Executes a single cycle.
-   *
-   * This method is periodically called by a timer to run the controller logic
-   */
-  void controller_cycle();
+  rclcpp::TimerBase::SharedPtr localizer_main_timer_;
 };
 
-}  // namespace easynav_controller
+/**
+ * @class SimpleLocalizer
+ * @brief This is only an example class that implements the interface defined in LocalizerNodeBase
+ *
+ */
+class SimpleLocalizer : public LocalizerNodeBase
+{
+protected:
+  /**
+   * @brief Executes a single cycle. Must be implemented by derived classes.
+   *
+   * This method should compute the actual pose of the robot and store it in robot_odom_
+   */
+  virtual void localizer_cycle() override
+  {
+    // Example implementation for the control cycle
+    robot_odom_.pose.pose.position.x += 1;
+  }
+};
 
-#endif  // EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
+}  // namespace easynav_localizer
+
+#endif  // EASYNAV_LOCALIZER__LOCALIZER_NODE_BASE_HPP_
