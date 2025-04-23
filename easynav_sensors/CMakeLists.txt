@@ -28,17 +28,12 @@ add_library(${PROJECT_NAME} SHARED
   src/easynav_sensors/SensorsNode.cpp)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
-add_executable(sensors_main src/sensors_main.cpp)
-ament_target_dependencies(sensors_main ${dependencies})
-target_link_libraries(sensors_main ${PROJECT_NAME})
-
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
   ${PROJECT_NAME}
-  sensors_main
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}

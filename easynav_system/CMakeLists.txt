@@ -12,10 +12,22 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
+find_package(easynav_common)
+find_package(easynav_controller)
+find_package(easynav_localizer)
+find_package(easynav_maps_manager)
+find_package(easynav_planner)
+find_package(easynav_sensors)
 
 set(dependencies
   rclcpp
   rclcpp_lifecycle
+  easynav_common
+  easynav_controller
+  easynav_localizer
+  easynav_maps_manager
+  easynav_planner
+  easynav_sensors
 )
 
 include_directories(include)

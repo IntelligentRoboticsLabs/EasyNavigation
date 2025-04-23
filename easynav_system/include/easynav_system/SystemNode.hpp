@@ -27,11 +27,23 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "easynav_controller/ControllerNode.hpp"
+#include "easynav_localizer/LocalizerNode.hpp"
+#include "easynav_maps_manager/MapsManagerNode.hpp"
+#include "easynav_planner/PlannerNode.hpp"
+#include "easynav_sensors/SensorsNode.hpp"
+
 namespace easynav_system
 {
 
 /// \file
 /// \brief Declaration of the SystemNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigation.
+
+struct SystemNodeInfo
+{
+  rclcpp_lifecycle::LifecycleNode::SharedPtr node_ptr;
+  rclcpp::CallbackGroup::SharedPtr realtime_cbg;
+};
 
 /**
  * @class SystemNode
@@ -117,6 +129,8 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  std::map<std::string, SystemNodeInfo> get_system_nodes();
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -127,6 +141,12 @@ private:
    * @brief Timer that triggers the periodic system tasks cycle.
    */
   rclcpp::TimerBase::SharedPtr system_main_timer_;
+
+  easynav_controller::ControllerNode::SharedPtr controller_node_;
+  easynav_localizer::LocalizerNode::SharedPtr localizer_node_;
+  easynav_maps_manager::MapsManagerNode::SharedPtr maps_manager_node_;
+  easynav_planner::PlannerNode::SharedPtr planner_node_;
+  easynav_sensors::SensorsNode::SharedPtr sensors_node_;
 
   /**
    * @brief Executes a single cycle.
