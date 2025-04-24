@@ -36,11 +36,44 @@
 namespace easynav_sensors
 {
 
+
+void
+convert(const sensor_msgs::msg::LaserScan & scan, pcl::PointCloud<pcl::PointXYZ> & pc)
+{
+  const size_t num_points = scan.ranges.size();
+
+  if (pc.points.size() != num_points) {
+    pc.points.resize(num_points);
+  }
+
+  pc.header.frame_id = scan.header.frame_id;
+  pc.width = static_cast<uint32_t>(pc.points.size());
+  pc.height = 1;
+  pc.is_dense = false;
+
+  for (size_t i = 0; i < num_points; ++i) {
+    float range = scan.ranges[i];
+
+    pcl::PointXYZ & point = pc.points[i];
+
+    if (!std::isfinite(range) || range < scan.range_min || range > scan.range_max) {
+      point.x = std::numeric_limits<float>::quiet_NaN();
+      point.y = std::numeric_limits<float>::quiet_NaN();
+      point.z = std::numeric_limits<float>::quiet_NaN();
+    } else {
+      float angle = scan.angle_min + i * scan.angle_increment;
+      point.x = range * std::cos(angle);
+      point.y = range * std::sin(angle);
+      point.z = 0.0f;
+    }
+  }
+}
+
 template<typename MsgT>
 rclcpp::SubscriptionBase::SharedPtr create_typed_subscription(
-    rclcpp_lifecycle::LifecycleNode & node,
-    const std::string & topic, 
-    Perception & perception)
+  rclcpp_lifecycle::LifecycleNode & node,
+  const std::string & topic,
+  Perception & perception)
 {
   std::cerr << "Generic transform" << std::endl;
   return nullptr;
@@ -50,7 +83,7 @@ template<>
 rclcpp::SubscriptionBase::SharedPtr
 create_typed_subscription<sensor_msgs::msg::LaserScan>(
   rclcpp_lifecycle::LifecycleNode & node,
-  const std::string & topic, 
+  const std::string & topic,
   Perception & perception)
 {
   return create_subscription<sensor_msgs::msg::LaserScan>(
@@ -58,33 +91,10 @@ create_typed_subscription<sensor_msgs::msg::LaserScan>(
     topic,
     rclcpp::SensorDataQoS().reliable(),
     [&perception](sensor_msgs::msg::LaserScan::UniquePtr msg) {
-      const size_t num_points = msg->ranges.size();
+      convert(*msg, perception.data);
 
-      if (perception.data.points.size() != num_points) {
-        perception.data.points.resize(num_points);
-      }
-
-      perception.data.header.frame_id = msg->header.frame_id;
-      perception.data.width = static_cast<uint32_t>(perception.data.points.size());
-      perception.data.height = 1;
-      perception.data.is_dense = false;
-
-      for (size_t i = 0; i < num_points; ++i) {
-        float range = msg->ranges[i];
-
-        pcl::PointXYZ & point = perception.data.points[i];
-
-        if (!std::isfinite(range) || range < msg->range_min || range > msg->range_max) {
-          point.x = std::numeric_limits<float>::quiet_NaN();
-          point.y = std::numeric_limits<float>::quiet_NaN();
-          point.z = std::numeric_limits<float>::quiet_NaN();
-        } else {
-          float angle = msg->angle_min + i * msg->angle_increment;
-          point.x = range * std::cos(angle);
-          point.y = range * std::sin(angle);
-          point.z = 0.0f;
-        }
-      }
+      perception.frame_id = msg->header.frame_id;
+      perception.stamp = msg->header.stamp;
     });
 }
 
@@ -92,7 +102,7 @@ template<>
 rclcpp::SubscriptionBase::SharedPtr
 create_typed_subscription<sensor_msgs::msg::PointCloud2>(
   rclcpp_lifecycle::LifecycleNode & node,
-  const std::string & topic, 
+  const std::string & topic,
   Perception & perception)
 {
   std::cerr << "PointCloud2 transform" << std::endl;

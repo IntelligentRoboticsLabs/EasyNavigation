@@ -61,8 +61,6 @@ SensorsNode::on_configure(const rclcpp_lifecycle::State & state)
     get_parameter(sensor + ".topic", topic);
     get_parameter(sensor + ".type", msg_type);
 
-    std::cerr << "Sensor: {" << sensor << "} [" << topic << ", "<< msg_type << "]" << std::endl;
-
     Perception perception_entry;
 
     if (msg_type == "LaserScan") {
