@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="namespaceeasynav__common.html">easynav_common</a></li><li class="navelem"><a class="el" href="classeasynav__common_1_1Result.html">Result</a></li>  </ul>
+<li class="navelem"><a class="el" href="namespaceeasynav.html">easynav</a></li><li class="navelem"><a class="el" href="classeasynav_1_1Result.html">Result</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -92,7 +92,7 @@ $(function(){ initResizable(false); });
 <a href="#pub-types">Public Types</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-static-methods">Static Public Member Functions</a> &#124;
-<a href="classeasynav__common_1_1Result-members.html">List of all members</a>  </div>
+<a href="classeasynav_1_1Result-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">Result&lt; T, E &gt; Class Template Reference</div></div>
 </div><!--header-->
 <div class="contents">
@@ -112,7 +112,7 @@ Public Types</h2></td></tr>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae6cb88cb8483d2851d615c6f31d2b1fe" id="r_ae6cb88cb8483d2851d615c6f31d2b1fe"><td class="memTemplParams" colspan="2">template&lt;typename Func&gt; </td></tr>
 <tr class="memitem:ae6cb88cb8483d2851d615c6f31d2b1fe"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#ae6cb88cb8483d2851d615c6f31d2b1fe">and_then</a> (Func f) const -&gt; decltype(f(std::declval&lt; T &gt;()))</td></tr>
-<tr class="memdesc:ae6cb88cb8483d2851d615c6f31d2b1fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains operations that return another <a class="el" href="classeasynav__common_1_1Result.html" title="Generic result type that holds either a value (T) or an error (E).">Result</a> if the current one is Ok.  <br /></td></tr>
+<tr class="memdesc:ae6cb88cb8483d2851d615c6f31d2b1fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Chains operations that return another <a class="el" href="classeasynav_1_1Result.html" title="Generic result type that holds either a value (T) or an error (E).">Result</a> if the current one is Ok.  <br /></td></tr>
 <tr class="separator:ae6cb88cb8483d2851d615c6f31d2b1fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c701edbd06d95945db2533ec27eeb1f" id="r_a2c701edbd06d95945db2533ec27eeb1f"><td class="memItemLeft" align="right" valign="top">const E &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2c701edbd06d95945db2533ec27eeb1f">error</a> () const</td></tr>
 <tr class="memdesc:a2c701edbd06d95945db2533ec27eeb1f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the error if the result is Err.  <br /></td></tr>
@@ -124,7 +124,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a78ae320e307335bd655f8767da418e36"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks whether the result contains a valid value.  <br /></td></tr>
 <tr class="separator:a78ae320e307335bd655f8767da418e36"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a12cd7e3a74c6ddc947cb7e94c587bfea" id="r_a12cd7e3a74c6ddc947cb7e94c587bfea"><td class="memTemplParams" colspan="2">template&lt;typename Func&gt; </td></tr>
-<tr class="memitem:a12cd7e3a74c6ddc947cb7e94c587bfea"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a12cd7e3a74c6ddc947cb7e94c587bfea">map</a> (Func f) const -&gt; <a class="el" href="classeasynav__common_1_1Result.html">Result</a>&lt; decltype(f(std::declval&lt; T &gt;())), E &gt;</td></tr>
+<tr class="memitem:a12cd7e3a74c6ddc947cb7e94c587bfea"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a12cd7e3a74c6ddc947cb7e94c587bfea">map</a> (Func f) const -&gt; <a class="el" href="classeasynav_1_1Result.html">Result</a>&lt; decltype(f(std::declval&lt; T &gt;())), E &gt;</td></tr>
 <tr class="memdesc:a12cd7e3a74c6ddc947cb7e94c587bfea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transforms the result if it is Ok, otherwise propagates the error.  <br /></td></tr>
 <tr class="separator:a12cd7e3a74c6ddc947cb7e94c587bfea"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab5d906b55180c260032ce43d6c5d4d06" id="r_ab5d906b55180c260032ce43d6c5d4d06"><td class="memItemLeft" align="right" valign="top">const T &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab5d906b55180c260032ce43d6c5d4d06">value</a> () const</td></tr>
@@ -136,16 +136,16 @@ Public Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a32d09532fa9d251a0ba1d29aa74c4f1b" id="r_a32d09532fa9d251a0ba1d29aa74c4f1b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classeasynav__common_1_1Result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32d09532fa9d251a0ba1d29aa74c4f1b">Err</a> (E <a class="el" href="#a2c701edbd06d95945db2533ec27eeb1f">error</a>)</td></tr>
+<tr class="memitem:a32d09532fa9d251a0ba1d29aa74c4f1b" id="r_a32d09532fa9d251a0ba1d29aa74c4f1b"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classeasynav_1_1Result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a32d09532fa9d251a0ba1d29aa74c4f1b">Err</a> (E <a class="el" href="#a2c701edbd06d95945db2533ec27eeb1f">error</a>)</td></tr>
 <tr class="memdesc:a32d09532fa9d251a0ba1d29aa74c4f1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a failed result.  <br /></td></tr>
 <tr class="separator:a32d09532fa9d251a0ba1d29aa74c4f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1a3b8aa54cb05bbca16dd8feeafc9c34" id="r_a1a3b8aa54cb05bbca16dd8feeafc9c34"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classeasynav__common_1_1Result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a3b8aa54cb05bbca16dd8feeafc9c34">Ok</a> (T <a class="el" href="#ab5d906b55180c260032ce43d6c5d4d06">value</a>)</td></tr>
+<tr class="memitem:a1a3b8aa54cb05bbca16dd8feeafc9c34" id="r_a1a3b8aa54cb05bbca16dd8feeafc9c34"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="classeasynav_1_1Result.html">Result</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1a3b8aa54cb05bbca16dd8feeafc9c34">Ok</a> (T <a class="el" href="#ab5d906b55180c260032ce43d6c5d4d06">value</a>)</td></tr>
 <tr class="memdesc:a1a3b8aa54cb05bbca16dd8feeafc9c34"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a successful result.  <br /></td></tr>
 <tr class="separator:a1a3b8aa54cb05bbca16dd8feeafc9c34"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename E&gt;<br />
-class easynav_common::Result&lt; T, E &gt;</div><p>Generic result type that holds either a value (T) or an error (E). </p>
+class easynav::Result&lt; T, E &gt;</div><p>Generic result type that holds either a value (T) or an error (E). </p>
 <p>This class is a type-safe alternative to exceptions and error codes, providing a functional style for composing and handling success or failure states in C++.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -194,7 +194,7 @@ template&lt;typename Func&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Chains operations that return another <a class="el" href="classeasynav__common_1_1Result.html" title="Generic result type that holds either a value (T) or an error (E).">Result</a> if the current one is Ok. </p>
+<p>Chains operations that return another <a class="el" href="classeasynav_1_1Result.html" title="Generic result type that holds either a value (T) or an error (E).">Result</a> if the current one is Ok. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Func</td><td>A callable that takes a T and returns Result&lt;U, E&gt;. </td></tr>
@@ -223,7 +223,7 @@ template&lt;typename T, typename E&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classeasynav__common_1_1Result.html">Result</a> Err </td>
+          <td class="memname">static <a class="el" href="classeasynav_1_1Result.html">Result</a> Err </td>
           <td>(</td>
           <td class="paramtype">E</td>          <td class="paramname"><span class="paramname"><em>error</em></span></td><td>)</td>
           <td></td>
@@ -333,7 +333,7 @@ template&lt;typename Func&gt; </div>
           <td class="memname">auto map </td>
           <td>(</td>
           <td class="paramtype">Func</td>          <td class="paramname"><span class="paramname"><em>f</em></span></td><td>)</td>
-          <td> const -&gt; <a class="el" href="classeasynav__common_1_1Result.html">Result</a>&lt;decltype(f(std::declval&lt;T&gt;())), E&gt;
+          <td> const -&gt; <a class="el" href="classeasynav_1_1Result.html">Result</a>&lt;decltype(f(std::declval&lt;T&gt;())), E&gt;
   </td>
         </tr>
       </table>
@@ -368,7 +368,7 @@ template&lt;typename T, typename E&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">static <a class="el" href="classeasynav__common_1_1Result.html">Result</a> Ok </td>
+          <td class="memname">static <a class="el" href="classeasynav_1_1Result.html">Result</a> Ok </td>
           <td>(</td>
           <td class="paramtype">T</td>          <td class="paramname"><span class="paramname"><em>value</em></span></td><td>)</td>
           <td></td>
