@@ -28,7 +28,7 @@ ament_target_dependencies(localizer_method_base PUBLIC ${dependencies})
 
 # Planner Base
 add_library(planner_method_base SHARED
-src/easynav_core/LocalizerMethodBase.cpp
+src/easynav_core/PlannerMethodBase.cpp
 )
 target_include_directories(planner_method_base PUBLIC
 $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

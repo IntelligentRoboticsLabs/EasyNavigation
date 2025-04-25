@@ -1,0 +1,11 @@
+<class_libraries>
+  <library path="easynav_dummy_localizer">
+    <class name="easynav_localizer/DummyLocalizer"  type="easynav::DummyLocalizer" base_class_type="easynav::LocalizerMethodBase">
+      <description>
+      A default "dummy" implementation for the Localizer Method.
+      This localization method does nothing. It serves as an example, and will be used as a default plugin implementation
+      if the navigation system configuration does not specify one.
+      </description>
+    </class>
+  </library>
+</class_libraries>
