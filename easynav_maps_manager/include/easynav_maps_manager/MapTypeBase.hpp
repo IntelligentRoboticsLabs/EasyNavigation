@@ -29,7 +29,7 @@
 
 #include "easynav_sensors/Perceptions.hpp"
 
-namespace easynav_maps_manager
+namespace easynav
 {
 
 /**
@@ -86,6 +86,6 @@ private:
   // std::shared_ptr<T> map_; ///< Internal representation of the managed map.
 };
 
-}  // namespace easynav_maps_manager
+}  // namespace easynav
 
 #endif  // EASYNAV_MAPSMANAGER__MAPSTYPEBASE_HPP_

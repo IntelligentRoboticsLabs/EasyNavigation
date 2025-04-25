@@ -26,7 +26,7 @@
 
 #include "easynav_planner/PlannerNode.hpp"
 
-namespace easynav_planner
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -101,4 +101,4 @@ PlannerNode::planner_cycle()
 }
 
 
-}  // namespace easynav_planner
+}  // namespace easynav

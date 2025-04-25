@@ -26,7 +26,7 @@
 
 #include "easynav_controller/ControllerNode.hpp"
 
-namespace easynav_controller
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -101,4 +101,4 @@ ControllerNode::controller_cycle()
 }
 
 
-}  // namespace easynav_controller
+}  // namespace easynav

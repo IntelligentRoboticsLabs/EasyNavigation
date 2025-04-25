@@ -27,7 +27,7 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_sensors
+namespace easynav
 {
 
 /// \file
@@ -136,6 +136,6 @@ private:
   void sensors_cycle();
 };
 
-}  // namespace easynav_sensors
+}  // namespace easynav
 
 #endif  // EASYNAV_SENSORS__SENSORNODE_HPP_

@@ -20,14 +20,14 @@
 /// \file
 /// \brief Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
-#define EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
+#define EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_controller
+namespace easynav
 {
 
 /// \file
@@ -136,6 +136,6 @@ private:
   void controller_cycle();
 };
 
-}  // namespace easynav_controller
+}  // namespace easynav
 
-#endif  // EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
+#endif  // EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_

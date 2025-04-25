@@ -26,7 +26,7 @@
 
 #include "easynav_localizer/LocalizerNode.hpp"
 
-namespace easynav_localizer
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -101,4 +101,4 @@ LocalizerNode::localizer_cycle()
 }
 
 
-}  // namespace easynav_localizer
+}  // namespace easynav

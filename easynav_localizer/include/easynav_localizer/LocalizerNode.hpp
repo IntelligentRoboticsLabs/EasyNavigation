@@ -27,7 +27,7 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_localizer
+namespace easynav
 {
 
 /// \file
@@ -136,6 +136,6 @@ private:
   void localizer_cycle();
 };
 
-}  // namespace easynav_localizer
+}  // namespace easynav
 
 #endif  // EASYNAV_LOCALIZER__EASYNAVNODE_HPP_
