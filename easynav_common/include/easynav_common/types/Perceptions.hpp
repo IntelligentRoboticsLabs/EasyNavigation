@@ -20,19 +20,15 @@
 /// \file
 /// \brief Definition of the Perception struct and the Perceptions container used for sensor data input.
 
-#ifndef EASYNAV_SENSORS__PERCEPTIONS_HPP_
-#define EASYNAV_SENSORS__PERCEPTIONS_HPP_
+#ifndef EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_
+#define EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_
 
 #include <string>
 #include <vector>
 
 #include "pcl/point_types.h"
-#include "pcl_conversions/pcl_conversions.h"
-#include "pcl/point_types_conversion.h"
-
-#include "rclcpp/rclcpp.hpp"
-#include "rclcpp/macros.hpp"
-#include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "pcl/point_cloud.h"
+#include "rclcpp/time.hpp"
 
 namespace easynav
 {
@@ -58,8 +54,8 @@ struct Perception
  *
  * This alias is used to represent a batch of sensor readings, usually for temporal integration or filtering.
  */
-typedef std::vector<Perception> Perceptions;
+using Perceptions = std::vector<Perception>;
 
 }  // namespace easynav
 
-#endif  // EASYNAV_SENSORS__PERCEPTIONS_HPP_
+#endif  // EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_

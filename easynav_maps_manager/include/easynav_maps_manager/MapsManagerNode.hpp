@@ -26,6 +26,7 @@
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "easynav_common/types/MapTypeBase.hpp"
 
 namespace easynav
 {
@@ -129,6 +130,8 @@ private:
    */
   rclcpp::TimerBase::SharedPtr maps_manager_main_timer_;
 
+  /** List of map representations */
+  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
   /**
    * @brief Executes a single cycle.
    *
