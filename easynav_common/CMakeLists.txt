@@ -12,10 +12,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(pcl_ros REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 set(dependencies
   rclcpp_lifecycle
   pcl_ros
+  geometry_msgs
+  nav_msgs
 )
 
 add_library(easynav_configuration SHARED

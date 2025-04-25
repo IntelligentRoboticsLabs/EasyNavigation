@@ -18,21 +18,17 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.
 
 #ifndef EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_
 #define EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_
 
-#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "easynav_common/types/MapTypeBase.hpp"
 
 namespace easynav
 {
-
-/// \file
-/// \brief Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.
 
 /**
  * @class MapsManagerNode
