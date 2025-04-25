@@ -59,7 +59,7 @@ public:
    */
   void initialize(std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node);
 
-   /**
+  /**
    * @brief Publish the static map.
    *
    * This method is intended to be called when the static map should be made available,
