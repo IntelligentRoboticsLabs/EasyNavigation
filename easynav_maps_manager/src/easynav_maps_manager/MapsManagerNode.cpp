@@ -26,7 +26,7 @@
 
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 
-namespace easynav_maps_manager
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -101,4 +101,4 @@ MapsManagerNode::maps_manager_cycle()
 }
 
 
-}  // namespace easynav_maps_manager
+}  // namespace easynav

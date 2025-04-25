@@ -26,7 +26,7 @@
 
 #include "easynav_sensors/SensorsNode.hpp"
 
-namespace easynav_sensors
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -101,4 +101,4 @@ SensorsNode::sensors_cycle()
 }
 
 
-}  // namespace easynav_sensors
+}  // namespace easynav

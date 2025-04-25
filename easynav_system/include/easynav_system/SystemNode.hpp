@@ -20,8 +20,8 @@
 /// \file
 /// \brief Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_SYSTEM__EASYNAVNODE_HPP_
-#define EASYNAV_SYSTEM__EASYNAVNODE_HPP_
+#ifndef EASYNAV_SYSTEM__SYSTEMNODE_HPP_
+#define EASYNAV_SYSTEM__SYSTEMNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
@@ -33,7 +33,7 @@
 #include "easynav_planner/PlannerNode.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
 
-namespace easynav_system
+namespace easynav
 {
 
 /// \file
@@ -142,11 +142,11 @@ private:
    */
   rclcpp::TimerBase::SharedPtr system_main_timer_;
 
-  easynav_controller::ControllerNode::SharedPtr controller_node_;
-  easynav_localizer::LocalizerNode::SharedPtr localizer_node_;
-  easynav_maps_manager::MapsManagerNode::SharedPtr maps_manager_node_;
-  easynav_planner::PlannerNode::SharedPtr planner_node_;
-  easynav_sensors::SensorsNode::SharedPtr sensors_node_;
+  ControllerNode::SharedPtr controller_node_;
+  LocalizerNode::SharedPtr localizer_node_;
+  MapsManagerNode::SharedPtr maps_manager_node_;
+  PlannerNode::SharedPtr planner_node_;
+  SensorsNode::SharedPtr sensors_node_;
 
   /**
    * @brief Executes a single cycle.
@@ -156,6 +156,6 @@ private:
   void system_cycle();
 };
 
-}  // namespace easynav_system
+}  // namespace easynav
 
-#endif  // EASYNAV_SYSTEM__EASYNAVNODE_HPP_
+#endif  // EASYNAV_SYSTEM__SYSTEMNODE_HPP_

@@ -20,14 +20,14 @@
 /// \file
 /// \brief Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
-#define EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_
+#define EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_maps_manager
+namespace easynav
 {
 
 /// \file
@@ -137,6 +137,6 @@ private:
   void maps_manager_cycle();
 };
 
-}  // namespace easynav_maps_manager
+}  // namespace easynav
 
-#endif  // EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
+#endif  // EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_

@@ -20,14 +20,14 @@
 /// \file
 /// \brief Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_PLANNER__EASYNAVNODE_HPP_
-#define EASYNAV_PLANNER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_PLANNER__PLANNERNODE_HPP_
+#define EASYNAV_PLANNER__PLANNERNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_planner
+namespace easynav
 {
 
 /// \file
@@ -136,6 +136,6 @@ private:
   void planner_cycle();
 };
 
-}  // namespace easynav_planner
+}  // namespace easynav
 
-#endif  // EASYNAV_PLANNER__EASYNAVNODE_HPP_
+#endif  // EASYNAV_PLANNER__PLANNERNODE_HPP_
