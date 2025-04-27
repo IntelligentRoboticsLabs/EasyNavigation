@@ -18,9 +18,26 @@ set(dependencies
   rclcpp_lifecycle
 )
 
+add_library(easynav_core_methods INTERFACE)
+target_include_directories(easynav_core_methods INTERFACE
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(easynav_core_methods INTERFACE
+  ${dependencies}
+)
+
 # Install header files
 install(DIRECTORY include/
   DESTINATION include/
+)
+
+install(TARGETS
+  easynav_core_methods
+  EXPORT easynav_core_methods
+  ARCHIVE DESTINATION lib
+  LIBRARY DESTINATION lib
+  RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
@@ -28,8 +45,12 @@ if(BUILD_TESTING)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_gtest REQUIRED)
+  add_subdirectory(test)
 endif()
 
 ament_export_include_directories(include)
+ament_export_targets(easynav_core_methods)
 ament_export_dependencies(${dependencies})
 ament_package()
