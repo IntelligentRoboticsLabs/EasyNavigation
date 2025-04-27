@@ -23,12 +23,10 @@
 #ifndef EASYNAV_CORE__LOCALIZERMETHODBASE_HPP_
 #define EASYNAV_CORE__LOCALIZERMETHODBASE_HPP_
 
-#include <memory>
-
-#include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "nav_msgs/msg/odometry.hpp"
 
 #include "easynav_common/types/NavState.hpp"
+#include "easynav_core/MethodBase.hpp"
 
 namespace easynav
 {
@@ -44,7 +42,7 @@ namespace easynav
  * and registering the derived class as a plugin with pluginlib,
  * which will be loaded at runtime in the system.
  */
-class LocalizerMethodBase
+class LocalizerMethodBase : public MethodBase
 {
 public:
   /**
@@ -58,27 +56,6 @@ public:
    * This ensures proper cleanup of derived classes.
    */
   virtual ~LocalizerMethodBase() = default;
-
-  /**
-   * @brief Initialize the localization method.
-   *
-   * This method should be called to set up any necessary resources
-   * or configurations for the localization algorithm.
-   * By default, it sets the parent node to the provided lifecycle node.
-   *
-   * @note If this method is overriden, the derived class should call the base method
-   * to ensure proper initialization of the parent node.
-   */
-  virtual void initialize(const std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node);
-
-  /**
-   * @brief get a pointer to the parent lifecycle node.
-   *
-   * This method can be used by derived classes to access the (private) lifecycle node.
-   *
-   * @return A shared pointer to the parent lifecycle node.
-   */
-  [[nodiscard]] std::shared_ptr<rclcpp_lifecycle::LifecycleNode> get_node() const;
 
   /**
    * @brief Get the current localization state.
@@ -98,14 +75,6 @@ public:
    * @param nav_state The current state of the navigation system.
    */
   virtual void update(const NavState nav_state) = 0;
-
-private:
-  /**
-   * @brief Pointer to the parent lifecycle node.
-   *
-   * This is used to access ROS interfaces and parameters.
-   */
-  std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node_;
 };
 
 }  // namespace easynav

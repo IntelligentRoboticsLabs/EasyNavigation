@@ -11,57 +11,16 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(ament_cmake REQUIRED)
 find_package(easynav_common REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
 
 set(dependencies
   easynav_common
+  rclcpp_lifecycle
 )
 
-# Localizer Base
-add_library(localizer_method_base SHARED
-src/easynav_core/LocalizerMethodBase.cpp
-)
-target_include_directories(localizer_method_base PUBLIC
-$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-$<INSTALL_INTERFACE:include>
-)
-ament_target_dependencies(localizer_method_base PUBLIC ${dependencies})
-
-# Planner Base
-add_library(planner_method_base SHARED
-src/easynav_core/PlannerMethodBase.cpp
-)
-target_include_directories(planner_method_base PUBLIC
-$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-$<INSTALL_INTERFACE:include>
-)
-ament_target_dependencies(planner_method_base PUBLIC ${dependencies})
-
-# Controller Base
-add_library(controller_method_base SHARED
-  src/easynav_core/ControllerMethodBase.cpp
-)
-target_include_directories(controller_method_base PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-ament_target_dependencies(controller_method_base PUBLIC ${dependencies})
-
+# Install header files
 install(DIRECTORY include/
   DESTINATION include/
-)
-
-set(target_libs
-  localizer_method_base
-  planner_method_base
-  controller_method_base
-)
-
-install(TARGETS
-  ${target_libs}
-  EXPORT export_${PROJECT_NAME}
-  ARCHIVE DESTINATION lib
-  LIBRARY DESTINATION lib
-  RUNTIME DESTINATION lib/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
@@ -72,11 +31,5 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_include_directories(include)
-ament_export_libraries(
-  ${target_libs}
-)
-ament_export_targets(
-  export_${PROJECT_NAME}
-)
 ament_export_dependencies(${dependencies})
 ament_package()

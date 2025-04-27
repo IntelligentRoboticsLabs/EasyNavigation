@@ -49,14 +49,8 @@ public:
    *
    * It is not required to override this method. Only if the derived class
    * requires further initialization than the provided by the base class.
-   * By default, the base class sets the parent node to the provided lifecycle node.
-   *
-   * @note If this method is overriden, the derived class should call the base method
-   * to ensure proper initialization of the parent node.
    */
-  virtual void initialize(
-    const std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node
-  ) override;
+  virtual void on_initialize() override;
 
   /**
    * @brief Get the current localization state.

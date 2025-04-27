@@ -25,13 +25,8 @@
 namespace easynav
 {
 
-void DummyLocalizer::initialize(
-  const std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node)
+void DummyLocalizer::on_initialize()
 {
-  // Call the base class initialize method to set the node
-  // This is required if the initialize method is overridden
-  LocalizerMethodBase::initialize(parent_node);
-
   // Initialize the odometry message
   odom_.header.stamp = get_node()->now();
   odom_.header.frame_id = "map";
