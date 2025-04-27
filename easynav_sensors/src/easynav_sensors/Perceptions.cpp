@@ -69,11 +69,72 @@ convert(const sensor_msgs::msg::LaserScan & scan, pcl::PointCloud<pcl::PointXYZ>
   }
 }
 
+void fuse_perceptions(
+  const std::vector<std::shared_ptr<Perception>> & perceptions,
+  const std::string & target_frame,
+  tf2_ros::Buffer & tf_buffer,
+  sensor_msgs::msg::PointCloud2 & output_msg)
+{
+  pcl::PointCloud<pcl::PointXYZ> merged;
+  size_t total_points = 0;
+
+  for (const auto & p : perceptions) {
+    if (p && p->valid) {
+      total_points += p->data.size();
+    }
+  }
+
+  merged.points.reserve(total_points);
+  merged.height = 1;
+  merged.is_dense = false;
+  merged.header.frame_id = target_frame;
+
+  for (const auto & p : perceptions) {
+    if (!p || !p->valid || p->data.empty()) {
+      continue;
+    }
+
+    geometry_msgs::msg::TransformStamped tf;
+    try {
+      tf = tf_buffer.lookupTransform(
+        target_frame, p->frame_id, tf2_ros::fromMsg(p->stamp), tf2::durationFromSec(0.0));
+    } catch (const tf2::TransformException & ex) {
+      RCLCPP_WARN(
+        rclcpp::get_logger("PerceptionFusion"),
+        "TF transform from '%s' to '%s' failed: %s",
+        p->frame_id.c_str(), target_frame.c_str(), ex.what());
+      continue;
+    }
+
+    Eigen::Affine3d tf_eigen = tf2::transformToEigen(tf);
+
+    pcl::PointCloud<pcl::PointXYZ> transformed;
+    pcl::transformPointCloud(p->data, transformed, tf_eigen);
+
+    merged.points.insert(merged.points.end(), transformed.begin(), transformed.end());
+  }
+
+  merged.width = merged.points.size();
+
+  pcl::toROSMsg(merged, output_msg);
+  output_msg.header.frame_id = target_frame;
+
+  rclcpp::Time latest_stamp(0, 0, RCL_ROS_TIME);
+
+  for (const auto & p : perceptions) {
+    if (p && p->valid && p->stamp > latest_stamp) {
+      latest_stamp = p->stamp;
+    }
+  }
+
+  output_msg.header.stamp = latest_stamp;
+}
+
 template<typename MsgT>
 rclcpp::SubscriptionBase::SharedPtr create_typed_subscription(
   rclcpp_lifecycle::LifecycleNode & node,
   const std::string & topic,
-  Perception & perception)
+  std::shared_ptr<Perception> perception)
 {
   std::cerr << "Generic transform" << std::endl;
   return nullptr;
@@ -84,18 +145,23 @@ rclcpp::SubscriptionBase::SharedPtr
 create_typed_subscription<sensor_msgs::msg::LaserScan>(
   rclcpp_lifecycle::LifecycleNode & node,
   const std::string & topic,
-  Perception & perception)
+  std::shared_ptr<Perception> perception,
+  rclcpp::CallbackGroup::SharedPtr cbg)
 {
+  rclcpp::SubscriptionOptions options;
+  options.callback_group = cbg;
+
   return create_subscription<sensor_msgs::msg::LaserScan>(
     node,
     topic,
     rclcpp::SensorDataQoS().reliable(),
-    [&perception](sensor_msgs::msg::LaserScan::UniquePtr msg) {
-      convert(*msg, perception.data);
+    [perception](sensor_msgs::msg::LaserScan::UniquePtr msg) {
+      convert(*msg, perception->data);
 
-      perception.frame_id = msg->header.frame_id;
-      perception.stamp = msg->header.stamp;
-    });
+      perception->frame_id = msg->header.frame_id;
+      perception->stamp = msg->header.stamp;
+      perception->valid = true;
+    }, options);
 }
 
 template<>
@@ -103,10 +169,23 @@ rclcpp::SubscriptionBase::SharedPtr
 create_typed_subscription<sensor_msgs::msg::PointCloud2>(
   rclcpp_lifecycle::LifecycleNode & node,
   const std::string & topic,
-  Perception & perception)
+  std::shared_ptr<Perception> perception,
+  rclcpp::CallbackGroup::SharedPtr cbg)
 {
-  std::cerr << "PointCloud2 transform" << std::endl;
-  return nullptr;
+  rclcpp::SubscriptionOptions options;
+  options.callback_group = cbg;
+
+  return create_subscription<sensor_msgs::msg::PointCloud2>(
+    node,
+    topic,
+    rclcpp::SensorDataQoS().reliable(),
+    [perception](sensor_msgs::msg::PointCloud2::UniquePtr msg) {
+      pcl::fromROSMsg(*msg, perception->data);
+
+      perception->frame_id = msg->header.frame_id;
+      perception->stamp = msg->header.stamp;
+      perception->valid = true;
+    }, options);
 }
 
 
