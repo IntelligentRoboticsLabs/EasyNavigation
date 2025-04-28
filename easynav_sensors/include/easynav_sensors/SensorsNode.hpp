@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -32,9 +32,10 @@
 
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
-#include "easynav_sensors/Perceptions.hpp"
+#include "easynav_common/types/Perceptions.hpp"
+#include "easynav_common/types/NavState.hpp"
 
-namespace easynav_sensors
+namespace easynav
 {
 
 /**
@@ -124,6 +125,14 @@ public:
    */
   const Perceptions & get_perceptions() const {return perceptions_;}
 
+  /**
+   * @brief Updates the node's behavior based on the provided navigation state.
+   *
+   * This may affect which perceptions are fused or published.
+   * @param nav_state The latest navigation state information.
+   */
+  void set_state(const NavState & nav_state);
+
 private:
   /**
    * @brief Callback group intended for real-time sensor processing tasks.
@@ -186,6 +195,6 @@ private:
   std::string perception_default_frame_;
 };
 
-}  // namespace easynav_sensors
+}  // namespace easynav
 
 #endif  // EASYNAV_SENSORS__SENSORNODE_HPP_

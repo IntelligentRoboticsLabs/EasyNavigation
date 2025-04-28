@@ -1,0 +1,11 @@
+<class_libraries>
+  <library path="easynav_dummy_planner">
+    <class name="easynav_planner/DummyPlanner"  type="easynav::DummyPlanner" base_class_type="easynav::PlannerMethodBase">
+      <description>
+      A default "dummy" implementation for the Planner Method.
+      This path planning method does nothing. It serves as an example, and will be used as a default plugin implementation
+      if the navigation system configuration does not specify one.
+      </description>
+    </class>
+  </library>
+</class_libraries>

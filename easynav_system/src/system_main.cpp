@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -36,7 +36,7 @@ int main(int argc, char ** argv)
   rclcpp::init(argc, argv);
 
   rclcpp::experimental::executors::EventsExecutor exe_nort, exe_rt;
-  auto system_node = easynav_system::SystemNode::make_shared();
+  auto system_node = easynav::SystemNode::make_shared();
 
   exe_nort.add_node(system_node->get_node_base_interface());
   exe_rt.add_callback_group(system_node->get_real_time_cbg(),

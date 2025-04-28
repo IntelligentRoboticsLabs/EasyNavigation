@@ -20,14 +20,14 @@
 /// \file
 /// \brief Definition of the Result class, a generic outcome container inspired by Rust's Result<T, E>.
 
-#ifndef EASYNAV_CORE__RESULT_HPP_
-#define EASYNAV_CORE__RESULT_HPP_
+#ifndef EASYNAV_COMMON__RESULT_HPP_
+#define EASYNAV_COMMON__RESULT_HPP_
 
 #include <variant>
 #include <functional>
 #include <stdexcept>
 
-namespace easynav_common
+namespace easynav
 {
 
 /**
@@ -165,6 +165,6 @@ private:
   ValueType value_;
 };
 
-}  // namespace easynav_common
+}  // namespace easynav
 
-#endif  // EASYNAV_CORE__RESULT_HPP_
+#endif  // EASYNAV_COMMON__RESULT_HPP_

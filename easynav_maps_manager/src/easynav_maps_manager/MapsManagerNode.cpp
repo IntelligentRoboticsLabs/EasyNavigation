@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -29,7 +29,7 @@
 
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 
-namespace easynav_maps_manager
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -121,4 +121,4 @@ MapsManagerNode::maps_manager_cycle_nort()
 {
 }
 
-}  // namespace easynav_maps_manager
+}  // namespace easynav

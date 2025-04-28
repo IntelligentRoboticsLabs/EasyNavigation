@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,14 +20,14 @@
 /// \file
 /// \brief Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
-#define EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
+#define EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
 
-#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "easynav_core/ControllerMethodBase.hpp"
 
-namespace easynav_controller
+namespace easynav
 {
 
 /// \file
@@ -122,6 +122,20 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Get the current control command.
+   *
+   * @return An Odometry message representing the current control command.
+   */
+  [[nodiscard]] geometry_msgs::msg::TwistStamped get_cmd_vel() const;
+
+  /**
+   * @brief Set the current navigation state.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -132,6 +146,20 @@ private:
    * @brief Timer that triggers the periodic controller tasks cycle.
    */
   rclcpp::TimerBase::SharedPtr controller_main_timer_;
+
+  /**
+   * @brief Pointer to the controller method.
+   *
+   * This is the actual control algorithm that will be used.
+   */
+  std::shared_ptr<ControllerMethodBase> controller_method_ {nullptr};
+
+  /**
+   * @brief Current navigation state.
+   *
+   * This is the current state of the navigation system.
+   */
+  NavState nav_state_;
 
   /**
    * @brief Executes one cycle of real-time system operations.
@@ -149,6 +177,6 @@ private:
   void controller_cycle_nort();
 };
 
-}  // namespace easynav_controller
+}  // namespace easynav
 
-#endif  // EASYNAV_CONTROLLER__EASYNAVNODE_HPP_
+#endif  // EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_

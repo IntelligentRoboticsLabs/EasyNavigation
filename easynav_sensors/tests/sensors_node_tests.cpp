@@ -19,7 +19,7 @@
 
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
-#include "easynav_sensors/Perceptions.hpp"
+#include "easynav_common/types/Perceptions.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
 
 #include "lifecycle_msgs/msg/transition.hpp"
@@ -251,7 +251,7 @@ TEST_F(SensorsNodeTestCase, convert_scan2pc)
 {
   {
     pcl::PointCloud<pcl::PointXYZ> out;
-    easynav_sensors::convert(get_scan_test_1(rclcpp::Time()), out);
+    easynav::convert(get_scan_test_1(rclcpp::Time()), out);
 
     ASSERT_EQ(out.header.frame_id, "base_laser");
     ASSERT_EQ(out.width, 16);
@@ -264,7 +264,7 @@ TEST_F(SensorsNodeTestCase, convert_scan2pc)
       ASSERT_TRUE(std::isnan(out.points[i].z));
     }
 
-    easynav_sensors::convert(get_scan_test_2(rclcpp::Time()), out);
+    easynav::convert(get_scan_test_2(rclcpp::Time()), out);
 
     ASSERT_EQ(out.header.frame_id, "base_laser");
     ASSERT_EQ(out.width, 16);
@@ -277,7 +277,7 @@ TEST_F(SensorsNodeTestCase, convert_scan2pc)
       ASSERT_NEAR(out.points[i].z, 0.0, 0.0001);
     }
 
-    easynav_sensors::convert(get_scan_test_3(rclcpp::Time()), out);
+    easynav::convert(get_scan_test_3(rclcpp::Time()), out);
 
     ASSERT_EQ(out.header.frame_id, "base_laser_1");
     ASSERT_EQ(out.width, 16);
@@ -302,7 +302,7 @@ TEST_F(SensorsNodeTestCase, convert_scan2pc)
 
 TEST_F(SensorsNodeTestCase, percept_laserscan)
 {
-  auto sensors_node = easynav_sensors::SensorsNode::make_shared();
+  auto sensors_node = easynav::SensorsNode::make_shared();
   auto test_node = rclcpp::Node::make_shared("test_node");
   auto laser_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>(
     "/scan1", rclcpp::SensorDataQoS().reliable());
@@ -375,7 +375,7 @@ TEST_F(SensorsNodeTestCase, percept_laserscan)
 
 TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
 {
-  auto sensors_node = easynav_sensors::SensorsNode::make_shared();
+  auto sensors_node = easynav::SensorsNode::make_shared();
   auto test_node = rclcpp::Node::make_shared("test_node");
   auto laser1_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>(
     "/scan1", rclcpp::SensorDataQoS().reliable());
@@ -518,7 +518,7 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
 
 TEST_F(SensorsNodeTestCase, percept_pc2)
 {
-  auto sensors_node = easynav_sensors::SensorsNode::make_shared();
+  auto sensors_node = easynav::SensorsNode::make_shared();
   auto test_node = rclcpp::Node::make_shared("test_node");
   auto laser3d_pub = test_node->create_publisher<sensor_msgs::msg::PointCloud2>(
     "/pc1", rclcpp::SensorDataQoS().reliable());
@@ -592,7 +592,7 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
 
 TEST_F(SensorsNodeTestCase, percept_fuse_all)
 {
-  auto sensors_node = easynav_sensors::SensorsNode::make_shared();
+  auto sensors_node = easynav::SensorsNode::make_shared();
   auto test_node = rclcpp::Node::make_shared("test_node");
   auto laser1_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>(
     "/scan1", rclcpp::SensorDataQoS().reliable());

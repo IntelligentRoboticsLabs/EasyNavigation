@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,16 +20,15 @@
 /// \file
 /// \brief Implementation of the PlannerNode class.
 
-#include "rclcpp/rclcpp.hpp"
-#include "rclcpp/macros.hpp"
-#include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "nav_msgs/msg/path.hpp"
+#include "pluginlib/class_loader.hpp"
 
 #include "lifecycle_msgs/msg/transition.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
 
 #include "easynav_planner/PlannerNode.hpp"
 
-namespace easynav_planner
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -38,6 +37,17 @@ PlannerNode::PlannerNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("planner_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+
+  pluginlib::ClassLoader<easynav::PlannerMethodBase> planner_loader(
+    "easynav_core", "easynav::PlannerMethodBase");
+
+  try {
+    planner_method_ = planner_loader.createSharedInstance("easynav::DummyPlanner");
+    planner_method_->initialize(shared_from_this());
+  } catch (pluginlib::PluginlibException & ex) {
+    RCLCPP_ERROR(get_logger(),
+      "Unable to load plugin easynav::DummyPlanner. Error: %s", ex.what());
+  }
 }
 
 PlannerNode::~PlannerNode()
@@ -111,9 +121,16 @@ PlannerNode::get_real_time_cbg()
   return realtime_cbg_;
 }
 
+nav_msgs::msg::Path
+PlannerNode::get_path() const
+{
+  return planner_method_->get_path();
+}
+
 void
 PlannerNode::planner_cycle_nort()
 {
+  planner_method_->update(nav_state_);
 }
 
 void
@@ -121,4 +138,4 @@ PlannerNode::planner_cycle_rt()
 {
 }
 
-}  // namespace easynav_planner
+}  // namespace easynav

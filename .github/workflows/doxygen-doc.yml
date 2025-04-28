@@ -1,9 +1,6 @@
 name: Doxygen Deployment
 
 on:
-  pull_request:
-    branches:
-      - rolling
   push:
     branches:
       - rolling

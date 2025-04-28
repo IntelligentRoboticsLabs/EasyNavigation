@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,20 +20,21 @@
 /// \file
 /// \brief Declaration of the SystemNode class, the central coordinator node for Easy Navigation components.
 
-#ifndef EASYNAV_SYSTEM__EASYNAVNODE_HPP_
-#define EASYNAV_SYSTEM__EASYNAVNODE_HPP_
+#ifndef EASYNAV_SYSTEM__SYSTEMNODE_HPP_
+#define EASYNAV_SYSTEM__SYSTEMNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "easynav_common/types/NavState.hpp"
 #include "easynav_controller/ControllerNode.hpp"
 #include "easynav_localizer/LocalizerNode.hpp"
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 #include "easynav_planner/PlannerNode.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
 
-namespace easynav_system
+namespace easynav
 {
 
 /**
@@ -147,27 +148,32 @@ private:
   /**
    * @brief Controller module node.
    */
-  easynav_controller::ControllerNode::SharedPtr controller_node_;
+  ControllerNode::SharedPtr controller_node_;
 
   /**
    * @brief Localizer module node.
    */
-  easynav_localizer::LocalizerNode::SharedPtr localizer_node_;
+  LocalizerNode::SharedPtr localizer_node_;
 
   /**
    * @brief Maps Manager module node.
    */
-  easynav_maps_manager::MapsManagerNode::SharedPtr maps_manager_node_;
+  MapsManagerNode::SharedPtr maps_manager_node_;
 
   /**
    * @brief Planner module node.
    */
-  easynav_planner::PlannerNode::SharedPtr planner_node_;
+  PlannerNode::SharedPtr planner_node_;
 
   /**
    * @brief Sensors module node.
    */
-  easynav_sensors::SensorsNode::SharedPtr sensors_node_;
+  SensorsNode::SharedPtr sensors_node_;
+
+  /**
+   * @brief The current navigation state.
+   */
+  NavState nav_state_;
 
   /**
    * @brief Executes one cycle of real-time system operations.
@@ -185,6 +191,6 @@ private:
   void system_cycle_nort();
 };
 
-}  // namespace easynav_system
+}  // namespace easynav
 
-#endif  // EASYNAV_SYSTEM__EASYNAVNODE_HPP_
+#endif  // EASYNAV_SYSTEM__SYSTEMNODE_HPP_
