@@ -18,7 +18,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the SensorsNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigation.
 
 #ifndef EASYNAV_SENSORS__SENSORNODE_HPP_
 #define EASYNAV_SENSORS__SENSORNODE_HPP_
@@ -27,20 +27,24 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "tf2_ros/buffer.h"
+#include "tf2_ros/transform_listener.h"
+
+#include "sensor_msgs/msg/point_cloud2.hpp"
+
+#include "easynav_common/types/Perceptions.hpp"
+#include "easynav_common/types/NavState.hpp"
+
 namespace easynav
 {
 
-/// \file
-/// \brief Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fussion tasks in Easy Navigation.
-
 /**
  * @class SensorsNode
- * @brief ROS 2 lifecycle node that manages sensors for the Easy Navigation system.
+ * @brief ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.
  *
- * This node provides the interface between the sensor module in EasyNav and the ROS 2 ecosystem.
- * It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup.
+ * This node handles the collection, transformation, and fusion of perception data from multiple sensor sources,
+ * managing lifecycle transitions and real-time scheduling of tasks.
  */
-
 class SensorsNode : public rclcpp_lifecycle::LifecycleNode
 {
 public:
@@ -54,9 +58,13 @@ public:
   explicit SensorsNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
+   * @brief Destroys the SensorsNode object.
+   */
+  ~SensorsNode();
+
+  /**
    * @brief Configures the SensorsNode node.
-   * This is typically where parameters and interfaces are declared.
-   *
+   * Declares parameters, initializes tf buffers, and prepares internal structures.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if configuration is successful.
    */
@@ -64,8 +72,7 @@ public:
 
   /**
    * @brief Activates the SensorsNode node.
-   * This starts periodic navigation control cycles.
-   *
+   * Starts periodic tasks such as perception fusion and publishing.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if activation is successful.
    */
@@ -73,8 +80,7 @@ public:
 
   /**
    * @brief Deactivates the SensorsNode node.
-   * Control loops are stopped and interfaces are disabled.
-   *
+   * Stops periodic tasks and publishers.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if deactivation is successful.
    */
@@ -82,8 +88,7 @@ public:
 
   /**
    * @brief Cleans up the SensorsNode node.
-   * Releases resources and resets the internal state.
-   *
+   * Releases resources such as subscriptions, timers, and tf listeners.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
    */
@@ -91,8 +96,7 @@ public:
 
   /**
    * @brief Shuts down the SensorsNode node.
-   * Called on final shutdown of the node's lifecycle.
-   *
+   * Performs final resource release and shutdown procedures.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
    */
@@ -100,8 +104,7 @@ public:
 
   /**
    * @brief Handles errors in the SensorsNode node.
-   * This is called when a failure occurs during a lifecycle transition.
-   *
+   * Called when an error occurs during a lifecycle transition.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating error handling is complete.
    */
@@ -110,30 +113,78 @@ public:
   /**
    * @brief Returns the real-time callback group.
    *
-   * This callback group can be used to assign callbacks that require
-   * low latency or have real-time constraints.
-   *
+   * Callbacks requiring low latency or real-time constraints should use this group.
    * @return Shared pointer to the real-time callback group.
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Retrieves the current set of active perceptions.
+   *
+   * @return Const reference to the list of perceptions.
+   */
+  const Perceptions & get_perceptions() const {return perceptions_;}
+
+  /**
+   * @brief Updates the node's behavior based on the provided navigation state.
+   *
+   * This may affect which perceptions are fused or published.
+   * @param nav_state The latest navigation state information.
+   */
+  void set_state(const NavState & nav_state);
+
 private:
   /**
-   * @brief Callback group intended for real-time tasks.
+   * @brief Callback group intended for real-time sensor processing tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the periodic sensors tasks cycle.
+   * @brief Timer that triggers the periodic sensor fusion cycle.
    */
   rclcpp::TimerBase::SharedPtr sensors_main_timer_;
 
   /**
-   * @brief Executes a single cycle.
+   * @brief Buffer storing transformations between frames.
+   */
+  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
+
+  /**
+   * @brief Transform listener that populates the tf buffer.
+   */
+  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
+
+  /**
+   * @brief Publisher for fused perception messages.
+   */
+  rclcpp_lifecycle::LifecyclePublisher<sensor_msgs::msg::PointCloud2>::SharedPtr percept_pub_;
+
+  /**
+   * @brief The latest fused perception message to be published.
+   */
+  sensor_msgs::msg::PointCloud2 perecption_msg_;
+
+  /**
+   * @brief Executes a single cycle of sensor fusion and publishing.
    *
-   * This method is periodically called by a timer to run the sensors logic
+   * This method is triggered periodically by the real-time timer.
    */
   void sensors_cycle();
+
+  /**
+   * @brief Container storing current active perceptions.
+   */
+  Perceptions perceptions_;
+
+  /**
+   * @brief Maximum age (in seconds) after which a perception is discarded.
+   */
+  double forget_time_;
+
+  /**
+   * @brief Target frame to which all perceptions will be transformed before fusion.
+   */
+  std::string perception_default_frame_;
 };
 
 }  // namespace easynav

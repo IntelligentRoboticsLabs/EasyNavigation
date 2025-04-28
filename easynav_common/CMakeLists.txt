@@ -10,18 +10,29 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(ament_cmake REQUIRED)
-find_package(pcl_ros REQUIRED)
+find_package(rclcpp_lifecycle REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
+find_package(pcl_conversions REQUIRED)
+find_package(pcl_ros REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_eigen REQUIRED)
 
 set(dependencies
-  pcl_ros
+  rclcpp_lifecycle
   geometry_msgs
   nav_msgs
+  pcl_conversions
+  pcl_ros
+  tf2
+  tf2_ros
+  tf2_eigen
 )
 
 add_library(${PROJECT_NAME} SHARED
   src/easynav_common/Configuration.cpp
+  src/easynav_common/Perceptions.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
