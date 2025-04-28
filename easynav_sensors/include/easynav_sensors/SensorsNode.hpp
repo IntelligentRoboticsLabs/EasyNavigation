@@ -33,7 +33,6 @@
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
 #include "easynav_sensors/Perceptions.hpp"
-#include "easynav_common/NavState.hpp"
 
 namespace easynav_sensors
 {
@@ -125,14 +124,6 @@ public:
    */
   const Perceptions & get_perceptions() const {return perceptions_;}
 
-  /**
-   * @brief Updates the node's behavior based on the provided navigation state.
-   *
-   * This may affect which perceptions are fused or published.
-   * @param nav_state The latest navigation state information.
-   */
-  void set_state(const easynav_common::NavState & nav_state);
-
 private:
   /**
    * @brief Callback group intended for real-time sensor processing tasks.
@@ -165,11 +156,19 @@ private:
   sensor_msgs::msg::PointCloud2 perecption_msg_;
 
   /**
-   * @brief Executes a single cycle of sensor fusion and publishing.
+   * @brief Executes one cycle of real-time system operations.
    *
-   * This method is triggered periodically by the real-time timer.
+   * This function is called periodically by the real-time timer to manage control,
+   * localization, planning, and other tightly coupled tasks.
    */
-  void sensors_cycle();
+  void sensors_cycle_rt();
+
+  /**
+   * @brief Executes one cycle of non-real-time system operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void sensors_cycle_nort();
 
   /**
    * @brief Container storing current active perceptions.

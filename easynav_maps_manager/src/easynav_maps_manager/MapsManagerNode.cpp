@@ -24,6 +24,9 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "lifecycle_msgs/msg/transition.hpp"
+#include "lifecycle_msgs/msg/state.hpp"
+
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 
 namespace easynav_maps_manager
@@ -35,6 +38,19 @@ MapsManagerNode::MapsManagerNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("maps_manager_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+}
+
+MapsManagerNode::~MapsManagerNode()
+{
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_INACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
+  }
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -53,7 +69,7 @@ MapsManagerNode::on_activate(const rclcpp_lifecycle::State & state)
   (void)state;
 
   maps_manager_main_timer_ = create_timer(1ms,
-    std::bind(&MapsManagerNode::maps_manager_cycle, this), realtime_cbg_);
+    std::bind(&MapsManagerNode::maps_manager_cycle_nort, this), realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
 }
@@ -96,9 +112,13 @@ MapsManagerNode::get_real_time_cbg()
 }
 
 void
-MapsManagerNode::maps_manager_cycle()
+MapsManagerNode::maps_manager_cycle_rt()
 {
 }
 
+void
+MapsManagerNode::maps_manager_cycle_nort()
+{
+}
 
 }  // namespace easynav_maps_manager

@@ -126,7 +126,7 @@ SensorsNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  sensors_main_timer_ = create_timer(100ms, std::bind(&SensorsNode::sensors_cycle, this));
+  sensors_main_timer_ = create_timer(100ms, std::bind(&SensorsNode::sensors_cycle_nort, this));
 
   percept_pub_->on_activate();
 
@@ -172,7 +172,7 @@ SensorsNode::get_real_time_cbg()
 }
 
 void
-SensorsNode::sensors_cycle()
+SensorsNode::sensors_cycle_nort()
 {
   for (auto & perception : perceptions_) {
     if (perception->valid && (now() - perception->stamp).seconds() > forget_time_) {
@@ -186,5 +186,9 @@ SensorsNode::sensors_cycle()
   }
 }
 
+void
+SensorsNode::sensors_cycle_rt()
+{
+}
 
 }  // namespace easynav_sensors

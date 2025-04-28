@@ -24,6 +24,9 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "lifecycle_msgs/msg/transition.hpp"
+#include "lifecycle_msgs/msg/state.hpp"
+
 #include "easynav_controller/ControllerNode.hpp"
 
 namespace easynav_controller
@@ -36,6 +39,21 @@ ControllerNode::ControllerNode(const rclcpp::NodeOptions & options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 }
+
+
+ControllerNode::~ControllerNode()
+{
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_INACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
+  }
+}
+
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
@@ -52,7 +70,7 @@ ControllerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  controller_main_timer_ = create_timer(1ms, std::bind(&ControllerNode::controller_cycle, this),
+  controller_main_timer_ = create_timer(1ms, std::bind(&ControllerNode::controller_cycle_rt, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
@@ -96,9 +114,13 @@ ControllerNode::get_real_time_cbg()
 }
 
 void
-ControllerNode::controller_cycle()
+ControllerNode::controller_cycle_rt()
 {
 }
 
+void
+ControllerNode::controller_cycle_nort()
+{
+}
 
 }  // namespace easynav_controller
