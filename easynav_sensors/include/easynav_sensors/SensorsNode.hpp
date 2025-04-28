@@ -185,6 +185,11 @@ private:
   Perceptions perceptions_;
 
   /**
+   * @brief Container perception subscriptions.
+   */
+  std::vector<rclcpp::SubscriptionBase::SharedPtr> subscriptions_;
+
+  /**
    * @brief Maximum age (in seconds) after which a perception is discarded.
    */
   double forget_time_;

@@ -31,6 +31,7 @@
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
 #include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_sensors/SensorsUtils.hpp"
 
 namespace easynav
 {
@@ -100,18 +101,20 @@ SensorsNode::on_configure(const rclcpp_lifecycle::State & state)
     perception_entry->stamp = now();
     perception_entry->valid = false;
 
-    perceptions_.push_back(perception_entry);
+    rclcpp::SubscriptionBase::SharedPtr perception_sub;
 
     if (msg_type == "LaserScan") {
-      perception_entry->subscription = create_typed_subscription<sensor_msgs::msg::LaserScan>(
-        *this, topic, perception_entry, realtime_cbg_);
+      perception_sub = create_typed_subscription<sensor_msgs::msg::LaserScan>(
+      *this, topic, perception_entry, realtime_cbg_);
     } else if (msg_type == "PointCloud") {
-      perception_entry->subscription = create_typed_subscription<sensor_msgs::msg::PointCloud2>(
-        *this, topic, perception_entry, realtime_cbg_);
+      perception_sub = create_typed_subscription<sensor_msgs::msg::PointCloud2>(
+      *this, topic, perception_entry, realtime_cbg_);
     } else {
       RCLCPP_ERROR(get_logger(), "Sensor type [%s] not supported", msg_type.c_str());
       return CallbackReturnT::FAILURE;
     }
+    perceptions_.push_back(perception_entry);
+    subscriptions_.push_back(perception_sub);
   }
 
   tf_buffer_ = std::make_shared<tf2_ros::Buffer>(get_clock());
