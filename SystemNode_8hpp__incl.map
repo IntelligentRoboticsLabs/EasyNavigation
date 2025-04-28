@@ -1,5 +1,5 @@
 <map id="easynav_system/include/easynav_system/SystemNode.hpp" name="easynav_system/include/easynav_system/SystemNode.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="722,5,947,46"/>
+<area shape="rect" id="Node000001" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="722,5,947,46"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="1115,190,1234,216"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="948,40,1053,62,1097,76,1127,92,1144,110,1157,132,1172,174,1167,176,1152,134,1140,113,1124,96,1095,81,1052,67,947,45"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="587,190,714,216"/>

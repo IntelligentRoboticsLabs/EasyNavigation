@@ -1,5 +1,5 @@
 <map id="SystemNode" name="SystemNode">
-<area shape="rect" id="Node000001" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system." alt="" coords="9,79,106,105"/>
+<area shape="rect" id="Node000001" title="ROS 2 lifecycle node that coordinates all major modules of the Easy Navigation system." alt="" coords="9,79,106,105"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,110,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="60,46,60,79,55,79,55,46"/>
 </map>
