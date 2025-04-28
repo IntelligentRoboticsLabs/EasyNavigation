@@ -27,6 +27,7 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "easynav_common/types/NavState.hpp"
 #include "easynav_controller/ControllerNode.hpp"
 #include "easynav_localizer/LocalizerNode.hpp"
 #include "easynav_maps_manager/MapsManagerNode.hpp"
@@ -136,6 +137,11 @@ private:
    * @brief Callback group intended for real-time tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
+
+  /**
+   * @brief The current navigation state.
+   */
+  easynav::NavState nav_state_;
 
   /**
    * @brief Timer that triggers the periodic system tasks cycle.

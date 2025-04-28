@@ -11,7 +11,8 @@
 
   <depend>rclcpp</depend>
   <depend>rclcpp_lifecycle</depend>
-  <depend>easynav_sensors</depend>
+  <depend>easynav_common</depend>
+  <depend>easynav_core</depend>
   <depend>pluginlib</depend>
 
   <test_depend>ament_lint_auto</test_depend>

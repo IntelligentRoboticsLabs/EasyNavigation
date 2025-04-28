@@ -10,12 +10,23 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(ament_cmake REQUIRED)
+find_package(pcl_ros REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 
-
-include_directories(include)
+set(dependencies
+  pcl_ros
+  geometry_msgs
+  nav_msgs
+)
 
 add_library(${PROJECT_NAME} SHARED
-  src/easynav_common/Configuration.cpp)
+  src/easynav_common/Configuration.cpp
+)
+target_include_directories(${PROJECT_NAME} PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
 install(DIRECTORY include/
@@ -24,6 +35,7 @@ install(DIRECTORY include/
 
 install(TARGETS
   ${PROJECT_NAME}
+  EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION lib/${PROJECT_NAME}
@@ -37,6 +49,11 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_include_directories(include)
-ament_export_libraries(${PROJECT_NAME})
+ament_export_libraries(
+  easynav_configuration
+)
+ament_export_targets(
+  export_${PROJECT_NAME}
+)
 ament_export_dependencies(${dependencies})
 ament_package()

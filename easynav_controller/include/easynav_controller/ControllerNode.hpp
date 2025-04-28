@@ -23,9 +23,9 @@
 #ifndef EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
 #define EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
 
-#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "easynav_core/ControllerMethodBase.hpp"
 
 namespace easynav
 {
@@ -117,6 +117,20 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Get the current control command.
+   *
+   * @return An Odometry message representing the current control command.
+   */
+  [[nodiscard]] geometry_msgs::msg::TwistStamped get_cmd_vel() const;
+
+  /**
+   * @brief Set the current navigation state.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -127,6 +141,20 @@ private:
    * @brief Timer that triggers the periodic controller tasks cycle.
    */
   rclcpp::TimerBase::SharedPtr controller_main_timer_;
+
+  /**
+   * @brief Pointer to the controller method.
+   *
+   * This is the actual control algorithm that will be used.
+   */
+  std::shared_ptr<ControllerMethodBase> controller_method_ {nullptr};
+
+  /**
+   * @brief Current navigation state.
+   *
+   * This is the current state of the navigation system.
+   */
+  NavState nav_state_;
 
   /**
    * @brief Executes a single cycle.

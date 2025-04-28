@@ -23,9 +23,9 @@
 #ifndef EASYNAV_PLANNER__PLANNERNODE_HPP_
 #define EASYNAV_PLANNER__PLANNERNODE_HPP_
 
-#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "easynav_core/PlannerMethodBase.hpp"
 
 namespace easynav
 {
@@ -117,6 +117,20 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Get the current navigation path.
+   *
+   * @return An Odometry message representing the current navigation path.
+   */
+  [[nodiscard]] nav_msgs::msg::Path get_path() const;
+
+  /**
+   * @brief Set the current navigation state.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -127,6 +141,20 @@ private:
    * @brief Timer that triggers the periodic planner tasks cycle.
    */
   rclcpp::TimerBase::SharedPtr planner_main_timer_;
+
+  /**
+   * @brief Pointer to the planner method.
+   *
+   * This is the actual planning algorithm that will be used.
+   */
+  std::shared_ptr<PlannerMethodBase> planner_method_ {nullptr};
+
+  /**
+   * @brief Current navigation state.
+   *
+   * This is the current state of the navigation system.
+   */
+  NavState nav_state_;
 
   /**
    * @brief Executes a single cycle.
