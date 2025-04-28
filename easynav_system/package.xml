@@ -16,7 +16,7 @@
   <depend>easynav_localizer</depend>
   <depend>easynav_maps_manager</depend>
   <depend>easynav_planner</depend>
-  <depend>easynav_sensor</depend>
+  <depend>easynav_sensors</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

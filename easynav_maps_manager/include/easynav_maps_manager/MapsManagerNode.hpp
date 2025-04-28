@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -18,20 +18,17 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.
 
-#ifndef EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
-#define EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_
+#define EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_
 
-#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "easynav_common/types/MapTypeBase.hpp"
 
-namespace easynav_maps_manager
+namespace easynav
 {
-
-/// \file
-/// \brief Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.
 
 /**
  * @class MapsManagerNode
@@ -129,6 +126,8 @@ private:
    */
   rclcpp::TimerBase::SharedPtr maps_manager_main_timer_;
 
+  /** List of map representations */
+  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
   /**
    * @brief Executes a single cycle.
    *
@@ -137,6 +136,6 @@ private:
   void maps_manager_cycle();
 };
 
-}  // namespace easynav_maps_manager
+}  // namespace easynav
 
-#endif  // EASYNAV_MAPSMANAGER__EASYNAVNODE_HPP_
+#endif  // EASYNAV_MAPSMANAGER__MAPSMANAGERNODE_HPP_

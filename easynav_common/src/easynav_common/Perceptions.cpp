@@ -31,9 +31,9 @@
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
-#include "easynav_sensors/Perceptions.hpp"
+#include "easynav_common/types/Perceptions.hpp"
 
-namespace easynav_sensors
+namespace easynav
 {
 
 
@@ -189,4 +189,4 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
 }
 
 
-}  // namespace easynav_sensors
+}  // namespace easynav

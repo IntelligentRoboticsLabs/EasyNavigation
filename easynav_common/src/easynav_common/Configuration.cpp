@@ -28,7 +28,7 @@
 
 #include "easynav_common/Configuration.hpp"
 
-namespace easynav_common
+namespace easynav
 {
 
 ConfigurationValue::ConfigurationValue()
@@ -107,4 +107,4 @@ ConfigurationValue::try_double_vector() const
   return std::get_if<std::vector<double>>(&value_);
 }
 
-}  // namespace easynav_common
+}  // namespace easynav

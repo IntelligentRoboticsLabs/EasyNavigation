@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -32,7 +32,7 @@
 
 #include "easynav_sensors/SensorsNode.hpp"
 
-namespace easynav_sensors
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -187,4 +187,4 @@ SensorsNode::sensors_cycle()
 }
 
 
-}  // namespace easynav_sensors
+}  // namespace easynav

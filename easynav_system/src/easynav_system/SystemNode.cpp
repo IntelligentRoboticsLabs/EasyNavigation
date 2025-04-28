@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -36,7 +36,7 @@
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
 
-namespace easynav_system
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -46,11 +46,11 @@ SystemNode::SystemNode(const rclcpp::NodeOptions & options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
-  controller_node_ = easynav_controller::ControllerNode::make_shared();
-  localizer_node_ = easynav_localizer::LocalizerNode::make_shared();
-  maps_manager_node_ = easynav_maps_manager::MapsManagerNode::make_shared();
-  planner_node_ = easynav_planner::PlannerNode::make_shared();
-  sensors_node_ = easynav_sensors::SensorsNode::make_shared();
+  controller_node_ = ControllerNode::make_shared();
+  localizer_node_ = LocalizerNode::make_shared();
+  maps_manager_node_ = MapsManagerNode::make_shared();
+  planner_node_ = PlannerNode::make_shared();
+  sensors_node_ = SensorsNode::make_shared();
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -170,4 +170,4 @@ SystemNode::get_system_nodes()
   return ret;
 }
 
-}  // namespace easynav_system
+}  // namespace easynav

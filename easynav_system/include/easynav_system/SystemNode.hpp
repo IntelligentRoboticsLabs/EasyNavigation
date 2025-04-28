@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,20 +20,21 @@
 /// \file
 /// \brief Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_SYSTEM__EASYNAVNODE_HPP_
-#define EASYNAV_SYSTEM__EASYNAVNODE_HPP_
+#ifndef EASYNAV_SYSTEM__SYSTEMNODE_HPP_
+#define EASYNAV_SYSTEM__SYSTEMNODE_HPP_
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
+#include "easynav_common/types/NavState.hpp"
 #include "easynav_controller/ControllerNode.hpp"
 #include "easynav_localizer/LocalizerNode.hpp"
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 #include "easynav_planner/PlannerNode.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
 
-namespace easynav_system
+namespace easynav
 {
 
 /// \file
@@ -138,15 +139,20 @@ private:
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
+   * @brief The current navigation state.
+   */
+  easynav::NavState nav_state_;
+
+  /**
    * @brief Timer that triggers the periodic system tasks cycle.
    */
   rclcpp::TimerBase::SharedPtr system_main_timer_;
 
-  easynav_controller::ControllerNode::SharedPtr controller_node_;
-  easynav_localizer::LocalizerNode::SharedPtr localizer_node_;
-  easynav_maps_manager::MapsManagerNode::SharedPtr maps_manager_node_;
-  easynav_planner::PlannerNode::SharedPtr planner_node_;
-  easynav_sensors::SensorsNode::SharedPtr sensors_node_;
+  ControllerNode::SharedPtr controller_node_;
+  LocalizerNode::SharedPtr localizer_node_;
+  MapsManagerNode::SharedPtr maps_manager_node_;
+  PlannerNode::SharedPtr planner_node_;
+  SensorsNode::SharedPtr sensors_node_;
 
   /**
    * @brief Executes a single cycle.
@@ -156,6 +162,6 @@ private:
   void system_cycle();
 };
 
-}  // namespace easynav_system
+}  // namespace easynav
 
-#endif  // EASYNAV_SYSTEM__EASYNAVNODE_HPP_
+#endif  // EASYNAV_SYSTEM__SYSTEMNODE_HPP_

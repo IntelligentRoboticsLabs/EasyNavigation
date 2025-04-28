@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,14 +20,16 @@
 /// \file
 /// \brief Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_LOCALIZER__EASYNAVNODE_HPP_
-#define EASYNAV_LOCALIZER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_LOCALIZER__LOCALIZERNODE_HPP_
+#define EASYNAV_LOCALIZER__LOCALIZERNODE_HPP_
 
-#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_localizer
+#include "easynav_core/LocalizerMethodBase.hpp"
+#include <easynav_common/types/NavState.hpp>
+
+namespace easynav
 {
 
 /// \file
@@ -117,6 +119,20 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Get the current localization state.
+   *
+   * @return An Odometry message representing the current localization state.
+   */
+  [[nodiscard]] nav_msgs::msg::Odometry get_odom() const;
+
+  /**
+   * @brief Set the current navigation state.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -129,6 +145,20 @@ private:
   rclcpp::TimerBase::SharedPtr localizer_main_timer_;
 
   /**
+   * @brief Pointer to the localization method.
+   *
+   * This is the actual localization algorithm that will be used.
+   */
+  std::shared_ptr<LocalizerMethodBase> localizer_method_ {nullptr};
+
+  /**
+   * @brief Current navigation state.
+   *
+   * This is the current state of the navigation system.
+   */
+  NavState nav_state_;
+
+  /**
    * @brief Executes a single cycle.
    *
    * This method is periodically called by a timer to run the localizer logic
@@ -136,6 +166,6 @@ private:
   void localizer_cycle();
 };
 
-}  // namespace easynav_localizer
+}  // namespace easynav
 
-#endif  // EASYNAV_LOCALIZER__EASYNAVNODE_HPP_
+#endif  // EASYNAV_LOCALIZER__LOCALIZERNODE_HPP_

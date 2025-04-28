@@ -20,15 +20,15 @@
 /// \file
 /// \brief Definition of the ConfigurationValue class used to store multiple types of configuration data.
 
-#ifndef EASYNAV_CORE__CONFIGURATION_HPP_
-#define EASYNAV_CORE__CONFIGURATION_HPP_
+#ifndef EASYNAV_COMMON__CONFIGURATION_HPP_
+#define EASYNAV_COMMON__CONFIGURATION_HPP_
 
 #include <string>
 #include <vector>
 #include <variant>
 #include <stdexcept>
 
-namespace easynav_common
+namespace easynav
 {
 
 /**
@@ -118,6 +118,6 @@ private:
   ValueType value_;
 };
 
-}  // namespace easynav_common
+}  // namespace easynav
 
-#endif  // EASYNAV_CORE__CONFIGURATION_HPP_
+#endif  // EASYNAV_COMMON__CONFIGURATION_HPP_

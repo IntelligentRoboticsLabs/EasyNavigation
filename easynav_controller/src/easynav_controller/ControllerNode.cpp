@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,13 +20,12 @@
 /// \file
 /// \brief Implementation of the ControllerNode class.
 
-#include "rclcpp/rclcpp.hpp"
-#include "rclcpp/macros.hpp"
-#include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "geometry_msgs/msg/twist_stamped.hpp"
+#include "pluginlib/class_loader.hpp"
 
 #include "easynav_controller/ControllerNode.hpp"
 
-namespace easynav_controller
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -35,6 +34,17 @@ ControllerNode::ControllerNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("controller_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+
+  pluginlib::ClassLoader<easynav::ControllerMethodBase> controller_loader(
+    "easynav_core", "easynav::ControllerMethodBase");
+
+  try {
+    controller_method_ = controller_loader.createSharedInstance("easynav::DummyController");
+    controller_method_->initialize(shared_from_this());
+  } catch (pluginlib::PluginlibException & ex) {
+    RCLCPP_ERROR(get_logger(),
+      "Unable to load plugin easynav::DummyController. Error: %s", ex.what());
+  }
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -95,10 +105,17 @@ ControllerNode::get_real_time_cbg()
   return realtime_cbg_;
 }
 
+geometry_msgs::msg::TwistStamped
+ControllerNode::get_cmd_vel() const
+{
+  return controller_method_->get_cmd_vel();
+}
+
 void
 ControllerNode::controller_cycle()
 {
+  controller_method_->update(nav_state_);
 }
 
 
-}  // namespace easynav_controller
+}  // namespace easynav

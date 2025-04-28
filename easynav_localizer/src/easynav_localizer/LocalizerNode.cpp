@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,13 +20,11 @@
 /// \file
 /// \brief Implementation of the LocalizerNode class.
 
-#include "rclcpp/rclcpp.hpp"
-#include "rclcpp/macros.hpp"
-#include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "pluginlib/class_loader.hpp"
 
 #include "easynav_localizer/LocalizerNode.hpp"
 
-namespace easynav_localizer
+namespace easynav
 {
 
 using namespace std::chrono_literals;
@@ -35,6 +33,17 @@ LocalizerNode::LocalizerNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("localizer_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
+
+  pluginlib::ClassLoader<easynav::LocalizerMethodBase> localizer_loader(
+    "easynav_core", "easynav::LocalizerMethodBase");
+
+  try {
+    localizer_method_ = localizer_loader.createSharedInstance("easynav::DummyLocalizer");
+    localizer_method_->initialize(shared_from_this());
+  } catch (pluginlib::PluginlibException & ex) {
+    RCLCPP_ERROR(get_logger(),
+      "Unable to load plugin easynav::DummyLocalizer. Error: %s", ex.what());
+  }
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -95,10 +104,17 @@ LocalizerNode::get_real_time_cbg()
   return realtime_cbg_;
 }
 
+nav_msgs::msg::Odometry
+LocalizerNode::get_odom() const
+{
+  return localizer_method_->get_odom();
+}
+
 void
 LocalizerNode::localizer_cycle()
 {
+  localizer_method_->update(nav_state_);
 }
 
 
-}  // namespace easynav_localizer
+}  // namespace easynav

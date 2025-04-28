@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,14 +20,14 @@
 /// \file
 /// \brief Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core.
 
-#ifndef EASYNAV_PLANNER__EASYNAVNODE_HPP_
-#define EASYNAV_PLANNER__EASYNAVNODE_HPP_
+#ifndef EASYNAV_PLANNER__PLANNERNODE_HPP_
+#define EASYNAV_PLANNER__PLANNERNODE_HPP_
 
-#include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "easynav_core/PlannerMethodBase.hpp"
 
-namespace easynav_planner
+namespace easynav
 {
 
 /// \file
@@ -117,6 +117,20 @@ public:
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Get the current navigation path.
+   *
+   * @return An Odometry message representing the current navigation path.
+   */
+  [[nodiscard]] nav_msgs::msg::Path get_path() const;
+
+  /**
+   * @brief Set the current navigation state.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -129,6 +143,20 @@ private:
   rclcpp::TimerBase::SharedPtr planner_main_timer_;
 
   /**
+   * @brief Pointer to the planner method.
+   *
+   * This is the actual planning algorithm that will be used.
+   */
+  std::shared_ptr<PlannerMethodBase> planner_method_ {nullptr};
+
+  /**
+   * @brief Current navigation state.
+   *
+   * This is the current state of the navigation system.
+   */
+  NavState nav_state_;
+
+  /**
    * @brief Executes a single cycle.
    *
    * This method is periodically called by a timer to run the planner logic
@@ -136,6 +164,6 @@ private:
   void planner_cycle();
 };
 
-}  // namespace easynav_planner
+}  // namespace easynav
 
-#endif  // EASYNAV_PLANNER__EASYNAVNODE_HPP_
+#endif  // EASYNAV_PLANNER__PLANNERNODE_HPP_

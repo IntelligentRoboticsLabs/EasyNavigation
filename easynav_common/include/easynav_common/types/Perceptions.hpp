@@ -1,6 +1,6 @@
 // Copyright 2025 Intelligent Robotics Lab
 //
-// This file is part of the project Easy Navigation (EasyNav in sh0rt)
+// This file is part of the project Easy Navigation (EasyNav in short)
 // licensed under the GNU General Public License v3.0.
 // See <http://www.gnu.org/licenses/> for details.
 //
@@ -20,26 +20,26 @@
 /// \file
 /// \brief Definitions for handling sensor perceptions, including point cloud conversion, fusion, and subscription creation.
 
-#ifndef EASYNAV_SENSORS__PERCEPTIONS_HPP_
-#define EASYNAV_SENSORS__PERCEPTIONS_HPP_
+#ifndef EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_
+#define EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_
 
 #include <string>
 #include <vector>
 
-#include "pcl/point_types.h"
 #include "pcl_conversions/pcl_conversions.h"
 #include "pcl/point_types_conversion.h"
 #include "pcl/common/transforms.h"
+#include "pcl/point_cloud.h"
+#include "pcl/point_types.h"
 #include "tf2_eigen/tf2_eigen.hpp"
 
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
-#include "rclcpp/rclcpp.hpp"
-#include "rclcpp/macros.hpp"
+#include "rclcpp/time.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-namespace easynav_sensors
+namespace easynav
 {
 
 /**
@@ -62,7 +62,7 @@ struct Perception
  * @typedef Perceptions
  * @brief A container of multiple Perception entries, each possibly from different sources.
  */
-typedef std::vector<std::shared_ptr<Perception>> Perceptions;
+using Perceptions = std::vector<std::shared_ptr<Perception>>;
 
 /**
  * @brief Converts a LaserScan message into a PCL point cloud.
@@ -127,7 +127,6 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
   const std::string & topic,
   std::shared_ptr<Perception> perception,
   rclcpp::CallbackGroup::SharedPtr cbg);
+}  // namespace easynav
 
-}  // namespace easynav_sensors
-
-#endif  // EASYNAV_SENSORS__PERCEPTIONS_HPP_
+#endif  // EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_
