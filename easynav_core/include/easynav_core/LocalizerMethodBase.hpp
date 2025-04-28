@@ -74,7 +74,7 @@ public:
    *
    * @param nav_state The current state of the navigation system.
    */
-  virtual void update(const NavState nav_state) = 0;
+  virtual void update(const NavState & nav_state) = 0;
 };
 
 }  // namespace easynav
