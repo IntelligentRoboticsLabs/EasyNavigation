@@ -165,11 +165,19 @@ private:
   sensor_msgs::msg::PointCloud2 perecption_msg_;
 
   /**
-   * @brief Executes a single cycle of sensor fusion and publishing.
+   * @brief Executes one cycle of real-time system operations.
    *
-   * This method is triggered periodically by the real-time timer.
+   * This function is called periodically by the real-time timer to manage control,
+   * localization, planning, and other tightly coupled tasks.
    */
-  void sensors_cycle();
+  void sensors_cycle_rt();
+
+  /**
+   * @brief Executes one cycle of non-real-time system operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void sensors_cycle_nort();
 
   /**
    * @brief Container storing current active perceptions.

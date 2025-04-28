@@ -51,6 +51,8 @@ public:
    */
   explicit MapsManagerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
+  ~MapsManagerNode();
+
   /**
    * @brief Configures the MapsManagerNode node.
    * This is typically where parameters and interfaces are declared.
@@ -129,11 +131,19 @@ private:
   /** List of map representations */
   std::vector<std::shared_ptr<MapsTypeBase>> maps_;
   /**
-   * @brief Executes a single cycle.
+   * @brief Executes one cycle of real-time system operations.
    *
-   * This method is periodically called by a timer to run the maps_manager logic
+   * This function is called periodically by the real-time timer to manage control,
+   * localization, planning, and other tightly coupled tasks.
    */
-  void maps_manager_cycle();
+  void maps_manager_cycle_rt();
+
+  /**
+   * @brief Executes one cycle of non-real-time system operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void maps_manager_cycle_nort();
 };
 
 }  // namespace easynav

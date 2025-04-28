@@ -53,6 +53,19 @@ SystemNode::SystemNode(const rclcpp::NodeOptions & options)
   sensors_node_ = SensorsNode::make_shared();
 }
 
+SystemNode::~SystemNode()
+{
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_INACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
+  }
+}
+
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 CallbackReturnT
@@ -94,7 +107,7 @@ SystemNode::on_activate(const rclcpp_lifecycle::State & state)
     }
   }
 
-  system_main_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle, this),
+  system_main_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle_rt, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
@@ -151,8 +164,33 @@ SystemNode::get_real_time_cbg()
 }
 
 void
-SystemNode::system_cycle()
+SystemNode::system_cycle_rt()
 {
+  // nav_state_.perceptions = sensors_node_->get_perceptions();
+  // localizer_node_->set_state(nav_state_);
+  // nav_state_.position = localizer_node_->get_robot_position();
+  // nav_state_.path = planner_node_->get_path();
+  // controller_node_->set_state(nav_state_);
+  // nav_state_.out_cmd_vel = controller_node_->get_cmd();
+  // vel_pub_->publish(vel_twist_stamped);  // Move to the controller?
+}
+
+void
+SystemNode::system_cycle_nort()
+{
+  // nav_state_.perceptions = sensors_node_->get_perceptions();
+  // nav_state_.position = localizer_node_->get_robot_position();
+  // maps_manager_node_->set_state(nav_state_);
+  // nav_state_.dynamic_map = maps_manager_node_->get_dynamic_map();
+  // planner_node_->set_state(nav_state_);
+
+  //  const auto & perceptions = sensors_node_->get_perceptions();
+  //  const auto & position = localizer_node_->get_robot_position();
+  //  maps_manager_node_->set_perceptions(perceptions);
+  //
+  //  const auto & dynamic_map = maps_manager_node_->get_dynamic_map();
+  //
+  //  planner_node_->set_input(dynamic_map, position);
 }
 
 std::map<std::string, SystemNodeInfo>

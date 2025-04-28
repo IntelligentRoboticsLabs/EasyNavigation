@@ -18,7 +18,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the SystemNode class, the central coordinator node for Easy Navigation components.
 
 #ifndef EASYNAV_SYSTEM__SYSTEMNODE_HPP_
 #define EASYNAV_SYSTEM__SYSTEMNODE_HPP_
@@ -37,23 +37,23 @@
 namespace easynav
 {
 
-/// \file
-/// \brief Declaration of the SystemNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigation.
-
+/**
+ * @struct SystemNodeInfo
+ * @brief Structure holding pointers to runtime info of each node.
+ */
 struct SystemNodeInfo
 {
-  rclcpp_lifecycle::LifecycleNode::SharedPtr node_ptr;
-  rclcpp::CallbackGroup::SharedPtr realtime_cbg;
+  rclcpp_lifecycle::LifecycleNode::SharedPtr node_ptr; ///< Shared pointer to the managed lifecycle node.
+  rclcpp::CallbackGroup::SharedPtr realtime_cbg;       ///< Associated real-time callback group.
 };
 
 /**
  * @class SystemNode
- * @brief ROS 2 lifecycle node that manages localization for the Easy Navigation system.
+ * @brief ROS 2 lifecycle node that coordinates all major modules of the Easy Navigation system.
  *
- * This node provides the interface between the localization module in EasyNav and the ROS 2 ecosystem.
- * It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup.
+ * This node manages the lifecycle, scheduling, and interactions between the Controller, Localizer,
+ * Planner, Maps Manager, and Sensors modules, providing a unified interface to ROS 2.
  */
-
 class SystemNode : public rclcpp_lifecycle::LifecycleNode
 {
 public:
@@ -67,9 +67,13 @@ public:
   explicit SystemNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
+   * @brief Destroys the SystemNode object.
+   */
+  ~SystemNode();
+
+  /**
    * @brief Configures the SystemNode node.
-   * This is typically where parameters and interfaces are declared.
-   *
+   * Declares parameters and initializes submodules (maps manager, planner, etc.).
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if configuration is successful.
    */
@@ -77,8 +81,7 @@ public:
 
   /**
    * @brief Activates the SystemNode node.
-   * This starts periodic navigation control cycles.
-   *
+   * Starts periodic cycles and activates all submodules.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if activation is successful.
    */
@@ -86,8 +89,7 @@ public:
 
   /**
    * @brief Deactivates the SystemNode node.
-   * Control loops are stopped and interfaces are disabled.
-   *
+   * Stops periodic tasks and deactivates all submodules.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if deactivation is successful.
    */
@@ -95,8 +97,7 @@ public:
 
   /**
    * @brief Cleans up the SystemNode node.
-   * Releases resources and resets the internal state.
-   *
+   * Resets submodules and releases allocated resources.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
    */
@@ -104,8 +105,7 @@ public:
 
   /**
    * @brief Shuts down the SystemNode node.
-   * Called on final shutdown of the node's lifecycle.
-   *
+   * Performs final shutdown procedures.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
    */
@@ -113,8 +113,7 @@ public:
 
   /**
    * @brief Handles errors in the SystemNode node.
-   * This is called when a failure occurs during a lifecycle transition.
-   *
+   * Called when an error occurs during a lifecycle transition.
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating error handling is complete.
    */
@@ -123,43 +122,73 @@ public:
   /**
    * @brief Returns the real-time callback group.
    *
-   * This callback group can be used to assign callbacks that require
-   * low latency or have real-time constraints.
-   *
+   * Callbacks requiring low latency or real-time constraints should use this group.
    * @return Shared pointer to the real-time callback group.
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Retrieves references to all system nodes managed by SystemNode.
+   *
+   * @return A map associating node names with their node pointers and callback groups.
+   */
   std::map<std::string, SystemNodeInfo> get_system_nodes();
 
 private:
   /**
-   * @brief Callback group intended for real-time tasks.
+   * @brief Callback group intended for real-time system operations.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief The current navigation state.
-   */
-  easynav::NavState nav_state_;
-
-  /**
-   * @brief Timer that triggers the periodic system tasks cycle.
+   * @brief Timer that triggers the real-time system cycle.
    */
   rclcpp::TimerBase::SharedPtr system_main_timer_;
 
+  /**
+   * @brief Controller module node.
+   */
   ControllerNode::SharedPtr controller_node_;
+
+  /**
+   * @brief Localizer module node.
+   */
   LocalizerNode::SharedPtr localizer_node_;
+
+  /**
+   * @brief Maps Manager module node.
+   */
   MapsManagerNode::SharedPtr maps_manager_node_;
+
+  /**
+   * @brief Planner module node.
+   */
   PlannerNode::SharedPtr planner_node_;
+
+  /**
+   * @brief Sensors module node.
+   */
   SensorsNode::SharedPtr sensors_node_;
 
   /**
-   * @brief Executes a single cycle.
-   *
-   * This method is periodically called by a timer to run the system logic
+   * @brief The current navigation state.
    */
-  void system_cycle();
+  NavState nav_state_;
+
+  /**
+   * @brief Executes one cycle of real-time system operations.
+   *
+   * This function is called periodically by the real-time timer to manage control,
+   * localization, planning, and other tightly coupled tasks.
+   */
+  void system_cycle_rt();
+
+  /**
+   * @brief Executes one cycle of non-real-time system operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void system_cycle_nort();
 };
 
 }  // namespace easynav

@@ -23,6 +23,9 @@
 #include "nav_msgs/msg/path.hpp"
 #include "pluginlib/class_loader.hpp"
 
+#include "lifecycle_msgs/msg/transition.hpp"
+#include "lifecycle_msgs/msg/state.hpp"
+
 #include "easynav_planner/PlannerNode.hpp"
 
 namespace easynav
@@ -47,6 +50,19 @@ PlannerNode::PlannerNode(const rclcpp::NodeOptions & options)
   }
 }
 
+PlannerNode::~PlannerNode()
+{
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_INACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
+  }
+}
+
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
 CallbackReturnT
@@ -62,7 +78,7 @@ PlannerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  planner_main_timer_ = create_timer(1ms, std::bind(&PlannerNode::planner_cycle, this),
+  planner_main_timer_ = create_timer(1ms, std::bind(&PlannerNode::planner_cycle_nort, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
@@ -112,10 +128,14 @@ PlannerNode::get_path() const
 }
 
 void
-PlannerNode::planner_cycle()
+PlannerNode::planner_cycle_nort()
 {
   planner_method_->update(nav_state_);
 }
 
+void
+PlannerNode::planner_cycle_rt()
+{
+}
 
 }  // namespace easynav

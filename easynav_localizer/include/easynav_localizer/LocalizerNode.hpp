@@ -56,6 +56,11 @@ public:
   explicit LocalizerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
+   * @brief Destroys the LocalizerNode object.
+   */
+  ~LocalizerNode();
+
+  /**
    * @brief Configures the LocalizerNode node.
    * This is typically where parameters and interfaces are declared.
    *
@@ -159,11 +164,19 @@ private:
   NavState nav_state_;
 
   /**
-   * @brief Executes a single cycle.
+   * @brief Executes one cycle of real-time system operations.
    *
-   * This method is periodically called by a timer to run the localizer logic
+   * This function is called periodically by the real-time timer to manage control,
+   * localization, planning, and other tightly coupled tasks.
    */
-  void localizer_cycle();
+  void localizer_cycle_rt();
+
+  /**
+   * @brief Executes one cycle of non-real-time system operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void localizer_cycle_nort();
 };
 
 }  // namespace easynav

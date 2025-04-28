@@ -22,6 +22,9 @@
 
 #include "pluginlib/class_loader.hpp"
 
+#include "lifecycle_msgs/msg/transition.hpp"
+#include "lifecycle_msgs/msg/state.hpp"
+
 #include "easynav_localizer/LocalizerNode.hpp"
 
 namespace easynav
@@ -56,12 +59,25 @@ LocalizerNode::on_configure(const rclcpp_lifecycle::State & state)
   return CallbackReturnT::SUCCESS;
 }
 
+LocalizerNode::~LocalizerNode()
+{
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_ACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_INACTIVE) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_INACTIVE_SHUTDOWN);
+  }
+  if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
+    trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
+  }
+}
+
 CallbackReturnT
 LocalizerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  localizer_main_timer_ = create_timer(1ms, std::bind(&LocalizerNode::localizer_cycle, this),
+  localizer_main_timer_ = create_timer(1ms, std::bind(&LocalizerNode::localizer_cycle_nort, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
@@ -111,10 +127,14 @@ LocalizerNode::get_odom() const
 }
 
 void
-LocalizerNode::localizer_cycle()
+LocalizerNode::localizer_cycle_rt()
 {
   localizer_method_->update(nav_state_);
 }
 
+void
+LocalizerNode::localizer_cycle_nort()
+{
+}
 
 }  // namespace easynav
