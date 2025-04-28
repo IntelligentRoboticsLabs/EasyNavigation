@@ -1,0 +1,36 @@
+<map id="easynav_common/src/easynav_common/Perceptions.cpp" name="easynav_common/src/easynav_common/Perceptions.cpp">
+<area shape="rect" id="Node000001" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="378,5,606,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,190,59,216"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="398,49,320,70,240,96,143,141,65,184,63,180,141,136,238,92,319,65,397,44"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="83,190,141,216"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="442,49,329,96,149,185,146,181,327,92,440,44"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="165,190,283,216"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="464,49,257,184,254,179,461,44"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="308,183,444,223"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="481,48,400,171,395,168,477,45"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="468,190,657,216"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="502,45,554,174,550,176,497,47"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="681,183,842,223"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="523,44,720,172,717,176,520,49"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="1700,183,1860,223"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="607,36,1073,91,1376,132,1685,180,1684,185,1375,137,1073,97,606,42"/>
+<area shape="rect" id="Node000009" href="$Perceptions_8hpp.html" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="681,94,842,135"/>
+<area shape="poly" id="edge8_Node000001_Node000009" title=" " alt="" coords="554,44,687,86,685,91,553,49"/>
+<area shape="poly" id="edge9_Node000009_Node000002" title=" " alt="" coords="681,123,359,145,192,163,123,174,71,185,68,186,66,181,70,180,122,169,191,158,359,140,680,117"/>
+<area shape="poly" id="edge10_Node000009_Node000003" title=" " alt="" coords="680,119,574,123,442,134,297,154,154,185,149,187,148,182,153,180,296,149,441,129,574,118,680,114"/>
+<area shape="poly" id="edge15_Node000009_Node000004" title=" " alt="" coords="680,127,504,150,297,185,282,189,281,183,295,180,503,145,680,122"/>
+<area shape="poly" id="edge11_Node000009_Node000005" title=" " alt="" coords="681,136,460,185,459,179,680,130"/>
+<area shape="poly" id="edge12_Node000009_Node000006" title=" " alt="" coords="717,138,606,186,603,181,715,133"/>
+<area shape="poly" id="edge17_Node000009_Node000007" title=" " alt="" coords="764,135,764,167,759,167,759,135"/>
+<area shape="poly" id="edge18_Node000009_Node000008" title=" " alt="" coords="842,115,1204,133,1441,152,1684,180,1684,185,1440,157,1203,139,842,121"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="1508,190,1676,216"/>
+<area shape="poly" id="edge13_Node000009_Node000010" title=" " alt="" coords="843,118,1132,139,1314,157,1496,180,1521,184,1520,189,1496,185,1313,162,1131,145,842,123"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="866,190,984,216"/>
+<area shape="poly" id="edge14_Node000009_Node000011" title=" " alt="" coords="800,133,890,180,888,185,797,138"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="1009,190,1164,216"/>
+<area shape="poly" id="edge16_Node000009_Node000012" title=" " alt="" coords="836,133,1027,183,1025,188,835,138"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="1188,190,1297,216"/>
+<area shape="poly" id="edge19_Node000009_Node000013" title=" " alt="" coords="843,123,998,146,1177,180,1189,183,1188,188,1175,185,997,152,842,129"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="1322,183,1483,223"/>
+<area shape="poly" id="edge20_Node000009_Node000014" title=" " alt="" coords="843,121,1049,144,1307,180,1306,185,1048,149,842,126"/>
+</map>

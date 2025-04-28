@@ -1,12 +1,14 @@
 <map id="easynav_sensors/include/easynav_sensors/SensorsNode.hpp" name="easynav_sensors/include/easynav_sensors/SensorsNode.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the SensorsNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="160,5,393,46"/>
+<area shape="rect" id="Node000001" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="289,5,523,46"/>
 <area shape="rect" id="Node000002" href="$SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="5,94,239,135"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,56,158,96,156,91,227,51"/>
-<area shape="rect" id="Node000003" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="315,94,540,135"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="325,51,395,91,392,96,322,56"/>
-<area shape="rect" id="Node000004" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="164,183,389,223"/>
-<area shape="poly" id="edge5_Node000001_Node000004" title=" " alt="" coords="279,61,279,182,274,182,274,61"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="382,145,312,185,309,180,379,140"/>
-<area shape="rect" id="Node000005" href="$system__main_8cpp.html" title=" " alt="" coords="413,183,554,223"/>
-<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="451,147,473,181,468,184,446,149"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="327,54,187,96,186,91,326,48"/>
+<area shape="rect" id="Node000003" href="$sensors__node__tests_8cpp.html" title=" " alt="" coords="263,94,429,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="386,60,362,95,357,92,382,57"/>
+<area shape="rect" id="Node000004" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="504,94,729,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="469,50,570,91,568,96,467,55"/>
+<area shape="rect" id="Node000005" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="353,183,579,223"/>
+<area shape="poly" id="edge6_Node000001_Node000005" title=" " alt="" coords="427,58,443,93,457,140,466,182,460,183,452,142,438,95,422,61"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="571,145,501,185,499,180,568,140"/>
+<area shape="rect" id="Node000006" href="$system__main_8cpp.html" title=" " alt="" coords="602,183,743,223"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="640,147,662,181,658,184,635,149"/>
 </map>

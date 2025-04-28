@@ -104,50 +104,55 @@ Collaboration diagram for Perception:</div>
 <div class="dyncontent">
 <div class="center"><img src="structeasynav_1_1Perception__coll__graph.png" border="0" usemap="#aPerception_coll__map" alt="Collaboration graph"/></div>
 <map name="aPerception_coll__map" id="aPerception_coll__map">
-<area shape="rect" title="Represents a single sensor perception used for mapping and localization." alt="" coords="87,94,170,120"/>
-<area shape="rect" title=" " alt="" coords="5,5,44,31"/>
-<area shape="poly" title=" " alt="" coords="40,43,61,68,99,91,96,96,57,72,36,46"/>
-<area shape="rect" title=" " alt="" coords="67,5,118,31"/>
-<area shape="poly" title=" " alt="" coords="94,46,99,69,116,92,112,95,94,71,89,47"/>
-<area shape="rect" title=" " alt="" coords="142,5,195,31"/>
-<area shape="poly" title=" " alt="" coords="159,46,136,95,132,93,154,44"/>
-<area shape="rect" title=" " alt="" coords="226,5,271,31"/>
-<area shape="poly" title=" " alt="" coords="236,46,212,72,190,86,168,96,166,91,188,81,208,68,232,42"/>
+<area shape="rect" title="Represents a single sensor perception used for mapping and localization." alt="" coords="270,94,353,120"/>
+<area shape="rect" title=" " alt="" coords="5,5,191,31"/>
+<area shape="poly" title=" " alt="" coords="143,35,282,91,280,96,141,40"/>
+<area shape="rect" title=" " alt="" coords="214,5,264,31"/>
+<area shape="poly" title=" " alt="" coords="254,43,270,68,296,92,292,96,266,72,249,46"/>
+<area shape="rect" title=" " alt="" coords="289,5,342,31"/>
+<area shape="poly" title=" " alt="" coords="316,47,316,55,314,94,309,93,310,55,311,46"/>
+<area shape="rect" title=" " alt="" coords="373,5,418,31"/>
+<area shape="poly" title=" " alt="" coords="386,46,368,72,337,96,333,91,364,68,382,43"/>
+<area shape="rect" title=" " alt="" coords="442,5,522,31"/>
+<area shape="poly" title=" " alt="" coords="458,43,414,72,354,96,352,91,411,68,455,39"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:ae5309f1e6ca372ea4033c00b589fb073" id="r_ae5309f1e6ca372ea4033c00b589fb073"><td class="memItemLeft" align="right" valign="top">pcl::PointCloud&lt; pcl::PointXYZ &gt;::Ptr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5309f1e6ca372ea4033c00b589fb073">data</a></td></tr>
-<tr class="memdesc:ae5309f1e6ca372ea4033c00b589fb073"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the point cloud data.  <br /></td></tr>
-<tr class="separator:ae5309f1e6ca372ea4033c00b589fb073"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81413027fc57f033b76d22fd6d880884" id="r_a81413027fc57f033b76d22fd6d880884"><td class="memItemLeft" align="right" valign="top">pcl::PointCloud&lt; pcl::PointXYZ &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a81413027fc57f033b76d22fd6d880884">data</a></td></tr>
+<tr class="memdesc:a81413027fc57f033b76d22fd6d880884"><td class="mdescLeft">&#160;</td><td class="mdescRight">Point cloud data.  <br /></td></tr>
+<tr class="separator:a81413027fc57f033b76d22fd6d880884"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aee63db9a1c81df1506964242aacdac88" id="r_aee63db9a1c81df1506964242aacdac88"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee63db9a1c81df1506964242aacdac88">frame_id</a></td></tr>
 <tr class="memdesc:aee63db9a1c81df1506964242aacdac88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frame ID associated with the data.  <br /></td></tr>
 <tr class="separator:aee63db9a1c81df1506964242aacdac88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ace6024cedb403facddccc6842dce24" id="r_a3ace6024cedb403facddccc6842dce24"><td class="memItemLeft" align="right" valign="top">rclcpp::Time&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3ace6024cedb403facddccc6842dce24">stamp</a></td></tr>
 <tr class="memdesc:a3ace6024cedb403facddccc6842dce24"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp of the perception.  <br /></td></tr>
 <tr class="separator:a3ace6024cedb403facddccc6842dce24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a809515a5f8c318880eb15f1d6be6f2a3" id="r_a809515a5f8c318880eb15f1d6be6f2a3"><td class="memItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a809515a5f8c318880eb15f1d6be6f2a3">subscription</a></td></tr>
+<tr class="memdesc:a809515a5f8c318880eb15f1d6be6f2a3"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS 2 subscription linked to the data source.  <br /></td></tr>
+<tr class="separator:a809515a5f8c318880eb15f1d6be6f2a3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a28e3c179a86f337095088b3ca02a2b2a" id="r_a28e3c179a86f337095088b3ca02a2b2a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a28e3c179a86f337095088b3ca02a2b2a">valid</a> = false</td></tr>
 <tr class="memdesc:a28e3c179a86f337095088b3ca02a2b2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Whether the perception is valid or usable.  <br /></td></tr>
 <tr class="separator:a28e3c179a86f337095088b3ca02a2b2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents a single sensor perception used for mapping and localization. </p>
-<p>This struct holds a point cloud with a timestamp and frame ID. It is typically generated by sensor drivers and passed to mapping or localization modules. </p>
+<p>Contains point cloud data, associated timestamp, and frame information, as well as metadata regarding its validity and the subscription that generated it. </p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae5309f1e6ca372ea4033c00b589fb073" name="ae5309f1e6ca372ea4033c00b589fb073"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae5309f1e6ca372ea4033c00b589fb073">&#9670;&#160;</a></span>data</h2>
+<a id="a81413027fc57f033b76d22fd6d880884" name="a81413027fc57f033b76d22fd6d880884"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a81413027fc57f033b76d22fd6d880884">&#9670;&#160;</a></span>data</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr data</td>
+          <td class="memname">pcl::PointCloud&lt;pcl::PointXYZ&gt; data</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Pointer to the point cloud data. </p>
+<p>Point cloud data. </p>
 
 </div>
 </div>
@@ -180,6 +185,22 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Timestamp of the perception. </p>
+
+</div>
+</div>
+<a id="a809515a5f8c318880eb15f1d6be6f2a3" name="a809515a5f8c318880eb15f1d6be6f2a3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a809515a5f8c318880eb15f1d6be6f2a3">&#9670;&#160;</a></span>subscription</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">rclcpp::SubscriptionBase::SharedPtr subscription</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>ROS 2 subscription linked to the data source. </p>
 
 </div>
 </div>
