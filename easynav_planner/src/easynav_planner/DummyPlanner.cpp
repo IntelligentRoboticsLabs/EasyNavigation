@@ -38,7 +38,7 @@ nav_msgs::msg::Path DummyPlanner::get_path()
   return path_;
 }
 
-void DummyPlanner::update(const NavState nav_state)
+void DummyPlanner::update(const NavState & nav_state)
 {
   path_.header.stamp = nav_state.timestamp;
   path_.header.frame_id = "map";

@@ -45,7 +45,7 @@ nav_msgs::msg::Odometry DummyLocalizer::get_odom()
   return odom_;
 }
 
-void DummyLocalizer::update(const NavState nav_state)
+void DummyLocalizer::update(const NavState & nav_state)
 {
   odom_.header.stamp = nav_state.timestamp;
   odom_.header.frame_id = "map";

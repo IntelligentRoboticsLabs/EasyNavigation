@@ -42,7 +42,7 @@ DummyMapsManager::get_dynamyc_map()
 }
 
 void
-DummyMapsManager::update(const NavState nav_state)
+DummyMapsManager::update(const NavState & nav_state)
 {
 }
 
