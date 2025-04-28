@@ -18,16 +18,35 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Implementation of the MapsTypeBase template class.
+/// \brief Implementation of the DummyMapsManager class.
 
-#include "easynav_common/types/MapTypeBase.hpp"
+#include "easynav_maps_manager/DummyMapsManager.hpp"
 
 namespace easynav
 {
 
-void MapsTypeBase::initialize(std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node)
+void DummyMapsManager::on_initialize()
 {
-  parent_node_ = parent_node;
+}
+
+std::shared_ptr<MapsTypeBase>
+DummyMapsManager::get_static_map()
+{
+  return nullptr;
+}
+
+std::shared_ptr<MapsTypeBase>
+DummyMapsManager::get_dynamyc_map()
+{
+  return nullptr;
+}
+
+void
+DummyMapsManager::update(const NavState nav_state)
+{
 }
 
 }  // namespace easynav
+
+#include <pluginlib/class_list_macros.hpp>
+PLUGINLIB_EXPORT_CLASS(easynav::DummyMapsManager, easynav::MapsManagerBase)

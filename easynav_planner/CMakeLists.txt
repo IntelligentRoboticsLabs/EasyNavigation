@@ -31,10 +31,6 @@ target_include_directories(planner_node PUBLIC
 )
 ament_target_dependencies(planner_node ${dependencies})
 
-install(DIRECTORY include/
-  DESTINATION include/
-)
-
 add_library(dummy_planner SHARED
   src/easynav_planner/DummyPlanner.cpp
 )
@@ -45,6 +41,10 @@ target_include_directories(dummy_planner PUBLIC
 ament_target_dependencies(dummy_planner
   easynav_core
   pluginlib
+)
+
+install(DIRECTORY include/
+  DESTINATION include/
 )
 
 install(TARGETS

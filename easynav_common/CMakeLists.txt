@@ -10,42 +10,31 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 find_package(ament_cmake REQUIRED)
-find_package(rclcpp_lifecycle REQUIRED)
 find_package(pcl_ros REQUIRED)
 find_package(geometry_msgs REQUIRED)
 find_package(nav_msgs REQUIRED)
 
 set(dependencies
-  rclcpp_lifecycle
   pcl_ros
   geometry_msgs
   nav_msgs
 )
 
-add_library(easynav_configuration SHARED
+add_library(${PROJECT_NAME} SHARED
   src/easynav_common/Configuration.cpp
 )
-target_include_directories(easynav_configuration PUBLIC
+target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
   $<INSTALL_INTERFACE:include>
 )
-
-add_library(easynav_types SHARED
-  src/easynav_common/types/MapTypeBase.cpp
-)
-target_include_directories(easynav_types PUBLIC
-  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-  $<INSTALL_INTERFACE:include>
-)
-ament_target_dependencies(easynav_types ${dependencies})
+ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
-  easynav_configuration
-  easynav_types
+  ${PROJECT_NAME}
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -62,7 +51,6 @@ endif()
 ament_export_include_directories(include)
 ament_export_libraries(
   easynav_configuration
-  easynav_types
 )
 ament_export_targets(
   export_${PROJECT_NAME}
