@@ -95,23 +95,35 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core.  
+<p>Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;rclcpp/rclcpp.hpp&quot;</code><br />
-<code>#include &quot;rclcpp/macros.hpp&quot;</code><br />
+<div class="textblock"><code>#include &quot;rclcpp/macros.hpp&quot;</code><br />
 <code>#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</code><br />
+<code>#include &quot;<a class="el" href="MapTypeBase_8hpp_source.html">easynav_common/types/MapTypeBase.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for MapsManagerNode.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="MapsManagerNode_8hpp__incl.png" border="0" usemap="#aeasynav__maps__manager_2include_2easynav__maps__manager_2MapsManagerNode_8hpp" alt=""/></div>
 <map name="aeasynav__maps__manager_2include_2easynav__maps__manager_2MapsManagerNode_8hpp" id="aeasynav__maps__manager_2include_2easynav__maps__manager_2MapsManagerNode_8hpp">
-<area shape="rect" title="Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="103,5,323,61"/>
-<area shape="rect" title=" " alt="" coords="5,116,125,142"/>
-<area shape="poly" title=" " alt="" coords="172,64,98,110,95,106,169,59"/>
-<area shape="rect" title=" " alt="" coords="149,116,277,142"/>
-<area shape="poly" title=" " alt="" coords="216,62,216,101,210,101,210,62"/>
-<area shape="rect" title=" " alt="" coords="300,109,462,150"/>
-<area shape="poly" title=" " alt="" coords="263,59,334,99,331,103,260,64"/>
+<area shape="rect" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="127,5,347,61"/>
+<area shape="rect" title=" " alt="" coords="5,116,133,142"/>
+<area shape="poly" title=" " alt="" coords="190,64,105,111,103,106,187,59"/>
+<area shape="rect" title=" " alt="" coords="156,109,318,150"/>
+<area shape="poly" title=" " alt="" coords="240,62,240,94,234,94,234,62"/>
+<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="342,109,503,150"/>
+<area shape="poly" title=" " alt="" coords="292,59,371,99,369,104,289,64"/>
+<area shape="rect" href="Perceptions_8hpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="342,198,503,238"/>
+<area shape="poly" title=" " alt="" coords="425,150,425,182,420,182,420,150"/>
+<area shape="rect" title=" " alt="" coords="204,286,257,312"/>
+<area shape="poly" title=" " alt="" coords="375,241,272,284,270,279,373,236"/>
+<area shape="rect" title=" " alt="" coords="282,286,339,312"/>
+<area shape="poly" title=" " alt="" coords="396,241,342,279,339,275,393,237"/>
+<area shape="rect" title=" " alt="" coords="363,286,482,312"/>
+<area shape="poly" title=" " alt="" coords="425,239,425,271,420,271,420,239"/>
+<area shape="rect" title=" " alt="" coords="506,286,624,312"/>
+<area shape="poly" title=" " alt="" coords="459,237,531,276,528,281,457,241"/>
+<area shape="rect" title=" " alt="" coords="648,286,757,312"/>
+<area shape="poly" title=" " alt="" coords="493,236,645,279,644,284,492,242"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -119,7 +131,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="MapsManagerNode_8hpp__dep__incl.png" border="0" usemap="#aeasynav__maps__manager_2include_2easynav__maps__manager_2MapsManagerNode_8hppdep" alt=""/></div>
 <map name="aeasynav__maps__manager_2include_2easynav__maps__manager_2MapsManagerNode_8hppdep" id="aeasynav__maps__manager_2include_2easynav__maps__manager_2MapsManagerNode_8hppdep">
-<area shape="rect" title="Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="125,5,344,61"/>
+<area shape="rect" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="125,5,344,61"/>
 <area shape="rect" href="MapsManagerNode_8cpp.html" title="Implementation of the MapsManagerNode class." alt="" coords="5,109,197,165"/>
 <area shape="poly" title=" " alt="" coords="188,73,138,110,135,106,185,69"/>
 <area shape="rect" href="SystemNode_8hpp.html" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="272,116,498,157"/>
@@ -146,8 +158,7 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Declaration of the MapsManagerNode lifecycle node, ROS 2 interface for EasyNav core. </p>
-<p>Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation.</p>
+<div class="textblock"><p>Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

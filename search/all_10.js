@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['update_5fdynamic_5fmap_0',['update_dynamic_map',['../classeasynav_1_1MapsTypeBase.html#ac7a22605895a8128b9520a7ac2754fcf',1,'easynav::MapsTypeBase']]]
+  ['update_0',['update',['../classeasynav_1_1DummyController.html#ada7a537d25f16c131755f9774c59dd3c',1,'easynav::DummyController::update()'],['../classeasynav_1_1DummyLocalizer.html#ada7a537d25f16c131755f9774c59dd3c',1,'easynav::DummyLocalizer::update()'],['../classeasynav_1_1DummyMapsManager.html#ada7a537d25f16c131755f9774c59dd3c',1,'easynav::DummyMapsManager::update()'],['../classeasynav_1_1DummyPlanner.html#ada7a537d25f16c131755f9774c59dd3c',1,'easynav::DummyPlanner::update()']]]
 ];

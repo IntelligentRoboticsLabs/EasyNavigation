@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Easy Navigation: easynav_sensors/include/easynav_sensors/Perceptions.hpp Source File</title>
+<title>Easy Navigation: easynav_common/include/easynav_common/types/Perceptions.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_614ab350d9e5a7622e6a48999ce2a386.html">easynav_sensors</a></li><li class="navelem"><a class="el" href="dir_4659c21185412ae3e088e10890213fb4.html">include</a></li><li class="navelem"><a class="el" href="dir_b0c22edc73147f7d064879d2e88aaf25.html">easynav_sensors</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_44416c254a438fcc2b63460fcfa852ae.html">easynav_common</a></li><li class="navelem"><a class="el" href="dir_cc6972266a67b0b1fd157ae5527840e4.html">include</a></li><li class="navelem"><a class="el" href="dir_ec05cbd8f7b709da2af7637994ebfa9c.html">easynav_common</a></li><li class="navelem"><a class="el" href="dir_ebe9adb9f1b38446d372d9f8adaa336f.html">types</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -111,45 +111,41 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef EASYNAV_SENSORS__PERCEPTIONS_HPP_</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define EASYNAV_SENSORS__PERCEPTIONS_HPP_</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#include &quot;pcl/point_types.h&quot;</span></div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;pcl_conversions/pcl_conversions.h&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;pcl/point_types_conversion.h&quot;</span></div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;pcl/point_cloud.h&quot;</span></div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="preprocessor">#include &quot;rclcpp/time.hpp&quot;</span></div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="preprocessor">#include &quot;rclcpp/rclcpp.hpp&quot;</span></div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span><span class="preprocessor">#include &quot;rclcpp/macros.hpp&quot;</span></div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="preprocessor">#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</span></div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>{</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span></div>
-<div class="foldopen" id="foldopen00047" data-start="{" data-end="};">
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html">   47</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structeasynav_1_1Perception.html">Perception</a></div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>{</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#ae5309f1e6ca372ea4033c00b589fb073">   49</a></span>  pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr <a class="code hl_variable" href="structeasynav_1_1Perception.html#ae5309f1e6ca372ea4033c00b589fb073">data</a>; </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24">   50</a></span>  rclcpp::Time <a class="code hl_variable" href="structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24">stamp</a>;                       </div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#aee63db9a1c81df1506964242aacdac88">   51</a></span>  std::string <a class="code hl_variable" href="structeasynav_1_1Perception.html#aee63db9a1c81df1506964242aacdac88">frame_id</a>;                     </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#a28e3c179a86f337095088b3ca02a2b2a">   52</a></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="structeasynav_1_1Perception.html#a28e3c179a86f337095088b3ca02a2b2a">valid</a> = <span class="keyword">false</span>;                       </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>};</div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>{</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span></div>
+<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html">   43</a></span><span class="keyword">struct </span><a class="code hl_struct" href="structeasynav_1_1Perception.html">Perception</a></div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#ae5309f1e6ca372ea4033c00b589fb073">   45</a></span>  pcl::PointCloud&lt;pcl::PointXYZ&gt;::Ptr <a class="code hl_variable" href="structeasynav_1_1Perception.html#ae5309f1e6ca372ea4033c00b589fb073">data</a>; </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24">   46</a></span>  rclcpp::Time <a class="code hl_variable" href="structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24">stamp</a>;                       </div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#aee63db9a1c81df1506964242aacdac88">   47</a></span>  std::string <a class="code hl_variable" href="structeasynav_1_1Perception.html#aee63db9a1c81df1506964242aacdac88">frame_id</a>;                     </div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="structeasynav_1_1Perception.html#a28e3c179a86f337095088b3ca02a2b2a">   48</a></span>  <span class="keywordtype">bool</span> <a class="code hl_variable" href="structeasynav_1_1Perception.html#a28e3c179a86f337095088b3ca02a2b2a">valid</a> = <span class="keyword">false</span>;                       </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>};</div>
 </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span></div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno"><a class="line" href="namespaceeasynav.html#a288500772f67d34ce87c1f0ebdb0d7ae">   61</a></span><span class="keyword">typedef</span> std::vector&lt;Perception&gt; <a class="code hl_typedef" href="namespaceeasynav.html#a288500772f67d34ce87c1f0ebdb0d7ae">Perceptions</a>;</div>
-<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}  <span class="comment">// namespace easynav</span></div>
-<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
-<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif  </span><span class="comment">// EASYNAV_SENSORS__PERCEPTIONS_HPP_</span></div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno"><a class="line" href="namespaceeasynav.html#af5a43608597b51ff750da8f53f7ebb1c">   57</a></span><span class="keyword">using </span><a class="code hl_typedef" href="namespaceeasynav.html#af5a43608597b51ff750da8f53f7ebb1c">Perceptions</a> = std::vector&lt;Perception&gt;;</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}  <span class="comment">// namespace easynav</span></div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif  </span><span class="comment">// EASYNAV_COMMON_TYPES__PERCEPTIONS_HPP_</span></div>
 <div class="ttc" id="anamespaceeasynav_html"><div class="ttname"><a href="namespaceeasynav.html">easynav</a></div><div class="ttdef"><b>Definition</b> Configuration.hpp:32</div></div>
-<div class="ttc" id="anamespaceeasynav_html_a288500772f67d34ce87c1f0ebdb0d7ae"><div class="ttname"><a href="namespaceeasynav.html#a288500772f67d34ce87c1f0ebdb0d7ae">easynav::Perceptions</a></div><div class="ttdeci">std::vector&lt; Perception &gt; Perceptions</div><div class="ttdoc">A container of multiple Perception entries.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:61</div></div>
-<div class="ttc" id="astructeasynav_1_1Perception_html"><div class="ttname"><a href="structeasynav_1_1Perception.html">easynav::Perception</a></div><div class="ttdoc">Represents a single sensor perception used for mapping and localization.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:48</div></div>
-<div class="ttc" id="astructeasynav_1_1Perception_html_a28e3c179a86f337095088b3ca02a2b2a"><div class="ttname"><a href="structeasynav_1_1Perception.html#a28e3c179a86f337095088b3ca02a2b2a">easynav::Perception::valid</a></div><div class="ttdeci">bool valid</div><div class="ttdoc">Whether the perception is valid or usable.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:52</div></div>
-<div class="ttc" id="astructeasynav_1_1Perception_html_a3ace6024cedb403facddccc6842dce24"><div class="ttname"><a href="structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24">easynav::Perception::stamp</a></div><div class="ttdeci">rclcpp::Time stamp</div><div class="ttdoc">Timestamp of the perception.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:50</div></div>
-<div class="ttc" id="astructeasynav_1_1Perception_html_ae5309f1e6ca372ea4033c00b589fb073"><div class="ttname"><a href="structeasynav_1_1Perception.html#ae5309f1e6ca372ea4033c00b589fb073">easynav::Perception::data</a></div><div class="ttdeci">pcl::PointCloud&lt; pcl::PointXYZ &gt;::Ptr data</div><div class="ttdoc">Pointer to the point cloud data.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:49</div></div>
-<div class="ttc" id="astructeasynav_1_1Perception_html_aee63db9a1c81df1506964242aacdac88"><div class="ttname"><a href="structeasynav_1_1Perception.html#aee63db9a1c81df1506964242aacdac88">easynav::Perception::frame_id</a></div><div class="ttdeci">std::string frame_id</div><div class="ttdoc">Frame ID associated with the data.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:51</div></div>
+<div class="ttc" id="anamespaceeasynav_html_af5a43608597b51ff750da8f53f7ebb1c"><div class="ttname"><a href="namespaceeasynav.html#af5a43608597b51ff750da8f53f7ebb1c">easynav::Perceptions</a></div><div class="ttdeci">std::vector&lt; Perception &gt; Perceptions</div><div class="ttdoc">A container of multiple Perception entries.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:57</div></div>
+<div class="ttc" id="astructeasynav_1_1Perception_html"><div class="ttname"><a href="structeasynav_1_1Perception.html">easynav::Perception</a></div><div class="ttdoc">Represents a single sensor perception used for mapping and localization.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:44</div></div>
+<div class="ttc" id="astructeasynav_1_1Perception_html_a28e3c179a86f337095088b3ca02a2b2a"><div class="ttname"><a href="structeasynav_1_1Perception.html#a28e3c179a86f337095088b3ca02a2b2a">easynav::Perception::valid</a></div><div class="ttdeci">bool valid</div><div class="ttdoc">Whether the perception is valid or usable.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:48</div></div>
+<div class="ttc" id="astructeasynav_1_1Perception_html_a3ace6024cedb403facddccc6842dce24"><div class="ttname"><a href="structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24">easynav::Perception::stamp</a></div><div class="ttdeci">rclcpp::Time stamp</div><div class="ttdoc">Timestamp of the perception.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:46</div></div>
+<div class="ttc" id="astructeasynav_1_1Perception_html_ae5309f1e6ca372ea4033c00b589fb073"><div class="ttname"><a href="structeasynav_1_1Perception.html#ae5309f1e6ca372ea4033c00b589fb073">easynav::Perception::data</a></div><div class="ttdeci">pcl::PointCloud&lt; pcl::PointXYZ &gt;::Ptr data</div><div class="ttdoc">Pointer to the point cloud data.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:45</div></div>
+<div class="ttc" id="astructeasynav_1_1Perception_html_aee63db9a1c81df1506964242aacdac88"><div class="ttname"><a href="structeasynav_1_1Perception.html#aee63db9a1c81df1506964242aacdac88">easynav::Perception::frame_id</a></div><div class="ttdeci">std::string frame_id</div><div class="ttdoc">Frame ID associated with the data.</div><div class="ttdef"><b>Definition</b> Perceptions.hpp:47</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

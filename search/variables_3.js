@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['realtime_5fcbg_0',['realtime_cbg',['../structeasynav_1_1SystemNodeInfo.html#a5aab17347096798b46e3925e6d931252',1,'easynav::SystemNodeInfo']]]
+  ['goal_0',['goal',['../structeasynav_1_1NavState.html#a5438a766488770784a4ded304c7f0504',1,'easynav::NavState']]]
 ];

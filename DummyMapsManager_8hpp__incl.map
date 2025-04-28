@@ -1,0 +1,21 @@
+<map id="easynav_maps_manager/include/easynav_maps_manager/DummyMapsManager.hpp" name="easynav_maps_manager/include/easynav_maps_manager/DummyMapsManager.hpp">
+<area shape="rect" id="Node000001" title="Declaration of the DummyMapsManager method." alt="" coords="171,5,403,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,116,169,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,64,128,112,125,107,228,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="193,109,381,150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="290,62,290,94,284,94,284,62"/>
+<area shape="rect" id="Node000004" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="405,109,566,150"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="346,59,431,100,429,104,343,64"/>
+<area shape="rect" id="Node000005" href="$Perceptions_8hpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="405,198,566,238"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="488,150,488,182,483,182,483,150"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="267,286,320,312"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="439,241,336,284,334,279,437,236"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="345,286,402,312"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="460,241,405,279,402,275,456,237"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="426,286,545,312"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="488,239,488,271,483,271,483,239"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="569,286,688,312"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="523,237,594,276,592,281,520,241"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="711,286,820,312"/>
+<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="556,236,709,279,707,284,555,242"/>
+</map>

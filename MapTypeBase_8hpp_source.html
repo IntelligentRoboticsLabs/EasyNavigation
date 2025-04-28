@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Easy Navigation: easynav_maps_manager/include/easynav_maps_manager/MapTypeBase.hpp Source File</title>
+<title>Easy Navigation: easynav_common/include/easynav_common/types/MapTypeBase.hpp Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_08f2ac1687261e34ac98cd598106342d.html">easynav_maps_manager</a></li><li class="navelem"><a class="el" href="dir_99a26ff111842302d7440f13c4908e2e.html">include</a></li><li class="navelem"><a class="el" href="dir_3ddc2489339f5bb743057788997157f3.html">easynav_maps_manager</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_44416c254a438fcc2b63460fcfa852ae.html">easynav_common</a></li><li class="navelem"><a class="el" href="dir_cc6972266a67b0b1fd157ae5527840e4.html">include</a></li><li class="navelem"><a class="el" href="dir_ec05cbd8f7b709da2af7637994ebfa9c.html">easynav_common</a></li><li class="navelem"><a class="el" href="dir_ebe9adb9f1b38446d372d9f8adaa336f.html">types</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -111,50 +111,32 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="comment">// along with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
 <div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span></div>
 <div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef EASYNAV_MAPSMANAGER__MAPSTYPEBASE_HPP_</span></div>
-<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define EASYNAV_MAPSMANAGER__MAPSTYPEBASE_HPP_</span></div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span><span class="preprocessor">#ifndef EASYNAV_COMMON_TYPES__MAPSTYPEBASE_HPP_</span></div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#define EASYNAV_COMMON_TYPES__MAPSTYPEBASE_HPP_</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span> </div>
-<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;rclcpp/rclcpp.hpp&quot;</span></div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &quot;rclcpp/macros.hpp&quot;</span></div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</span></div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#include &quot;<a class="code" href="Perceptions_8hpp.html">easynav_sensors/Perceptions.hpp</a>&quot;</span></div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>{</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span></div>
-<div class="foldopen" id="foldopen00043" data-start="{" data-end="};">
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html">   43</a></span><span class="keyword">class </span><a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#ae9b01ffdd6fd0c2c415a916e45380b37">MapsTypeBase</a></div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>{</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00050" data-start="{" data-end="}">
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html#ae9b01ffdd6fd0c2c415a916e45380b37">   50</a></span>  <a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#ae9b01ffdd6fd0c2c415a916e45380b37">MapsTypeBase</a>(rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node)</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  : parent_node_(parent_node) {}</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span><span class="preprocessor">#include &quot;<a class="code" href="Perceptions_8hpp.html">easynav_common/types/Perceptions.hpp</a>&quot;</span></div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>{</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span></div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="foldopen" id="foldopen00040" data-start="{" data-end="};">
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html">   40</a></span><span class="keyword">class </span><a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#ae083a5e858aaea0f6dede71e82cbed13">MapsTypeBase</a></div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>{</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html#ae083a5e858aaea0f6dede71e82cbed13">   46</a></span>  <a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#ae083a5e858aaea0f6dede71e82cbed13">MapsTypeBase</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span></div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html#afb3c621d8c83fdfbcf6904d1f1dfca99">   51</a></span>  <span class="keyword">virtual</span> <a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#afb3c621d8c83fdfbcf6904d1f1dfca99">~MapsTypeBase</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>};</div>
 </div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span></div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html#a488c3c519541c01fa18830c7385ba06b">   59</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#a488c3c519541c01fa18830c7385ba06b">publish_static_map</a>() = 0;</div>
-<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span></div>
-<div class="line"><a id="l00066" name="l00066"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html#af27049e3cfc837fdce6fbd476b5a060c">   66</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#af27049e3cfc837fdce6fbd476b5a060c">publish_dynamic_map</a>() = 0;</div>
-<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span></div>
-<div class="line"><a id="l00072" name="l00072"></a><span class="lineno"><a class="line" href="classeasynav_1_1MapsTypeBase.html#ac7a22605895a8128b9520a7ac2754fcf">   72</a></span>  <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classeasynav_1_1MapsTypeBase.html#ac7a22605895a8128b9520a7ac2754fcf">update_dynamic_map</a>(<span class="keyword">const</span> easynav_sensors::Perceptions &amp; perceptions) = 0;</div>
-<div class="line"><a id="l00073" name="l00073"></a><span class="lineno">   73</span></div>
-<div class="line"><a id="l00081" name="l00081"></a><span class="lineno">   81</span>  <span class="comment">// We have to see how to do this without templates</span></div>
-<div class="line"><a id="l00082" name="l00082"></a><span class="lineno">   82</span>  <span class="comment">// std::shared_ptr&lt;const T&gt; get_map() const { return map_; }</span></div>
-<div class="line"><a id="l00083" name="l00083"></a><span class="lineno">   83</span> </div>
-<div class="line"><a id="l00084" name="l00084"></a><span class="lineno">   84</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00085" name="l00085"></a><span class="lineno">   85</span>  rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_; </div>
-<div class="line"><a id="l00086" name="l00086"></a><span class="lineno">   86</span>  <span class="comment">// std::shared_ptr&lt;T&gt; map_; ///&lt; Internal representation of the managed map.</span></div>
-<div class="line"><a id="l00087" name="l00087"></a><span class="lineno">   87</span>};</div>
-</div>
-<div class="line"><a id="l00088" name="l00088"></a><span class="lineno">   88</span> </div>
-<div class="line"><a id="l00089" name="l00089"></a><span class="lineno">   89</span>}  <span class="comment">// namespace easynav</span></div>
-<div class="line"><a id="l00090" name="l00090"></a><span class="lineno">   90</span> </div>
-<div class="line"><a id="l00091" name="l00091"></a><span class="lineno">   91</span><span class="preprocessor">#endif  </span><span class="comment">// EASYNAV_MAPSMANAGER__MAPSTYPEBASE_HPP_</span></div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span> </div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>}  <span class="comment">// namespace easynav</span></div>
+<div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="preprocessor">#endif  </span><span class="comment">// EASYNAV_COMMON_TYPES__MAPSTYPEBASE_HPP_</span></div>
 <div class="ttc" id="aPerceptions_8hpp_html"><div class="ttname"><a href="Perceptions_8hpp.html">Perceptions.hpp</a></div><div class="ttdoc">Definition of the Perception struct and the Perceptions container used for sensor data input.</div></div>
-<div class="ttc" id="aclasseasynav_1_1MapsTypeBase_html_a488c3c519541c01fa18830c7385ba06b"><div class="ttname"><a href="classeasynav_1_1MapsTypeBase.html#a488c3c519541c01fa18830c7385ba06b">easynav::MapsTypeBase::publish_static_map</a></div><div class="ttdeci">virtual void publish_static_map()=0</div><div class="ttdoc">Publish the static map.</div></div>
-<div class="ttc" id="aclasseasynav_1_1MapsTypeBase_html_ac7a22605895a8128b9520a7ac2754fcf"><div class="ttname"><a href="classeasynav_1_1MapsTypeBase.html#ac7a22605895a8128b9520a7ac2754fcf">easynav::MapsTypeBase::update_dynamic_map</a></div><div class="ttdeci">virtual void update_dynamic_map(const easynav_sensors::Perceptions &amp;perceptions)=0</div><div class="ttdoc">Update the internal dynamic map with new perception data.</div></div>
-<div class="ttc" id="aclasseasynav_1_1MapsTypeBase_html_ae9b01ffdd6fd0c2c415a916e45380b37"><div class="ttname"><a href="classeasynav_1_1MapsTypeBase.html#ae9b01ffdd6fd0c2c415a916e45380b37">easynav::MapsTypeBase::MapsTypeBase</a></div><div class="ttdeci">MapsTypeBase(rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node)</div><div class="ttdoc">map_</div><div class="ttdef"><b>Definition</b> MapTypeBase.hpp:50</div></div>
-<div class="ttc" id="aclasseasynav_1_1MapsTypeBase_html_af27049e3cfc837fdce6fbd476b5a060c"><div class="ttname"><a href="classeasynav_1_1MapsTypeBase.html#af27049e3cfc837fdce6fbd476b5a060c">easynav::MapsTypeBase::publish_dynamic_map</a></div><div class="ttdeci">virtual void publish_dynamic_map()=0</div><div class="ttdoc">Publish the current dynamic map.</div></div>
+<div class="ttc" id="aclasseasynav_1_1MapsTypeBase_html_ae083a5e858aaea0f6dede71e82cbed13"><div class="ttname"><a href="classeasynav_1_1MapsTypeBase.html#ae083a5e858aaea0f6dede71e82cbed13">easynav::MapsTypeBase::MapsTypeBase</a></div><div class="ttdeci">MapsTypeBase()=default</div><div class="ttdoc">Construct a new MapsTypeBase.</div></div>
+<div class="ttc" id="aclasseasynav_1_1MapsTypeBase_html_afb3c621d8c83fdfbcf6904d1f1dfca99"><div class="ttname"><a href="classeasynav_1_1MapsTypeBase.html#afb3c621d8c83fdfbcf6904d1f1dfca99">easynav::MapsTypeBase::~MapsTypeBase</a></div><div class="ttdeci">virtual ~MapsTypeBase()=default</div><div class="ttdoc">Virtual destructor for MapsTypeBase.</div></div>
 <div class="ttc" id="anamespaceeasynav_html"><div class="ttname"><a href="namespaceeasynav.html">easynav</a></div><div class="ttdef"><b>Definition</b> Configuration.hpp:32</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

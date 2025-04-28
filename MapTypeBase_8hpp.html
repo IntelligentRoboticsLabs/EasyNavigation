@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.13.2"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Easy Navigation: easynav_maps_manager/include/easynav_maps_manager/MapTypeBase.hpp File Reference</title>
+<title>Easy Navigation: easynav_common/include/easynav_common/types/MapTypeBase.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,7 +83,7 @@ $(function(){ initResizable(false); });
 
 <div id="nav-path" class="navpath">
   <ul>
-<li class="navelem"><a class="el" href="dir_08f2ac1687261e34ac98cd598106342d.html">easynav_maps_manager</a></li><li class="navelem"><a class="el" href="dir_99a26ff111842302d7440f13c4908e2e.html">include</a></li><li class="navelem"><a class="el" href="dir_3ddc2489339f5bb743057788997157f3.html">easynav_maps_manager</a></li>  </ul>
+<li class="navelem"><a class="el" href="dir_44416c254a438fcc2b63460fcfa852ae.html">easynav_common</a></li><li class="navelem"><a class="el" href="dir_cc6972266a67b0b1fd157ae5527840e4.html">include</a></li><li class="navelem"><a class="el" href="dir_ec05cbd8f7b709da2af7637994ebfa9c.html">easynav_common</a></li><li class="navelem"><a class="el" href="dir_ebe9adb9f1b38446d372d9f8adaa336f.html">types</a></li>  </ul>
 </div>
 </div><!-- top -->
 <div id="doc-content">
@@ -95,39 +95,59 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Declaration of the MapsTypeBase template class, an abstract interface for managing static and dynamic maps.  
+<p>Declaration of the MapsTypeBase template class, an abstract interface to represent map types.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;rclcpp/rclcpp.hpp&quot;</code><br />
-<code>#include &quot;rclcpp/macros.hpp&quot;</code><br />
-<code>#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</code><br />
-<code>#include &quot;<a class="el" href="Perceptions_8hpp_source.html">easynav_sensors/Perceptions.hpp</a>&quot;</code><br />
+<div class="textblock"><code>#include &quot;<a class="el" href="Perceptions_8hpp_source.html">easynav_common/types/Perceptions.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for MapTypeBase.hpp:</div>
 <div class="dyncontent">
-<div class="center"><img src="MapTypeBase_8hpp__incl.png" border="0" usemap="#aeasynav__maps__manager_2include_2easynav__maps__manager_2MapTypeBase_8hpp" alt=""/></div>
-<map name="aeasynav__maps__manager_2include_2easynav__maps__manager_2MapTypeBase_8hpp" id="aeasynav__maps__manager_2include_2easynav__maps__manager_2MapTypeBase_8hpp">
-<area shape="rect" title="Declaration of the MapsTypeBase template class, an abstract interface for managing static and dynamic..." alt="" coords="224,5,413,61"/>
-<area shape="rect" title=" " alt="" coords="5,190,125,216"/>
-<area shape="poly" title=" " alt="" coords="279,64,97,184,94,179,276,59"/>
-<area shape="rect" title=" " alt="" coords="149,190,277,216"/>
-<area shape="poly" title=" " alt="" coords="304,63,231,178,226,175,299,60"/>
-<area shape="rect" title=" " alt="" coords="300,183,462,223"/>
-<area shape="poly" title=" " alt="" coords="331,60,371,167,366,169,326,62"/>
-<area shape="rect" href="Perceptions_8hpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="470,109,689,135"/>
-<area shape="poly" title=" " alt="" coords="401,59,529,101,528,106,400,64"/>
-<area shape="poly" title=" " alt="" coords="470,137,312,156,138,185,123,188,122,183,136,180,311,151,469,131"/>
-<area shape="poly" title=" " alt="" coords="517,138,290,185,275,189,274,183,288,180,516,133"/>
-<area shape="poly" title=" " alt="" coords="550,138,446,179,444,174,548,133"/>
-<area shape="rect" title=" " alt="" coords="698,190,752,216"/>
-<area shape="poly" title=" " alt="" coords="603,133,691,180,688,185,600,137"/>
-<area shape="rect" title=" " alt="" coords="776,190,834,216"/>
-<area shape="poly" title=" " alt="" coords="623,133,765,180,767,181,765,186,763,185,621,138"/>
-<area shape="rect" title=" " alt="" coords="858,190,976,216"/>
-<area shape="poly" title=" " alt="" coords="638,133,847,180,859,183,858,188,846,185,636,138"/>
-<area shape="rect" title=" " alt="" coords="1001,183,1137,223"/>
-<area shape="poly" title=" " alt="" coords="680,133,820,152,986,180,985,185,820,157,679,138"/>
-<area shape="rect" title=" " alt="" coords="486,190,674,216"/>
-<area shape="poly" title=" " alt="" coords="582,135,582,174,577,174,577,135"/>
+<div class="center"><img src="MapTypeBase_8hpp__incl.png" border="0" usemap="#aeasynav__common_2include_2easynav__common_2types_2MapTypeBase_8hpp" alt=""/></div>
+<map name="aeasynav__common_2include_2easynav__common_2types_2MapTypeBase_8hpp" id="aeasynav__common_2include_2easynav__common_2types_2MapTypeBase_8hpp">
+<area shape="rect" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="138,5,310,61"/>
+<area shape="rect" href="Perceptions_8hpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="143,109,305,150"/>
+<area shape="poly" title=" " alt="" coords="227,62,227,94,221,94,221,62"/>
+<area shape="rect" title=" " alt="" coords="5,198,59,223"/>
+<area shape="poly" title=" " alt="" coords="177,153,74,195,72,190,175,148"/>
+<area shape="rect" title=" " alt="" coords="83,198,141,223"/>
+<area shape="poly" title=" " alt="" coords="198,152,143,190,140,186,195,148"/>
+<area shape="rect" title=" " alt="" coords="165,198,283,223"/>
+<area shape="poly" title=" " alt="" coords="227,150,227,182,221,182,221,150"/>
+<area shape="rect" title=" " alt="" coords="308,198,426,223"/>
+<area shape="poly" title=" " alt="" coords="261,148,333,187,330,192,258,153"/>
+<area shape="rect" title=" " alt="" coords="449,198,559,223"/>
+<area shape="poly" title=" " alt="" coords="295,148,447,190,446,196,293,153"/>
+</map>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="MapTypeBase_8hpp__dep__incl.png" border="0" usemap="#aeasynav__common_2include_2easynav__common_2types_2MapTypeBase_8hppdep" alt=""/></div>
+<map name="aeasynav__common_2include_2easynav__common_2types_2MapTypeBase_8hppdep" id="aeasynav__common_2include_2easynav__common_2types_2MapTypeBase_8hppdep">
+<area shape="rect" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="308,5,479,61"/>
+<area shape="rect" href="NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="308,109,479,165"/>
+<area shape="poly" title=" " alt="" coords="396,77,396,108,391,108,391,77"/>
+<area shape="rect" href="DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager method." alt="" coords="586,109,819,165"/>
+<area shape="poly" title=" " alt="" coords="491,64,620,106,619,111,490,69"/>
+<area shape="rect" href="MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="54,213,274,268"/>
+<area shape="poly" title=" " alt="" coords="345,73,298,111,240,165,191,214,187,210,236,161,294,107,342,68"/>
+<area shape="rect" href="LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="387,220,626,261"/>
+<area shape="poly" title=" " alt="" coords="437,173,487,218,483,222,433,177"/>
+<area shape="rect" href="SystemNode_8hpp.html" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="243,324,469,364"/>
+<area shape="poly" title=" " alt="" coords="386,181,379,213,361,324,356,323,373,212,380,180"/>
+<area shape="rect" href="LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="544,316,728,372"/>
+<area shape="poly" title=" " alt="" coords="545,269,603,314,600,318,542,273"/>
+<area shape="poly" title=" " alt="" coords="466,272,386,326,383,321,463,268"/>
+<area shape="rect" href="SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="139,420,365,461"/>
+<area shape="poly" title=" " alt="" coords="512,277,507,326,498,351,483,374,463,388,433,401,358,422,356,417,431,396,460,383,479,370,493,349,501,325,506,276"/>
+<area shape="poly" title=" " alt="" coords="325,377,275,422,272,418,321,373"/>
+<area shape="rect" href="system__main_8cpp.html" title=" " alt="" coords="388,420,529,461"/>
+<area shape="poly" title=" " alt="" coords="390,373,439,418,436,422,386,377"/>
+<area shape="rect" href="DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="650,213,841,268"/>
+<area shape="poly" title=" " alt="" coords="722,178,736,211,731,213,717,180"/>
+<area shape="poly" title=" " alt="" coords="230,274,320,321,318,326,228,278"/>
+<area shape="poly" title=" " alt="" coords="60,278,37,296,18,318,11,332,8,345,10,357,18,370,36,384,65,397,140,418,138,423,63,402,33,389,14,374,5,359,3,345,6,330,14,315,33,292,57,274"/>
+<area shape="rect" href="MapsManagerNode_8cpp.html" title="Implementation of the MapsManagerNode class." alt="" coords="28,316,220,372"/>
+<area shape="poly" title=" " alt="" coords="150,284,137,317,132,315,145,282"/>
 </map>
 </div>
 </div>
@@ -145,7 +165,7 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Declaration of the MapsTypeBase template class, an abstract interface for managing static and dynamic maps. </p>
+<div class="textblock"><p>Declaration of the MapsTypeBase template class, an abstract interface to represent map types. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

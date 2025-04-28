@@ -128,6 +128,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:aaaaa94687f625c2b97202255d2e3cf0d" id="r_aaaaa94687f625c2b97202255d2e3cf0d"><td class="memItemLeft" align="right" valign="top">nav_msgs::msg::Odometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aaaaa94687f625c2b97202255d2e3cf0d">get_odom</a> () const</td></tr>
+<tr class="memdesc:aaaaa94687f625c2b97202255d2e3cf0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current localization state.  <br /></td></tr>
+<tr class="separator:aaaaa94687f625c2b97202255d2e3cf0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8366fef9515c0b0cd47949fbfc018641" id="r_a8366fef9515c0b0cd47949fbfc018641"><td class="memItemLeft" align="right" valign="top">rclcpp::CallbackGroup::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8366fef9515c0b0cd47949fbfc018641">get_real_time_cbg</a> ()</td></tr>
 <tr class="memdesc:a8366fef9515c0b0cd47949fbfc018641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the real-time callback group.  <br /></td></tr>
 <tr class="separator:a8366fef9515c0b0cd47949fbfc018641"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,6 +155,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a38b74771f6ab23805f990786e4d6f806" id="r_a38b74771f6ab23805f990786e4d6f806"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38b74771f6ab23805f990786e4d6f806">on_shutdown</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
 <tr class="memdesc:a38b74771f6ab23805f990786e4d6f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> node.  <br /></td></tr>
 <tr class="separator:a38b74771f6ab23805f990786e4d6f806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab236eebc784f0964df7ca06e685f4994" id="r_ab236eebc784f0964df7ca06e685f4994"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab236eebc784f0964df7ca06e685f4994">set_nav_state</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> nav_state)</td></tr>
+<tr class="memdesc:ab236eebc784f0964df7ca06e685f4994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current navigation state.  <br /></td></tr>
+<tr class="separator:ab236eebc784f0964df7ca06e685f4994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ROS 2 lifecycle node that manages localization for the Easy Navigation system. </p>
@@ -206,6 +212,34 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="aaaaa94687f625c2b97202255d2e3cf0d" name="aaaaa94687f625c2b97202255d2e3cf0d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaaaa94687f625c2b97202255d2e3cf0d">&#9670;&#160;</a></span>get_odom()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">nav_msgs::msg::Odometry get_odom </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the current localization state. </p>
+<dl class="section return"><dt>Returns</dt><dd>An Odometry message representing the current localization state. </dd></dl>
+
+</div>
+</div>
 <a id="a8366fef9515c0b0cd47949fbfc018641" name="a8366fef9515c0b0cd47949fbfc018641"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8366fef9515c0b0cd47949fbfc018641">&#9670;&#160;</a></span>get_real_time_cbg()</h2>
 
@@ -386,6 +420,31 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating shutdown is complete. </dd></dl>
+
+</div>
+</div>
+<a id="ab236eebc784f0964df7ca06e685f4994" name="ab236eebc784f0964df7ca06e685f4994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab236eebc784f0964df7ca06e685f4994">&#9670;&#160;</a></span>set_nav_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_nav_state </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structeasynav_1_1NavState.html">NavState</a></td>          <td class="paramname"><span class="paramname"><em>nav_state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the current navigation state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nav_state</td><td>The current state of the navigation system. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

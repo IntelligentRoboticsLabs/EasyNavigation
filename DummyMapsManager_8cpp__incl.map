@@ -1,0 +1,25 @@
+<map id="easynav_maps_manager/src/easynav_maps_manager/DummyMapsManager.cpp" name="easynav_maps_manager/src/easynav_maps_manager/DummyMapsManager.cpp">
+<area shape="rect" id="Node000001" title="Implementation of the DummyMapsManager class." alt="" coords="279,5,471,61"/>
+<area shape="rect" id="Node000002" href="$DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager method." alt="" coords="199,109,375,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="351,63,317,100,314,96,348,60"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="399,109,527,150"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="402,60,436,96,433,100,399,63"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,205,169,231"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="243,153,130,201,128,196,241,148"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="193,198,381,238"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="290,150,290,182,284,182,284,150"/>
+<area shape="rect" id="Node000005" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="405,198,566,238"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="333,148,428,189,425,194,331,153"/>
+<area shape="rect" id="Node000006" href="$Perceptions_8hpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="405,286,566,327"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="488,239,488,271,483,271,483,239"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="267,375,320,401"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="439,330,336,372,334,367,437,325"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="345,375,402,401"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="460,330,405,368,402,363,456,325"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="426,375,545,401"/>
+<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="488,327,488,359,483,359,483,327"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="569,375,688,401"/>
+<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="523,325,594,365,592,369,520,330"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="711,375,820,401"/>
+<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="556,325,709,368,707,373,555,330"/>
+</map>

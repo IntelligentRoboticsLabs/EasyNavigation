@@ -128,6 +128,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a618c508c69d8fe9751cc8d659d62f294" id="r_a618c508c69d8fe9751cc8d659d62f294"><td class="memItemLeft" align="right" valign="top">nav_msgs::msg::Path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a618c508c69d8fe9751cc8d659d62f294">get_path</a> () const</td></tr>
+<tr class="memdesc:a618c508c69d8fe9751cc8d659d62f294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current navigation path.  <br /></td></tr>
+<tr class="separator:a618c508c69d8fe9751cc8d659d62f294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8366fef9515c0b0cd47949fbfc018641" id="r_a8366fef9515c0b0cd47949fbfc018641"><td class="memItemLeft" align="right" valign="top">rclcpp::CallbackGroup::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8366fef9515c0b0cd47949fbfc018641">get_real_time_cbg</a> ()</td></tr>
 <tr class="memdesc:a8366fef9515c0b0cd47949fbfc018641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the real-time callback group.  <br /></td></tr>
 <tr class="separator:a8366fef9515c0b0cd47949fbfc018641"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -152,6 +155,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af704ae61f2177a980bf10e15c267159d" id="r_af704ae61f2177a980bf10e15c267159d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af704ae61f2177a980bf10e15c267159d">PlannerNode</a> (const rclcpp::NodeOptions &amp;options=rclcpp::NodeOptions())</td></tr>
 <tr class="memdesc:af704ae61f2177a980bf10e15c267159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> lifecycle node with the specified options.  <br /></td></tr>
 <tr class="separator:af704ae61f2177a980bf10e15c267159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab236eebc784f0964df7ca06e685f4994" id="r_ab236eebc784f0964df7ca06e685f4994"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab236eebc784f0964df7ca06e685f4994">set_nav_state</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> nav_state)</td></tr>
+<tr class="memdesc:ab236eebc784f0964df7ca06e685f4994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current navigation state.  <br /></td></tr>
+<tr class="separator:ab236eebc784f0964df7ca06e685f4994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system. </p>
@@ -206,6 +212,34 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a618c508c69d8fe9751cc8d659d62f294" name="a618c508c69d8fe9751cc8d659d62f294"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a618c508c69d8fe9751cc8d659d62f294">&#9670;&#160;</a></span>get_path()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">nav_msgs::msg::Path get_path </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Get the current navigation path. </p>
+<dl class="section return"><dt>Returns</dt><dd>An Odometry message representing the current navigation path. </dd></dl>
+
+</div>
+</div>
 <a id="a8366fef9515c0b0cd47949fbfc018641" name="a8366fef9515c0b0cd47949fbfc018641"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a8366fef9515c0b0cd47949fbfc018641">&#9670;&#160;</a></span>get_real_time_cbg()</h2>
 
@@ -386,6 +420,31 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating shutdown is complete. </dd></dl>
+
+</div>
+</div>
+<a id="ab236eebc784f0964df7ca06e685f4994" name="ab236eebc784f0964df7ca06e685f4994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab236eebc784f0964df7ca06e685f4994">&#9670;&#160;</a></span>set_nav_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_nav_state </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structeasynav_1_1NavState.html">NavState</a></td>          <td class="paramname"><span class="paramname"><em>nav_state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the current navigation state. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nav_state</td><td>The current state of the navigation system. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

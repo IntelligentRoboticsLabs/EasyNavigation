@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['perception_0',['Perception',['../structeasynav_1_1Perception.html',1,'easynav']]],
-  ['plannernode_1',['PlannerNode',['../classeasynav_1_1PlannerNode.html',1,'easynav']]]
+  ['mapsmanagernode_0',['MapsManagerNode',['../classeasynav_1_1MapsManagerNode.html',1,'easynav']]],
+  ['mapstypebase_1',['MapsTypeBase',['../classeasynav_1_1MapsTypeBase.html',1,'easynav']]]
 ];

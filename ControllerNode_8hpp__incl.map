@@ -1,9 +1,9 @@
 <map id="easynav_controller/include/easynav_controller/ControllerNode.hpp" name="easynav_controller/include/easynav_controller/ControllerNode.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="124,5,302,61"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,116,125,142"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="172,64,98,110,95,106,169,59"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="149,116,277,142"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="216,62,216,101,210,101,210,62"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="300,109,462,150"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="263,59,334,99,331,103,260,64"/>
+<area shape="rect" id="Node000001" title="Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="148,5,326,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,116,133,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,64,105,111,103,106,187,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="156,109,318,150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,62,240,94,234,94,234,62"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="342,109,545,150"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="298,59,388,100,386,105,296,64"/>
 </map>

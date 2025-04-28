@@ -99,6 +99,18 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1ControllerNode.html">ControllerNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS 2 lifecycle node that manages calculating speeds for the Easy Navigation system.  <a href="classeasynav_1_1ControllerNode.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1DummyController.html">DummyController</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "dummy" implementation for the Control Method.  <a href="classeasynav_1_1DummyController.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1DummyLocalizer.html">DummyLocalizer</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "dummy" implementation for the Localizer Method.  <a href="classeasynav_1_1DummyLocalizer.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1DummyMapsManager.html">DummyMapsManager</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "dummy" implementation for the Planner Method.  <a href="classeasynav_1_1DummyMapsManager.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1DummyPlanner.html">DummyPlanner</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "dummy" implementation for the Planner Method.  <a href="classeasynav_1_1DummyPlanner.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1LocalizerNode.html">LocalizerNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS 2 lifecycle node that manages localization for the Easy Navigation system.  <a href="classeasynav_1_1LocalizerNode.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,6 +119,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1MapsTypeBase.html">MapsTypeBase</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Abstract base class for managing map data in Easy Navigation.  <a href="classeasynav_1_1MapsTypeBase.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeasynav_1_1NavState.html">NavState</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents the state of the navigation system.  <a href="structeasynav_1_1NavState.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeasynav_1_1Perception.html">Perception</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single sensor perception used for mapping and localization.  <a href="structeasynav_1_1Perception.html#details">More...</a><br /></td></tr>
@@ -130,9 +145,9 @@ Classes</h2></td></tr>
 Typedefs</h2></td></tr>
 <tr class="memitem:ad09d90f1fe35c9e2f2fd7fc1902312f4" id="r_ad09d90f1fe35c9e2f2fd7fc1902312f4"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a> = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn</td></tr>
 <tr class="separator:ad09d90f1fe35c9e2f2fd7fc1902312f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a288500772f67d34ce87c1f0ebdb0d7ae" id="r_a288500772f67d34ce87c1f0ebdb0d7ae"><td class="memItemLeft" align="right" valign="top">typedef std::vector&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a288500772f67d34ce87c1f0ebdb0d7ae">Perceptions</a></td></tr>
-<tr class="memdesc:a288500772f67d34ce87c1f0ebdb0d7ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">A container of multiple <a class="el" href="structeasynav_1_1Perception.html" title="Represents a single sensor perception used for mapping and localization.">Perception</a> entries.  <br /></td></tr>
-<tr class="separator:a288500772f67d34ce87c1f0ebdb0d7ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af5a43608597b51ff750da8f53f7ebb1c" id="r_af5a43608597b51ff750da8f53f7ebb1c"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af5a43608597b51ff750da8f53f7ebb1c">Perceptions</a> = std::vector&lt;<a class="el" href="structeasynav_1_1Perception.html">Perception</a>&gt;</td></tr>
+<tr class="memdesc:af5a43608597b51ff750da8f53f7ebb1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A container of multiple <a class="el" href="structeasynav_1_1Perception.html" title="Represents a single sensor perception used for mapping and localization.">Perception</a> entries.  <br /></td></tr>
+<tr class="separator:af5a43608597b51ff750da8f53f7ebb1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ad09d90f1fe35c9e2f2fd7fc1902312f4" name="ad09d90f1fe35c9e2f2fd7fc1902312f4"></a>
@@ -149,14 +164,14 @@ Typedefs</h2></td></tr>
 
 </div>
 </div>
-<a id="a288500772f67d34ce87c1f0ebdb0d7ae" name="a288500772f67d34ce87c1f0ebdb0d7ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a288500772f67d34ce87c1f0ebdb0d7ae">&#9670;&#160;</a></span>Perceptions</h2>
+<a id="af5a43608597b51ff750da8f53f7ebb1c" name="af5a43608597b51ff750da8f53f7ebb1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af5a43608597b51ff750da8f53f7ebb1c">&#9670;&#160;</a></span>Perceptions</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">typedef std::vector&lt;<a class="el" href="structeasynav_1_1Perception.html">Perception</a>&gt; <a class="el" href="#a288500772f67d34ce87c1f0ebdb0d7ae">Perceptions</a></td>
+          <td class="memname">using <a class="el" href="#af5a43608597b51ff750da8f53f7ebb1c">Perceptions</a> = std::vector&lt;<a class="el" href="structeasynav_1_1Perception.html">Perception</a>&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">

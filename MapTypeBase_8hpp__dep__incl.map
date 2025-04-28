@@ -1,0 +1,27 @@
+<map id="easynav_common/include/easynav_common/types/MapTypeBase.hpp" name="easynav_common/include/easynav_common/types/MapTypeBase.hpp">
+<area shape="rect" id="Node000001" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="308,5,479,61"/>
+<area shape="rect" id="Node000002" href="$NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="308,109,479,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="396,77,396,108,391,108,391,77"/>
+<area shape="rect" id="Node000008" href="$DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager method." alt="" coords="586,109,819,165"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="491,64,620,106,619,111,490,69"/>
+<area shape="rect" id="Node000010" href="$MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="54,213,274,268"/>
+<area shape="poly" id="edge11_Node000001_Node000010" title=" " alt="" coords="345,73,298,111,240,165,191,214,187,210,236,161,294,107,342,68"/>
+<area shape="rect" id="Node000003" href="$LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="387,220,626,261"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="437,173,487,218,483,222,433,177"/>
+<area shape="rect" id="Node000005" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="243,324,469,364"/>
+<area shape="poly" id="edge8_Node000002_Node000005" title=" " alt="" coords="386,181,379,213,361,324,356,323,373,212,380,180"/>
+<area shape="rect" id="Node000004" href="$LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="544,316,728,372"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="545,269,603,314,600,318,542,273"/>
+<area shape="poly" id="edge4_Node000003_Node000005" title=" " alt="" coords="466,272,386,326,383,321,463,268"/>
+<area shape="rect" id="Node000006" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="139,420,365,461"/>
+<area shape="poly" id="edge7_Node000003_Node000006" title=" " alt="" coords="512,277,507,326,498,351,483,374,463,388,433,401,358,422,356,417,431,396,460,383,479,370,493,349,501,325,506,276"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="325,377,275,422,272,418,321,373"/>
+<area shape="rect" id="Node000007" href="$system__main_8cpp.html" title=" " alt="" coords="388,420,529,461"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="390,373,439,418,436,422,386,377"/>
+<area shape="rect" id="Node000009" href="$DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="650,213,841,268"/>
+<area shape="poly" id="edge10_Node000008_Node000009" title=" " alt="" coords="722,178,736,211,731,213,717,180"/>
+<area shape="poly" id="edge13_Node000010_Node000005" title=" " alt="" coords="230,274,320,321,318,326,228,278"/>
+<area shape="poly" id="edge14_Node000010_Node000006" title=" " alt="" coords="60,278,37,296,18,318,11,332,8,345,10,357,18,370,36,384,65,397,140,418,138,423,63,402,33,389,14,374,5,359,3,345,6,330,14,315,33,292,57,274"/>
+<area shape="rect" id="Node000011" href="$MapsManagerNode_8cpp.html" title="Implementation of the MapsManagerNode class." alt="" coords="28,316,220,372"/>
+<area shape="poly" id="edge12_Node000010_Node000011" title=" " alt="" coords="150,284,137,317,132,315,145,282"/>
+</map>

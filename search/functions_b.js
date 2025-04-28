@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['try_5fdouble_0',['try_double',['../classeasynav_1_1ConfigurationValue.html#a98d2669f8a30af5bb32d6620d19fd6b9',1,'easynav::ConfigurationValue']]],
-  ['try_5fdouble_5fvector_1',['try_double_vector',['../classeasynav_1_1ConfigurationValue.html#ab5daaaa3feceda9d5422f1cd1a7a6ef0',1,'easynav::ConfigurationValue']]],
-  ['try_5fstring_2',['try_string',['../classeasynav_1_1ConfigurationValue.html#a2b164219b15761ba9f3966b4977483c8',1,'easynav::ConfigurationValue']]],
-  ['try_5fstring_5fvector_3',['try_string_vector',['../classeasynav_1_1ConfigurationValue.html#abdd979f2aebee5bdbd23dc534a15d645',1,'easynav::ConfigurationValue']]]
+  ['sensorsnode_0',['SensorsNode',['../classeasynav_1_1SensorsNode.html#a5629e27f739777bfe6b081a54f41ef30',1,'easynav::SensorsNode']]],
+  ['set_5fnav_5fstate_1',['set_nav_state',['../classeasynav_1_1ControllerNode.html#ab236eebc784f0964df7ca06e685f4994',1,'easynav::ControllerNode::set_nav_state()'],['../classeasynav_1_1LocalizerNode.html#ab236eebc784f0964df7ca06e685f4994',1,'easynav::LocalizerNode::set_nav_state()'],['../classeasynav_1_1PlannerNode.html#ab236eebc784f0964df7ca06e685f4994',1,'easynav::PlannerNode::set_nav_state()']]],
+  ['systemnode_2',['SystemNode',['../classeasynav_1_1SystemNode.html#abff1721399712e8fc6091a43b83d95aa',1,'easynav::SystemNode']]]
 ];

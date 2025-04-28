@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['stamp_0',['stamp',['../structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24',1,'easynav::Perception']]]
+  ['maps_0',['maps',['../structeasynav_1_1NavState.html#a47110e50d58f5e195d7442cbe6586958',1,'easynav::NavState']]]
 ];

@@ -1,0 +1,15 @@
+<map id="easynav_common/include/easynav_common/types/NavState.hpp" name="easynav_common/include/easynav_common/types/NavState.hpp">
+<area shape="rect" id="Node000001" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="215,5,387,61"/>
+<area shape="rect" id="Node000002" href="$LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="104,109,343,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="271,75,242,110,238,107,267,72"/>
+<area shape="rect" id="Node000004" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="266,205,491,246"/>
+<area shape="poly" id="edge7_Node000001_Node000004" title=" " alt="" coords="336,72,357,108,372,159,379,204,374,205,367,161,352,110,331,75"/>
+<area shape="rect" id="Node000003" href="$LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="5,198,189,253"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="187,161,135,199,132,195,184,157"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="271,156,347,202,345,207,268,160"/>
+<area shape="rect" id="Node000005" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="114,301,339,342"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="227,165,229,301,223,301,221,165"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="335,257,260,303,257,298,332,252"/>
+<area shape="rect" id="Node000006" href="$system__main_8cpp.html" title=" " alt="" coords="363,301,503,342"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="400,258,424,300,419,302,395,261"/>
+</map>

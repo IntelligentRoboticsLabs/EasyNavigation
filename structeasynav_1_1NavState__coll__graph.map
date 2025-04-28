@@ -1,0 +1,17 @@
+<map id="NavState" name="NavState">
+<area shape="rect" id="Node000001" title="Represents the state of the navigation system." alt="" coords="344,161,420,187"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="90,5,141,31"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="156,17,194,21,237,30,281,45,321,69,342,91,359,116,379,160,374,162,354,118,338,94,318,74,279,50,236,35,193,26,155,22"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="77,55,154,80"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="170,71,244,86,283,100,321,117,349,138,371,159,367,163,346,142,318,122,281,105,242,92,169,76"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="45,104,186,130"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="202,127,320,152,344,159,343,164,319,157,201,132"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="5,154,226,194"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="241,172,344,172,344,177,241,177"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="91,219,140,244"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="155,224,231,211,319,192,343,185,344,190,320,197,232,216,156,229"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="88,268,143,294"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="158,274,236,259,278,245,318,227,346,207,367,185,371,189,349,211,321,231,280,250,237,264,159,279"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="63,317,168,343"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="183,324,252,309,287,295,318,275,338,254,354,230,374,186,379,188,359,233,342,258,321,279,289,299,254,314,184,329"/>
+</map>
