@@ -353,7 +353,6 @@ TEST_F(SensorsNodeTestCase, percept_laserscan)
   ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.001);
   ASSERT_EQ(perceptions[0]->frame_id, "base_laser");
   ASSERT_EQ(perceptions[0]->valid, true);
-  // ASSERT_NE(perceptions[0]->subscription, nullptr);
 
   {
     auto start = test_node->now();
@@ -366,7 +365,6 @@ TEST_F(SensorsNodeTestCase, percept_laserscan)
   ASSERT_EQ(perceptions[0]->data.size(), 16u);
   ASSERT_EQ(perceptions[0]->frame_id, "base_laser");
   ASSERT_EQ(perceptions[0]->valid, false);
-  // ASSERT_NE(perceptions[0]->subscription, nullptr);
 }
 
 TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
@@ -455,11 +453,9 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
     ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.01, 0.001);
     ASSERT_EQ(perceptions[0]->valid, true);
-    // ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
     ASSERT_NEAR((test_node->now() - perceptions[1]->stamp).seconds(), 0.02, 0.001);
     ASSERT_EQ(perceptions[1]->valid, true);
-    // ASSERT_NE(perceptions[1]->subscription, nullptr);
     ASSERT_LT(perceptions[1]->stamp, perceptions[0]->stamp);
 
     ASSERT_NE(fused_perception, nullptr);
@@ -497,10 +493,8 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
     ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.01, 0.001);
     ASSERT_EQ(perceptions[0]->valid, true);
-    // ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
     ASSERT_EQ(perceptions[1]->valid, false);
-    // ASSERT_NE(perceptions[1]->subscription, nullptr);
 
     ASSERT_NE(fused_perception, nullptr);
 
@@ -572,7 +566,6 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
   ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.001);
   ASSERT_EQ(perceptions[0]->frame_id, "base_lidar3d");
   ASSERT_EQ(perceptions[0]->valid, true);
-  // ASSERT_NE(perceptions[0]->subscription, nullptr);
 
   {
     auto start = test_node->now();
@@ -585,7 +578,6 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
   ASSERT_EQ(perceptions[0]->data.size(), 16u);
   ASSERT_EQ(perceptions[0]->frame_id, "base_lidar3d");
   ASSERT_EQ(perceptions[0]->valid, false);
-  // ASSERT_NE(perceptions[0]->subscription, nullptr);
 }
 
 
@@ -684,16 +676,13 @@ TEST_F(SensorsNodeTestCase, percept_fuse_all)
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
     ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.01, 0.001);
     ASSERT_EQ(perceptions[0]->valid, true);
-    // ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
     ASSERT_NEAR((test_node->now() - perceptions[1]->stamp).seconds(), 0.02, 0.001);
     ASSERT_EQ(perceptions[1]->valid, true);
-    // ASSERT_NE(perceptions[1]->subscription, nullptr);
     ASSERT_LT(perceptions[1]->stamp, perceptions[0]->stamp);
     ASSERT_EQ(perceptions[2]->data.size(), 16u);
     ASSERT_NEAR((test_node->now() - perceptions[2]->stamp).seconds(), 0.01, 0.001);
     ASSERT_EQ(perceptions[2]->valid, true);
-    // ASSERT_NE(perceptions[2]->subscription, nullptr);
     ASSERT_NE(fused_perception, nullptr);
 
     pcl::PointCloud<pcl::PointXYZ> fused_pcl;
@@ -732,13 +721,10 @@ TEST_F(SensorsNodeTestCase, percept_fuse_all)
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
     ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.01, 0.001);
     ASSERT_EQ(perceptions[0]->valid, true);
-    // ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
     ASSERT_EQ(perceptions[1]->valid, false);
-    // ASSERT_NE(perceptions[1]->subscription, nullptr);
     ASSERT_EQ(perceptions[2]->data.size(), 16u);
     ASSERT_EQ(perceptions[2]->valid, false);
-    // ASSERT_NE(perceptions[2]->subscription, nullptr);
 
     ASSERT_NE(fused_perception, nullptr);
 

@@ -101,20 +101,20 @@ SensorsNode::on_configure(const rclcpp_lifecycle::State & state)
     perception_entry->stamp = now();
     perception_entry->valid = false;
 
-    rclcpp::SubscriptionBase::SharedPtr perception_sub;
+    PerceptionData perception_data;
+    perception_data.perception = perception_entry;
 
     if (msg_type == "LaserScan") {
-      perception_sub = create_typed_subscription<sensor_msgs::msg::LaserScan>(
+      perception_data.subscription = create_typed_subscription<sensor_msgs::msg::LaserScan>(
       *this, topic, perception_entry, realtime_cbg_);
     } else if (msg_type == "PointCloud") {
-      perception_sub = create_typed_subscription<sensor_msgs::msg::PointCloud2>(
+      perception_data.subscription = create_typed_subscription<sensor_msgs::msg::PointCloud2>(
       *this, topic, perception_entry, realtime_cbg_);
     } else {
       RCLCPP_ERROR(get_logger(), "Sensor type [%s] not supported", msg_type.c_str());
       return CallbackReturnT::FAILURE;
     }
-    perceptions_.push_back(perception_entry);
-    subscriptions_.push_back(perception_sub);
+    perceptions_.push_back(perception_data);
   }
 
   tf_buffer_ = std::make_shared<tf2_ros::Buffer>(get_clock());
@@ -168,6 +168,15 @@ SensorsNode::on_error(const rclcpp_lifecycle::State & state)
   return CallbackReturnT::SUCCESS;
 }
 
+const Perceptions
+SensorsNode::get_perceptions() const
+{
+  Perceptions perceptions;
+  std::ranges::transform(perceptions_, std::back_inserter(perceptions),
+    [](const PerceptionData & data) {return data.perception;});
+  return perceptions;
+}
+
 rclcpp::CallbackGroup::SharedPtr
 SensorsNode::get_real_time_cbg()
 {
@@ -178,13 +187,16 @@ void
 SensorsNode::sensors_cycle_nort()
 {
   for (auto & perception : perceptions_) {
-    if (perception->valid && (now() - perception->stamp).seconds() > forget_time_) {
-      perception->valid = false;
+    if (
+      perception.perception->valid &&
+      (now() - perception.perception->stamp).seconds() > forget_time_)
+    {
+      perception.perception->valid = false;
     }
   }
 
   if (percept_pub_->get_subscription_count() > 0) {
-    fuse_perceptions(perceptions_, perception_default_frame_, *tf_buffer_, perecption_msg_);
+    fuse_perceptions(get_perceptions(), perception_default_frame_, *tf_buffer_, perecption_msg_);
     percept_pub_->publish(perecption_msg_);
   }
 }
