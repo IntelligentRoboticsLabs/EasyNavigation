@@ -38,6 +38,12 @@
 namespace easynav
 {
 
+struct PerceptionData
+{
+  std::shared_ptr<Perception> perception;
+  rclcpp::SubscriptionBase::SharedPtr subscription;
+};
+
 /**
  * @class SensorsNode
  * @brief ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.
@@ -123,7 +129,7 @@ public:
    *
    * @return Const reference to the list of perceptions.
    */
-  const Perceptions & get_perceptions() const {return perceptions_;}
+  const Perceptions get_perceptions() const;
 
   /**
    * @brief Updates the node's behavior based on the provided navigation state.
@@ -180,9 +186,9 @@ private:
   void sensors_cycle_nort();
 
   /**
-   * @brief Container storing current active perceptions.
+   * @brief Container storing current active perceptions and their subscription objects
    */
-  Perceptions perceptions_;
+  std::vector<PerceptionData> perceptions_;
 
   /**
    * @brief Maximum age (in seconds) after which a perception is discarded.

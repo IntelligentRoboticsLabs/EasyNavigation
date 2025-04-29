@@ -23,16 +23,11 @@ set(dependencies
   rclcpp_lifecycle
   geometry_msgs
   nav_msgs
-  pcl_conversions
   pcl_ros
-  tf2
-  tf2_ros
-  tf2_eigen
 )
 
 add_library(${PROJECT_NAME} SHARED
   src/easynav_common/Configuration.cpp
-  src/easynav_common/Perceptions.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>

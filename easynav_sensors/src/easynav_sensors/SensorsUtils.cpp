@@ -25,13 +25,15 @@
 #include <vector>
 
 #include "pcl/point_types.h"
+#include "pcl/common/transforms.h"
 #include "pcl_conversions/pcl_conversions.h"
-#include "pcl/point_types_conversion.h"
+#include "tf2_eigen/tf2_eigen.hpp"
 
 #include "sensor_msgs/msg/laser_scan.hpp"
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
 #include "easynav_common/types/Perceptions.hpp"
+#include "easynav_sensors/SensorsUtils.hpp"
 
 namespace easynav
 {
@@ -128,16 +130,6 @@ void fuse_perceptions(
   }
 
   output_msg.header.stamp = latest_stamp;
-}
-
-template<typename MsgT>
-rclcpp::SubscriptionBase::SharedPtr create_typed_subscription(
-  rclcpp_lifecycle::LifecycleNode & node,
-  const std::string & topic,
-  std::shared_ptr<Perception> perception)
-{
-  std::cerr << "Generic transform" << std::endl;
-  return nullptr;
 }
 
 template<>

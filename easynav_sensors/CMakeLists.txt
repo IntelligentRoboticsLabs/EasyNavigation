@@ -14,19 +14,31 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
+find_package(pcl_conversions REQUIRED)
+find_package(pcl_ros REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_eigen REQUIRED)
 
 find_package(easynav_common REQUIRED)
 
 set(dependencies
   rclcpp
   rclcpp_lifecycle
+  pcl_conversions
+  pcl_ros
+  tf2
+  tf2_ros
+  tf2_eigen
   easynav_common
 )
 
 include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED
-  src/easynav_sensors/SensorsNode.cpp)
+  src/easynav_sensors/SensorsNode.cpp
+  src/easynav_sensors/SensorsUtils.cpp
+)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
 install(DIRECTORY include/
