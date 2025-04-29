@@ -1,34 +1,23 @@
 <map id="easynav_maps_manager/include/easynav_maps_manager/MapsManagerNode.hpp" name="easynav_maps_manager/include/easynav_maps_manager/MapsManagerNode.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="279,5,498,61"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="224,116,351,142"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="361,64,313,108,309,104,358,60"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,286,167,327"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="391,62,385,106,378,130,365,151,323,197,272,233,218,262,168,283,165,278,216,257,269,229,319,192,361,148,373,127,380,105,386,61"/>
-<area shape="rect" id="Node000004" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="577,109,739,150"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="467,59,588,101,586,106,466,64"/>
-<area shape="rect" id="Node000005" href="$Perceptions_8hpp.html" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="728,198,889,238"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="694,148,763,188,761,192,691,152"/>
-<area shape="poly" id="edge16_Node000005_Node000003" title=" " alt="" coords="728,228,487,250,182,289,181,283,487,245,727,223"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="191,294,245,320"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="728,223,631,228,512,240,384,259,257,289,254,290,252,285,256,284,383,254,512,234,630,223,727,218"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="269,294,327,320"/>
-<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="728,226,548,246,443,264,340,289,336,290,335,285,339,284,442,258,547,240,727,221"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="351,286,488,327"/>
-<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="728,239,503,288,502,283,727,234"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="512,294,700,320"/>
-<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="764,241,649,290,647,285,762,236"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="724,294,893,320"/>
-<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="811,239,811,278,806,278,806,239"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="918,294,1036,320"/>
-<area shape="poly" id="edge10_Node000005_Node000011" title=" " alt="" coords="848,236,941,284,939,289,846,241"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="1060,294,1178,320"/>
-<area shape="poly" id="edge11_Node000005_Node000012" title=" " alt="" coords="880,236,1062,287,1060,292,879,242"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="1203,294,1358,320"/>
-<area shape="poly" id="edge12_Node000005_Node000013" title=" " alt="" coords="890,230,1190,284,1210,287,1209,293,1190,289,889,235"/>
-<area shape="rect" id="Node000014" title=" " alt="" coords="1382,286,1542,327"/>
-<area shape="poly" id="edge13_Node000005_Node000014" title=" " alt="" coords="890,224,1102,247,1367,283,1366,288,1101,252,890,229"/>
-<area shape="rect" id="Node000015" title=" " alt="" coords="1566,286,1726,327"/>
-<area shape="poly" id="edge14_Node000005_Node000015" title=" " alt="" coords="890,221,1178,242,1362,259,1550,283,1550,289,1361,265,1177,247,889,226"/>
-<area shape="rect" id="Node000016" title=" " alt="" coords="1750,294,1859,320"/>
-<area shape="poly" id="edge15_Node000005_Node000016" title=" " alt="" coords="890,217,1047,220,1258,230,1498,250,1619,265,1738,284,1753,287,1752,292,1738,289,1619,270,1497,256,1258,236,1047,226,889,222"/>
+<area shape="rect" id="Node000001" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="127,5,347,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,116,133,142"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,64,105,111,103,106,187,59"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="156,109,318,150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,62,240,94,234,94,234,62"/>
+<area shape="rect" id="Node000004" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="342,109,503,150"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="292,59,371,99,369,104,289,64"/>
+<area shape="rect" id="Node000005" href="$Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="342,198,503,238"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="425,150,425,182,420,182,420,150"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="169,286,236,312"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="368,241,251,283,250,278,366,236"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="260,286,313,312"/>
+<area shape="poly" id="edge6_Node000005_Node000007" title=" " alt="" coords="390,241,321,281,319,276,387,237"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="338,286,395,312"/>
+<area shape="poly" id="edge7_Node000005_Node000008" title=" " alt="" coords="411,240,386,275,382,272,406,237"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="419,286,538,312"/>
+<area shape="poly" id="edge8_Node000005_Node000009" title=" " alt="" coords="438,237,463,272,459,275,434,240"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="562,286,680,312"/>
+<area shape="poly" id="edge9_Node000005_Node000010" title=" " alt="" coords="473,236,578,278,576,283,471,241"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="704,286,813,312"/>
+<area shape="poly" id="edge10_Node000005_Node000011" title=" " alt="" coords="504,236,692,280,691,285,503,241"/>
 </map>

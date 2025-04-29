@@ -91,56 +91,37 @@ $(function(){ initResizable(false); });
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#namespaces">Namespaces</a> &#124;
-<a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#typedef-members">Typedefs</a>  </div>
   <div class="headertitle"><div class="title">Perceptions.hpp File Reference</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Definitions for handling sensor perceptions, including point cloud conversion, fusion, and subscription creation.  
+<p>Definitions for a unified Perception type.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<div class="textblock"><code>#include &lt;memory&gt;</code><br />
+<code>#include &lt;string&gt;</code><br />
 <code>#include &lt;vector&gt;</code><br />
-<code>#include &quot;pcl_conversions/pcl_conversions.h&quot;</code><br />
-<code>#include &quot;pcl/point_types_conversion.h&quot;</code><br />
-<code>#include &quot;pcl/common/transforms.h&quot;</code><br />
 <code>#include &quot;pcl/point_cloud.h&quot;</code><br />
 <code>#include &quot;pcl/point_types.h&quot;</code><br />
-<code>#include &quot;tf2_eigen/tf2_eigen.hpp&quot;</code><br />
-<code>#include &quot;sensor_msgs/msg/laser_scan.hpp&quot;</code><br />
-<code>#include &quot;sensor_msgs/msg/point_cloud2.hpp&quot;</code><br />
 <code>#include &quot;rclcpp/time.hpp&quot;</code><br />
-<code>#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Perceptions.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="Perceptions_8hpp__incl.png" border="0" usemap="#aeasynav__common_2include_2easynav__common_2types_2Perceptions_8hpp" alt=""/></div>
 <map name="aeasynav__common_2include_2easynav__common_2types_2Perceptions_8hpp" id="aeasynav__common_2include_2easynav__common_2types_2Perceptions_8hpp">
-<area shape="rect" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="776,5,947,61"/>
-<area shape="rect" title=" " alt="" coords="5,116,59,142"/>
-<area shape="poly" title=" " alt="" coords="775,41,406,66,211,86,132,98,71,112,68,113,66,108,70,106,131,93,211,81,405,61,775,36"/>
-<area shape="rect" title=" " alt="" coords="83,116,141,142"/>
-<area shape="poly" title=" " alt="" coords="775,37,652,41,496,53,324,75,238,91,154,112,149,113,148,108,153,106,237,86,323,70,495,47,652,36,775,32"/>
-<area shape="rect" title=" " alt="" coords="165,109,302,150"/>
-<area shape="poly" title=" " alt="" coords="775,46,570,71,317,111,316,106,570,66,775,41"/>
-<area shape="rect" title=" " alt="" coords="326,116,514,142"/>
-<area shape="poly" title=" " alt="" coords="776,55,493,115,491,110,775,50"/>
-<area shape="rect" title=" " alt="" coords="538,116,707,142"/>
-<area shape="poly" title=" " alt="" coords="793,64,668,113,666,108,791,59"/>
-<area shape="rect" title=" " alt="" coords="732,116,850,142"/>
-<area shape="poly" title=" " alt="" coords="843,63,811,106,807,102,839,60"/>
-<area shape="rect" title=" " alt="" coords="874,116,992,142"/>
-<area shape="poly" title=" " alt="" coords="884,60,917,103,913,106,880,63"/>
-<area shape="rect" title=" " alt="" coords="1017,116,1172,142"/>
-<area shape="poly" title=" " alt="" coords="930,59,1052,108,1050,113,928,64"/>
-<area shape="rect" title=" " alt="" coords="1196,109,1356,150"/>
-<area shape="poly" title=" " alt="" coords="948,51,1181,104,1180,109,947,56"/>
-<area shape="rect" title=" " alt="" coords="1380,109,1540,150"/>
-<area shape="poly" title=" " alt="" coords="948,43,1135,69,1365,106,1364,111,1135,74,947,48"/>
-<area shape="rect" title=" " alt="" coords="1564,116,1673,142"/>
-<area shape="poly" title=" " alt="" coords="948,36,1219,59,1386,79,1553,106,1566,109,1565,115,1551,112,1385,84,1218,64,947,42"/>
-<area shape="rect" title=" " alt="" coords="1698,109,1859,150"/>
-<area shape="poly" title=" " alt="" coords="947,36,1267,60,1472,80,1683,106,1683,111,1472,85,1266,65,947,42"/>
+<area shape="rect" title="Definitions for a unified Perception type." alt="" coords="173,5,345,61"/>
+<area shape="rect" title=" " alt="" coords="5,109,73,135"/>
+<area shape="poly" title=" " alt="" coords="191,64,85,105,83,100,189,59"/>
+<area shape="rect" title=" " alt="" coords="96,109,150,135"/>
+<area shape="poly" title=" " alt="" coords="218,64,156,103,154,98,215,59"/>
+<area shape="rect" title=" " alt="" coords="174,109,232,135"/>
+<area shape="poly" title=" " alt="" coords="244,63,221,97,217,94,239,60"/>
+<area shape="rect" title=" " alt="" coords="256,109,374,135"/>
+<area shape="poly" title=" " alt="" coords="279,60,301,94,297,97,274,63"/>
+<area shape="rect" title=" " alt="" coords="398,109,517,135"/>
+<area shape="poly" title=" " alt="" coords="322,59,417,100,415,105,320,64"/>
+<area shape="rect" title=" " alt="" coords="540,109,650,135"/>
+<area shape="poly" title=" " alt="" coords="346,54,534,102,532,107,344,59"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -148,46 +129,50 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="Perceptions_8hpp__dep__incl.png" border="0" usemap="#aeasynav__common_2include_2easynav__common_2types_2Perceptions_8hppdep" alt=""/></div>
 <map name="aeasynav__common_2include_2easynav__common_2types_2Perceptions_8hppdep" id="aeasynav__common_2include_2easynav__common_2types_2Perceptions_8hppdep">
-<area shape="rect" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="479,5,650,61"/>
-<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="602,109,773,165"/>
-<area shape="poly" title=" " alt="" coords="611,69,656,106,653,110,607,73"/>
-<area shape="rect" href="NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="532,213,704,268"/>
-<area shape="poly" title=" " alt="" coords="574,76,593,164,609,211,604,213,587,165,568,77"/>
-<area shape="rect" href="SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="191,324,424,364"/>
-<area shape="poly" title=" " alt="" coords="496,71,470,90,445,111,400,166,363,227,335,283,317,325,312,323,330,281,358,224,396,163,441,107,466,85,493,67"/>
-<area shape="rect" href="sensors__node__tests_8cpp.html" title=" " alt="" coords="314,428,480,468"/>
-<area shape="poly" title=" " alt="" coords="553,77,505,210,438,373,410,428,405,426,433,371,500,208,548,75"/>
-<area shape="rect" href="Perceptions_8cpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="798,116,1025,157"/>
-<area shape="poly" title=" " alt="" coords="666,61,845,113,843,118,665,66"/>
-<area shape="poly" title=" " alt="" coords="662,179,639,214,634,211,658,176"/>
-<area shape="rect" href="DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager method." alt="" coords="759,213,992,268"/>
-<area shape="poly" title=" " alt="" coords="752,170,826,210,824,214,750,175"/>
-<area shape="rect" href="MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="1027,316,1246,372"/>
-<area shape="poly" title=" " alt="" coords="789,162,851,172,902,177,949,187,1005,210,1039,233,1071,261,1119,314,1115,318,1067,265,1036,238,1002,215,948,192,901,183,851,178,788,168"/>
-<area shape="rect" href="LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="499,324,737,364"/>
-<area shape="poly" title=" " alt="" coords="621,284,621,324,615,324,615,284"/>
-<area shape="rect" href="SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="763,428,988,468"/>
-<area shape="poly" title=" " alt="" coords="689,274,750,314,777,341,801,370,857,425,853,429,797,374,773,345,747,318,686,278"/>
-<area shape="poly" title=" " alt="" coords="521,276,368,326,367,321,519,271"/>
-<area shape="rect" href="LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="504,420,687,476"/>
-<area shape="poly" title=" " alt="" coords="613,380,604,420,599,419,608,379"/>
-<area shape="poly" title=" " alt="" coords="682,368,826,424,824,429,681,373"/>
-<area shape="rect" href="SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="612,524,837,564"/>
-<area shape="poly" title=" " alt="" coords="661,372,683,393,702,419,713,446,721,474,727,523,722,523,716,475,708,447,697,421,679,397,657,376"/>
-<area shape="poly" title=" " alt="" coords="832,479,758,525,755,521,830,474"/>
-<area shape="rect" href="system__main_8cpp.html" title=" " alt="" coords="861,524,1002,564"/>
-<area shape="poly" title=" " alt="" coords="897,480,922,522,917,525,892,483"/>
-<area shape="poly" title=" " alt="" coords="433,365,766,424,765,430,432,370"/>
-<area shape="poly" title=" " alt="" coords="297,380,291,403,289,428,293,453,304,474,323,489,352,502,430,521,522,532,612,538,611,543,521,538,429,526,350,507,321,494,300,477,288,454,284,429,286,402,292,379"/>
-<area shape="rect" href="SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="5,428,239,468"/>
-<area shape="poly" title=" " alt="" coords="259,375,159,429,156,425,257,370"/>
-<area shape="poly" title=" " alt="" coords="337,375,381,425,377,429,333,378"/>
-<area shape="rect" href="DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="812,316,1003,372"/>
-<area shape="poly" title=" " alt="" coords="891,282,901,315,896,316,886,284"/>
-<area shape="poly" title=" " alt="" coords="1054,380,927,429,925,424,1052,375"/>
-<area shape="poly" title=" " alt="" coords="1094,384,1053,422,1030,452,1019,465,1002,478,973,491,931,503,834,526,833,520,930,498,971,486,999,473,1016,461,1026,449,1049,418,1091,380"/>
-<area shape="rect" href="MapsManagerNode_8cpp.html" title="Implementation of the MapsManagerNode class." alt="" coords="1064,420,1255,476"/>
-<area shape="poly" title=" " alt="" coords="1149,387,1156,419,1151,420,1143,388"/>
+<area shape="rect" title="Definitions for a unified Perception type." alt="" coords="826,5,997,61"/>
+<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="527,109,699,165"/>
+<area shape="poly" title=" " alt="" coords="818,69,694,111,692,106,816,64"/>
+<area shape="rect" href="NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="213,213,384,268"/>
+<area shape="poly" title=" " alt="" coords="811,46,669,69,592,87,517,111,465,134,416,161,336,214,333,210,414,157,463,129,515,107,590,82,668,64,810,41"/>
+<area shape="rect" href="SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="795,324,1028,364"/>
+<area shape="poly" title=" " alt="" coords="914,76,914,323,909,323,909,76"/>
+<area shape="rect" href="SensorsUtils_8hpp.html" title="uTILITY FUNCTIONS for handling sensor perceptions, including point cloud conversion,..." alt="" coords="964,116,1193,157"/>
+<area shape="poly" title=" " alt="" coords="971,67,1048,114,1045,118,968,72"/>
+<area shape="rect" href="SensorsUtils_8cpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="1154,220,1384,261"/>
+<area shape="poly" title=" " alt="" coords="1014,37,1062,45,1113,58,1162,78,1207,107,1230,133,1248,163,1267,219,1262,220,1243,165,1226,136,1203,111,1160,83,1111,63,1061,50,1013,42"/>
+<area shape="poly" title=" " alt="" coords="515,172,384,215,382,209,513,167"/>
+<area shape="rect" href="DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager method." alt="" coords="408,213,640,268"/>
+<area shape="poly" title=" " alt="" coords="581,178,550,214,546,210,577,175"/>
+<area shape="rect" href="MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="551,316,771,372"/>
+<area shape="poly" title=" " alt="" coords="640,177,654,212,663,267,665,316,660,316,658,268,649,213,635,179"/>
+<area shape="rect" href="LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="23,324,262,364"/>
+<area shape="poly" title=" " alt="" coords="246,279,174,326,171,321,243,275"/>
+<area shape="rect" href="SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="264,428,490,468"/>
+<area shape="poly" title=" " alt="" coords="305,283,312,327,326,371,343,400,362,425,357,429,338,403,321,373,307,328,299,284"/>
+<area shape="poly" title=" " alt="" coords="399,266,507,283,592,292,676,299,783,314,821,321,820,326,782,319,676,305,591,297,506,289,398,271"/>
+<area shape="rect" href="LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="5,420,189,476"/>
+<area shape="poly" title=" " alt="" coords="130,380,112,421,107,418,125,378"/>
+<area shape="poly" title=" " alt="" coords="202,368,333,424,330,429,200,373"/>
+<area shape="rect" href="SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="415,524,640,564"/>
+<area shape="poly" title=" " alt="" coords="169,375,219,436,255,473,282,486,323,498,419,520,417,526,321,504,281,491,251,478,215,439,165,379"/>
+<area shape="poly" title=" " alt="" coords="423,474,498,521,495,525,420,479"/>
+<area shape="rect" href="system__main_8cpp.html" title=" " alt="" coords="251,524,391,564"/>
+<area shape="poly" title=" " alt="" coords="360,483,335,525,330,522,355,480"/>
+<area shape="poly" title=" " alt="" coords="803,371,783,375,488,429,487,424,782,369,802,365"/>
+<area shape="poly" title=" " alt="" coords="876,376,823,422,799,452,788,465,770,478,707,508,642,527,640,522,705,503,768,473,784,461,795,448,819,418,873,372"/>
+<area shape="rect" href="SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="832,428,1066,468"/>
+<area shape="poly" title=" " alt="" coords="927,378,944,426,939,428,922,380"/>
+<area shape="rect" href="sensors__node__tests_8cpp.html" title=" " alt="" coords="1090,428,1256,468"/>
+<area shape="poly" title=" " alt="" coords="977,368,1123,424,1121,429,975,373"/>
+<area shape="rect" href="DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="336,316,527,372"/>
+<area shape="poly" title=" " alt="" coords="491,282,458,317,454,314,487,278"/>
+<area shape="poly" title=" " alt="" coords="571,380,433,429,431,424,570,375"/>
+<area shape="poly" title=" " alt="" coords="594,383,573,401,555,421,543,447,535,474,530,523,525,523,530,473,538,445,551,419,569,397,591,379"/>
+<area shape="rect" href="MapsManagerNode_8cpp.html" title="Implementation of the MapsManagerNode class." alt="" coords="565,420,757,476"/>
+<area shape="poly" title=" " alt="" coords="664,388,664,419,658,419,658,388"/>
+<area shape="poly" title=" " alt="" coords="1083,172,1082,215,1077,267,1065,322,1043,373,1017,405,986,429,983,425,1013,401,1039,371,1060,320,1072,266,1077,215,1078,172"/>
+<area shape="poly" title=" " alt="" coords="1091,171,1170,426,1165,428,1086,173"/>
+<area shape="poly" title=" " alt="" coords="1130,162,1234,217,1231,222,1127,167"/>
 </map>
 </div>
 </div>
@@ -209,30 +194,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:aaf5526be35ee28b08c0fa269875118e2" id="r_aaf5526be35ee28b08c0fa269875118e2"><td class="memItemLeft" align="right" valign="top">using&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceeasynav.html#aaf5526be35ee28b08c0fa269875118e2">Perceptions</a> = std::vector&lt;std::shared_ptr&lt;<a class="el" href="structeasynav_1_1Perception.html">Perception</a>&gt;&gt;</td></tr>
 <tr class="memdesc:aaf5526be35ee28b08c0fa269875118e2"><td class="mdescLeft">&#160;</td><td class="mdescRight">A container of multiple <a class="el" href="structeasynav_1_1Perception.html" title="Represents a single sensor perception used for mapping and localization.">Perception</a> entries, each possibly from different sources.  <br /></td></tr>
 <tr class="separator:aaf5526be35ee28b08c0fa269875118e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:aa1af512138bf2ac8f6d199ba2761a918" id="r_aa1af512138bf2ac8f6d199ba2761a918"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceeasynav.html#aa1af512138bf2ac8f6d199ba2761a918">convert</a> (const sensor_msgs::msg::LaserScan &amp;scan, pcl::PointCloud&lt; pcl::PointXYZ &gt; &amp;pc)</td></tr>
-<tr class="memdesc:aa1af512138bf2ac8f6d199ba2761a918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a LaserScan message into a PCL point cloud.  <br /></td></tr>
-<tr class="separator:aa1af512138bf2ac8f6d199ba2761a918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a600b006a061c094e4288ce66c511d70a" id="r_a600b006a061c094e4288ce66c511d70a"><td class="memTemplParams" colspan="2">template&lt;typename MsgT&gt; </td></tr>
-<tr class="memitem:a600b006a061c094e4288ce66c511d70a"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceeasynav.html#a600b006a061c094e4288ce66c511d70a">create_typed_subscription</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
-<tr class="memdesc:a600b006a061c094e4288ce66c511d70a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a subscription for a given sensor message type and binds it to a <a class="el" href="structeasynav_1_1Perception.html" title="Represents a single sensor perception used for mapping and localization.">Perception</a> object.  <br /></td></tr>
-<tr class="separator:a600b006a061c094e4288ce66c511d70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9201a908ed7d6874130f6ebc3ab632b0" id="r_a9201a908ed7d6874130f6ebc3ab632b0"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a9201a908ed7d6874130f6ebc3ab632b0"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceeasynav.html#a9201a908ed7d6874130f6ebc3ab632b0">create_typed_subscription&lt; sensor_msgs::msg::LaserScan &gt;</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
-<tr class="memdesc:a9201a908ed7d6874130f6ebc3ab632b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialization of create_typed_subscription for LaserScan messages.  <br /></td></tr>
-<tr class="separator:a9201a908ed7d6874130f6ebc3ab632b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23e58ccb99b3a76ae4f6a1fd1d0d1716" id="r_a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="namespaceeasynav.html#a23e58ccb99b3a76ae4f6a1fd1d0d1716">create_typed_subscription&lt; sensor_msgs::msg::PointCloud2 &gt;</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
-<tr class="memdesc:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialization of create_typed_subscription for PointCloud2 messages.  <br /></td></tr>
-<tr class="separator:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a37b5b73a7290c6d8860632ea03f0d32f" id="r_a37b5b73a7290c6d8860632ea03f0d32f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceeasynav.html#a37b5b73a7290c6d8860632ea03f0d32f">fuse_perceptions</a> (const <a class="el" href="namespaceeasynav.html#aaf5526be35ee28b08c0fa269875118e2">Perceptions</a> &amp;perceptions, const std::string &amp;target_frame, tf2_ros::Buffer &amp;tf_buffer, sensor_msgs::msg::PointCloud2 &amp;output_msg)</td></tr>
-<tr class="memdesc:a37b5b73a7290c6d8860632ea03f0d32f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fuses a collection of <a class="el" href="namespaceeasynav.html#aaf5526be35ee28b08c0fa269875118e2" title="A container of multiple Perception entries, each possibly from different sources.">Perceptions</a> into a single PointCloud2, transforming all frames into a common target frame.  <br /></td></tr>
-<tr class="separator:a37b5b73a7290c6d8860632ea03f0d32f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Definitions for handling sensor perceptions, including point cloud conversion, fusion, and subscription creation. </p>
+<div class="textblock"><p>Definitions for a unified Perception type. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

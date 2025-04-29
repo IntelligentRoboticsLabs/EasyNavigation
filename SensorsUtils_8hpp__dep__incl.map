@@ -1,0 +1,9 @@
+<map id="easynav_sensors/include/easynav_sensors/SensorsUtils.hpp" name="easynav_sensors/include/easynav_sensors/SensorsUtils.hpp">
+<area shape="rect" id="Node000001" title="uTILITY FUNCTIONS for handling sensor perceptions, including point cloud conversion,..." alt="" coords="263,5,493,46"/>
+<area shape="rect" id="Node000002" href="$SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="5,94,239,135"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="307,54,181,96,179,91,305,49"/>
+<area shape="rect" id="Node000003" href="$SensorsUtils_8cpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="263,94,493,135"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="381,62,381,94,375,94,375,62"/>
+<area shape="rect" id="Node000004" href="$sensors__node__tests_8cpp.html" title=" " alt="" coords="516,94,682,135"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="443,49,550,91,548,96,441,54"/>
+</map>

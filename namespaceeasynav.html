@@ -127,6 +127,8 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeasynav_1_1Perception.html">Perception</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Represents a single sensor perception used for mapping and localization.  <a href="structeasynav_1_1Perception.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structeasynav_1_1PerceptionData.html">PerceptionData</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1PlannerNode.html">PlannerNode</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.  <a href="classeasynav_1_1PlannerNode.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -156,28 +158,15 @@ Functions</h2></td></tr>
 <tr class="memitem:aa1af512138bf2ac8f6d199ba2761a918" id="r_aa1af512138bf2ac8f6d199ba2761a918"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa1af512138bf2ac8f6d199ba2761a918">convert</a> (const sensor_msgs::msg::LaserScan &amp;scan, pcl::PointCloud&lt; pcl::PointXYZ &gt; &amp;pc)</td></tr>
 <tr class="memdesc:aa1af512138bf2ac8f6d199ba2761a918"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a LaserScan message into a PCL point cloud.  <br /></td></tr>
 <tr class="separator:aa1af512138bf2ac8f6d199ba2761a918"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3ed86b7d0e22186c31329aeaac52874a" id="r_a3ed86b7d0e22186c31329aeaac52874a"><td class="memTemplParams" colspan="2">template&lt;typename MsgT&gt; </td></tr>
-<tr class="memitem:a3ed86b7d0e22186c31329aeaac52874a"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a3ed86b7d0e22186c31329aeaac52874a">create_typed_subscription</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception)</td></tr>
-<tr class="separator:a3ed86b7d0e22186c31329aeaac52874a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a600b006a061c094e4288ce66c511d70a" id="r_a600b006a061c094e4288ce66c511d70a"><td class="memTemplParams" colspan="2">template&lt;typename MsgT&gt; </td></tr>
 <tr class="memitem:a600b006a061c094e4288ce66c511d70a"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a600b006a061c094e4288ce66c511d70a">create_typed_subscription</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
 <tr class="memdesc:a600b006a061c094e4288ce66c511d70a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a subscription for a given sensor message type and binds it to a <a class="el" href="structeasynav_1_1Perception.html" title="Represents a single sensor perception used for mapping and localization.">Perception</a> object.  <br /></td></tr>
 <tr class="separator:a600b006a061c094e4288ce66c511d70a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9201a908ed7d6874130f6ebc3ab632b0" id="r_a9201a908ed7d6874130f6ebc3ab632b0"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:a9201a908ed7d6874130f6ebc3ab632b0"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a9201a908ed7d6874130f6ebc3ab632b0">create_typed_subscription&lt; sensor_msgs::msg::LaserScan &gt;</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
-<tr class="memdesc:a9201a908ed7d6874130f6ebc3ab632b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialization of create_typed_subscription for LaserScan messages.  <br /></td></tr>
-<tr class="separator:a9201a908ed7d6874130f6ebc3ab632b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9201a908ed7d6874130f6ebc3ab632b0" id="r_a9201a908ed7d6874130f6ebc3ab632b0"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a9201a908ed7d6874130f6ebc3ab632b0"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a9201a908ed7d6874130f6ebc3ab632b0">create_typed_subscription&lt; sensor_msgs::msg::LaserScan &gt;</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
-<tr class="memdesc:a9201a908ed7d6874130f6ebc3ab632b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialization of create_typed_subscription for LaserScan messages.  <br /></td></tr>
 <tr class="separator:a9201a908ed7d6874130f6ebc3ab632b0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a23e58ccb99b3a76ae4f6a1fd1d0d1716" id="r_a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
 <tr class="memitem:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a23e58ccb99b3a76ae4f6a1fd1d0d1716">create_typed_subscription&lt; sensor_msgs::msg::PointCloud2 &gt;</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
-<tr class="memdesc:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialization of create_typed_subscription for PointCloud2 messages.  <br /></td></tr>
-<tr class="separator:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a23e58ccb99b3a76ae4f6a1fd1d0d1716" id="r_a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memItemLeft" align="right" valign="top">template&lt;&gt; </td></tr>
-<tr class="memitem:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memTemplItemLeft" align="right" valign="top">rclcpp::SubscriptionBase::SharedPtr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="#a23e58ccb99b3a76ae4f6a1fd1d0d1716">create_typed_subscription&lt; sensor_msgs::msg::PointCloud2 &gt;</a> (rclcpp_lifecycle::LifecycleNode &amp;node, const std::string &amp;topic, std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt; perception, rclcpp::CallbackGroup::SharedPtr cbg)</td></tr>
-<tr class="memdesc:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="mdescLeft">&#160;</td><td class="mdescRight">Specialization of create_typed_subscription for PointCloud2 messages.  <br /></td></tr>
 <tr class="separator:a23e58ccb99b3a76ae4f6a1fd1d0d1716"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37b5b73a7290c6d8860632ea03f0d32f" id="r_a37b5b73a7290c6d8860632ea03f0d32f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37b5b73a7290c6d8860632ea03f0d32f">fuse_perceptions</a> (const <a class="el" href="#aaf5526be35ee28b08c0fa269875118e2">Perceptions</a> &amp;perceptions, const std::string &amp;target_frame, tf2_ros::Buffer &amp;tf_buffer, sensor_msgs::msg::PointCloud2 &amp;output_msg)</td></tr>
 <tr class="memdesc:a37b5b73a7290c6d8860632ea03f0d32f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fuses a collection of <a class="el" href="#aaf5526be35ee28b08c0fa269875118e2" title="A container of multiple Perception entries, each possibly from different sources.">Perceptions</a> into a single PointCloud2, transforming all frames into a common target frame.  <br /></td></tr>
@@ -247,36 +236,8 @@ Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a3ed86b7d0e22186c31329aeaac52874a" name="a3ed86b7d0e22186c31329aeaac52874a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3ed86b7d0e22186c31329aeaac52874a">&#9670;&#160;</a></span>create_typed_subscription() <span class="overload">[1/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename MsgT&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">rclcpp::SubscriptionBase::SharedPtr create_typed_subscription </td>
-          <td>(</td>
-          <td class="paramtype">rclcpp_lifecycle::LifecycleNode &amp;</td>          <td class="paramname"><span class="paramname"><em>node</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>topic</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>perception</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
 <a id="a600b006a061c094e4288ce66c511d70a" name="a600b006a061c094e4288ce66c511d70a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a600b006a061c094e4288ce66c511d70a">&#9670;&#160;</a></span>create_typed_subscription() <span class="overload">[2/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a600b006a061c094e4288ce66c511d70a">&#9670;&#160;</a></span>create_typed_subscription()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -327,7 +288,7 @@ template&lt;typename MsgT&gt; </div>
 </div>
 </div>
 <a id="a9201a908ed7d6874130f6ebc3ab632b0" name="a9201a908ed7d6874130f6ebc3ab632b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9201a908ed7d6874130f6ebc3ab632b0">&#9670;&#160;</a></span>create_typed_subscription&lt; sensor_msgs::msg::LaserScan &gt;() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a9201a908ed7d6874130f6ebc3ab632b0">&#9670;&#160;</a></span>create_typed_subscription&lt; sensor_msgs::msg::LaserScan &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -357,47 +318,10 @@ template&lt;&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p>Specialization of create_typed_subscription for LaserScan messages. </p>
-
-</div>
-</div>
-<a id="a9201a908ed7d6874130f6ebc3ab632b0" name="a9201a908ed7d6874130f6ebc3ab632b0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a9201a908ed7d6874130f6ebc3ab632b0">&#9670;&#160;</a></span>create_typed_subscription&lt; sensor_msgs::msg::LaserScan &gt;() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">rclcpp::SubscriptionBase::SharedPtr <a class="el" href="#a600b006a061c094e4288ce66c511d70a">create_typed_subscription</a>&lt; sensor_msgs::msg::LaserScan &gt; </td>
-          <td>(</td>
-          <td class="paramtype">rclcpp_lifecycle::LifecycleNode &amp;</td>          <td class="paramname"><span class="paramname"><em>node</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>topic</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>perception</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">rclcpp::CallbackGroup::SharedPtr</td>          <td class="paramname"><span class="paramname"><em>cbg</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Specialization of create_typed_subscription for LaserScan messages. </p>
-
 </div>
 </div>
 <a id="a23e58ccb99b3a76ae4f6a1fd1d0d1716" name="a23e58ccb99b3a76ae4f6a1fd1d0d1716"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23e58ccb99b3a76ae4f6a1fd1d0d1716">&#9670;&#160;</a></span>create_typed_subscription&lt; sensor_msgs::msg::PointCloud2 &gt;() <span class="overload">[1/2]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a23e58ccb99b3a76ae4f6a1fd1d0d1716">&#9670;&#160;</a></span>create_typed_subscription&lt; sensor_msgs::msg::PointCloud2 &gt;()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -426,43 +350,6 @@ template&lt;&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Specialization of create_typed_subscription for PointCloud2 messages. </p>
-
-</div>
-</div>
-<a id="a23e58ccb99b3a76ae4f6a1fd1d0d1716" name="a23e58ccb99b3a76ae4f6a1fd1d0d1716"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a23e58ccb99b3a76ae4f6a1fd1d0d1716">&#9670;&#160;</a></span>create_typed_subscription&lt; sensor_msgs::msg::PointCloud2 &gt;() <span class="overload">[2/2]</span></h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;&gt; </div>
-      <table class="memname">
-        <tr>
-          <td class="memname">rclcpp::SubscriptionBase::SharedPtr <a class="el" href="#a600b006a061c094e4288ce66c511d70a">create_typed_subscription</a>&lt; sensor_msgs::msg::PointCloud2 &gt; </td>
-          <td>(</td>
-          <td class="paramtype">rclcpp_lifecycle::LifecycleNode &amp;</td>          <td class="paramname"><span class="paramname"><em>node</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;</td>          <td class="paramname"><span class="paramname"><em>topic</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="structeasynav_1_1Perception.html">Perception</a> &gt;</td>          <td class="paramname"><span class="paramname"><em>perception</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">rclcpp::CallbackGroup::SharedPtr</td>          <td class="paramname"><span class="paramname"><em>cbg</em></span>&#160;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Specialization of create_typed_subscription for PointCloud2 messages. </p>
 
 </div>
 </div>
