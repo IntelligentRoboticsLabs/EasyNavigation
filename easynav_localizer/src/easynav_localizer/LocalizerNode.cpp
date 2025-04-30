@@ -37,26 +37,8 @@ LocalizerNode::LocalizerNode(const rclcpp::NodeOptions & options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
-  pluginlib::ClassLoader<easynav::LocalizerMethodBase> localizer_loader(
+  localizer_loader_ = std::make_unique<pluginlib::ClassLoader<easynav::LocalizerMethodBase>>(
     "easynav_core", "easynav::LocalizerMethodBase");
-
-  try {
-    localizer_method_ = localizer_loader.createSharedInstance("easynav::DummyLocalizer");
-    localizer_method_->initialize(shared_from_this());
-  } catch (pluginlib::PluginlibException & ex) {
-    RCLCPP_ERROR(get_logger(),
-      "Unable to load plugin easynav::DummyLocalizer. Error: %s", ex.what());
-  }
-}
-
-using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
-
-CallbackReturnT
-LocalizerNode::on_configure(const rclcpp_lifecycle::State & state)
-{
-  (void)state;
-
-  return CallbackReturnT::SUCCESS;
 }
 
 LocalizerNode::~LocalizerNode()
@@ -70,6 +52,29 @@ LocalizerNode::~LocalizerNode()
   if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
     trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
   }
+}
+
+using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
+
+CallbackReturnT
+LocalizerNode::on_configure(const rclcpp_lifecycle::State & state)
+{
+  (void)state;
+
+  try {
+    localizer_method_ = localizer_loader_->createSharedInstance("easynav_localizer/DummyLocalizer");
+    auto result = localizer_method_->initialize(shared_from_this(), "dummy_localizer");
+    if (!result) {
+      RCLCPP_ERROR(get_logger(),
+        "Unable to initialize [dummy_localizer]. Error: %s", result.error().c_str());
+      return CallbackReturnT::FAILURE;
+    }
+  } catch (pluginlib::PluginlibException & ex) {
+    RCLCPP_ERROR(get_logger(),
+      "Unable to load plugin easynav::DummyLocalizer. Error: %s", ex.what());
+  }
+
+  return CallbackReturnT::SUCCESS;
 }
 
 CallbackReturnT

@@ -38,16 +38,9 @@ PlannerNode::PlannerNode(const rclcpp::NodeOptions & options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
-  pluginlib::ClassLoader<easynav::PlannerMethodBase> planner_loader(
+  planner_loader_ = std::make_unique<pluginlib::ClassLoader<easynav::PlannerMethodBase>>(
     "easynav_core", "easynav::PlannerMethodBase");
 
-  try {
-    planner_method_ = planner_loader.createSharedInstance("easynav::DummyPlanner");
-    planner_method_->initialize(shared_from_this());
-  } catch (pluginlib::PluginlibException & ex) {
-    RCLCPP_ERROR(get_logger(),
-      "Unable to load plugin easynav::DummyPlanner. Error: %s", ex.what());
-  }
 }
 
 PlannerNode::~PlannerNode()
@@ -69,6 +62,19 @@ CallbackReturnT
 PlannerNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
+
+  try {
+    planner_method_ = planner_loader_->createSharedInstance("easynav_planner/DummyPlanner");
+    auto result = planner_method_->initialize(shared_from_this(), "dummy_planner");
+    if (!result) {
+      RCLCPP_ERROR(get_logger(),
+        "Unable to initialize [dummy_planner]. Error: %s", result.error().c_str());
+      return CallbackReturnT::FAILURE;
+    }
+  } catch (pluginlib::PluginlibException & ex) {
+    RCLCPP_ERROR(get_logger(),
+      "Unable to load plugin easynav::DummyPlanner. Error: %s", ex.what());
+  }
 
   return CallbackReturnT::SUCCESS;
 }

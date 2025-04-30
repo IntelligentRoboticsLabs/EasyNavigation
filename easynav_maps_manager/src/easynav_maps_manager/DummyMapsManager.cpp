@@ -20,13 +20,16 @@
 /// \file
 /// \brief Implementation of the DummyMapsManager class.
 
+#include <expected>
+
 #include "easynav_maps_manager/DummyMapsManager.hpp"
 
 namespace easynav
 {
 
-void DummyMapsManager::on_initialize()
+std::expected<void, std::string> DummyMapsManager::on_initialize()
 {
+  return {};
 }
 
 std::shared_ptr<MapsTypeBase>

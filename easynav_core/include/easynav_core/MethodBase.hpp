@@ -18,12 +18,13 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the base class MethodBase.
+/// \brief Declaration of the base class MethodBase used in plugin-based EasyNav modules.
 
 #ifndef EASYNAV_CORE__METHODBASE_HPP_
 #define EASYNAV_CORE__METHODBASE_HPP_
 
 #include <memory>
+#include <expected>
 
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
@@ -32,11 +33,11 @@ namespace easynav
 
 /**
  * @class MethodBase
- * @brief Base class for abstract methods in Easy Navigation.
+ * @brief Base class for Easy Navigation method plugins.
  *
- * This class provides the common functionality that all methods have,
- * like managing the parent Lifecycle Node.
- *
+ * This abstract base class provides common functionality for all plugin-based
+ * modules in Easy Navigation, including access to the parent lifecycle node
+ * and the plugin name.
  */
 class MethodBase
 {
@@ -49,43 +50,54 @@ public:
   /**
    * @brief Virtual destructor for MethodBase.
    *
-   * This ensures proper cleanup of derived classes.
+   * Ensures proper destruction of derived classes.
    */
   virtual ~MethodBase() = default;
 
   /**
-   * @brief Initialize the module method.
+   * @brief Initializes the module method with the given parent node and plugin name.
    *
-   * This method should be called to set up any necessary resources
-   * or configurations for the algorithm.
-   * By default, it sets the parent node to the provided lifecycle node.
+   * This method should be called to set up any necessary resources or configuration
+   * required by the module. By default, it stores the provided lifecycle node and
+   * plugin name, and delegates additional initialization to the virtual on_initialize() method.
    *
-   * @note If this method is overriden, the derived class should call the base method
-   * to ensure proper initialization of the parent node.
+   * @param parent_node Shared pointer to the parent lifecycle node.
+   * @param plugin_name Name of the plugin (used for logging or namespacing).
+   * @return std::expected<void, std::string> Returns:
+   *         - `void` if initialization succeeds,
+   *         - a `std::string` containing the error message if it fails.
+   *
+   * @note If this method is overridden in a derived class, it should explicitly call
+   *       the base class implementation to ensure proper setup of the parent node and plugin name.
    */
-  virtual void
-  initialize(const std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node)
+  virtual std::expected<void, std::string>
+  initialize(
+    const std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node,
+    const std::string plugin_name)
   {
     parent_node_ = parent_node;
-    on_initialize();
+    plugin_name_ = plugin_name;
+    return on_initialize();
   }
 
   /**
-   * @brief Initialize the method.
+   * @brief Called during initialization for custom setup by the derived class.
    *
-   * This method can be overriden to set up any necessary resources
-   * or configurations for the derived algorithm.
-   * It will be called after the base initialize() ends.
+   * This method is automatically called by initialize(), and is intended to be overridden
+   * by derived plugins if they need to perform additional setup or resource allocation.
    *
+   * @return std::expected<void, std::string> Returns:
+   *         - `void` if successful,
+   *         - a `std::string` with the error message on failure.
    */
-  virtual void on_initialize() {}
+  virtual std::expected<void, std::string> on_initialize() {return {};}
 
   /**
-   * @brief get a pointer to the parent lifecycle node.
+   * @brief Get a shared pointer to the parent lifecycle node.
    *
-   * This method can be used by derived classes to access the (private) lifecycle node.
+   * Useful for accessing parameters, logging, and other ROS interfaces in derived classes.
    *
-   * @return A shared pointer to the parent lifecycle node.
+   * @return A shared pointer to the parent rclcpp_lifecycle::LifecycleNode.
    */
   [[nodiscard]] std::shared_ptr<rclcpp_lifecycle::LifecycleNode>
   get_node() const
@@ -93,13 +105,33 @@ public:
     return parent_node_;
   }
 
+  /**
+   * @brief Get the plugin name assigned during initialization.
+   *
+   * Typically used for namespacing, logging or plugin-specific configuration.
+   *
+   * @return A const reference to the plugin name string.
+   */
+  [[nodiscard]] const std::string &
+  get_plugin_name() const
+  {
+    return plugin_name_;
+  }
+
 private:
   /**
    * @brief Pointer to the parent lifecycle node.
    *
-   * This is used to access ROS interfaces and parameters.
+   * Provides access to parameters, logging, and other ROS-related functionality.
    */
   std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node_ {nullptr};
+
+  /**
+   * @brief Name assigned to the plugin during initialization.
+   *
+   * Used for identification, namespacing, and logging.
+   */
+  std::string plugin_name_;
 };
 
 }  // namespace easynav

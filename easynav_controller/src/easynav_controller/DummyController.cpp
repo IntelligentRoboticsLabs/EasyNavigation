@@ -20,13 +20,15 @@
 /// \file
 /// \brief Implementation of the DummyController class.
 
+#include <expected>
+
 #include "easynav_controller/DummyController.hpp"
 #include "geometry_msgs/msg/twist_stamped.hpp"
 
 namespace easynav
 {
 
-void DummyController::on_initialize()
+std::expected<void, std::string> DummyController::on_initialize()
 {
   // Initialize the odometry message
   cmd_vel_.header.stamp = get_node()->now();
@@ -37,6 +39,8 @@ void DummyController::on_initialize()
   cmd_vel_.twist.angular.x = 0.0;
   cmd_vel_.twist.angular.y = 0.0;
   cmd_vel_.twist.angular.z = 0.0;
+
+  return {};
 }
 
 geometry_msgs::msg::TwistStamped DummyController::get_cmd_vel()

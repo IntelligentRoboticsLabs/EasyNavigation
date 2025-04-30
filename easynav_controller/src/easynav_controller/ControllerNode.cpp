@@ -38,16 +38,8 @@ ControllerNode::ControllerNode(const rclcpp::NodeOptions & options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
-  pluginlib::ClassLoader<easynav::ControllerMethodBase> controller_loader(
+  controller_loader_ = std::make_unique<pluginlib::ClassLoader<easynav::ControllerMethodBase>>(
     "easynav_core", "easynav::ControllerMethodBase");
-
-  try {
-    controller_method_ = controller_loader.createSharedInstance("easynav::DummyController");
-    controller_method_->initialize(shared_from_this());
-  } catch (pluginlib::PluginlibException & ex) {
-    RCLCPP_ERROR(get_logger(),
-      "Unable to load plugin easynav::DummyController. Error: %s", ex.what());
-  }
 }
 
 
@@ -71,6 +63,20 @@ CallbackReturnT
 ControllerNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
+
+  try {
+    controller_method_ =
+      controller_loader_->createSharedInstance("easynav_controller/DummyController");
+    if (!controller_method_->initialize(shared_from_this(), "dummy_controller")) {
+      RCLCPP_ERROR(get_logger(),
+        "Unable to configure plugin easynav::DummyController.");
+      return  CallbackReturnT::FAILURE;
+    }
+  } catch (pluginlib::PluginlibException & ex) {
+    RCLCPP_ERROR(get_logger(),
+      "Unable to load plugin easynav::DummyController. Error: %s", ex.what());
+    return  CallbackReturnT::FAILURE;
+  }
 
   return CallbackReturnT::SUCCESS;
 }

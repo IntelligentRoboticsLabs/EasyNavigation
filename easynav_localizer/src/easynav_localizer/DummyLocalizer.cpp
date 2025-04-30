@@ -20,12 +20,13 @@
 /// \file
 /// \brief Implementation of the DummyLocalizer class.
 
+#include <expected>
 #include "easynav_localizer/DummyLocalizer.hpp"
 
 namespace easynav
 {
 
-void DummyLocalizer::on_initialize()
+std::expected<void, std::string> DummyLocalizer::on_initialize()
 {
   // Initialize the odometry message
   odom_.header.stamp = get_node()->now();
@@ -38,6 +39,8 @@ void DummyLocalizer::on_initialize()
   odom_.pose.pose.orientation.y = 0.0;
   odom_.pose.pose.orientation.z = 0.0;
   odom_.pose.pose.orientation.w = 1.0;
+
+  return {};
 }
 
 nav_msgs::msg::Odometry DummyLocalizer::get_odom()

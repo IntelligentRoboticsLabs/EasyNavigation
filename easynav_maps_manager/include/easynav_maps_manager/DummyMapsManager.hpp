@@ -18,65 +18,73 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the DummyMapsManager method.
+/// \brief Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation.
 
 #ifndef EASYNAV_PLANNER__DUMMYMAPMANAGER_HPP_
 #define EASYNAV_PLANNER__DUMMYMAPMANAGER_HPP_
 
-#include "nav_msgs/msg/path.hpp"
+#include <expected>
 
+#include "nav_msgs/msg/path.hpp"
 #include "easynav_core/MapsManagerBase.hpp"
 #include "easynav_common/types/MapTypeBase.hpp"
 
 namespace easynav
 {
 
-
 /**
  * @class DummyMapsManager
- * @brief A default "dummy" implementation for the Planner Method.
+ * @brief A default "do-nothing" implementation of MapsManagerBase.
  *
- * This planning method does nothing. It serves as an example, and will be used as a default plugin implementation
- * if the navigation system configuration does not specify one.
+ * This class fulfills the interface for a map manager in EasyNav but does not
+ * manage or modify any actual map data. It is intended to be used as a placeholder
+ * or fallback when no real implementation is specified in the configuration.
  */
 class DummyMapsManager : public easynav::MapsManagerBase
 {
 public:
+  /**
+   * @brief Default constructor.
+   */
   DummyMapsManager() = default;
+
+  /**
+   * @brief Default destructor.
+   */
   ~DummyMapsManager() = default;
 
   /**
-   * @brief Initialize the planning method.
+   * @brief Initialize the dummy maps manager.
    *
-   * It is not required to override this method. Only if the derived class
-   * requires further initialization than the provided by the base class.
+   * Optionally overridden in derived classes to perform setup logic.
+   *
+   * @return std::expected<void, std::string> Success or error message.
    */
-  virtual void on_initialize() override;
+  virtual std::expected<void, std::string> on_initialize() override;
 
   /**
-   * @brief Get the current path.
+   * @brief Returns a shared pointer to the current static map.
    *
-   * This method should return the last path computed.
-   * It should not run the planning algorithm (see update method).
+   * This dummy version returns a null or placeholder pointer.
    *
-   * @return A TwistStamped message with the current path.
+   * @return Shared pointer to a MapsTypeBase representing the static map.
    */
   [[nodiscard]] virtual std::shared_ptr<MapsTypeBase> get_static_map() override;
 
   /**
-   * @brief Get the current path.
+   * @brief Returns a shared pointer to the current dynamic map.
    *
-   * This method should return the last path computed.
-   * It should not run the planning algorithm (see update method).
+   * This dummy version returns a null or placeholder pointer.
    *
-   * @return A TwistStamped message with the current path.
+   * @return Shared pointer to a MapsTypeBase representing the dynamic map.
    */
   [[nodiscard]] virtual std::shared_ptr<MapsTypeBase> get_dynamyc_map() override;
 
   /**
-   * @brief Run the path planning method and update the path.
+   * @brief Dummy update method.
    *
-   * This method will be called by the system's PlannerNode to run the planning algorithm.
+   * This function is intended to update the internal map data based on the current
+   * navigation state. In this dummy implementation, it performs no action.
    *
    * @param nav_state The current state of the navigation system.
    */

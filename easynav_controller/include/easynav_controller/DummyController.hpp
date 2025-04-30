@@ -23,6 +23,8 @@
 #ifndef EASYNAV_CONTROLLER__DUMMYCONTROLLER_HPP_
 #define EASYNAV_CONTROLLER__DUMMYCONTROLLER_HPP_
 
+#include <expected>
+
 #include "geometry_msgs/msg/twist_stamped.hpp"
 
 #include "easynav_core/ControllerMethodBase.hpp"
@@ -44,12 +46,16 @@ public:
   ~DummyController() = default;
 
   /**
-   * @brief Initialize the control method.
+   * @brief Initializes the control method plugin.
    *
-   * It is not required to override this method. Only if the derived class
-   * requires further initialization than the provided by the base class.
+   * This method is called once during the configuration phase of the controller node,
+   * and can be optionally overridden by derived classes to perform custom setup logic.
+   *
+   * @return std::expected<void, std::string> Returns an expected object:
+   *         - `void` if initialization was successful,
+   *         - a `std::string` containing an error message if initialization failed.
    */
-  virtual void on_initialize() override;
+  virtual std::expected<void, std::string> on_initialize() override;
 
   /**
    * @brief Get the current control command.
