@@ -152,12 +152,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a38b74771f6ab23805f990786e4d6f806" id="r_a38b74771f6ab23805f990786e4d6f806"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38b74771f6ab23805f990786e4d6f806">on_shutdown</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
 <tr class="memdesc:a38b74771f6ab23805f990786e4d6f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the <a class="el" href="classeasynav_1_1MapsManagerNode.html" title="ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.">MapsManagerNode</a> node.  <br /></td></tr>
 <tr class="separator:a38b74771f6ab23805f990786e4d6f806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab236eebc784f0964df7ca06e685f4994" id="r_ab236eebc784f0964df7ca06e685f4994"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab236eebc784f0964df7ca06e685f4994">set_nav_state</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> nav_state)</td></tr>
+<tr class="memdesc:ab236eebc784f0964df7ca06e685f4994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current navigation state for the system.  <br /></td></tr>
+<tr class="separator:ab236eebc784f0964df7ca06e685f4994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8c3c562111b3eaedff90cc9f902f9b05" id="r_a8c3c562111b3eaedff90cc9f902f9b05"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8c3c562111b3eaedff90cc9f902f9b05">~MapsManagerNode</a> ()</td></tr>
+<tr class="memdesc:a8c3c562111b3eaedff90cc9f902f9b05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
 <tr class="separator:a8c3c562111b3eaedff90cc9f902f9b05"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system. </p>
-<p>This node is responsible for orchestrating the mapping functionality in the EasyNav architecture. It includes lifecycle management, real-time callback group assignment, and periodic execution of map-related operations such as updates, data fusion, and diagnostics. </p>
+<p>This node acts as the orchestrator for multiple map manager plugins, each responsible for a specific type of map representation. It handles lifecycle state transitions, loads plugins dynamically, and schedules map updates in real-time or background cycles. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ad09d90f1fe35c9e2f2fd7fc1902312f4" name="ad09d90f1fe35c9e2f2fd7fc1902312f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">&#9670;&#160;</a></span>CallbackReturnT</h2>
@@ -222,6 +226,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Destructor. </p>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -241,7 +247,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the real-time callback group. </p>
-<p>This callback group can be used to assign callbacks that require low latency or have real-time constraints.</p>
+<p>This callback group is used for low-latency tasks that must not block.</p>
 <dl class="section return"><dt>Returns</dt><dd>Shared pointer to the real-time callback group. </dd></dl>
 
 </div>
@@ -262,7 +268,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Activates the <a class="el" href="classeasynav_1_1MapsManagerNode.html" title="ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.">MapsManagerNode</a> node. </p>
-<p>This starts periodic navigation control cycles.</p>
+<p>Starts timers and enables execution of map-related tasks.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -289,7 +295,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cleans up the <a class="el" href="classeasynav_1_1MapsManagerNode.html" title="ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.">MapsManagerNode</a> node. </p>
-<p>Releases resources and resets the internal state.</p>
+<p>Releases all resources and resets the internal state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -316,7 +322,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Configures the <a class="el" href="classeasynav_1_1MapsManagerNode.html" title="ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.">MapsManagerNode</a> node. </p>
-<p>This is typically where parameters and interfaces are declared.</p>
+<p>Loads parameters, instantiates maps manager plugins, and prepares internal structures.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -343,7 +349,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Deactivates the <a class="el" href="classeasynav_1_1MapsManagerNode.html" title="ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.">MapsManagerNode</a> node. </p>
-<p>Control loops are stopped and interfaces are disabled.</p>
+<p>Stops timers and disables map-related interfaces.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -370,7 +376,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Handles errors in the <a class="el" href="classeasynav_1_1MapsManagerNode.html" title="ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.">MapsManagerNode</a> node. </p>
-<p>This is called when a failure occurs during a lifecycle transition.</p>
+<p>Invoked when a transition fails and recovery or diagnostics are needed.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -397,7 +403,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shuts down the <a class="el" href="classeasynav_1_1MapsManagerNode.html" title="ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.">MapsManagerNode</a> node. </p>
-<p>Called on final shutdown of the node's lifecycle.</p>
+<p>Called at final shutdown of the lifecycle node.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -405,6 +411,32 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating shutdown is complete. </dd></dl>
+
+</div>
+</div>
+<a id="ab236eebc784f0964df7ca06e685f4994" name="ab236eebc784f0964df7ca06e685f4994"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab236eebc784f0964df7ca06e685f4994">&#9670;&#160;</a></span>set_nav_state()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void set_nav_state </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structeasynav_1_1NavState.html">NavState</a></td>          <td class="paramname"><span class="paramname"><em>nav_state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Set the current navigation state for the system. </p>
+<p>This state is passed to map manager plugins during update cycles.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nav_state</td><td>The current navigation state. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

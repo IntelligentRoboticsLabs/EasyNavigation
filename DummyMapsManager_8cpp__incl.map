@@ -1,27 +1,30 @@
 <map id="easynav_maps_manager/src/easynav_maps_manager/DummyMapsManager.cpp" name="easynav_maps_manager/src/easynav_maps_manager/DummyMapsManager.cpp">
-<area shape="rect" id="Node000001" title="Implementation of the DummyMapsManager class." alt="" coords="279,5,471,61"/>
-<area shape="rect" id="Node000002" href="$DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager method." alt="" coords="199,109,375,150"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="351,63,317,100,314,96,348,60"/>
-<area shape="rect" id="Node000013" title=" " alt="" coords="399,109,527,150"/>
-<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="402,60,436,96,433,100,399,63"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,205,169,231"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="243,153,130,201,128,196,241,148"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="193,198,381,238"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="290,150,290,182,284,182,284,150"/>
-<area shape="rect" id="Node000005" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="405,198,566,238"/>
-<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="333,148,428,189,425,194,331,153"/>
-<area shape="rect" id="Node000006" href="$Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="405,286,566,327"/>
-<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="488,239,488,271,483,271,483,239"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="232,375,299,401"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="432,330,315,372,313,367,430,325"/>
-<area shape="rect" id="Node000008" title=" " alt="" coords="323,375,376,401"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="453,330,385,369,382,365,450,325"/>
-<area shape="rect" id="Node000009" title=" " alt="" coords="401,375,458,401"/>
-<area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="474,329,449,364,445,360,470,326"/>
-<area shape="rect" id="Node000010" title=" " alt="" coords="482,375,601,401"/>
-<area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="502,326,526,360,522,364,497,329"/>
-<area shape="rect" id="Node000011" title=" " alt="" coords="625,375,744,401"/>
-<area shape="poly" id="edge10_Node000006_Node000011" title=" " alt="" coords="536,325,641,366,639,371,534,330"/>
-<area shape="rect" id="Node000012" title=" " alt="" coords="767,375,876,401"/>
-<area shape="poly" id="edge11_Node000006_Node000012" title=" " alt="" coords="567,324,756,368,754,374,566,329"/>
+<area shape="rect" id="Node000001" title="Implementation of the DummyMapsManager class." alt="" coords="89,5,280,61"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,205,79,231"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="139,64,111,85,87,111,64,151,51,191,46,189,59,149,83,107,108,81,136,59"/>
+<area shape="rect" id="Node000003" href="$DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation." alt="" coords="97,109,272,150"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="187,62,187,94,182,94,182,62"/>
+<area shape="rect" id="Node000014" title=" " alt="" coords="297,109,424,150"/>
+<area shape="poly" id="edge14_Node000001_Node000014" title=" " alt="" coords="237,59,312,99,309,104,234,64"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="154,152,76,199,73,195,151,148"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="103,205,266,231"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="187,150,187,190,182,190,182,150"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="291,198,478,238"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="231,148,326,189,324,194,229,153"/>
+<area shape="rect" id="Node000006" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="503,198,664,238"/>
+<area shape="poly" id="edge6_Node000003_Node000006" title=" " alt="" coords="273,147,488,193,487,199,272,152"/>
+<area shape="rect" id="Node000007" href="$Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="503,286,664,327"/>
+<area shape="poly" id="edge7_Node000006_Node000007" title=" " alt="" coords="586,239,586,271,581,271,581,239"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="330,375,397,401"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="529,330,412,372,411,367,527,325"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="421,375,474,401"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="551,330,482,369,480,365,548,325"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="499,375,556,401"/>
+<area shape="poly" id="edge10_Node000007_Node000010" title=" " alt="" coords="572,329,547,364,543,360,567,326"/>
+<area shape="rect" id="Node000011" title=" " alt="" coords="580,375,698,401"/>
+<area shape="poly" id="edge11_Node000007_Node000011" title=" " alt="" coords="599,326,624,360,620,364,595,329"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="723,375,841,401"/>
+<area shape="poly" id="edge12_Node000007_Node000012" title=" " alt="" coords="634,325,739,366,737,371,632,330"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="865,375,974,401"/>
+<area shape="poly" id="edge13_Node000007_Node000013" title=" " alt="" coords="665,324,853,368,852,374,664,329"/>
 </map>

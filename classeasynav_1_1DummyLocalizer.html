@@ -95,7 +95,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A default "dummy" implementation for the Localizer Method.  
+<p>A default "do-nothing" implementation of the LocalizerMethodBase.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DummyLocalizer_8hpp_source.html">DummyLocalizer.hpp</a>&gt;</code></p>
@@ -104,7 +104,7 @@ Inheritance diagram for DummyLocalizer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1DummyLocalizer__inherit__graph.png" border="0" usemap="#aDummyLocalizer_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDummyLocalizer_inherit__map" id="aDummyLocalizer_inherit__map">
-<area shape="rect" title="A default &quot;dummy&quot; implementation for the Localizer Method." alt="" coords="20,79,137,105"/>
+<area shape="rect" title="A default &quot;do&#45;nothing&quot; implementation of the LocalizerMethodBase." alt="" coords="20,79,137,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,152,31"/>
 <area shape="poly" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
 </map>
@@ -114,7 +114,7 @@ Collaboration diagram for DummyLocalizer:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1DummyLocalizer__coll__graph.png" border="0" usemap="#aDummyLocalizer_coll__map" alt="Collaboration graph"/></div>
 <map name="aDummyLocalizer_coll__map" id="aDummyLocalizer_coll__map">
-<area shape="rect" title="A default &quot;dummy&quot; implementation for the Localizer Method." alt="" coords="20,79,137,105"/>
+<area shape="rect" title="A default &quot;do&#45;nothing&quot; implementation of the LocalizerMethodBase." alt="" coords="20,79,137,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,152,31"/>
 <area shape="poly" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
 </map>
@@ -123,22 +123,24 @@ Collaboration diagram for DummyLocalizer:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a52dc2fa7e6298336e8297661cc09b064" id="r_a52dc2fa7e6298336e8297661cc09b064"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a52dc2fa7e6298336e8297661cc09b064">DummyLocalizer</a> ()=default</td></tr>
+<tr class="memdesc:a52dc2fa7e6298336e8297661cc09b064"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:a52dc2fa7e6298336e8297661cc09b064"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5e4f64b27ae1b006757326b7c7e4b574" id="r_a5e4f64b27ae1b006757326b7c7e4b574"><td class="memItemLeft" align="right" valign="top">virtual nav_msgs::msg::Odometry&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5e4f64b27ae1b006757326b7c7e4b574">get_odom</a> () override</td></tr>
-<tr class="memdesc:a5e4f64b27ae1b006757326b7c7e4b574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current localization state.  <br /></td></tr>
+<tr class="memdesc:a5e4f64b27ae1b006757326b7c7e4b574"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieve the current robot odometry.  <br /></td></tr>
 <tr class="separator:a5e4f64b27ae1b006757326b7c7e4b574"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9d1795b6cf8a4da7bf9b33f783db911" id="r_ac9d1795b6cf8a4da7bf9b33f783db911"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9d1795b6cf8a4da7bf9b33f783db911">on_initialize</a> () override</td></tr>
-<tr class="memdesc:ac9d1795b6cf8a4da7bf9b33f783db911"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the localization method.  <br /></td></tr>
-<tr class="separator:ac9d1795b6cf8a4da7bf9b33f783db911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa09f4316ce265b452c96e6d74101cd76" id="r_aa09f4316ce265b452c96e6d74101cd76"><td class="memItemLeft" align="right" valign="top">virtual std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa09f4316ce265b452c96e6d74101cd76">on_initialize</a> () override</td></tr>
+<tr class="memdesc:aa09f4316ce265b452c96e6d74101cd76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the localization method.  <br /></td></tr>
+<tr class="separator:aa09f4316ce265b452c96e6d74101cd76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbea5f6d7a91b4a1f7fa21d5a46c18aa" id="r_adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbea5f6d7a91b4a1f7fa21d5a46c18aa">update</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;nav_state) override</td></tr>
-<tr class="memdesc:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the localization method and update the robot's estimated localization.  <br /></td></tr>
+<tr class="memdesc:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the localization estimate based on the current navigation state.  <br /></td></tr>
 <tr class="separator:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef89e5a5bfb7d4e13c0a91b843471c2a" id="r_aef89e5a5bfb7d4e13c0a91b843471c2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef89e5a5bfb7d4e13c0a91b843471c2a">~DummyLocalizer</a> ()=default</td></tr>
+<tr class="memdesc:aef89e5a5bfb7d4e13c0a91b843471c2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <br /></td></tr>
 <tr class="separator:aef89e5a5bfb7d4e13c0a91b843471c2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A default "dummy" implementation for the Localizer Method. </p>
-<p>This localization method does nothing. It serves as an example, and will be used as a default plugin implementation if the navigation system configuration does not specify one. </p>
+<div class="textblock"><p>A default "do-nothing" implementation of the LocalizerMethodBase. </p>
+<p>This class implements the interface required by the Easy Navigation framework for localization but does not perform any actual computation. It is useful as a placeholder, example, or fallback when no real localization plugin is configured. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a52dc2fa7e6298336e8297661cc09b064" name="a52dc2fa7e6298336e8297661cc09b064"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a52dc2fa7e6298336e8297661cc09b064">&#9670;&#160;</a></span>DummyLocalizer()</h2>
@@ -162,6 +164,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default constructor. </p>
 
 </div>
 </div>
@@ -187,6 +191,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default destructor. </p>
 
 </div>
 </div>
@@ -214,14 +220,14 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the current localization state. </p>
-<p>This method should return the last known localization of the robot. It should not run the localization algorithm (see update method).</p>
-<dl class="section return"><dt>Returns</dt><dd>An Odometry message representing the current localization state. </dd></dl>
+<p>Retrieve the current robot odometry. </p>
+<p>Returns the last stored odometry message representing the estimated robot pose. This method should not perform any actual localization computation.</p>
+<dl class="section return"><dt>Returns</dt><dd>nav_msgs::msg::Odometry Current localization estimate. </dd></dl>
 
 </div>
 </div>
-<a id="ac9d1795b6cf8a4da7bf9b33f783db911" name="ac9d1795b6cf8a4da7bf9b33f783db911"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9d1795b6cf8a4da7bf9b33f783db911">&#9670;&#160;</a></span>on_initialize()</h2>
+<a id="aa09f4316ce265b452c96e6d74101cd76" name="aa09f4316ce265b452c96e6d74101cd76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa09f4316ce265b452c96e6d74101cd76">&#9670;&#160;</a></span>on_initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +236,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void on_initialize </td>
+          <td class="memname">std::expected&lt; void, std::string &gt; on_initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -244,7 +250,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Initialize the localization method. </p>
-<p>It is not required to override this method. Only if the derived class requires further initialization than the provided by the base class. </p>
+<p>This override may be used to set up internal resources. By default, it simply succeeds.</p>
+<dl class="section return"><dt>Returns</dt><dd>std::expected&lt;void, std::string&gt; Returns success or an error message. </dd></dl>
 
 </div>
 </div>
@@ -271,11 +278,11 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Run the localization method and update the robot's estimated localization. </p>
-<p>This method will be called by the system's <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> to run the localization algorithm.</p>
+<p>Updates the localization estimate based on the current navigation state. </p>
+<p>This method is intended to run the localization logic and update the odometry. In this dummy implementation, it does nothing.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nav_state</td><td>The current state of the navigation system. </td></tr>
+    <tr><td class="paramname">nav_state</td><td>The current navigation state of the system. </td></tr>
   </table>
   </dd>
 </dl>

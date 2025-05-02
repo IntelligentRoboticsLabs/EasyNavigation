@@ -1,11 +1,15 @@
 <map id="easynav_maps_manager/include/easynav_maps_manager/MapsManagerNode.hpp" name="easynav_maps_manager/include/easynav_maps_manager/MapsManagerNode.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="127,5,347,61"/>
+<area shape="rect" id="Node000001" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="313,5,532,61"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,116,133,142"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,64,105,111,103,106,187,59"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="321,64,130,115,129,109,319,59"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="156,109,318,150"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="240,62,240,94,234,94,234,62"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="370,64,291,104,288,99,368,59"/>
 <area shape="rect" id="Node000004" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="342,109,503,150"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="292,59,371,99,369,104,289,64"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="425,62,425,94,420,94,420,62"/>
+<area shape="rect" id="Node000012" title=" " alt="" coords="527,109,715,150"/>
+<area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="481,59,567,100,564,104,479,64"/>
+<area shape="rect" id="Node000013" title=" " alt="" coords="739,116,908,142"/>
+<area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="533,58,758,110,756,115,532,63"/>
 <area shape="rect" id="Node000005" href="$Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="342,198,503,238"/>
 <area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="425,150,425,182,420,182,420,150"/>
 <area shape="rect" id="Node000006" title=" " alt="" coords="169,286,236,312"/>

@@ -95,23 +95,26 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core.  
+<p>Declaration of the ControllerNode class, a ROS 2 lifecycle node for speed computation in Easy Navigation.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;rclcpp/macros.hpp&quot;</code><br />
 <code>#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</code><br />
 <code>#include &quot;easynav_core/ControllerMethodBase.hpp&quot;</code><br />
+<code>#include &quot;pluginlib/class_loader.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for ControllerNode.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="ControllerNode_8hpp__incl.png" border="0" usemap="#aeasynav__controller_2include_2easynav__controller_2ControllerNode_8hpp" alt=""/></div>
 <map name="aeasynav__controller_2include_2easynav__controller_2ControllerNode_8hpp" id="aeasynav__controller_2include_2easynav__controller_2ControllerNode_8hpp">
-<area shape="rect" title="Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="148,5,326,61"/>
+<area shape="rect" title="Declaration of the ControllerNode class, a ROS 2 lifecycle node for speed computation in Easy Navigat..." alt="" coords="250,5,429,61"/>
 <area shape="rect" title=" " alt="" coords="5,116,133,142"/>
-<area shape="poly" title=" " alt="" coords="190,64,105,111,103,106,187,59"/>
+<area shape="poly" title=" " alt="" coords="262,64,119,113,118,108,261,59"/>
 <area shape="rect" title=" " alt="" coords="156,109,318,150"/>
-<area shape="poly" title=" " alt="" coords="240,62,240,94,234,94,234,62"/>
+<area shape="poly" title=" " alt="" coords="312,64,271,100,268,96,308,60"/>
 <area shape="rect" title=" " alt="" coords="342,109,545,150"/>
-<area shape="poly" title=" " alt="" coords="298,59,388,100,386,105,296,64"/>
+<area shape="poly" title=" " alt="" coords="372,60,413,97,409,101,368,64"/>
+<area shape="rect" title=" " alt="" coords="570,116,739,142"/>
+<area shape="poly" title=" " alt="" coords="430,59,600,109,598,114,429,64"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -119,7 +122,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="ControllerNode_8hpp__dep__incl.png" border="0" usemap="#aeasynav__controller_2include_2easynav__controller_2ControllerNode_8hppdep" alt=""/></div>
 <map name="aeasynav__controller_2include_2easynav__controller_2ControllerNode_8hppdep" id="aeasynav__controller_2include_2easynav__controller_2ControllerNode_8hppdep">
-<area shape="rect" title="Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="108,5,287,61"/>
+<area shape="rect" title="Declaration of the ControllerNode class, a ROS 2 lifecycle node for speed computation in Easy Navigat..." alt="" coords="108,5,287,61"/>
 <area shape="rect" href="ControllerNode_8cpp.html" title="Implementation of the ControllerNode class." alt="" coords="5,109,161,165"/>
 <area shape="poly" title=" " alt="" coords="157,73,116,110,112,106,154,69"/>
 <area shape="rect" href="SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="236,116,461,157"/>
@@ -146,7 +149,7 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core. </p>
+<div class="textblock"><p>Declaration of the ControllerNode class, a ROS 2 lifecycle node for speed computation in Easy Navigation. </p>
 <p>Declaration of the ControllerNode class, a ROS 2 lifecycle node for calculating speeds tasks in Easy Navigation.</p>
 </div></div><!-- contents -->
 <!-- start footer part -->

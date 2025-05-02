@@ -1,5 +1,5 @@
 <map id="easynav_planner/include/easynav_planner/DummyPlanner.hpp" name="easynav_planner/include/easynav_planner/DummyPlanner.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the DummyPlanner method." alt="" coords="5,5,244,46"/>
+<area shape="rect" id="Node000001" title="Declaration of the DummyPlanner class, a default fallback planner plugin." alt="" coords="5,5,244,46"/>
 <area shape="rect" id="Node000002" href="$DummyPlanner_8cpp.html" title="Implementation of the DummyPlanner class." alt="" coords="5,94,244,135"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="127,62,127,94,122,94,122,62"/>
 </map>

@@ -95,7 +95,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>A default "dummy" implementation for the Planner Method.  
+<p>A default "do-nothing" implementation of PlannerMethodBase.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="DummyPlanner_8hpp_source.html">DummyPlanner.hpp</a>&gt;</code></p>
@@ -104,7 +104,7 @@ Inheritance diagram for DummyPlanner:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1DummyPlanner__inherit__graph.png" border="0" usemap="#aDummyPlanner_inherit__map" alt="Inheritance graph"/></div>
 <map name="aDummyPlanner_inherit__map" id="aDummyPlanner_inherit__map">
-<area shape="rect" title="A default &quot;dummy&quot; implementation for the Planner Method." alt="" coords="20,79,129,105"/>
+<area shape="rect" title="A default &quot;do&#45;nothing&quot; implementation of PlannerMethodBase." alt="" coords="20,79,129,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,144,31"/>
 <area shape="poly" title=" " alt="" coords="77,46,77,79,72,79,72,46"/>
 </map>
@@ -114,7 +114,7 @@ Collaboration diagram for DummyPlanner:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1DummyPlanner__coll__graph.png" border="0" usemap="#aDummyPlanner_coll__map" alt="Collaboration graph"/></div>
 <map name="aDummyPlanner_coll__map" id="aDummyPlanner_coll__map">
-<area shape="rect" title="A default &quot;dummy&quot; implementation for the Planner Method." alt="" coords="20,79,129,105"/>
+<area shape="rect" title="A default &quot;do&#45;nothing&quot; implementation of PlannerMethodBase." alt="" coords="20,79,129,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,144,31"/>
 <area shape="poly" title=" " alt="" coords="77,46,77,79,72,79,72,46"/>
 </map>
@@ -123,22 +123,24 @@ Collaboration diagram for DummyPlanner:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a17e0443632add3355bdb6e8e8c81cf68" id="r_a17e0443632add3355bdb6e8e8c81cf68"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17e0443632add3355bdb6e8e8c81cf68">DummyPlanner</a> ()=default</td></tr>
+<tr class="memdesc:a17e0443632add3355bdb6e8e8c81cf68"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <br /></td></tr>
 <tr class="separator:a17e0443632add3355bdb6e8e8c81cf68"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10e0034ffa7008e6189d2ec96abfe200" id="r_a10e0034ffa7008e6189d2ec96abfe200"><td class="memItemLeft" align="right" valign="top">virtual nav_msgs::msg::Path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10e0034ffa7008e6189d2ec96abfe200">get_path</a> () override</td></tr>
 <tr class="memdesc:a10e0034ffa7008e6189d2ec96abfe200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current path.  <br /></td></tr>
 <tr class="separator:a10e0034ffa7008e6189d2ec96abfe200"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9d1795b6cf8a4da7bf9b33f783db911" id="r_ac9d1795b6cf8a4da7bf9b33f783db911"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac9d1795b6cf8a4da7bf9b33f783db911">on_initialize</a> () override</td></tr>
-<tr class="memdesc:ac9d1795b6cf8a4da7bf9b33f783db911"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize the planning method.  <br /></td></tr>
-<tr class="separator:ac9d1795b6cf8a4da7bf9b33f783db911"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa09f4316ce265b452c96e6d74101cd76" id="r_aa09f4316ce265b452c96e6d74101cd76"><td class="memItemLeft" align="right" valign="top">virtual std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa09f4316ce265b452c96e6d74101cd76">on_initialize</a> () override</td></tr>
+<tr class="memdesc:aa09f4316ce265b452c96e6d74101cd76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional initialization logic.  <br /></td></tr>
+<tr class="separator:aa09f4316ce265b452c96e6d74101cd76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbea5f6d7a91b4a1f7fa21d5a46c18aa" id="r_adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbea5f6d7a91b4a1f7fa21d5a46c18aa">update</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;nav_state) override</td></tr>
-<tr class="memdesc:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run the path planning method and update the path.  <br /></td></tr>
+<tr class="memdesc:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy update method.  <br /></td></tr>
 <tr class="separator:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae5b7a07c0a2137e5faef603bf7f707ef" id="r_ae5b7a07c0a2137e5faef603bf7f707ef"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae5b7a07c0a2137e5faef603bf7f707ef">~DummyPlanner</a> ()=default</td></tr>
+<tr class="memdesc:ae5b7a07c0a2137e5faef603bf7f707ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
 <tr class="separator:ae5b7a07c0a2137e5faef603bf7f707ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>A default "dummy" implementation for the Planner Method. </p>
-<p>This planning method does nothing. It serves as an example, and will be used as a default plugin implementation if the navigation system configuration does not specify one. </p>
+<div class="textblock"><p>A default "do-nothing" implementation of PlannerMethodBase. </p>
+<p>This planner serves as a fallback when no actual planning plugin is specified. It returns an empty or default path and does not perform any path planning logic. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a17e0443632add3355bdb6e8e8c81cf68" name="a17e0443632add3355bdb6e8e8c81cf68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17e0443632add3355bdb6e8e8c81cf68">&#9670;&#160;</a></span>DummyPlanner()</h2>
@@ -162,6 +164,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Default constructor. </p>
 
 </div>
 </div>
@@ -187,6 +191,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -215,13 +221,13 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the current path. </p>
-<p>This method should return the last path computed. It should not run the planning algorithm (see update method).</p>
-<dl class="section return"><dt>Returns</dt><dd>A TwistStamped message with the current path. </dd></dl>
+<p>Returns the most recent (or default) path. This method should not trigger any planning logic.</p>
+<dl class="section return"><dt>Returns</dt><dd>nav_msgs::msg::Path The stored or placeholder path. </dd></dl>
 
 </div>
 </div>
-<a id="ac9d1795b6cf8a4da7bf9b33f783db911" name="ac9d1795b6cf8a4da7bf9b33f783db911"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac9d1795b6cf8a4da7bf9b33f783db911">&#9670;&#160;</a></span>on_initialize()</h2>
+<a id="aa09f4316ce265b452c96e6d74101cd76" name="aa09f4316ce265b452c96e6d74101cd76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa09f4316ce265b452c96e6d74101cd76">&#9670;&#160;</a></span>on_initialize()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -230,7 +236,7 @@ Public Member Functions</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void on_initialize </td>
+          <td class="memname">std::expected&lt; void, std::string &gt; on_initialize </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -243,8 +249,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Initialize the planning method. </p>
-<p>It is not required to override this method. Only if the derived class requires further initialization than the provided by the base class. </p>
+<p>Optional initialization logic. </p>
+<p>Called after the base initialize method. This dummy version performs no additional setup.</p>
+<dl class="section return"><dt>Returns</dt><dd>std::expected&lt;void, std::string&gt; Success or error message. </dd></dl>
 
 </div>
 </div>
@@ -271,8 +278,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Run the path planning method and update the path. </p>
-<p>This method will be called by the system's <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> to run the planning algorithm.</p>
+<p>Dummy update method. </p>
+<p>Called to update the internal path based on the current navigation state. This dummy version does not modify the path.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nav_state</td><td>The current state of the navigation system. </td></tr>

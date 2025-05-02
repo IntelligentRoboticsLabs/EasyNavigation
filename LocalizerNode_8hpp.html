@@ -95,52 +95,55 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core.  
+<p>Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigation.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;rclcpp/macros.hpp&quot;</code><br />
 <code>#include &quot;rclcpp_lifecycle/lifecycle_node.hpp&quot;</code><br />
+<code>#include &quot;pluginlib/class_loader.hpp&quot;</code><br />
 <code>#include &quot;easynav_core/LocalizerMethodBase.hpp&quot;</code><br />
-<code>#include &lt;<a class="el" href="NavState_8hpp_source.html">easynav_common/types/NavState.hpp</a>&gt;</code><br />
+<code>#include &quot;<a class="el" href="NavState_8hpp_source.html">easynav_common/types/NavState.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for LocalizerNode.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="LocalizerNode_8hpp__incl.png" border="0" usemap="#aeasynav__localizer_2include_2easynav__localizer_2LocalizerNode_8hpp" alt=""/></div>
 <map name="aeasynav__localizer_2include_2easynav__localizer_2LocalizerNode_8hpp" id="aeasynav__localizer_2include_2easynav__localizer_2LocalizerNode_8hpp">
-<area shape="rect" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="220,5,459,46"/>
+<area shape="rect" title="Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigat..." alt="" coords="307,5,546,46"/>
 <area shape="rect" title=" " alt="" coords="5,102,133,127"/>
-<area shape="poly" title=" " alt="" coords="279,49,122,99,121,94,277,44"/>
+<area shape="poly" title=" " alt="" coords="343,49,144,97,131,100,130,95,143,91,342,44"/>
 <area shape="rect" title=" " alt="" coords="156,94,318,135"/>
-<area shape="poly" title=" " alt="" coords="318,49,274,86,270,82,315,44"/>
-<area shape="rect" title=" " alt="" coords="342,94,542,135"/>
-<area shape="poly" title=" " alt="" coords="365,44,409,82,406,86,361,49"/>
-<area shape="rect" href="NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="567,94,728,135"/>
-<area shape="poly" title=" " alt="" coords="411,44,564,87,562,92,409,49"/>
-<area shape="rect" title=" " alt="" coords="353,360,462,386"/>
-<area shape="poly" title=" " alt="" coords="567,135,555,137,461,141,340,141,279,144,225,151,180,164,163,173,150,184,140,198,135,212,135,225,138,237,157,262,187,285,225,306,267,325,349,353,347,358,265,330,222,311,184,290,153,266,134,240,129,226,130,211,135,196,146,181,160,169,178,159,224,146,279,139,340,136,461,136,554,132,566,130"/>
-<area shape="rect" title=" " alt="" coords="160,190,351,216"/>
-<area shape="poly" title=" " alt="" coords="567,136,326,189,325,184,566,131"/>
-<area shape="rect" title=" " alt="" coords="375,190,539,216"/>
-<area shape="poly" title=" " alt="" coords="605,138,499,186,496,181,603,133"/>
-<area shape="rect" title=" " alt="" coords="563,190,732,216"/>
-<area shape="poly" title=" " alt="" coords="650,135,650,175,645,175,645,135"/>
-<area shape="rect" title=" " alt="" coords="756,183,931,223"/>
-<area shape="poly" title=" " alt="" coords="693,133,786,174,784,179,691,138"/>
-<area shape="rect" href="Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="887,271,1048,312"/>
-<area shape="poly" title=" " alt="" coords="729,122,854,144,908,160,929,170,944,181,957,197,965,217,971,255,966,256,960,218,952,200,940,185,926,174,906,165,852,149,728,127"/>
-<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="1006,183,1167,223"/>
-<area shape="poly" title=" " alt="" coords="729,129,991,180,990,185,728,134"/>
-<area shape="poly" title=" " alt="" coords="887,307,478,364,477,359,886,302"/>
-<area shape="rect" title=" " alt="" coords="770,360,837,386"/>
-<area shape="poly" title=" " alt="" coords="928,315,844,355,841,351,926,310"/>
-<area shape="rect" title=" " alt="" coords="861,360,914,386"/>
-<area shape="poly" title=" " alt="" coords="950,314,913,351,909,347,946,311"/>
-<area shape="rect" title=" " alt="" coords="939,360,996,386"/>
-<area shape="poly" title=" " alt="" coords="970,312,970,344,965,344,965,312"/>
-<area shape="rect" title=" " alt="" coords="1020,360,1139,386"/>
-<area shape="poly" title=" " alt="" coords="997,310,1051,348,1048,353,994,315"/>
-<area shape="rect" title=" " alt="" coords="1163,360,1282,386"/>
-<area shape="poly" title=" " alt="" coords="1032,310,1169,352,1168,357,1030,315"/>
-<area shape="poly" title=" " alt="" coords="1061,226,1008,264,1005,260,1058,222"/>
+<area shape="poly" title=" " alt="" coords="384,49,295,90,292,85,382,44"/>
+<area shape="rect" title=" " alt="" coords="342,102,511,127"/>
+<area shape="poly" title=" " alt="" coords="429,47,429,86,424,86,424,47"/>
+<area shape="rect" title=" " alt="" coords="536,94,736,135"/>
+<area shape="poly" title=" " alt="" coords="475,44,575,85,573,90,473,49"/>
+<area shape="rect" href="NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="760,94,922,135"/>
+<area shape="poly" title=" " alt="" coords="521,44,745,90,744,96,520,49"/>
+<area shape="rect" title=" " alt="" coords="546,360,656,386"/>
+<area shape="poly" title=" " alt="" coords="761,135,748,137,655,141,533,141,473,144,418,151,373,164,356,173,343,184,333,198,328,212,328,225,332,237,350,262,380,285,418,306,460,325,542,353,540,358,458,330,416,311,377,290,346,266,327,240,323,226,323,211,328,196,339,181,353,169,371,159,417,146,472,139,533,136,655,136,747,132,760,130"/>
+<area shape="rect" title=" " alt="" coords="353,190,545,216"/>
+<area shape="poly" title=" " alt="" coords="760,136,520,189,518,184,759,131"/>
+<area shape="rect" title=" " alt="" coords="569,190,732,216"/>
+<area shape="poly" title=" " alt="" coords="799,138,692,186,690,181,797,133"/>
+<area shape="rect" title=" " alt="" coords="756,190,926,216"/>
+<area shape="poly" title=" " alt="" coords="844,135,844,175,838,175,838,135"/>
+<area shape="rect" title=" " alt="" coords="950,183,1124,223"/>
+<area shape="poly" title=" " alt="" coords="887,133,980,174,978,179,884,138"/>
+<area shape="rect" href="Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="1080,271,1242,312"/>
+<area shape="poly" title=" " alt="" coords="922,122,1047,144,1101,160,1122,170,1138,181,1150,197,1158,217,1164,255,1159,256,1153,218,1145,200,1134,185,1120,174,1100,165,1046,149,922,127"/>
+<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="1199,183,1360,223"/>
+<area shape="poly" title=" " alt="" coords="922,129,1184,180,1183,185,921,134"/>
+<area shape="poly" title=" " alt="" coords="1081,307,671,364,670,359,1080,302"/>
+<area shape="rect" title=" " alt="" coords="963,360,1031,386"/>
+<area shape="poly" title=" " alt="" coords="1121,315,1037,355,1035,351,1119,310"/>
+<area shape="rect" title=" " alt="" coords="1054,360,1108,386"/>
+<area shape="poly" title=" " alt="" coords="1143,314,1106,351,1102,347,1139,311"/>
+<area shape="rect" title=" " alt="" coords="1132,360,1190,386"/>
+<area shape="poly" title=" " alt="" coords="1164,312,1164,344,1158,344,1158,312"/>
+<area shape="rect" title=" " alt="" coords="1214,360,1332,386"/>
+<area shape="poly" title=" " alt="" coords="1190,310,1245,348,1242,353,1187,315"/>
+<area shape="rect" title=" " alt="" coords="1356,360,1475,386"/>
+<area shape="poly" title=" " alt="" coords="1225,310,1362,352,1361,357,1224,315"/>
+<area shape="poly" title=" " alt="" coords="1254,226,1201,264,1198,260,1251,222"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -148,7 +151,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="LocalizerNode_8hpp__dep__incl.png" border="0" usemap="#aeasynav__localizer_2include_2easynav__localizer_2LocalizerNode_8hppdep" alt=""/></div>
 <map name="aeasynav__localizer_2include_2easynav__localizer_2LocalizerNode_8hppdep" id="aeasynav__localizer_2include_2easynav__localizer_2LocalizerNode_8hppdep">
-<area shape="rect" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="107,5,346,46"/>
+<area shape="rect" title="Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigat..." alt="" coords="107,5,346,46"/>
 <area shape="rect" href="LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="5,94,189,150"/>
 <area shape="poly" title=" " alt="" coords="189,57,136,96,133,91,186,53"/>
 <area shape="rect" href="SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="264,102,490,142"/>
@@ -175,8 +178,7 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core. </p>
-<p>Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigation.</p>
+<div class="textblock"><p>Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigation. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

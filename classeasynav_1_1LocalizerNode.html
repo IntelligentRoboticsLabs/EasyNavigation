@@ -164,7 +164,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>ROS 2 lifecycle node that manages localization for the Easy Navigation system. </p>
-<p>This node provides the interface between the localization module in EasyNav and the ROS 2 ecosystem. It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup. </p>
+<p>This node serves as a runtime interface between the ROS 2 ecosystem and the localization method plugin in EasyNav. It manages the lifecycle transitions, real-time control cycles, and dynamic loading of the localization method. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ad09d90f1fe35c9e2f2fd7fc1902312f4" name="ad09d90f1fe35c9e2f2fd7fc1902312f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">&#9670;&#160;</a></span>CallbackReturnT</h2>
@@ -258,7 +258,8 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the current localization state. </p>
-<dl class="section return"><dt>Returns</dt><dd>An Odometry message representing the current localization state. </dd></dl>
+<p>Retrieves the most recent odometry estimate produced by the localization method.</p>
+<dl class="section return"><dt>Returns</dt><dd>An Odometry message representing the current robot pose and velocity. </dd></dl>
 
 </div>
 </div>
@@ -278,7 +279,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the real-time callback group. </p>
-<p>This callback group can be used to assign callbacks that require low latency or have real-time constraints.</p>
+<p>This callback group is reserved for timers or subscriptions with strict timing constraints.</p>
 <dl class="section return"><dt>Returns</dt><dd>Shared pointer to the real-time callback group. </dd></dl>
 
 </div>
@@ -299,7 +300,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Activates the <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> node. </p>
-<p>This starts periodic navigation control cycles.</p>
+<p>Starts timers and prepares the node to begin executing control cycles.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -326,7 +327,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Cleans up the <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> node. </p>
-<p>Releases resources and resets the internal state.</p>
+<p>Releases allocated resources and resets internal state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -353,7 +354,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Configures the <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> node. </p>
-<p>This is typically where parameters and interfaces are declared.</p>
+<p>Declares and loads parameters, initializes the plugin loader, and instantiates the selected localization method.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -380,7 +381,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Deactivates the <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> node. </p>
-<p>Control loops are stopped and interfaces are disabled.</p>
+<p>Stops timers and disables external interfaces without releasing resources.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -407,7 +408,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Handles errors in the <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> node. </p>
-<p>This is called when a failure occurs during a lifecycle transition.</p>
+<p>Called when a lifecycle transition fails, allowing for fallback or recovery behavior.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -434,7 +435,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Shuts down the <a class="el" href="classeasynav_1_1LocalizerNode.html" title="ROS 2 lifecycle node that manages localization for the Easy Navigation system.">LocalizerNode</a> node. </p>
-<p>Called on final shutdown of the node's lifecycle.</p>
+<p>Final stage of the lifecycle. Similar to cleanup, but called during shutdown.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -461,6 +462,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set the current navigation state. </p>
+<p>Updates the internal navigation state used by the localization plugin.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nav_state</td><td>The current state of the navigation system. </td></tr>

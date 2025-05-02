@@ -1,46 +1,52 @@
 <map id="easynav_common/include/easynav_common/types/Perceptions.hpp" name="easynav_common/include/easynav_common/types/Perceptions.hpp">
-<area shape="rect" id="Node000001" title="Definitions for a unified Perception type." alt="" coords="826,5,997,61"/>
-<area shape="rect" id="Node000002" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="527,109,699,165"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="818,69,694,111,692,106,816,64"/>
-<area shape="rect" id="Node000003" href="$NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="213,213,384,268"/>
-<area shape="poly" id="edge21_Node000001_Node000003" title=" " alt="" coords="811,46,669,69,592,87,517,111,465,134,416,161,336,214,333,210,414,157,463,129,515,107,590,82,668,64,810,41"/>
-<area shape="rect" id="Node000009" href="$SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="795,324,1028,364"/>
-<area shape="poly" id="edge22_Node000001_Node000009" title=" " alt="" coords="914,76,914,323,909,323,909,76"/>
-<area shape="rect" id="Node000016" href="$SensorsUtils_8hpp.html" title="uTILITY FUNCTIONS for handling sensor perceptions, including point cloud conversion,..." alt="" coords="964,116,1193,157"/>
-<area shape="poly" id="edge23_Node000001_Node000016" title=" " alt="" coords="971,67,1048,114,1045,118,968,72"/>
-<area shape="rect" id="Node000017" href="$SensorsUtils_8cpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="1154,220,1384,261"/>
-<area shape="poly" id="edge27_Node000001_Node000017" title=" " alt="" coords="1014,37,1062,45,1113,58,1162,78,1207,107,1230,133,1248,163,1267,219,1262,220,1243,165,1226,136,1203,111,1160,83,1111,63,1061,50,1013,42"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="515,172,384,215,382,209,513,167"/>
-<area shape="rect" id="Node000012" href="$DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager method." alt="" coords="408,213,640,268"/>
-<area shape="poly" id="edge15_Node000002_Node000012" title=" " alt="" coords="581,178,550,214,546,210,577,175"/>
-<area shape="rect" id="Node000014" href="$MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="551,316,771,372"/>
-<area shape="poly" id="edge17_Node000002_Node000014" title=" " alt="" coords="640,177,654,212,663,267,665,316,660,316,658,268,649,213,635,179"/>
-<area shape="rect" id="Node000004" href="$LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="23,324,262,364"/>
-<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="246,279,174,326,171,321,243,275"/>
-<area shape="rect" id="Node000006" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="264,428,490,468"/>
-<area shape="poly" id="edge14_Node000003_Node000006" title=" " alt="" coords="305,283,312,327,326,371,343,400,362,425,357,429,338,403,321,373,307,328,299,284"/>
-<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="399,266,507,283,592,292,676,299,783,314,821,321,820,326,782,319,676,305,591,297,506,289,398,271"/>
-<area shape="rect" id="Node000005" href="$LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="5,420,189,476"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="130,380,112,421,107,418,125,378"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="202,368,333,424,330,429,200,373"/>
-<area shape="rect" id="Node000007" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="415,524,640,564"/>
-<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="169,375,219,436,255,473,282,486,323,498,419,520,417,526,321,504,281,491,251,478,215,439,165,379"/>
-<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="423,474,498,521,495,525,420,479"/>
-<area shape="rect" id="Node000008" href="$system__main_8cpp.html" title=" " alt="" coords="251,524,391,564"/>
-<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="360,483,335,525,330,522,355,480"/>
-<area shape="poly" id="edge12_Node000009_Node000006" title=" " alt="" coords="803,371,783,375,488,429,487,424,782,369,802,365"/>
-<area shape="poly" id="edge13_Node000009_Node000007" title=" " alt="" coords="876,376,823,422,799,452,788,465,770,478,707,508,642,527,640,522,705,503,768,473,784,461,795,448,819,418,873,372"/>
-<area shape="rect" id="Node000010" href="$SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="832,428,1066,468"/>
-<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="927,378,944,426,939,428,922,380"/>
-<area shape="rect" id="Node000011" href="$sensors__node__tests_8cpp.html" title=" " alt="" coords="1090,428,1256,468"/>
-<area shape="poly" id="edge11_Node000009_Node000011" title=" " alt="" coords="977,368,1123,424,1121,429,975,373"/>
-<area shape="rect" id="Node000013" href="$DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="336,316,527,372"/>
-<area shape="poly" id="edge16_Node000012_Node000013" title=" " alt="" coords="491,282,458,317,454,314,487,278"/>
-<area shape="poly" id="edge19_Node000014_Node000006" title=" " alt="" coords="571,380,433,429,431,424,570,375"/>
-<area shape="poly" id="edge20_Node000014_Node000007" title=" " alt="" coords="594,383,573,401,555,421,543,447,535,474,530,523,525,523,530,473,538,445,551,419,569,397,591,379"/>
-<area shape="rect" id="Node000015" href="$MapsManagerNode_8cpp.html" title="Implementation of the MapsManagerNode class." alt="" coords="565,420,757,476"/>
-<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="664,388,664,419,658,419,658,388"/>
-<area shape="poly" id="edge24_Node000016_Node000010" title=" " alt="" coords="1083,172,1082,215,1077,267,1065,322,1043,373,1017,405,986,429,983,425,1013,401,1039,371,1060,320,1072,266,1077,215,1078,172"/>
-<area shape="poly" id="edge26_Node000016_Node000011" title=" " alt="" coords="1091,171,1170,426,1165,428,1086,173"/>
-<area shape="poly" id="edge25_Node000016_Node000017" title=" " alt="" coords="1130,162,1234,217,1231,222,1127,167"/>
+<area shape="rect" id="Node000001" title="Definitions for a unified Perception type." alt="" coords="1057,5,1229,61"/>
+<area shape="rect" id="Node000002" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="667,109,838,165"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="1043,63,839,116,838,111,1041,58"/>
+<area shape="rect" id="Node000003" href="$NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="749,213,921,268"/>
+<area shape="poly" id="edge25_Node000001_Node000003" title=" " alt="" coords="1091,72,877,214,874,210,1089,68"/>
+<area shape="rect" id="Node000011" href="$SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="1026,324,1260,364"/>
+<area shape="poly" id="edge26_Node000001_Node000011" title=" " alt="" coords="1146,76,1146,323,1140,323,1140,76"/>
+<area shape="rect" id="Node000018" href="$SensorsUtils_8hpp.html" title="uTILITY FUNCTIONS for handling sensor perceptions, including point cloud conversion,..." alt="" coords="1195,116,1424,157"/>
+<area shape="poly" id="edge27_Node000001_Node000018" title=" " alt="" coords="1202,67,1279,114,1276,118,1199,72"/>
+<area shape="rect" id="Node000019" href="$SensorsUtils_8cpp.html" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="1386,220,1615,261"/>
+<area shape="poly" id="edge31_Node000001_Node000019" title=" " alt="" coords="1245,37,1293,45,1344,58,1393,78,1438,107,1462,133,1479,163,1499,219,1494,220,1474,165,1457,136,1435,111,1391,83,1342,63,1292,50,1244,42"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="786,175,815,210,811,214,782,179"/>
+<area shape="rect" id="Node000014" href="$DummyMapsManager_8hpp.html" title="Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation." alt="" coords="396,213,628,268"/>
+<area shape="poly" id="edge19_Node000002_Node000014" title=" " alt="" coords="675,174,578,214,576,210,673,169"/>
+<area shape="rect" id="Node000016" href="$MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="5,316,225,372"/>
+<area shape="poly" id="edge21_Node000002_Node000016" title=" " alt="" coords="652,154,523,178,453,195,385,215,324,239,263,266,163,318,160,313,261,261,322,234,383,210,452,190,522,173,651,149"/>
+<area shape="rect" id="Node000004" href="$LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigat..." alt="" coords="764,324,1002,364"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="857,281,876,323,871,325,852,284"/>
+<area shape="rect" id="Node000006" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="614,428,840,468"/>
+<area shape="poly" id="edge18_Node000003_Node000006" title=" " alt="" coords="786,281,769,298,755,318,743,346,735,375,730,427,724,427,730,375,738,344,750,315,764,295,782,277"/>
+<area shape="rect" id="Node000009" href="$PlannerNode_8hpp.html" title="Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="464,324,689,364"/>
+<area shape="poly" id="edge9_Node000003_Node000009" title=" " alt="" coords="752,277,628,326,626,321,750,272"/>
+<area shape="poly" id="edge13_Node000003_Node000011" title=" " alt="" coords="933,271,1084,321,1082,326,931,276"/>
+<area shape="rect" id="Node000005" href="$LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="915,420,1099,476"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="920,372,975,417,972,422,917,376"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="842,375,758,429,756,425,839,371"/>
+<area shape="rect" id="Node000007" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="689,524,914,564"/>
+<area shape="poly" id="edge8_Node000004_Node000007" title=" " alt="" coords="882,380,872,427,855,477,839,503,822,525,817,522,835,500,850,475,867,426,876,379"/>
+<area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="754,479,788,522,784,525,750,482"/>
+<area shape="rect" id="Node000008" href="$system__main_8cpp.html" title=" " alt="" coords="525,524,665,564"/>
+<area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="689,480,624,525,621,521,686,475"/>
+<area shape="poly" id="edge11_Node000009_Node000006" title=" " alt="" coords="620,371,700,425,697,429,617,376"/>
+<area shape="poly" id="edge12_Node000009_Node000007" title=" " alt="" coords="470,371,399,394,372,408,356,422,348,436,345,448,347,461,356,474,379,491,415,502,458,510,507,514,603,517,678,521,689,523,688,528,677,526,603,522,506,519,458,515,414,507,377,495,352,478,342,463,340,448,343,434,352,418,369,403,397,389,468,366"/>
+<area shape="rect" id="Node000010" href="$PlannerNode_8cpp.html" title="Implementation of the PlannerNode class." alt="" coords="365,428,590,468"/>
+<area shape="poly" id="edge10_Node000009_Node000010" title=" " alt="" coords="549,378,499,429,495,425,545,374"/>
+<area shape="poly" id="edge16_Node000011_Node000006" title=" " alt="" coords="1048,371,808,429,807,424,1047,366"/>
+<area shape="poly" id="edge17_Node000011_Node000007" title=" " alt="" coords="1147,380,1139,430,1129,456,1113,478,1080,497,1032,512,915,533,914,528,1030,507,1078,492,1109,474,1124,453,1134,429,1141,379"/>
+<area shape="rect" id="Node000012" href="$SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="1364,428,1597,468"/>
+<area shape="poly" id="edge14_Node000011_Node000012" title=" " alt="" coords="1224,367,1416,424,1414,430,1222,372"/>
+<area shape="rect" id="Node000013" href="$sensors__node__tests_8cpp.html" title=" " alt="" coords="1173,428,1340,468"/>
+<area shape="poly" id="edge15_Node000011_Node000013" title=" " alt="" coords="1178,373,1236,425,1233,429,1174,377"/>
+<area shape="rect" id="Node000015" href="$DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="249,316,440,372"/>
+<area shape="poly" id="edge20_Node000014_Node000015" title=" " alt="" coords="456,279,391,318,388,313,453,274"/>
+<area shape="poly" id="edge23_Node000016_Node000006" title=" " alt="" coords="240,370,343,385,423,394,503,402,603,417,640,424,639,429,603,423,502,408,423,399,342,390,239,375"/>
+<area shape="poly" id="edge24_Node000016_Node000007" title=" " alt="" coords="171,378,261,434,337,473,430,499,505,508,581,511,678,521,689,523,688,528,677,526,581,517,504,513,429,504,335,478,259,439,168,383"/>
+<area shape="rect" id="Node000017" href="$MapsManagerNode_8cpp.html" title="Implementation of the MapsManagerNode class." alt="" coords="19,420,211,476"/>
+<area shape="poly" id="edge22_Node000016_Node000017" title=" " alt="" coords="118,388,118,419,112,419,112,388"/>
+<area shape="poly" id="edge28_Node000018_Node000012" title=" " alt="" coords="1328,170,1376,267,1470,426,1466,428,1371,270,1323,173"/>
+<area shape="poly" id="edge30_Node000018_Node000013" title=" " alt="" coords="1307,173,1275,372,1263,427,1258,426,1270,372,1302,172"/>
+<area shape="poly" id="edge29_Node000018_Node000019" title=" " alt="" coords="1361,162,1465,217,1462,222,1359,167"/>
 </map>

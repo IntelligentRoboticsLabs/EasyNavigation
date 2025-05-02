@@ -1,5 +1,5 @@
 <map id="DummyLocalizer" name="DummyLocalizer">
-<area shape="rect" id="Node000001" title="A default &quot;dummy&quot; implementation for the Localizer Method." alt="" coords="20,79,137,105"/>
+<area shape="rect" id="Node000001" title="A default &quot;do&#45;nothing&quot; implementation of the LocalizerMethodBase." alt="" coords="20,79,137,105"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,152,31"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,81,79,76,79,76,46"/>
 </map>

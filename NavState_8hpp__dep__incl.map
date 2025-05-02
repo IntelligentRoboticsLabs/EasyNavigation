@@ -1,23 +1,29 @@
 <map id="easynav_common/include/easynav_common/types/NavState.hpp" name="easynav_common/include/easynav_common/types/NavState.hpp">
-<area shape="rect" id="Node000001" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="294,5,465,61"/>
-<area shape="rect" id="Node000002" href="$LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="104,109,343,150"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="323,71,258,111,255,106,320,67"/>
+<area shape="rect" id="Node000001" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="397,5,568,61"/>
+<area shape="rect" id="Node000002" href="$LocalizerNode_8hpp.html" title="Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigat..." alt="" coords="112,109,351,150"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="397,69,285,111,283,106,395,64"/>
 <area shape="rect" id="Node000004" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="264,205,490,246"/>
-<area shape="poly" id="edge12_Node000001_Node000004" title=" " alt="" coords="382,76,380,205,375,205,376,76"/>
-<area shape="rect" id="Node000007" href="$SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="418,109,651,150"/>
-<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="438,67,503,106,501,111,436,71"/>
+<area shape="poly" id="edge16_Node000001_Node000004" title=" " alt="" coords="462,76,390,206,385,204,458,73"/>
+<area shape="rect" id="Node000007" href="$PlannerNode_8hpp.html" title="Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="456,109,682,150"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="520,71,553,107,549,111,516,74"/>
+<area shape="rect" id="Node000009" href="$SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="711,109,944,150"/>
+<area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="584,59,756,106,755,111,582,64"/>
 <area shape="rect" id="Node000003" href="$LocalizerNode_8cpp.html" title="Implementation of the LocalizerNode class." alt="" coords="5,198,189,253"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="187,161,135,199,132,195,184,157"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="270,156,346,202,344,207,267,160"/>
-<area shape="rect" id="Node000005" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="339,301,564,342"/>
-<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="226,165,233,210,242,232,255,252,273,268,294,282,340,301,338,306,291,286,270,272,251,255,237,235,228,211,221,166"/>
-<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="404,256,438,299,434,303,400,260"/>
-<area shape="rect" id="Node000006" href="$system__main_8cpp.html" title=" " alt="" coords="175,301,315,342"/>
-<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="339,257,274,303,271,299,336,253"/>
-<area shape="poly" id="edge10_Node000007_Node000004" title=" " alt="" coords="490,160,411,207,409,202,487,156"/>
-<area shape="poly" id="edge11_Node000007_Node000005" title=" " alt="" coords="532,166,522,209,505,254,489,281,472,303,467,300,485,278,500,252,516,207,526,165"/>
-<area shape="rect" id="Node000008" href="$SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="566,205,799,246"/>
-<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="579,156,653,202,650,207,576,160"/>
-<area shape="rect" id="Node000009" href="$sensors__node__tests_8cpp.html" title=" " alt="" coords="823,205,990,246"/>
-<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="634,151,812,195,838,202,837,207,811,200,633,156"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="193,161,138,199,135,195,190,156"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="276,156,348,202,345,207,273,160"/>
+<area shape="rect" id="Node000005" href="$SystemNode_8cpp.html" title="Implementation of the SystemNode class." alt="" coords="567,301,792,342"/>
+<area shape="poly" id="edge6_Node000002_Node000005" title=" " alt="" coords="230,165,234,210,242,233,255,251,269,259,295,267,374,282,567,307,566,312,373,287,294,272,267,264,251,255,237,235,229,212,225,165"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="456,248,617,298,616,303,454,253"/>
+<area shape="rect" id="Node000006" href="$system__main_8cpp.html" title=" " alt="" coords="307,301,447,342"/>
+<area shape="poly" id="edge5_Node000004_Node000006" title=" " alt="" coords="380,261,380,301,374,301,374,261"/>
+<area shape="poly" id="edge9_Node000007_Node000004" title=" " alt="" coords="516,159,418,207,416,202,514,155"/>
+<area shape="poly" id="edge10_Node000007_Node000005" title=" " alt="" coords="697,152,729,170,754,196,762,211,763,225,754,254,736,282,712,303,709,299,732,278,749,252,758,224,756,213,750,199,725,174,695,157"/>
+<area shape="rect" id="Node000008" href="$PlannerNode_8cpp.html" title="Implementation of the PlannerNode class." alt="" coords="514,205,739,246"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="591,162,617,203,612,206,587,165"/>
+<area shape="poly" id="edge14_Node000009_Node000004" title=" " alt="" coords="717,156,503,200,470,207,469,202,502,195,716,151"/>
+<area shape="poly" id="edge15_Node000009_Node000005" title=" " alt="" coords="821,166,804,210,776,255,748,282,718,303,715,299,745,278,772,252,799,208,816,164"/>
+<area shape="rect" id="Node000010" href="$SensorsNode_8cpp.html" title="Implementation of the SensorsNode class." alt="" coords="1055,205,1288,246"/>
+<area shape="poly" id="edge12_Node000009_Node000010" title=" " alt="" coords="915,152,1100,202,1099,207,914,157"/>
+<area shape="rect" id="Node000011" href="$sensors__node__tests_8cpp.html" title=" " alt="" coords="864,205,1031,246"/>
+<area shape="poly" id="edge13_Node000009_Node000011" title=" " alt="" coords="866,157,924,203,921,207,863,161"/>
 </map>

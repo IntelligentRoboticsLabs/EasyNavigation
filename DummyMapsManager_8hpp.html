@@ -95,9 +95,10 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Declaration of the DummyMapsManager method.  
+<p>Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;nav_msgs/msg/path.hpp&quot;</code><br />
+<div class="textblock"><code>#include &lt;expected&gt;</code><br />
+<code>#include &quot;nav_msgs/msg/path.hpp&quot;</code><br />
 <code>#include &quot;easynav_core/MapsManagerBase.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="MapTypeBase_8hpp_source.html">easynav_common/types/MapTypeBase.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
@@ -105,27 +106,29 @@ Include dependency graph for DummyMapsManager.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="DummyMapsManager_8hpp__incl.png" border="0" usemap="#aeasynav__maps__manager_2include_2easynav__maps__manager_2DummyMapsManager_8hpp" alt=""/></div>
 <map name="aeasynav__maps__manager_2include_2easynav__maps__manager_2DummyMapsManager_8hpp" id="aeasynav__maps__manager_2include_2easynav__maps__manager_2DummyMapsManager_8hpp">
-<area shape="rect" title="Declaration of the DummyMapsManager method." alt="" coords="171,5,403,61"/>
-<area shape="rect" title=" " alt="" coords="5,116,169,142"/>
-<area shape="poly" title=" " alt="" coords="230,64,128,112,125,107,228,59"/>
-<area shape="rect" title=" " alt="" coords="193,109,381,150"/>
-<area shape="poly" title=" " alt="" coords="290,62,290,94,284,94,284,62"/>
-<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="405,109,566,150"/>
-<area shape="poly" title=" " alt="" coords="346,59,431,100,429,104,343,64"/>
-<area shape="rect" href="Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="405,198,566,238"/>
-<area shape="poly" title=" " alt="" coords="488,150,488,182,483,182,483,150"/>
-<area shape="rect" title=" " alt="" coords="232,286,299,312"/>
-<area shape="poly" title=" " alt="" coords="432,241,315,283,313,278,430,236"/>
-<area shape="rect" title=" " alt="" coords="323,286,376,312"/>
-<area shape="poly" title=" " alt="" coords="453,241,385,281,382,276,450,237"/>
-<area shape="rect" title=" " alt="" coords="401,286,458,312"/>
-<area shape="poly" title=" " alt="" coords="474,240,449,275,445,272,470,237"/>
-<area shape="rect" title=" " alt="" coords="482,286,601,312"/>
-<area shape="poly" title=" " alt="" coords="502,237,526,272,522,275,497,240"/>
-<area shape="rect" title=" " alt="" coords="625,286,744,312"/>
-<area shape="poly" title=" " alt="" coords="536,236,641,278,639,283,534,241"/>
-<area shape="rect" title=" " alt="" coords="767,286,876,312"/>
-<area shape="poly" title=" " alt="" coords="567,236,756,280,754,285,566,241"/>
+<area shape="rect" title="Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation." alt="" coords="168,5,401,61"/>
+<area shape="rect" title=" " alt="" coords="5,116,79,142"/>
+<area shape="poly" title=" " alt="" coords="215,64,88,113,86,108,214,59"/>
+<area shape="rect" title=" " alt="" coords="103,116,266,142"/>
+<area shape="poly" title=" " alt="" coords="258,63,210,108,206,104,254,60"/>
+<area shape="rect" title=" " alt="" coords="291,109,478,150"/>
+<area shape="poly" title=" " alt="" coords="315,60,355,97,351,100,312,63"/>
+<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="503,109,664,150"/>
+<area shape="poly" title=" " alt="" coords="372,59,507,101,506,107,370,64"/>
+<area shape="rect" href="Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="503,198,664,238"/>
+<area shape="poly" title=" " alt="" coords="586,150,586,182,581,182,581,150"/>
+<area shape="rect" title=" " alt="" coords="330,286,397,312"/>
+<area shape="poly" title=" " alt="" coords="529,241,412,283,411,278,527,236"/>
+<area shape="rect" title=" " alt="" coords="421,286,474,312"/>
+<area shape="poly" title=" " alt="" coords="551,241,482,281,480,276,548,237"/>
+<area shape="rect" title=" " alt="" coords="499,286,556,312"/>
+<area shape="poly" title=" " alt="" coords="572,240,547,275,543,272,567,237"/>
+<area shape="rect" title=" " alt="" coords="580,286,698,312"/>
+<area shape="poly" title=" " alt="" coords="599,237,624,272,620,275,595,240"/>
+<area shape="rect" title=" " alt="" coords="723,286,841,312"/>
+<area shape="poly" title=" " alt="" coords="634,236,739,278,737,283,632,241"/>
+<area shape="rect" title=" " alt="" coords="865,286,974,312"/>
+<area shape="poly" title=" " alt="" coords="665,236,853,280,852,285,664,241"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -133,7 +136,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="DummyMapsManager_8hpp__dep__incl.png" border="0" usemap="#aeasynav__maps__manager_2include_2easynav__maps__manager_2DummyMapsManager_8hppdep" alt=""/></div>
 <map name="aeasynav__maps__manager_2include_2easynav__maps__manager_2DummyMapsManager_8hppdep" id="aeasynav__maps__manager_2include_2easynav__maps__manager_2DummyMapsManager_8hppdep">
-<area shape="rect" title="Declaration of the DummyMapsManager method." alt="" coords="5,5,238,61"/>
+<area shape="rect" title="Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation." alt="" coords="5,5,238,61"/>
 <area shape="rect" href="DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="26,109,217,165"/>
 <area shape="poly" title=" " alt="" coords="124,77,124,108,119,108,119,77"/>
 </map>
@@ -144,7 +147,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1DummyMapsManager.html">DummyMapsManager</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "dummy" implementation for the Planner Method.  <a href="classeasynav_1_1DummyMapsManager.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "do-nothing" implementation of MapsManagerBase.  <a href="classeasynav_1_1DummyMapsManager.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -153,7 +156,7 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Declaration of the DummyMapsManager method. </p>
+<div class="textblock"><p>Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

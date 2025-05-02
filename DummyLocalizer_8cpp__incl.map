@@ -1,11 +1,14 @@
 <map id="easynav_localizer/src/easynav_localizer/DummyLocalizer.cpp" name="easynav_localizer/src/easynav_localizer/DummyLocalizer.cpp">
-<area shape="rect" id="Node000001" title="Implementation of the DummyLocalizer class." alt="" coords="190,5,441,46"/>
-<area shape="rect" id="Node000002" href="$DummyLocalizer_8hpp.html" title="Declaration of the DummyLocalizer method." alt="" coords="87,102,334,127"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="293,49,238,94,235,90,290,44"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="359,94,486,135"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="342,44,388,82,385,86,338,49"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="5,190,197,216"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="197,130,130,182,127,178,193,126"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="221,183,421,223"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="227,126,286,171,283,175,224,130"/>
+<area shape="rect" id="Node000001" title="Implementation of the DummyLocalizer class." alt="" coords="75,5,326,46"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,190,79,216"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="133,49,97,68,67,96,56,114,49,135,44,175,39,174,44,133,51,112,63,92,94,64,131,44"/>
+<area shape="rect" id="Node000003" href="$DummyLocalizer_8hpp.html" title="Declaration of the DummyLocalizer class, a default plugin implementation for localization." alt="" coords="77,102,324,127"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,47,203,86,198,86,198,47"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="349,94,476,135"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="250,44,351,85,349,90,248,49"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="180,130,79,185,76,180,177,125"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="104,190,295,216"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="203,128,202,175,197,174,198,128"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="319,183,520,223"/>
+<area shape="poly" id="edge5_Node000003_Node000005" title=" " alt="" coords="233,125,357,174,355,179,231,130"/>
 </map>

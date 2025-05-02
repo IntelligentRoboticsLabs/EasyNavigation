@@ -96,7 +96,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.  
+<p>ROS 2 lifecycle node that manages path planning for the Easy Navigation system.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="PlannerNode_8hpp_source.html">PlannerNode.hpp</a>&gt;</code></p>
@@ -105,7 +105,7 @@ Inheritance diagram for PlannerNode:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1PlannerNode__inherit__graph.png" border="0" usemap="#aPlannerNode_inherit__map" alt="Inheritance graph"/></div>
 <map name="aPlannerNode_inherit__map" id="aPlannerNode_inherit__map">
-<area shape="rect" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system." alt="" coords="9,79,106,105"/>
+<area shape="rect" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system." alt="" coords="9,79,106,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,110,31"/>
 <area shape="poly" title=" " alt="" coords="60,46,60,79,55,79,55,46"/>
 </map>
@@ -115,7 +115,7 @@ Collaboration diagram for PlannerNode:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1PlannerNode__coll__graph.png" border="0" usemap="#aPlannerNode_coll__map" alt="Collaboration graph"/></div>
 <map name="aPlannerNode_coll__map" id="aPlannerNode_coll__map">
-<area shape="rect" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system." alt="" coords="9,79,106,105"/>
+<area shape="rect" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system." alt="" coords="9,79,106,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,110,31"/>
 <area shape="poly" title=" " alt="" coords="60,46,60,79,55,79,55,46"/>
 </map>
@@ -129,42 +129,42 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a618c508c69d8fe9751cc8d659d62f294" id="r_a618c508c69d8fe9751cc8d659d62f294"><td class="memItemLeft" align="right" valign="top">nav_msgs::msg::Path&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a618c508c69d8fe9751cc8d659d62f294">get_path</a> () const</td></tr>
-<tr class="memdesc:a618c508c69d8fe9751cc8d659d62f294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current navigation path.  <br /></td></tr>
+<tr class="memdesc:a618c508c69d8fe9751cc8d659d62f294"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recent computed navigation path.  <br /></td></tr>
 <tr class="separator:a618c508c69d8fe9751cc8d659d62f294"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8366fef9515c0b0cd47949fbfc018641" id="r_a8366fef9515c0b0cd47949fbfc018641"><td class="memItemLeft" align="right" valign="top">rclcpp::CallbackGroup::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8366fef9515c0b0cd47949fbfc018641">get_real_time_cbg</a> ()</td></tr>
 <tr class="memdesc:a8366fef9515c0b0cd47949fbfc018641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the real-time callback group.  <br /></td></tr>
 <tr class="separator:a8366fef9515c0b0cd47949fbfc018641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26f6915d7f6c74f8cf2e766e352ef4a1" id="r_a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26f6915d7f6c74f8cf2e766e352ef4a1">on_activate</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
 <tr class="separator:a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51a30cb3859b0fc27bd0aafaa778acb2" id="r_a51a30cb3859b0fc27bd0aafaa778acb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51a30cb3859b0fc27bd0aafaa778acb2">on_cleanup</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a51a30cb3859b0fc27bd0aafaa778acb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a51a30cb3859b0fc27bd0aafaa778acb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
 <tr class="separator:a51a30cb3859b0fc27bd0aafaa778acb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a316621c227e6363944e9d141fc227697" id="r_a316621c227e6363944e9d141fc227697"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a316621c227e6363944e9d141fc227697">on_configure</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a316621c227e6363944e9d141fc227697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a316621c227e6363944e9d141fc227697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
 <tr class="separator:a316621c227e6363944e9d141fc227697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc8a8fa2ed2c7efe041cde46ce4c3c9b" id="r_afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc8a8fa2ed2c7efe041cde46ce4c3c9b">on_deactivate</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
+<tr class="memdesc:afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
 <tr class="separator:afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b0782b915f4798a61ae8b9e56ebd5fb" id="r_a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b0782b915f4798a61ae8b9e56ebd5fb">on_error</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles errors in the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles errors during lifecycle transitions.  <br /></td></tr>
 <tr class="separator:a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38b74771f6ab23805f990786e4d6f806" id="r_a38b74771f6ab23805f990786e4d6f806"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38b74771f6ab23805f990786e4d6f806">on_shutdown</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a38b74771f6ab23805f990786e4d6f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a38b74771f6ab23805f990786e4d6f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node.  <br /></td></tr>
 <tr class="separator:a38b74771f6ab23805f990786e4d6f806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af704ae61f2177a980bf10e15c267159d" id="r_af704ae61f2177a980bf10e15c267159d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#af704ae61f2177a980bf10e15c267159d">PlannerNode</a> (const rclcpp::NodeOptions &amp;options=rclcpp::NodeOptions())</td></tr>
-<tr class="memdesc:af704ae61f2177a980bf10e15c267159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> lifecycle node with the specified options.  <br /></td></tr>
+<tr class="memdesc:af704ae61f2177a980bf10e15c267159d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> lifecycle node with the specified options.  <br /></td></tr>
 <tr class="separator:af704ae61f2177a980bf10e15c267159d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab236eebc784f0964df7ca06e685f4994" id="r_ab236eebc784f0964df7ca06e685f4994"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab236eebc784f0964df7ca06e685f4994">set_nav_state</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> nav_state)</td></tr>
 <tr class="memdesc:ab236eebc784f0964df7ca06e685f4994"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the current navigation state.  <br /></td></tr>
 <tr class="separator:ab236eebc784f0964df7ca06e685f4994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a10ae20b189dd786b467a8441316e13d7" id="r_a10ae20b189dd786b467a8441316e13d7"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a10ae20b189dd786b467a8441316e13d7">~PlannerNode</a> ()</td></tr>
-<tr class="memdesc:a10ae20b189dd786b467a8441316e13d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> object.  <br /></td></tr>
+<tr class="memdesc:a10ae20b189dd786b467a8441316e13d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> object.  <br /></td></tr>
 <tr class="separator:a10ae20b189dd786b467a8441316e13d7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system. </p>
-<p>This node provides the interface between the planner module in EasyNav and the ROS 2 ecosystem. It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup. </p>
+<div class="textblock"><p>ROS 2 lifecycle node that manages path planning for the Easy Navigation system. </p>
+<p>This node provides the interface between the planner plugin and the ROS 2 ecosystem. It manages lifecycle transitions, real-time callback scheduling, and invokes the underlying PlannerMethodBase implementation to generate navigation paths. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ad09d90f1fe35c9e2f2fd7fc1902312f4" name="ad09d90f1fe35c9e2f2fd7fc1902312f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">&#9670;&#160;</a></span>CallbackReturnT</h2>
@@ -204,10 +204,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> lifecycle node with the specified options. </p>
+<p>Constructs a <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> lifecycle node with the specified options. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">options</td><td>Node options to configure the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node. </td></tr>
+    <tr><td class="paramname">options</td><td>Node options to configure the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node. </td></tr>
   </table>
   </dd>
 </dl>
@@ -229,7 +229,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> object. </p>
+<p>Destroys the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> object. </p>
 
 </div>
 </div>
@@ -257,8 +257,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Get the current navigation path. </p>
-<dl class="section return"><dt>Returns</dt><dd>An Odometry message representing the current navigation path. </dd></dl>
+<p>Get the most recent computed navigation path. </p>
+<dl class="section return"><dt>Returns</dt><dd>nav_msgs::msg::Path representing the current navigation plan. </dd></dl>
 
 </div>
 </div>
@@ -278,7 +278,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Returns the real-time callback group. </p>
-<p>This callback group can be used to assign callbacks that require low latency or have real-time constraints.</p>
+<p>This group is used to assign callbacks that require low latency or hard timing constraints.</p>
 <dl class="section return"><dt>Returns</dt><dd>Shared pointer to the real-time callback group. </dd></dl>
 
 </div>
@@ -298,8 +298,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Activates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node. </p>
-<p>This starts periodic navigation control cycles.</p>
+<p>Activates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node. </p>
+<p>This starts periodic planning updates.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -325,8 +325,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Cleans up the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node. </p>
-<p>Releases resources and resets the internal state.</p>
+<p>Cleans up the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node. </p>
+<p>Releases resources and resets internal state.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -352,7 +352,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Configures the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node. </p>
+<p>Configures the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node. </p>
 <p>This is typically where parameters and interfaces are declared.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -379,7 +379,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Deactivates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node. </p>
+<p>Deactivates the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node. </p>
 <p>Control loops are stopped and interfaces are disabled.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
@@ -406,8 +406,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handles errors in the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node. </p>
-<p>This is called when a failure occurs during a lifecycle transition.</p>
+<p>Handles errors during lifecycle transitions. </p>
+<p>This method is triggered if an error occurs while transitioning states.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -433,8 +433,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Shuts down the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.">PlannerNode</a> node. </p>
-<p>Called on final shutdown of the node's lifecycle.</p>
+<p>Shuts down the <a class="el" href="classeasynav_1_1PlannerNode.html" title="ROS 2 lifecycle node that manages path planning for the Easy Navigation system.">PlannerNode</a> node. </p>
+<p>Called during the final shutdown phase.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
@@ -461,9 +461,10 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Set the current navigation state. </p>
+<p>This state is passed to the planner plugin during updates.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nav_state</td><td>The current state of the navigation system. </td></tr>
+    <tr><td class="paramname">nav_state</td><td>The new navigation state. </td></tr>
   </table>
   </dd>
 </dl>

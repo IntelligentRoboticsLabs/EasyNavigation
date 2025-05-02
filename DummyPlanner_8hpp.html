@@ -95,20 +95,23 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>Declaration of the DummyPlanner method.  
+<p>Declaration of the DummyPlanner class, a default fallback planner plugin.  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;nav_msgs/msg/path.hpp&quot;</code><br />
+<div class="textblock"><code>#include &lt;expected&gt;</code><br />
+<code>#include &quot;nav_msgs/msg/path.hpp&quot;</code><br />
 <code>#include &quot;easynav_core/PlannerMethodBase.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for DummyPlanner.hpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="DummyPlanner_8hpp__incl.png" border="0" usemap="#aeasynav__planner_2include_2easynav__planner_2DummyPlanner_8hpp" alt=""/></div>
 <map name="aeasynav__planner_2include_2easynav__planner_2DummyPlanner_8hpp" id="aeasynav__planner_2include_2easynav__planner_2DummyPlanner_8hpp">
-<area shape="rect" title="Declaration of the DummyPlanner method." alt="" coords="68,5,306,46"/>
-<area shape="rect" title=" " alt="" coords="5,102,169,127"/>
-<area shape="poly" title=" " alt="" coords="166,49,114,94,110,90,163,44"/>
-<area shape="rect" title=" " alt="" coords="192,94,384,135"/>
-<area shape="poly" title=" " alt="" coords="212,44,256,82,252,86,208,49"/>
+<area shape="rect" title="Declaration of the DummyPlanner class, a default fallback planner plugin." alt="" coords="66,5,304,46"/>
+<area shape="rect" title=" " alt="" coords="5,102,79,127"/>
+<area shape="poly" title=" " alt="" coords="154,49,76,96,73,91,151,44"/>
+<area shape="rect" title=" " alt="" coords="103,102,266,127"/>
+<area shape="poly" title=" " alt="" coords="187,47,187,86,182,86,182,47"/>
+<area shape="rect" title=" " alt="" coords="290,94,482,135"/>
+<area shape="poly" title=" " alt="" coords="231,44,327,85,325,90,229,49"/>
 </map>
 </div>
 </div><div class="textblock"><div class="dynheader">
@@ -116,7 +119,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <div class="dyncontent">
 <div class="center"><img src="DummyPlanner_8hpp__dep__incl.png" border="0" usemap="#aeasynav__planner_2include_2easynav__planner_2DummyPlanner_8hppdep" alt=""/></div>
 <map name="aeasynav__planner_2include_2easynav__planner_2DummyPlanner_8hppdep" id="aeasynav__planner_2include_2easynav__planner_2DummyPlanner_8hppdep">
-<area shape="rect" title="Declaration of the DummyPlanner method." alt="" coords="5,5,244,46"/>
+<area shape="rect" title="Declaration of the DummyPlanner class, a default fallback planner plugin." alt="" coords="5,5,244,46"/>
 <area shape="rect" href="DummyPlanner_8cpp.html" title="Implementation of the DummyPlanner class." alt="" coords="5,94,244,135"/>
 <area shape="poly" title=" " alt="" coords="127,62,127,94,122,94,122,62"/>
 </map>
@@ -127,7 +130,7 @@ This graph shows which files directly or indirectly include this file:</div>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classeasynav_1_1DummyPlanner.html">DummyPlanner</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "dummy" implementation for the Planner Method.  <a href="classeasynav_1_1DummyPlanner.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A default "do-nothing" implementation of PlannerMethodBase.  <a href="classeasynav_1_1DummyPlanner.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="namespaces" name="namespaces"></a>
@@ -136,7 +139,7 @@ Namespaces</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Declaration of the DummyPlanner method. </p>
+<div class="textblock"><p>Declaration of the DummyPlanner class, a default fallback planner plugin. </p>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

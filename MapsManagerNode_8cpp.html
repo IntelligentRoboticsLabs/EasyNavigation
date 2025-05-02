@@ -102,42 +102,48 @@ $(function(){ initResizable(false); });
 <code>#include &quot;lifecycle_msgs/msg/transition.hpp&quot;</code><br />
 <code>#include &quot;lifecycle_msgs/msg/state.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="MapsManagerNode_8hpp_source.html">easynav_maps_manager/MapsManagerNode.hpp</a>&quot;</code><br />
+<code>#include &quot;easynav_core/MapsManagerBase.hpp&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for MapsManagerNode.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="MapsManagerNode_8cpp__incl.png" border="0" usemap="#aeasynav__maps__manager_2src_2easynav__maps__manager_2MapsManagerNode_8cpp" alt=""/></div>
 <map name="aeasynav__maps__manager_2src_2easynav__maps__manager_2MapsManagerNode_8cpp" id="aeasynav__maps__manager_2src_2easynav__maps__manager_2MapsManagerNode_8cpp">
-<area shape="rect" title="Implementation of the MapsManagerNode class." alt="" coords="247,5,438,61"/>
-<area shape="rect" title=" " alt="" coords="5,116,125,142"/>
-<area shape="poly" title=" " alt="" coords="263,64,116,114,114,109,261,59"/>
-<area shape="rect" title=" " alt="" coords="51,205,178,231"/>
-<area shape="poly" title=" " alt="" coords="268,64,227,85,189,111,154,152,129,193,124,190,150,148,186,107,224,80,265,59"/>
-<area shape="rect" title=" " alt="" coords="387,198,548,238"/>
-<area shape="poly" title=" " alt="" coords="363,60,448,184,444,187,359,63"/>
-<area shape="rect" title=" " alt="" coords="440,109,576,150"/>
-<area shape="poly" title=" " alt="" coords="391,59,461,99,459,103,389,64"/>
-<area shape="rect" title=" " alt="" coords="600,109,736,150"/>
-<area shape="poly" title=" " alt="" coords="437,59,586,102,585,107,436,64"/>
-<area shape="rect" href="MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="200,109,365,150"/>
-<area shape="poly" title=" " alt="" coords="327,63,305,97,301,94,323,60"/>
-<area shape="poly" title=" " alt="" coords="245,153,152,200,150,195,243,148"/>
-<area shape="poly" title=" " alt="" coords="326,148,413,188,411,193,323,153"/>
-<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="202,198,363,238"/>
-<area shape="poly" title=" " alt="" coords="285,150,285,182,280,182,280,150"/>
-<area shape="rect" href="Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="202,286,363,327"/>
-<area shape="poly" title=" " alt="" coords="285,239,285,271,280,271,280,239"/>
-<area shape="rect" title=" " alt="" coords="29,375,96,401"/>
-<area shape="poly" title=" " alt="" coords="228,330,111,372,110,367,226,325"/>
-<area shape="rect" title=" " alt="" coords="120,375,173,401"/>
-<area shape="poly" title=" " alt="" coords="250,330,181,369,179,365,247,325"/>
-<area shape="rect" title=" " alt="" coords="198,375,255,401"/>
-<area shape="poly" title=" " alt="" coords="271,329,246,364,242,360,266,326"/>
-<area shape="rect" title=" " alt="" coords="279,375,398,401"/>
-<area shape="poly" title=" " alt="" coords="298,326,323,360,319,364,294,329"/>
-<area shape="rect" title=" " alt="" coords="422,375,540,401"/>
-<area shape="poly" title=" " alt="" coords="333,325,438,366,436,371,331,330"/>
-<area shape="rect" title=" " alt="" coords="564,375,673,401"/>
-<area shape="poly" title=" " alt="" coords="364,324,552,368,551,374,363,329"/>
+<area shape="rect" title="Implementation of the MapsManagerNode class." alt="" coords="296,5,487,61"/>
+<area shape="rect" title=" " alt="" coords="64,116,183,142"/>
+<area shape="poly" title=" " alt="" coords="315,64,174,113,172,108,313,59"/>
+<area shape="rect" title=" " alt="" coords="5,205,133,231"/>
+<area shape="poly" title=" " alt="" coords="347,64,197,152,107,200,105,195,194,147,345,59"/>
+<area shape="rect" title=" " alt="" coords="156,198,318,238"/>
+<area shape="poly" title=" " alt="" coords="352,64,325,85,299,111,273,148,253,185,249,183,269,145,295,107,321,81,349,59"/>
+<area shape="rect" title=" " alt="" coords="549,109,685,150"/>
+<area shape="poly" title=" " alt="" coords="458,59,557,100,555,105,456,64"/>
+<area shape="rect" title=" " alt="" coords="709,109,845,150"/>
+<area shape="poly" title=" " alt="" coords="489,55,694,105,693,110,487,60"/>
+<area shape="rect" href="MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="309,109,474,150"/>
+<area shape="poly" title=" " alt="" coords="394,62,394,94,389,94,389,62"/>
+<area shape="rect" title=" " alt="" coords="721,198,908,238"/>
+<area shape="poly" title=" " alt="" coords="428,60,488,107,512,129,538,147,609,170,706,193,705,198,608,176,536,152,509,133,485,111,425,64"/>
+<area shape="poly" title=" " alt="" coords="319,153,130,203,128,198,317,148"/>
+<area shape="poly" title=" " alt="" coords="358,153,286,192,284,188,355,148"/>
+<area shape="rect" href="MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="535,198,696,238"/>
+<area shape="poly" title=" " alt="" coords="443,148,551,189,549,194,442,153"/>
+<area shape="poly" title=" " alt="" coords="475,145,706,192,705,197,474,150"/>
+<area shape="rect" title=" " alt="" coords="342,205,511,231"/>
+<area shape="poly" title=" " alt="" coords="402,149,418,190,414,192,397,151"/>
+<area shape="rect" href="Perceptions_8hpp.html" title="Definitions for a unified Perception type." alt="" coords="535,286,696,327"/>
+<area shape="poly" title=" " alt="" coords="618,239,618,271,613,271,613,239"/>
+<area shape="rect" title=" " alt="" coords="362,375,429,401"/>
+<area shape="poly" title=" " alt="" coords="562,330,445,372,443,367,560,325"/>
+<area shape="rect" title=" " alt="" coords="453,375,506,401"/>
+<area shape="poly" title=" " alt="" coords="583,330,515,369,512,365,580,325"/>
+<area shape="rect" title=" " alt="" coords="531,375,588,401"/>
+<area shape="poly" title=" " alt="" coords="604,329,579,364,575,360,600,326"/>
+<area shape="rect" title=" " alt="" coords="612,375,731,401"/>
+<area shape="poly" title=" " alt="" coords="632,326,656,360,652,364,627,329"/>
+<area shape="rect" title=" " alt="" coords="755,375,874,401"/>
+<area shape="poly" title=" " alt="" coords="666,325,771,366,769,371,664,330"/>
+<area shape="rect" title=" " alt="" coords="897,375,1006,401"/>
+<area shape="poly" title=" " alt="" coords="697,324,886,368,884,374,696,329"/>
 </map>
 </div>
 </div><table class="memberdecls">

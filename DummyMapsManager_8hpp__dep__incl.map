@@ -1,5 +1,5 @@
 <map id="easynav_maps_manager/include/easynav_maps_manager/DummyMapsManager.hpp" name="easynav_maps_manager/include/easynav_maps_manager/DummyMapsManager.hpp">
-<area shape="rect" id="Node000001" title="Declaration of the DummyMapsManager method." alt="" coords="5,5,238,61"/>
+<area shape="rect" id="Node000001" title="Declaration of the DummyMapsManager class, a default map manager plugin for Easy Navigation." alt="" coords="5,5,238,61"/>
 <area shape="rect" id="Node000002" href="$DummyMapsManager_8cpp.html" title="Implementation of the DummyMapsManager class." alt="" coords="26,109,217,165"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="124,77,124,108,119,108,119,77"/>
 </map>
