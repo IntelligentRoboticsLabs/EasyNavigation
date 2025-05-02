@@ -143,7 +143,12 @@ private:
   /**
    * @brief Timer that triggers the real-time system cycle.
    */
-  rclcpp::TimerBase::SharedPtr system_main_timer_;
+  rclcpp::TimerBase::SharedPtr system_main_rt_timer_;
+
+  /**
+   * @brief Timer that triggers the non-real-time system cycle.
+   */
+  rclcpp::TimerBase::SharedPtr system_main_nort_timer_;
 
   /**
    * @brief Controller module node.

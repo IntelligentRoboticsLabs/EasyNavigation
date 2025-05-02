@@ -18,31 +18,29 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the LocalizerNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigation.
 
 #ifndef EASYNAV_LOCALIZER__LOCALIZERNODE_HPP_
 #define EASYNAV_LOCALIZER__LOCALIZERNODE_HPP_
 
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+#include "pluginlib/class_loader.hpp"
 
 #include "easynav_core/LocalizerMethodBase.hpp"
-#include <easynav_common/types/NavState.hpp>
+#include "easynav_common/types/NavState.hpp"
 
 namespace easynav
 {
-
-/// \file
-/// \brief Declaration of the LocalizerNode class, a ROS 2 lifecycle node for localization tasks in Easy Navigation.
 
 /**
  * @class LocalizerNode
  * @brief ROS 2 lifecycle node that manages localization for the Easy Navigation system.
  *
- * This node provides the interface between the localization module in EasyNav and the ROS 2 ecosystem.
- * It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup.
+ * This node serves as a runtime interface between the ROS 2 ecosystem and the
+ * localization method plugin in EasyNav. It manages the lifecycle transitions,
+ * real-time control cycles, and dynamic loading of the localization method.
  */
-
 class LocalizerNode : public rclcpp_lifecycle::LifecycleNode
 {
 public:
@@ -62,7 +60,9 @@ public:
 
   /**
    * @brief Configures the LocalizerNode node.
-   * This is typically where parameters and interfaces are declared.
+   *
+   * Declares and loads parameters, initializes the plugin loader, and instantiates
+   * the selected localization method.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if configuration is successful.
@@ -71,7 +71,8 @@ public:
 
   /**
    * @brief Activates the LocalizerNode node.
-   * This starts periodic navigation control cycles.
+   *
+   * Starts timers and prepares the node to begin executing control cycles.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if activation is successful.
@@ -80,7 +81,8 @@ public:
 
   /**
    * @brief Deactivates the LocalizerNode node.
-   * Control loops are stopped and interfaces are disabled.
+   *
+   * Stops timers and disables external interfaces without releasing resources.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if deactivation is successful.
@@ -89,7 +91,8 @@ public:
 
   /**
    * @brief Cleans up the LocalizerNode node.
-   * Releases resources and resets the internal state.
+   *
+   * Releases allocated resources and resets internal state.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
@@ -98,7 +101,8 @@ public:
 
   /**
    * @brief Shuts down the LocalizerNode node.
-   * Called on final shutdown of the node's lifecycle.
+   *
+   * Final stage of the lifecycle. Similar to cleanup, but called during shutdown.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
@@ -107,7 +111,8 @@ public:
 
   /**
    * @brief Handles errors in the LocalizerNode node.
-   * This is called when a failure occurs during a lifecycle transition.
+   *
+   * Called when a lifecycle transition fails, allowing for fallback or recovery behavior.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating error handling is complete.
@@ -117,8 +122,7 @@ public:
   /**
    * @brief Returns the real-time callback group.
    *
-   * This callback group can be used to assign callbacks that require
-   * low latency or have real-time constraints.
+   * This callback group is reserved for timers or subscriptions with strict timing constraints.
    *
    * @return Shared pointer to the real-time callback group.
    */
@@ -127,12 +131,16 @@ public:
   /**
    * @brief Get the current localization state.
    *
-   * @return An Odometry message representing the current localization state.
+   * Retrieves the most recent odometry estimate produced by the localization method.
+   *
+   * @return An Odometry message representing the current robot pose and velocity.
    */
   [[nodiscard]] nav_msgs::msg::Odometry get_odom() const;
 
   /**
    * @brief Set the current navigation state.
+   *
+   * Updates the internal navigation state used by the localization plugin.
    *
    * @param nav_state The current state of the navigation system.
    */
@@ -145,38 +153,40 @@ private:
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the periodic localizer tasks cycle.
+   * @brief Timer that triggers the periodic localization cycle.
    */
   rclcpp::TimerBase::SharedPtr localizer_main_timer_;
 
   /**
-   * @brief Pointer to the localization method.
-   *
-   * This is the actual localization algorithm that will be used.
+   * @brief Pointer to the dynamically loaded localization method.
    */
   std::shared_ptr<LocalizerMethodBase> localizer_method_ {nullptr};
 
   /**
-   * @brief Current navigation state.
-   *
-   * This is the current state of the navigation system.
+   * @brief Current navigation state passed to the localization plugin.
    */
   NavState nav_state_;
 
   /**
-   * @brief Executes one cycle of real-time system operations.
+   * @brief Executes one cycle of real-time localization tasks.
    *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
+   * Typically called from a real-time timer. Invokes the plugin's update method.
    */
   void localizer_cycle_rt();
 
   /**
-   * @brief Executes one cycle of non-real-time system operations.
+   * @brief Executes one cycle of non-real-time localization tasks.
    *
-   * This function manages background tasks not requiring strict real-time execution.
+   * May be used for diagnostics, debugging, or deferred operations.
    */
   void localizer_cycle_nort();
+
+  /**
+   * @brief Pluginlib loader for LocalizerMethodBase plugins.
+   *
+   * Used to dynamically instantiate the localization method based on configuration.
+   */
+  std::unique_ptr<pluginlib::ClassLoader<easynav::LocalizerMethodBase>> localizer_loader_;
 };
 
 }  // namespace easynav

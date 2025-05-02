@@ -50,7 +50,7 @@ public:
    * @param value The value to store.
    * @return A Result<T, E> containing the value.
    */
-  static Result Ok(T value)
+  static Result Ok(T value = T())
   {
     return Result(std::move(value));
   }

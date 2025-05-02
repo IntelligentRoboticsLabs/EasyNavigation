@@ -107,7 +107,10 @@ SystemNode::on_activate(const rclcpp_lifecycle::State & state)
     }
   }
 
-  system_main_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle_rt, this),
+  system_main_rt_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle_rt, this),
+    realtime_cbg_);
+
+  system_main_nort_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle_nort, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
@@ -131,7 +134,8 @@ SystemNode::on_deactivate(const rclcpp_lifecycle::State & state)
     }
   }
 
-  system_main_timer_->cancel();
+  system_main_rt_timer_->cancel();
+  system_main_nort_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -178,9 +182,10 @@ SystemNode::system_cycle_rt()
 void
 SystemNode::system_cycle_nort()
 {
-  // nav_state_.perceptions = sensors_node_->get_perceptions();
+  std::cerr << "*" << std::endl;
+  nav_state_.perceptions = sensors_node_->get_perceptions();
   // nav_state_.position = localizer_node_->get_robot_position();
-  // maps_manager_node_->set_state(nav_state_);
+  maps_manager_node_->set_nav_state(nav_state_);
   // nav_state_.dynamic_map = maps_manager_node_->get_dynamic_map();
   // planner_node_->set_state(nav_state_);
 

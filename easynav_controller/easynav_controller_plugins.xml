@@ -1,5 +1,5 @@
 <class_libraries>
-  <library path="easynav_dummy_controller">
+  <library path="dummy_controller">
     <class name="easynav_controller/DummyController"  type="easynav::DummyController" base_class_type="easynav::ControllerMethodBase">
       <description>
       A default "dummy" implementation for the Controller Method.

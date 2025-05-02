@@ -25,7 +25,10 @@
 
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+
 #include "easynav_common/types/MapTypeBase.hpp"
+#include "easynav_core/MapsManagerBase.hpp"
+#include "pluginlib/class_loader.hpp"
 
 namespace easynav
 {
@@ -34,11 +37,10 @@ namespace easynav
  * @class MapsManagerNode
  * @brief ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.
  *
- * This node is responsible for orchestrating the mapping functionality in the EasyNav architecture.
- * It includes lifecycle management, real-time callback group assignment, and periodic execution of
- * map-related operations such as updates, data fusion, and diagnostics.
+ * This node acts as the orchestrator for multiple map manager plugins, each responsible
+ * for a specific type of map representation. It handles lifecycle state transitions,
+ * loads plugins dynamically, and schedules map updates in real-time or background cycles.
  */
-
 class MapsManagerNode : public rclcpp_lifecycle::LifecycleNode
 {
 public:
@@ -51,11 +53,15 @@ public:
    */
   explicit MapsManagerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
+  /**
+   * @brief Destructor.
+   */
   ~MapsManagerNode();
 
   /**
    * @brief Configures the MapsManagerNode node.
-   * This is typically where parameters and interfaces are declared.
+   *
+   * Loads parameters, instantiates maps manager plugins, and prepares internal structures.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if configuration is successful.
@@ -64,7 +70,8 @@ public:
 
   /**
    * @brief Activates the MapsManagerNode node.
-   * This starts periodic navigation control cycles.
+   *
+   * Starts timers and enables execution of map-related tasks.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if activation is successful.
@@ -73,7 +80,8 @@ public:
 
   /**
    * @brief Deactivates the MapsManagerNode node.
-   * Control loops are stopped and interfaces are disabled.
+   *
+   * Stops timers and disables map-related interfaces.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if deactivation is successful.
@@ -82,7 +90,8 @@ public:
 
   /**
    * @brief Cleans up the MapsManagerNode node.
-   * Releases resources and resets the internal state.
+   *
+   * Releases all resources and resets the internal state.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
@@ -91,7 +100,8 @@ public:
 
   /**
    * @brief Shuts down the MapsManagerNode node.
-   * Called on final shutdown of the node's lifecycle.
+   *
+   * Called at final shutdown of the lifecycle node.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
@@ -100,7 +110,8 @@ public:
 
   /**
    * @brief Handles errors in the MapsManagerNode node.
-   * This is called when a failure occurs during a lifecycle transition.
+   *
+   * Invoked when a transition fails and recovery or diagnostics are needed.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating error handling is complete.
@@ -110,40 +121,65 @@ public:
   /**
    * @brief Returns the real-time callback group.
    *
-   * This callback group can be used to assign callbacks that require
-   * low latency or have real-time constraints.
+   * This callback group is used for low-latency tasks that must not block.
    *
    * @return Shared pointer to the real-time callback group.
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
+  /**
+   * @brief Set the current navigation state for the system.
+   *
+   * This state is passed to map manager plugins during update cycles.
+   *
+   * @param nav_state The current navigation state.
+   */
+  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+
 private:
   /**
-   * @brief Callback group intended for real-time tasks.
+   * @brief Callback group intended for real-time map operations.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the periodic map tasks cycle.
+   * @brief Timer that triggers the periodic map update cycle.
    */
   rclcpp::TimerBase::SharedPtr maps_manager_main_timer_;
 
-  /** List of map representations */
-  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
   /**
-   * @brief Executes one cycle of real-time system operations.
+   * @brief List of active map instances in memory.
+   */
+  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
+
+  /**
+   * @brief Executes one cycle of real-time operations for all map managers.
    *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
+   * Calls each map plugin’s update and/or publishing interface.
    */
   void maps_manager_cycle_rt();
 
   /**
-   * @brief Executes one cycle of non-real-time system operations.
+   * @brief Executes one cycle of non-real-time operations.
    *
-   * This function manages background tasks not requiring strict real-time execution.
+   * Reserved for diagnostics, visualization, or heavy I/O.
    */
   void maps_manager_cycle_nort();
+
+  /**
+   * @brief Plugin loader for MapsManagerBase-based implementations.
+   */
+  std::unique_ptr<pluginlib::ClassLoader<MapsManagerBase>> maps_manager_loader_;
+
+  /**
+   * @brief List of active map manager plugin instances.
+   */
+  std::vector<std::shared_ptr<MapsManagerBase>> maps_managers_;
+
+  /**
+   * @brief Latest known navigation state.
+   */
+  NavState nav_state_;
 };
 
 }  // namespace easynav

@@ -20,17 +20,21 @@
 /// \file
 /// \brief Implementation of the DummyPlanner class.
 
+#include <expected>
+
 #include "easynav_planner/DummyPlanner.hpp"
 
 namespace easynav
 {
 
-void DummyPlanner::on_initialize()
+std::expected<void, std::string> DummyPlanner::on_initialize()
 {
   // Initialize the Path message
   path_.header.stamp = get_node()->now();
   path_.header.frame_id = "map";
   path_.poses.clear();
+
+  return {};
 }
 
 nav_msgs::msg::Path DummyPlanner::get_path()
