@@ -182,9 +182,9 @@ SensorsNode::sensors_cycle_nort()
 
   if (percept_pub_->get_subscription_count() > 0) {
     auto cloned = PerceptionsOps(perceptions_).clone();
-    PerceptionsOps(cloned).fuse(perception_default_frame_, *tf_buffer_);
+    auto fused = PerceptionsOps(cloned).fuse(perception_default_frame_, *tf_buffer_);
 
-    percept_pub_->publish(perception_to_rosmsg(*cloned[0]));
+    percept_pub_->publish(perception_to_rosmsg(fused.fused_perception()));
   }
 }
 

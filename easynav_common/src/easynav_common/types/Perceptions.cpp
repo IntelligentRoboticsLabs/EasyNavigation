@@ -308,4 +308,13 @@ PerceptionsOps::fused_data() const
   return perceptions_[0]->data;
 }
 
+const Perception &
+PerceptionsOps::fused_perception() const
+{
+  if (perceptions_.size() != 1) {
+    throw std::runtime_error("fused_data() requires exactly one perception.");
+  }
+  return *perceptions_[0];
+}
+
 }  // namespace easynav

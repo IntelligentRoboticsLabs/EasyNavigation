@@ -212,6 +212,15 @@ public:
    */
   const pcl::PointCloud<pcl::PointXYZ> & fused_data() const;
 
+  /**
+   * @brief Returns the (fused) single Perception.
+   *
+   * This is only valid after a `fuse()` operation that results in a single entry.
+   *
+   * @return Const reference to a fused Perception.
+   */
+  const Perception & fused_perception() const;
+
 private:
   std::optional<Perceptions> owned_;  ///< Owned container in case of copy construction.
   Perceptions & perceptions_;         ///< Reference to the underlying Perceptions container.
