@@ -87,6 +87,14 @@ perception_to_rosmsg(const Perception & perception)
   return msg;
 }
 
+sensor_msgs::msg::PointCloud2
+points_to_rosmsg(const pcl::PointCloud<pcl::PointXYZ> & cloud)
+{
+  sensor_msgs::msg::PointCloud2 msg;
+  pcl::toROSMsg(cloud, msg);
+  return msg;
+}
+
 template<typename MsgT>
 rclcpp::SubscriptionBase::SharedPtr create_typed_subscription(
   rclcpp_lifecycle::LifecycleNode & node,
@@ -144,85 +152,43 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
     }, options);
 }
 
-PerceptionsOps::PerceptionsOps(Perceptions & perceptions)
-: perceptions_(perceptions)
-{}
 
-PerceptionsOps::PerceptionsOps(const Perceptions & perceptions)
-: owned_(perceptions), perceptions_(*owned_)
-{}
-
-Perceptions
-PerceptionsOps::clone() const
+PerceptionsOpsView::PerceptionsOpsView(const Perceptions & perceptions)
+: perceptions_(perceptions), indices_(perceptions.size())
 {
-  Perceptions copy;
-  for (const auto & p : perceptions_) {
-    auto new_p = std::make_shared<Perception>();
-    new_p->stamp = p->stamp;
-    new_p->frame_id = p->frame_id;
-    new_p->valid = p->valid;
-    new_p->data = p->data;
-    copy.push_back(new_p);
-  }
-  return copy;
-}
-
-PerceptionsOps &
-PerceptionsOps::fuse(
-  const std::string & target_frame,
-  tf2_ros::Buffer & tf_buffer)
-{
-  pcl::PointCloud<pcl::PointXYZ> merged;
-  std::optional<rclcpp::Time> latest_stamp;
-
-  for (const auto & p : perceptions_) {
-    if (!p || !p->valid || p->data.empty()) {continue;}
-
-    geometry_msgs::msg::TransformStamped tf;
-
-    try {
-      tf = tf_buffer.lookupTransform(
-        target_frame, p->frame_id, tf2_ros::fromMsg(p->stamp), tf2::durationFromSec(0.0));
-    } catch (const tf2::TransformException & ex) {
-      RCLCPP_WARN(rclcpp::get_logger("PerceptionsOps"), "TF failed: %s", ex.what());
-      continue;
-    }
-
-    Eigen::Affine3d tf_eigen = tf2::transformToEigen(tf);
-    pcl::PointCloud<pcl::PointXYZ> transformed;
-
-    pcl::transformPointCloud(p->data, transformed, tf_eigen);
-
-    merged += transformed;
-    if (!latest_stamp.has_value() || p->stamp > latest_stamp.value()) {
-      latest_stamp = p->stamp;
+  for (std::size_t i = 0; i < perceptions.size(); ++i) {
+    if (perceptions[i]) {
+      indices_[i].indices.resize(perceptions[i]->data.size());
+      std::iota(indices_[i].indices.begin(), indices_[i].indices.end(), 0);
     }
   }
-
-
-  auto fused = std::make_shared<Perception>();
-  fused->data = merged;
-  fused->stamp = latest_stamp.value_or(rclcpp::Time(0));
-  fused->frame_id = target_frame;
-  fused->valid = true;
-
-  perceptions_.clear();
-  perceptions_.push_back(fused);
-
-  return *this;
 }
 
+PerceptionsOpsView::PerceptionsOpsView(Perceptions && perceptions)
+: owned_(std::move(perceptions)), perceptions_(*owned_), indices_(perceptions_.size())
+{
+  for (std::size_t i = 0; i < perceptions_.size(); ++i) {
+    if (perceptions_[i]) {
+      indices_[i].indices.resize(perceptions_[i]->data.size());
+      std::iota(indices_[i].indices.begin(), indices_[i].indices.end(), 0);
+    }
+  }
+}
 
-PerceptionsOps &
-PerceptionsOps::filter(
+PerceptionsOpsView &
+PerceptionsOpsView::filter(
   const std::vector<double> & min_bounds,
   const std::vector<double> & max_bounds)
 {
-  for (auto & p : perceptions_) {
-    if (!p || !p->valid) {continue;}
+  for (std::size_t i = 0; i < perceptions_.size(); ++i) {
+    if (!perceptions_[i]) {continue;}
 
-    pcl::PointCloud<pcl::PointXYZ> filtered;
-    for (const auto & pt : p->data.points) {
+    const auto & cloud = perceptions_[i]->data;
+    auto & indices = indices_[i].indices;
+
+    std::size_t write_idx = 0;
+    for (std::size_t read_idx = 0; read_idx < indices.size(); ++read_idx) {
+      const auto & pt = cloud[indices[read_idx]];
       bool keep = true;
       if (!std::isnan(min_bounds[0]) && pt.x < min_bounds[0]) {keep = false;}
       if (!std::isnan(max_bounds[0]) && pt.x > max_bounds[0]) {keep = false;}
@@ -230,91 +196,139 @@ PerceptionsOps::filter(
       if (!std::isnan(max_bounds[1]) && pt.y > max_bounds[1]) {keep = false;}
       if (!std::isnan(min_bounds[2]) && pt.z < min_bounds[2]) {keep = false;}
       if (!std::isnan(max_bounds[2]) && pt.z > max_bounds[2]) {keep = false;}
-      if (keep) {filtered.points.push_back(pt);}
-    }
-    filtered.width = filtered.points.size();
-    filtered.height = 1;
-    p->data = std::move(filtered);
-  }
 
-  return *this;
-}
-
-PerceptionsOps &
-PerceptionsOps::collapse(const std::vector<double> & fixed_coords)
-{
-  for (auto & p : perceptions_) {
-    if (!p || !p->valid) {continue;}
-    for (auto & pt : p->data.points) {
-      if (!std::isnan(fixed_coords[0])) {pt.x = fixed_coords[0];}
-      if (!std::isnan(fixed_coords[1])) {pt.y = fixed_coords[1];}
-      if (!std::isnan(fixed_coords[2])) {pt.z = fixed_coords[2];}
-    }
-  }
-  return *this;
-}
-
-struct VoxelKey
-{
-  int x, y, z;
-  bool operator==(const VoxelKey & other) const
-  {
-    return x == other.x && y == other.y && z == other.z;
-  }
-};
-
-struct VoxelKeyHash
-{
-  std::size_t operator()(const VoxelKey & k) const
-  {
-    return ((std::hash<int>()(k.x) ^ (std::hash<int>()(k.y) << 1)) >> 1) ^ (std::hash<int>()(k.z) <<
-           1);
-  }
-};
-
-PerceptionsOps &
-PerceptionsOps::downsample(double resolution)
-{
-  for (auto & p : perceptions_) {
-    if (!p || !p->valid) {continue;}
-
-    std::unordered_set<VoxelKey, VoxelKeyHash> seen;
-    pcl::PointCloud<pcl::PointXYZ> filtered;
-
-    for (const auto & pt : p->data.points) {
-      int xi = static_cast<int>(std::floor(pt.x / resolution));
-      int yi = static_cast<int>(std::floor(pt.y / resolution));
-      int zi = static_cast<int>(std::floor(pt.z / resolution));
-      VoxelKey key{xi, yi, zi};
-      if (seen.insert(key).second) {
-        filtered.points.push_back(pt);
+      if (keep) {
+        indices[write_idx++] = indices[read_idx];
       }
     }
 
-    filtered.width = filtered.points.size();
-    filtered.height = 1;
-    p->data = std::move(filtered);
+    indices.resize(write_idx);
   }
 
   return *this;
 }
 
-const pcl::PointCloud<pcl::PointXYZ> &
-PerceptionsOps::fused_data() const
+PerceptionsOpsView &
+PerceptionsOpsView::downsample(double resolution)
 {
-  if (perceptions_.size() != 1) {
-    throw std::runtime_error("fused_data() requires exactly one perception.");
+  for (std::size_t i = 0; i < perceptions_.size(); ++i) {
+    if (!perceptions_[i]) {continue;}
+
+    const auto & cloud = perceptions_[i]->data;
+    auto & indices = indices_[i].indices;
+
+    std::unordered_set<std::tuple<int, int, int>> voxel_set;
+    std::size_t write_idx = 0;
+
+    for (std::size_t read_idx = 0; read_idx < indices.size(); ++read_idx) {
+      const auto & pt = cloud[indices[read_idx]];
+      auto voxel = std::make_tuple(
+        static_cast<int>(pt.x / resolution),
+        static_cast<int>(pt.y / resolution),
+        static_cast<int>(pt.z / resolution));
+
+      if (voxel_set.insert(voxel).second) {
+        indices[write_idx++] = indices[read_idx];
+      }
+    }
+
+    indices.resize(write_idx);
   }
-  return perceptions_[0]->data;
+
+  return *this;
 }
 
-const Perception &
-PerceptionsOps::fused_perception() const
+std::shared_ptr<PerceptionsOpsView>
+PerceptionsOpsView::collapse(const std::vector<double> & collapse_dims) const
 {
-  if (perceptions_.size() != 1) {
-    throw std::runtime_error("fused_data() requires exactly one perception.");
+  Perceptions result;
+
+  for (std::size_t i = 0; i < perceptions_.size(); ++i) {
+    if (!perceptions_[i]) {continue;}
+
+    auto collapsed = std::make_shared<Perception>();
+    collapsed->valid = perceptions_[i]->valid;
+    collapsed->frame_id = perceptions_[i]->frame_id;
+    collapsed->stamp = perceptions_[i]->stamp;
+
+    const auto & cloud = perceptions_[i]->data;
+    for (int idx : indices_[i].indices) {
+      auto pt = cloud[idx];
+      if (!std::isnan(collapse_dims[0])) {pt.x = collapse_dims[0];}
+      if (!std::isnan(collapse_dims[1])) {pt.y = collapse_dims[1];}
+      if (!std::isnan(collapse_dims[2])) {pt.z = collapse_dims[2];}
+      collapsed->data.push_back(pt);
+    }
+
+    result.push_back(collapsed);
   }
-  return *perceptions_[0];
+
+  return std::make_shared<PerceptionsOpsView>(std::move(result));
+}
+
+pcl::PointCloud<pcl::PointXYZ>
+PerceptionsOpsView::as_points() const
+{
+  pcl::PointCloud<pcl::PointXYZ> output;
+  for (std::size_t i = 0; i < perceptions_.size(); ++i) {
+    if (!perceptions_[i]) {continue;}
+    const auto & cloud = perceptions_[i]->data;
+    for (int idx : indices_[i].indices) {
+      output.push_back(cloud[idx]);
+    }
+  }
+  return output;
+}
+
+const pcl::PointCloud<pcl::PointXYZ> &
+PerceptionsOpsView::as_points(int idx) const
+{
+  return perceptions_[idx]->data;
+}
+
+std::shared_ptr<PerceptionsOpsView>
+PerceptionsOpsView::fuse(
+  const std::string & target_frame,
+  tf2_ros::Buffer & tf_buffer) const
+{
+  auto fused = std::make_shared<Perception>();
+  fused->valid = true;
+  fused->frame_id = target_frame;
+  std::optional<rclcpp::Time> latest_stamp;
+
+  for (std::size_t i = 0; i < perceptions_.size(); ++i) {
+    const auto & p = perceptions_[i];
+    if (!p || !p->valid || p->data.empty()) {continue;}
+
+    geometry_msgs::msg::TransformStamped tf;
+    try {
+      tf = tf_buffer.lookupTransform(
+        target_frame, p->frame_id, tf2_ros::fromMsg(p->stamp), tf2::durationFromSec(0.0));
+    } catch (const tf2::TransformException & ex) {
+      RCLCPP_WARN(rclcpp::get_logger("PerceptionsOpsView"), "TF failed: %s", ex.what());
+      continue;
+    }
+
+    Eigen::Affine3d tf_eigen = tf2::transformToEigen(tf);
+    pcl::PointCloud<pcl::PointXYZ> transformed;
+    for (int idx : indices_[i].indices) {
+      transformed.push_back(p->data[idx]);
+    }
+
+    pcl::transformPointCloud(transformed, transformed, tf_eigen);
+    fused->data += transformed;
+
+    if (!latest_stamp.has_value() || p->stamp > latest_stamp.value()) {
+      latest_stamp = p->stamp;
+    }
+  }
+
+  fused->stamp = latest_stamp.value_or(rclcpp::Time(0));
+
+  Perceptions result;
+  result.push_back(fused);
+
+  return std::make_shared<PerceptionsOpsView>(std::move(result));
 }
 
 }  // namespace easynav

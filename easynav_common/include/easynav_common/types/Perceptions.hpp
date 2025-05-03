@@ -29,9 +29,11 @@
 
 #include "pcl_conversions/pcl_conversions.h"
 #include "pcl/point_types_conversion.h"
+
 #include "pcl/common/transforms.h"
 #include "pcl/point_cloud.h"
 #include "pcl/point_types.h"
+#include "pcl/PointIndices.h"
 #include "tf2_eigen/tf2_eigen.hpp"
 
 #include "sensor_msgs/msg/laser_scan.hpp"
@@ -39,6 +41,24 @@
 
 #include "rclcpp/time.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
+
+
+namespace std
+{
+
+template<>
+struct hash<std::tuple<int, int, int>>
+{
+  std::size_t operator()(const std::tuple<int, int, int> & key) const
+  {
+    std::size_t h1 = std::hash<int>()(std::get<0>(key));
+    std::size_t h2 = std::hash<int>()(std::get<1>(key));
+    std::size_t h3 = std::hash<int>()(std::get<2>(key));
+    return h1 ^ (h2 << 1) ^ (h3 << 2);  // combinación simple
+  }
+};
+
+}  // namespace std
 
 namespace easynav
 {
@@ -82,6 +102,14 @@ void convert(const sensor_msgs::msg::LaserScan & scan, pcl::PointCloud<pcl::Poin
 sensor_msgs::msg::PointCloud2 perception_to_rosmsg(const Perception & perception);
 
 /**
+ * @brief Converts points into a ROS PointCloud2 message.
+ *
+ * @param points The input points as a pcl::PointCloud<pcl::PointXYZ>
+ * @return sensor_msgs::msg::PointCloud2 The resulting PointCloud2 message.
+ */
+sensor_msgs::msg::PointCloud2 points_to_rosmsg(const pcl::PointCloud<pcl::PointXYZ> & points);
+
+/**
  * @brief Creates a subscription for a given sensor message type and binds it to a Perception object.
  *
  * @tparam MsgT The sensor message type (e.g., LaserScan, PointCloud2).
@@ -121,110 +149,106 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
   rclcpp::CallbackGroup::SharedPtr cbg);
 
 /**
- * @class PerceptionsOps
- * @brief Helper class providing efficient, chainable operations on Perceptions.
+ * @class PerceptionsOpsView
+ * @brief Provides efficient, non-destructive, chainable operations over a set of sensor perceptions.
  *
- * Allows filtering, fusing, collapsing, and downsampling of point clouds
- * within the Perceptions container with performance in mind and fluent syntax.
+ * This class operates over a constant reference to a Perceptions container and uses point indices
+ * to define views over the original point clouds, enabling efficient processing without modifying or copying data.
+ * It supports filtering and downsampling. Collapsing and fusing produce new views.
  */
-class PerceptionsOps
+class PerceptionsOpsView
 {
 public:
-  /**
-   * @brief Constructs an operation interface over a mutable reference to a Perceptions container.
-   * @param perceptions The Perceptions container to operate on.
-   */
-  explicit PerceptionsOps(Perceptions & perceptions);
+  struct VoxelKey
+  {
+    int x, y, z;
+    bool operator==(const VoxelKey & other) const
+    {
+      return x == other.x && y == other.y && z == other.z;
+    }
+  };
+
+  struct VoxelKeyHash
+  {
+    std::size_t operator()(const VoxelKey & key) const
+    {
+      std::size_t h1 = std::hash<int>{}(key.x);
+      std::size_t h2 = std::hash<int>{}(key.y);
+      std::size_t h3 = std::hash<int>{}(key.z);
+      return h1 ^ (h2 << 1) ^ (h3 << 2);
+    }
+  };
 
   /**
-   * @brief Constructs an operation interface from a const Perceptions container, taking ownership.
-   *        The internal container is copied and kept alive inside the operator object.
-   * @param perceptions The Perceptions container to copy and own.
+   * @brief Constructs a view interface for the given Perceptions.
+   * @param perceptions A constant reference to a vector of shared pointers to Perception instances.
    */
-  explicit PerceptionsOps(const Perceptions & perceptions);
+  explicit PerceptionsOpsView(const Perceptions & perceptions);
+  explicit PerceptionsOpsView(Perceptions && perceptions);
 
   /**
-   * @brief Returns a deep copy of the current Perceptions container.
-   * @return A cloned Perceptions object (shared_ptrs with copied PCL data).
+   * @brief Filters all point clouds according to given bounds (x, y, z). NaN disables dimension filtering.
+   *
+   * @param min_bounds A vector of 3 doubles specifying minimum allowed values per axis. Use NAN to ignore.
+   * @param max_bounds A vector of 3 doubles specifying maximum allowed values per axis. Use NAN to ignore.
+   * @return Reference to self for chaining.
    */
-  Perceptions clone() const;
-
-  /**
-   * @brief Fuses all valid perceptions into a single point cloud, transforming to the given target frame.
-   *
-   * The fused result replaces all previous entries, and is stored in a new single Perception.
-   *
-   * @param target_frame Target coordinate frame for transformation.
-   * @param tf_buffer The TF buffer used to resolve transformations.
-   * @return Reference to this object (for method chaining).
-   */
-  PerceptionsOps & fuse(const std::string & target_frame, tf2_ros::Buffer & tf_buffer);
-
-  /**
-   * @brief Filters all point clouds based on spatial bounds.
-   *
-   * Only keeps points within [min_bounds, max_bounds]. Any dimension set to NaN is ignored.
-   *
-   * @param min_bounds Minimum (x, y, z) bounds. Use NaN to skip a dimension.
-   * @param max_bounds Maximum (x, y, z) bounds. Use NaN to skip a dimension.
-   * @return Reference to this object (for method chaining).
-   */
-  PerceptionsOps & filter(
+  PerceptionsOpsView & filter(
     const std::vector<double> & min_bounds,
     const std::vector<double> & max_bounds);
 
   /**
-   * @brief Collapses one or more dimensions of all point clouds to a fixed value.
+   * @brief Applies voxel grid downsampling to each perception using a given resolution.
    *
-   * Any dimension specified with a numeric value is overwritten. NaN leaves the dimension unchanged.
-   *
-   * @param collapse_dims Vector of 3 values for (x, y, z). Use NaN to skip.
-   * @return Reference to this object (for method chaining).
+   * @param resolution The voxel size in meters.
+   * @return Reference to self for chaining.
    */
-  PerceptionsOps & collapse(const std::vector<double> & collapse_dims);
+  PerceptionsOpsView & downsample(double resolution);
 
   /**
-   * @brief Applies voxel grid filtering to all point clouds in the Perceptions container.
+   * @brief Collapses selected dimensions to fixed values.
    *
-   * @param resolution The voxel size to use for downsampling (in meters).
-   * @return Reference to this object (for method chaining).
+   * Any dimension set to NaN will be left unchanged.
+   *
+   * @param collapse_dims A vector of 3 values representing the fixed coordinates per axis.
+   * @return A shared pointer to a new PerceptionsOpsView created with the collapsed perception.
    */
-  PerceptionsOps & downsample(double resolution);
+  std::shared_ptr<PerceptionsOpsView> collapse(const std::vector<double> & collapse_dims) const;
 
   /**
-   * @brief Returns a const reference to the internal Perceptions container.
-   * @return Const reference to Perceptions.
+   * @brief Returns the resulting points from the current view as a single flat vector.
+   *        The returned vector is built with copies of the selected points.
+   * @return A std::vector containing all filtered, downsampled, or collapsed points.
    */
-  const Perceptions & get() const;
+  pcl::PointCloud<pcl::PointXYZ> as_points() const;
 
   /**
-   * @brief Returns a mutable reference to the internal Perceptions container.
-   * @return Reference to Perceptions.
+   * @brief Returns the resulting points from the current view as a reference to pcl::PointCloud<pcl::PointXYZ>.
+   *        The returned vector is built with copies of the selected points.
+   * @param idx The index to the perception to return data.
+   * @return A pcl::PointCloud<pcl::PointXYZ> all filtered, downsampled, or collapsed points.
    */
-  Perceptions & get();
+  const pcl::PointCloud<pcl::PointXYZ> & as_points(int idx) const;
 
   /**
-   * @brief Returns the point cloud data from the (fused) single Perception.
+   * @brief Fuses the current view into a single Perception, transforming each cloud into the target frame.
    *
-   * This is only valid after a `fuse()` operation that results in a single entry.
+   * The resulting Perception includes all valid points from the selected indices, transformed via tf.
    *
-   * @return Const reference to the fused pcl::PointCloud<pcl::PointXYZ>.
+   * @param target_frame The desired target frame.
+   * @param tf_buffer TF buffer used for coordinate transformations.
+   * @return A shared pointer to a new PerceptionsOpsView wrapping the fused perception.
    */
-  const pcl::PointCloud<pcl::PointXYZ> & fused_data() const;
-
-  /**
-   * @brief Returns the (fused) single Perception.
-   *
-   * This is only valid after a `fuse()` operation that results in a single entry.
-   *
-   * @return Const reference to a fused Perception.
-   */
-  const Perception & fused_perception() const;
+  std::shared_ptr<PerceptionsOpsView> fuse(
+    const std::string & target_frame,
+    tf2_ros::Buffer & tf_buffer) const;
 
 private:
-  std::optional<Perceptions> owned_;  ///< Owned container in case of copy construction.
-  Perceptions & perceptions_;         ///< Reference to the underlying Perceptions container.
+  std::optional<Perceptions> owned_;
+  const Perceptions & perceptions_;  ///< Reference to the original Perceptions container.
+  std::vector<pcl::PointIndices> indices_;  ///< Selected point indices for each Perception.
 };
+
 
 }  // namespace easynav
 
