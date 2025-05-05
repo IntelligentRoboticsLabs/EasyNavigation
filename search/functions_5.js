@@ -16,6 +16,5 @@ var searchData=
   ['get_5fscan_5ftest_5f3_13',['get_scan_test_3',['../sensors__node__tests_8cpp.html#a23efabd9e7ad12a441729673581de29f',1,'sensors_node_tests.cpp']]],
   ['get_5fscan_5ftest_5f4_14',['get_scan_test_4',['../sensors__node__tests_8cpp.html#a60427f64e78eed185876f16255f88644',1,'sensors_node_tests.cpp']]],
   ['get_5fstatic_5fmap_15',['get_static_map',['../classeasynav_1_1DummyMapsManager.html#a7a608228397f52826ef2d19c08213924',1,'easynav::DummyMapsManager']]],
-  ['get_5fsystem_5fnodes_16',['get_system_nodes',['../classeasynav_1_1SystemNode.html#a514922ffaeaefa826c2d33243b19891f',1,'easynav::SystemNode']]],
-  ['get_5fvariant_17',['get_variant',['../classeasynav_1_1ConfigurationValue.html#a5c05022f1a36069a31ee02de7d5d9282',1,'easynav::ConfigurationValue']]]
+  ['get_5fsystem_5fnodes_16',['get_system_nodes',['../classeasynav_1_1SystemNode.html#a514922ffaeaefa826c2d33243b19891f',1,'easynav::SystemNode']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['navstate_0',['NavState',['../structeasynav_1_1NavState.html',1,'easynav']]]
+  ['mapsmanagernode_0',['MapsManagerNode',['../classeasynav_1_1MapsManagerNode.html',1,'easynav']]],
+  ['mapstypebase_1',['MapsTypeBase',['../classeasynav_1_1MapsTypeBase.html',1,'easynav']]]
 ];

@@ -118,7 +118,8 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
+<div class="foldopen" id="foldopen00030" data-start="{" data-end="}">
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="namespaceeasynav.html">   30</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>{</div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span></div>
 <div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> E&gt;</div>
@@ -208,16 +209,17 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00155" name="l00155"></a><span class="lineno">  155</span> </div>
 <div class="line"><a id="l00156" name="l00156"></a><span class="lineno">  156</span><span class="keyword">private</span>:</div>
 <div class="line"><a id="l00158" name="l00158"></a><span class="lineno">  158</span>  <span class="keyword">explicit</span> <a class="code hl_class" href="classeasynav_1_1Result.html">Result</a>(T <a class="code hl_function" href="classeasynav_1_1Result.html#ab5d906b55180c260032ce43d6c5d4d06">value</a>)</div>
-<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  : value_(std::move(<a class="code hl_function" href="classeasynav_1_1Result.html#ab5d906b55180c260032ce43d6c5d4d06">value</a>)) {}</div>
+<div class="line"><a id="l00159" name="l00159"></a><span class="lineno">  159</span>  : value_(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(<a class="code hl_function" href="classeasynav_1_1Result.html#ab5d906b55180c260032ce43d6c5d4d06">value</a>)) {}</div>
 <div class="line"><a id="l00160" name="l00160"></a><span class="lineno">  160</span></div>
 <div class="line"><a id="l00162" name="l00162"></a><span class="lineno">  162</span>  <span class="keyword">explicit</span> Result(E <a class="code hl_function" href="classeasynav_1_1Result.html#a2c701edbd06d95945db2533ec27eeb1f">error</a>)</div>
-<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  : value_(std::move(<a class="code hl_function" href="classeasynav_1_1Result.html#a2c701edbd06d95945db2533ec27eeb1f">error</a>)) {}</div>
+<div class="line"><a id="l00163" name="l00163"></a><span class="lineno">  163</span>  : value_(<a class="code hl_namespace" href="namespacestd.html">std</a>::move(<a class="code hl_function" href="classeasynav_1_1Result.html#a2c701edbd06d95945db2533ec27eeb1f">error</a>)) {}</div>
 <div class="line"><a id="l00164" name="l00164"></a><span class="lineno">  164</span> </div>
 <div class="line"><a id="l00165" name="l00165"></a><span class="lineno">  165</span>  <a class="code hl_typedef" href="classeasynav_1_1Result.html#afffa0dbe3a9d5eddeaf6378f18d59437">ValueType</a> value_;</div>
 <div class="line"><a id="l00166" name="l00166"></a><span class="lineno">  166</span>};</div>
 </div>
 <div class="line"><a id="l00167" name="l00167"></a><span class="lineno">  167</span> </div>
 <div class="line"><a id="l00168" name="l00168"></a><span class="lineno">  168</span>}  <span class="comment">// namespace easynav</span></div>
+</div>
 <div class="line"><a id="l00169" name="l00169"></a><span class="lineno">  169</span> </div>
 <div class="line"><a id="l00170" name="l00170"></a><span class="lineno">  170</span><span class="preprocessor">#endif  </span><span class="comment">// EASYNAV_COMMON__RESULT_HPP_</span></div>
 <div class="ttc" id="aclasseasynav_1_1Result_html"><div class="ttname"><a href="classeasynav_1_1Result.html">easynav::Result</a></div><div class="ttdoc">Generic result type that holds either a value (T) or an error (E).</div><div class="ttdef"><b>Definition</b> Result.hpp:43</div></div>
@@ -231,7 +233,8 @@ $(function(){ initResizable(false); });
 <div class="ttc" id="aclasseasynav_1_1Result_html_adf91898e0eca6655321e2ed8a0dbbbbe"><div class="ttname"><a href="classeasynav_1_1Result.html#adf91898e0eca6655321e2ed8a0dbbbbe">easynav::Result::Ok</a></div><div class="ttdeci">static Result Ok(T value=T())</div><div class="ttdoc">Creates a successful result.</div><div class="ttdef"><b>Definition</b> Result.hpp:53</div></div>
 <div class="ttc" id="aclasseasynav_1_1Result_html_ae6cb88cb8483d2851d615c6f31d2b1fe"><div class="ttname"><a href="classeasynav_1_1Result.html#ae6cb88cb8483d2851d615c6f31d2b1fe">easynav::Result::and_then</a></div><div class="ttdeci">auto and_then(Func f) const -&gt; decltype(f(std::declval&lt; T &gt;()))</div><div class="ttdoc">Chains operations that return another Result if the current one is Ok.</div><div class="ttdef"><b>Definition</b> Result.hpp:147</div></div>
 <div class="ttc" id="aclasseasynav_1_1Result_html_afffa0dbe3a9d5eddeaf6378f18d59437"><div class="ttname"><a href="classeasynav_1_1Result.html#afffa0dbe3a9d5eddeaf6378f18d59437">easynav::Result::ValueType</a></div><div class="ttdeci">std::variant&lt; T, E &gt; ValueType</div><div class="ttdoc">Variant type that stores either a success value or an error.</div><div class="ttdef"><b>Definition</b> Result.hpp:46</div></div>
-<div class="ttc" id="anamespaceeasynav_html"><div class="ttname"><a href="namespaceeasynav.html">easynav</a></div><div class="ttdef"><b>Definition</b> Configuration.hpp:32</div></div>
+<div class="ttc" id="anamespaceeasynav_html"><div class="ttname"><a href="namespaceeasynav.html">easynav</a></div><div class="ttdef"><b>Definition</b> Result.hpp:31</div></div>
+<div class="ttc" id="anamespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div><div class="ttdef"><b>Definition</b> Perceptions.hpp:47</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

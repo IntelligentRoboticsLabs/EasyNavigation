@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['update_0',['update',['../classeasynav_1_1DummyController.html#adbea5f6d7a91b4a1f7fa21d5a46c18aa',1,'easynav::DummyController::update()'],['../classeasynav_1_1DummyLocalizer.html#adbea5f6d7a91b4a1f7fa21d5a46c18aa',1,'easynav::DummyLocalizer::update()'],['../classeasynav_1_1DummyMapsManager.html#adbea5f6d7a91b4a1f7fa21d5a46c18aa',1,'easynav::DummyMapsManager::update()'],['../classeasynav_1_1DummyPlanner.html#adbea5f6d7a91b4a1f7fa21d5a46c18aa',1,'easynav::DummyPlanner::update()']]]
+  ['value_0',['value',['../classeasynav_1_1Result.html#ab5d906b55180c260032ce43d6c5d4d06',1,'easynav::Result']]],
+  ['value_5for_1',['value_or',['../classeasynav_1_1Result.html#a85e64abd67d3a569203b23bacc76bf0a',1,'easynav::Result']]]
 ];
