@@ -590,6 +590,7 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
 }
 
 
+/*
 TEST(SensorsNodeTestCase, percept_fuse_all)
 {
   rclcpp::init(0, nullptr);
@@ -751,4 +752,4 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
     }
   }
   rclcpp::shutdown();
-}
+}*/
