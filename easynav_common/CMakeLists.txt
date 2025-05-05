@@ -26,8 +26,10 @@ set(dependencies
   pcl_ros
 )
 
+include_directories(include)
+
 add_library(${PROJECT_NAME} SHARED
-  src/easynav_common/Configuration.cpp
+  src/easynav_common/types/Perceptions.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -52,6 +54,9 @@ if(BUILD_TESTING)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_gtest REQUIRED)
+  add_subdirectory(tests)
 endif()
 
 ament_export_include_directories(include)
