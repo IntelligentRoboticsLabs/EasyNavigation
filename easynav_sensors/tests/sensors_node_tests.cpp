@@ -590,8 +590,10 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
 }
 
 
-TEST_F(SensorsNodeTestCase, percept_fuse_all)
+TEST(SensorsNodeTestCase, percept_fuse_all)
 {
+  rclcpp::init(0, nullptr);
+
   auto sensors_node = easynav::SensorsNode::make_shared();
   auto test_node = rclcpp::Node::make_shared("test_node");
   auto laser1_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>(
@@ -748,4 +750,5 @@ TEST_F(SensorsNodeTestCase, percept_fuse_all)
       ASSERT_EQ(p.z, 1.0);
     }
   }
+  rclcpp::shutdown();
 }
