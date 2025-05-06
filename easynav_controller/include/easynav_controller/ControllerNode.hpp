@@ -52,7 +52,9 @@ public:
    * @brief Constructs a ControllerNode lifecycle node with the specified options.
    * @param options Node options to configure the ControllerNode node.
    */
-  explicit ControllerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit ControllerNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destroys the ControllerNode object.
@@ -130,13 +132,6 @@ public:
    */
   [[nodiscard]] geometry_msgs::msg::TwistStamped get_cmd_vel() const;
 
-  /**
-   * @brief Set the current navigation state.
-   *
-   * @param nav_state The current state of the navigation system.
-   */
-  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
-
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -160,7 +155,7 @@ private:
    *
    * This is the current state of the navigation system.
    */
-  NavState nav_state_;
+  const std::shared_ptr<const NavState> nav_state_;
 
   /**
    * @brief Executes one cycle of real-time controller logic.

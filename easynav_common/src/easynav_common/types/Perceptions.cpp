@@ -71,12 +71,6 @@ convert(const sensor_msgs::msg::LaserScan & scan, pcl::PointCloud<pcl::PointXYZ>
   }
 }
 
-/**
- * @brief Converts a Perception into a ROS PointCloud2 message.
- *
- * @param perception The input Perception.
- * @return sensor_msgs::msg::PointCloud2 The resulting PointCloud2 message.
- */
 sensor_msgs::msg::PointCloud2
 perception_to_rosmsg(const Perception & perception)
 {
@@ -125,6 +119,7 @@ create_typed_subscription<sensor_msgs::msg::LaserScan>(
       perception->frame_id = msg->header.frame_id;
       perception->stamp = msg->header.stamp;
       perception->valid = true;
+      new_data = true;
     }, options);
 }
 
@@ -149,6 +144,7 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
       perception->frame_id = msg->header.frame_id;
       perception->stamp = msg->header.stamp;
       perception->valid = true;
+      new_data = true;
     }, options);
 }
 

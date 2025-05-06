@@ -79,7 +79,17 @@ public:
    *
    * @param nav_state The current navigation state of the system.
    */
-  virtual void update(const NavState & nav_state) override;
+  virtual void update_rt(const NavState & nav_state) override;
+
+  /**
+   * @brief Updates the localization estimate based on the current navigation state.
+   *
+   * This method is intended to run the localization logic and update the odometry.
+   * In this dummy implementation, it does nothing.
+   *
+   * @param nav_state The current navigation state of the system.
+   */
+  virtual void update_nort(const NavState & nav_state) override;
 
 private:
   /**

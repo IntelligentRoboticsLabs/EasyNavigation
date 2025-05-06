@@ -37,8 +37,11 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-SensorsNode::SensorsNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("sensors_node", options)
+SensorsNode::SensorsNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options)
+: LifecycleNode("sensors_node", options),
+  nav_state_(nav_state)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
@@ -170,6 +173,20 @@ SensorsNode::get_real_time_cbg()
 {
   return realtime_cbg_;
 }
+
+bool
+SensorsNode::localizer_cycle_rt(bool trigger)
+{
+  (void)trigger;
+
+  bool trigger_perceptions = false;
+  for (const auto & perception : perceptions_) {
+    trigger_perceptions = trigger_perceptions || perception.new_data;
+    perception.new_data = false;
+  }
+  return trigger_perceptions;
+}
+
 
 void
 SensorsNode::sensors_cycle_nort()

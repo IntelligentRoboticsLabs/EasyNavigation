@@ -77,6 +77,7 @@ struct Perception
   std::string frame_id;                     ///< Frame ID associated with the data.
   bool valid = false;                       ///< Whether the perception is valid or usable.
   rclcpp::SubscriptionBase::SharedPtr subscription; ///< ROS 2 subscription linked to the data source.
+  bool new_data = false;
 };
 
 /**

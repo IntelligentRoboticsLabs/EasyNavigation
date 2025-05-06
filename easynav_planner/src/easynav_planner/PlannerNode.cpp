@@ -33,8 +33,11 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-PlannerNode::PlannerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("planner_node", options)
+PlannerNode::PlannerNode(
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
+: LifecycleNode("planner_node", options),
+  nav_state_(nav_state)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 

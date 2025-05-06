@@ -51,7 +51,9 @@ public:
    * @brief Constructs a LocalizerNode lifecycle node with the specified options.
    * @param options Node options to configure the LocalizerNode node.
    */
-  explicit LocalizerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit LocalizerNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destroys the LocalizerNode object.
@@ -138,15 +140,20 @@ public:
   [[nodiscard]] nav_msgs::msg::Odometry get_odom() const;
 
   /**
-   * @brief Set the current navigation state.
+   * @brief Executes one cycle of real-time localization tasks.
    *
-   * Updates the internal navigation state used by the localization plugin.
-   *
-   * @param nav_state The current state of the navigation system.
+   * Typically called from a real-time timer. Invokes the plugin's update method.
    */
-  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+  bool localizer_cycle_rt(bool trigger = false);
 
 private:
+  /**
+   * @brief Executes one cycle of non-real-time localization tasks.
+   *
+   * May be used for diagnostics, debugging, or deferred operations.
+   */
+  void localizer_cycle_nort();
+
   /**
    * @brief Callback group intended for real-time tasks.
    */
@@ -165,21 +172,7 @@ private:
   /**
    * @brief Current navigation state passed to the localization plugin.
    */
-  NavState nav_state_;
-
-  /**
-   * @brief Executes one cycle of real-time localization tasks.
-   *
-   * Typically called from a real-time timer. Invokes the plugin's update method.
-   */
-  void localizer_cycle_rt();
-
-  /**
-   * @brief Executes one cycle of non-real-time localization tasks.
-   *
-   * May be used for diagnostics, debugging, or deferred operations.
-   */
-  void localizer_cycle_nort();
+  const std::shared_ptr<const NavState> nav_state_;
 
   /**
    * @brief Pluginlib loader for LocalizerMethodBase plugins.

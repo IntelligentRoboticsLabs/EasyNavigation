@@ -35,8 +35,11 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-MapsManagerNode::MapsManagerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("maps_manager_node", options)
+MapsManagerNode::MapsManagerNode(
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
+: LifecycleNode("maps_manager_node", options),
+  nav_state_(nav_state)
 {
   maps_manager_loader_ = std::make_unique<pluginlib::ClassLoader<MapsManagerBase>>(
     "easynav_core", "easynav::MapsManagerBase");

@@ -141,11 +141,6 @@ private:
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the real-time system cycle.
-   */
-  rclcpp::TimerBase::SharedPtr system_main_rt_timer_;
-
-  /**
    * @brief Timer that triggers the non-real-time system cycle.
    */
   rclcpp::TimerBase::SharedPtr system_main_nort_timer_;
@@ -178,7 +173,7 @@ private:
   /**
    * @brief The current navigation state.
    */
-  NavState nav_state_;
+  std::shared_ptr<NavState> nav_state_;
 
   /**
    * @brief Executes one cycle of real-time system operations.

@@ -77,6 +77,14 @@ public:
   {
     parent_node_ = parent_node;
     plugin_name_ = plugin_name;
+
+    frequency_ = 10.0;
+
+    parent_node_->declare_parameter(plugin_name + ".rt_freq", frequency_);
+    parent_node_->get_parameter(plugin_name + ".rt_freq", frequency_);
+
+    last_ts_ = parent_node_->now();
+  
     return on_initialize();
   }
 
@@ -118,6 +126,17 @@ public:
     return plugin_name_;
   }
 
+  bool
+  isTime2Run() const
+  {
+    if ((parent_node_->now() - last_ts_).seconds() > (1.0 / frequency_)) {
+      last_ts_ = parent_node_->now();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 private:
   /**
    * @brief Pointer to the parent lifecycle node.
@@ -132,6 +151,9 @@ private:
    * Used for identification, namespacing, and logging.
    */
   std::string plugin_name_;
+
+  float frequency_;
+  rclcpp::Time last_ts_;
 };
 
 }  // namespace easynav

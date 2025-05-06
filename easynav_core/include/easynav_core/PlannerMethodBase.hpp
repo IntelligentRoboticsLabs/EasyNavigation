@@ -67,14 +67,34 @@ public:
    */
   [[nodiscard]] virtual nav_msgs::msg::Path get_path() = 0;
 
+  bool internal_update_rt(const NavState & nav_state, bool trigger = false)
+  {
+    if (isTime2Run() || trigger) {
+      update_rt();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+protected:
   /**
-   * @brief Run the path planning method and update the navigation route.
+   * @brief Run the path planning method and update in real-time the navigation route.
    *
    * This method will be called by the system's PlannerNode to run the path planning algorithm.
    *
    * @param nav_state The current state of the navigation system.
    */
-  virtual void update(const NavState & nav_state) = 0;
+  virtual void update_rt(const NavState & nav_state) = 0;
+
+  /**
+   * @brief Run the path planning method and update in non real-time the navigation route.
+   *
+   * This method will be called by the system's PlannerNode to run the path planning algorithm.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  virtual void update_nort(const NavState & nav_state) = 0;
 };
 
 }  // namespace easynav

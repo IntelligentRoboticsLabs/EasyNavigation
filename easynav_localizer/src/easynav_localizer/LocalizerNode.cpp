@@ -32,8 +32,11 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-LocalizerNode::LocalizerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("localizer_node", options)
+LocalizerNode::LocalizerNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options)
+: LifecycleNode("localizer_node", options),
+  nav_state_(nav_state)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
@@ -131,15 +134,16 @@ LocalizerNode::get_odom() const
   return localizer_method_->get_odom();
 }
 
-void
-LocalizerNode::localizer_cycle_rt()
+bool
+LocalizerNode::localizer_cycle_rt(bool trigger)
 {
-  localizer_method_->update(nav_state_);
+  return localizer_method_->internal_update_rt(nav_state_, trigger);
 }
 
 void
 LocalizerNode::localizer_cycle_nort()
 {
+  localizer_method_->update_nort(nav_state_);
 }
 
 }  // namespace easynav

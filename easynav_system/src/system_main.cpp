@@ -77,8 +77,14 @@ int main(int argc, char ** argv)
         RCLCPP_ERROR(system_node->get_logger(), "set your system to have permissions.");
         throw std::runtime_error{std::string("failed to set sched: ") + std::strerror(errno)};
       }
-
-      exe_rt.spin();
+      while (rclcpp::ok()) {
+        if (system_node->get_current_state().id() ==
+          lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE)
+        {
+          system_node->system_cycle_rt();
+        }
+        exe_rt.spin_some();
+      }
     });
 
   exe_nort.spin();

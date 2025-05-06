@@ -67,14 +67,34 @@ public:
    */
   [[nodiscard]] virtual geometry_msgs::msg::TwistStamped get_cmd_vel() = 0;
 
+  bool internal_update_rt(const NavState & nav_state, bool trigger = false)
+  {
+    if (isTime2Run() || trigger) {
+      update_rt();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+protected:
   /**
-   * @brief Run the control method and update the control command.
+   * @brief Run the control method and update in real-time the control command.
    *
    * This method will be called by the system's ControllerNode to run the control algorithm.
    *
    * @param nav_state The current state of the navigation system.
    */
-  virtual void update(const NavState & nav_state) = 0;
+  virtual void update_rt(const NavState & nav_state) {}
+
+  /**
+   * @brief Run the control method and update in non real-time the control command.
+   *
+   * This method will be called by the system's ControllerNode to run the control algorithm.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  virtual void update_nort(const NavState & nav_state) {};
 };
 
 }  // namespace easynav

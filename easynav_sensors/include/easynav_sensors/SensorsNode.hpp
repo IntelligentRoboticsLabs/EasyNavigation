@@ -55,7 +55,9 @@ public:
    * @brief Constructs a SensorsNode lifecycle node with the specified options.
    * @param options Node options to configure the SensorsNode node.
    */
-  explicit SensorsNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit SensorsNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destroys the SensorsNode object.
@@ -126,14 +128,20 @@ public:
   const Perceptions get_perceptions() const {return perceptions_;}
 
   /**
-   * @brief Updates the node's behavior based on the provided navigation state.
+   * @brief Executes one cycle of real-time sensor operations.
    *
-   * This may affect which perceptions are fused or published.
-   * @param nav_state The latest navigation state information.
+   * This function manages background tasks not requiring strict real-time execution.
    */
-  void set_state(const NavState & nav_state);
+  bool localizer_cycle_rt(bool trigger = false);
 
 private:
+  /**
+   * @brief Executes one cycle of non real-time sensor operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void sensors_cycle_nort();
+  
   /**
    * @brief Callback group intended for real-time sensor processing tasks.
    */
@@ -165,21 +173,6 @@ private:
   sensor_msgs::msg::PointCloud2 perecption_msg_;
 
   /**
-   * @brief Executes one cycle of real-time system operations.
-   *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
-   */
-  void sensors_cycle_rt();
-
-  /**
-   * @brief Executes one cycle of non-real-time system operations.
-   *
-   * This function manages background tasks not requiring strict real-time execution.
-   */
-  void sensors_cycle_nort();
-
-  /**
    * @brief Container storing current perceptions
    */
   Perceptions perceptions_;
@@ -193,6 +186,13 @@ private:
    * @brief Target frame to which all perceptions will be transformed before fusion.
    */
   std::string perception_default_frame_;
+
+  /**
+   * @brief Current navigation state.
+   *
+   * This is the current state of the navigation system.
+   */
+  const std::shared_ptr<const NavState> nav_state_;
 };
 
 }  // namespace easynav

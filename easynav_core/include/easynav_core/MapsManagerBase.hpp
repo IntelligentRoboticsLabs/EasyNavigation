@@ -77,14 +77,34 @@ public:
    */
   [[nodiscard]] virtual std::shared_ptr<MapsTypeBase> get_dynamyc_map() = 0;
 
+  bool internal_update_rt(const NavState & nav_state, bool trigger = false)
+  {
+    if (isTime2Run() || trigger) {
+      update_rt();
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+protected:
   /**
-   * @brief Run the localization method and update the robot's estimated localization.
+   * @brief Run the localization method and update in real-time the robot's estimated localization.
    *
    * This method will be called by the system's LocalizerNode to run the localization algorithm.
    *
    * @param nav_state The current state of the navigation system.
    */
-  virtual void update(const NavState & nav_state) = 0;
+  virtual void update_rt(const NavState & nav_state) {}
+
+  /**
+   * @brief Run the localization method and update in non real-time the robot's estimated localization.
+   *
+   * This method will be called by the system's LocalizerNode to run the localization algorithm.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  virtual void update_nort(const NavState & nav_state) {};
 };
 
 }  // namespace easynav

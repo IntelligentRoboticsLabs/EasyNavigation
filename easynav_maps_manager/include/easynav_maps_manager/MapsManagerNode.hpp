@@ -51,7 +51,9 @@ public:
    * @brief Constructs a MapsManagerNode lifecycle node with the specified options.
    * @param options Node options to configure the MapsManagerNode node.
    */
-  explicit MapsManagerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit MapsManagerNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destructor.
@@ -128,13 +130,11 @@ public:
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
   /**
-   * @brief Set the current navigation state for the system.
+   * @brief Executes one cycle of real-time localization tasks.
    *
-   * This state is passed to map manager plugins during update cycles.
-   *
-   * @param nav_state The current navigation state.
+   * Typically called from a real-time timer. Invokes the plugin's update method.
    */
-  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+  bool maps_manager_cycle_rt(bool trigger = false);
 
 private:
   /**
@@ -151,13 +151,6 @@ private:
    * @brief List of active map instances in memory.
    */
   std::vector<std::shared_ptr<MapsTypeBase>> maps_;
-
-  /**
-   * @brief Executes one cycle of real-time operations for all map managers.
-   *
-   * Calls each map plugin’s update and/or publishing interface.
-   */
-  void maps_manager_cycle_rt();
 
   /**
    * @brief Executes one cycle of non-real-time operations.
@@ -179,7 +172,7 @@ private:
   /**
    * @brief Latest known navigation state.
    */
-  NavState nav_state_;
+  const std::shared_ptr<const NavState> nav_state_;
 };
 
 }  // namespace easynav

@@ -54,7 +54,9 @@ public:
    * @brief Constructs a PlannerNode lifecycle node with the specified options.
    * @param options Node options to configure the PlannerNode node.
    */
-  explicit PlannerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit PlannerNode((
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destroys the PlannerNode object.
@@ -132,15 +134,6 @@ public:
    */
   [[nodiscard]] nav_msgs::msg::Path get_path() const;
 
-  /**
-   * @brief Set the current navigation state.
-   *
-   * This state is passed to the planner plugin during updates.
-   *
-   * @param nav_state The new navigation state.
-   */
-  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
-
 private:
   /**
    * @brief Callback group intended for real-time tasks.
@@ -162,7 +155,7 @@ private:
   /**
    * @brief The current navigation state.
    */
-  NavState nav_state_;
+  const std::shared_ptr<const NavState> nav_state_;
 
   /**
    * @brief Real-time cycle execution.

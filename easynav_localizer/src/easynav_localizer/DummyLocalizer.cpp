@@ -48,7 +48,16 @@ nav_msgs::msg::Odometry DummyLocalizer::get_odom()
   return odom_;
 }
 
-void DummyLocalizer::update(const NavState & nav_state)
+void DummyLocalizer::update_rt(const NavState & nav_state)
+{
+  odom_.header.stamp = nav_state.timestamp;
+  odom_.header.frame_id = "map";
+  odom_.child_frame_id = "base_link";
+  // Compute the current robot position...
+  // odom_.pose.pose.position.x += 1.0;
+}
+
+void DummyLocalizer::update_nort(const NavState & nav_state)
 {
   odom_.header.stamp = nav_state.timestamp;
   odom_.header.frame_id = "map";
