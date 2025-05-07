@@ -57,7 +57,7 @@ void DummyLocalizer::update_rt(const NavState & nav_state)
   // odom_.pose.pose.position.x += 1.0;
 }
 
-void DummyLocalizer::update_nort(const NavState & nav_state)
+void DummyLocalizer::update(const NavState & nav_state)
 {
   odom_.header.stamp = nav_state.timestamp;
   odom_.header.frame_id = "map";

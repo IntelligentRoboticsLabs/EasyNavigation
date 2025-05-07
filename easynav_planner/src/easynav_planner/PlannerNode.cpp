@@ -39,8 +39,6 @@ PlannerNode::PlannerNode(
 : LifecycleNode("planner_node", options),
   nav_state_(nav_state)
 {
-  realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
-
   planner_loader_ = std::make_unique<pluginlib::ClassLoader<easynav::PlannerMethodBase>>(
     "easynav_core", "easynav::PlannerMethodBase");
 
@@ -87,9 +85,6 @@ PlannerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  planner_main_timer_ = create_timer(1ms, std::bind(&PlannerNode::planner_cycle_nort, this),
-    realtime_cbg_);
-
   return CallbackReturnT::SUCCESS;
 }
 
@@ -97,8 +92,6 @@ CallbackReturnT
 PlannerNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
-  planner_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -124,12 +117,6 @@ PlannerNode::on_error(const rclcpp_lifecycle::State & state)
   return CallbackReturnT::SUCCESS;
 }
 
-rclcpp::CallbackGroup::SharedPtr
-PlannerNode::get_real_time_cbg()
-{
-  return realtime_cbg_;
-}
-
 nav_msgs::msg::Path
 PlannerNode::get_path() const
 {
@@ -137,14 +124,9 @@ PlannerNode::get_path() const
 }
 
 void
-PlannerNode::planner_cycle_nort()
+PlannerNode::cycle()
 {
-  planner_method_->update(nav_state_);
-}
-
-void
-PlannerNode::planner_cycle_rt()
-{
+  planner_method_->internal_update(*nav_state_);
 }
 
 }  // namespace easynav

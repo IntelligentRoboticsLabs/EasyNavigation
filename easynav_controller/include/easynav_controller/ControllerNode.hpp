@@ -132,16 +132,19 @@ public:
    */
   [[nodiscard]] geometry_msgs::msg::TwistStamped get_cmd_vel() const;
 
+  /**
+   * @brief Executes one cycle of real-time controller logic.
+   *
+   * This method is invoked periodically by a high-priority timer and is expected
+   * to compute control commands based on the current navigation state and input data.
+   */
+    bool cycle_rt(bool trigger = false);
+
 private:
   /**
    * @brief Callback group intended for real-time tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
-
-  /**
-   * @brief Timer that triggers the periodic controller tasks cycle.
-   */
-  rclcpp::TimerBase::SharedPtr controller_main_timer_;
 
   /**
    * @brief Pointer to the controller method.
@@ -156,21 +159,6 @@ private:
    * This is the current state of the navigation system.
    */
   const std::shared_ptr<const NavState> nav_state_;
-
-  /**
-   * @brief Executes one cycle of real-time controller logic.
-   *
-   * This method is invoked periodically by a high-priority timer and is expected
-   * to compute control commands based on the current navigation state and input data.
-   */
-  void controller_cycle_rt();
-
-  /**
-   * @brief Executes one cycle of non-real-time controller logic.
-   *
-   * This method handles background tasks such as diagnostics, logging, or dynamic reconfiguration.
-   */
-  void controller_cycle_nort();
 
   /**
    * @brief Pluginlib loader used to dynamically load controller implementations.

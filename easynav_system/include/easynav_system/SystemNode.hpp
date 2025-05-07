@@ -134,6 +134,14 @@ public:
    */
   std::map<std::string, SystemNodeInfo> get_system_nodes();
 
+  /**
+   * @brief Executes one cycle of real-time system operations.
+   *
+   * This function is called periodically by the real-time timer to manage control,
+   * localization, planning, and other tightly coupled tasks.
+   */
+  void system_cycle_rt();
+
 private:
   /**
    * @brief Callback group intended for real-time system operations.
@@ -176,19 +184,11 @@ private:
   std::shared_ptr<NavState> nav_state_;
 
   /**
-   * @brief Executes one cycle of real-time system operations.
-   *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
-   */
-  void system_cycle_rt();
-
-  /**
    * @brief Executes one cycle of non-real-time system operations.
    *
    * This function manages background tasks not requiring strict real-time execution.
    */
-  void system_cycle_nort();
+  void system_cycle();
 };
 
 }  // namespace easynav

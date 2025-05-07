@@ -121,43 +121,17 @@ public:
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Returns the real-time callback group.
-   *
-   * This callback group is used for low-latency tasks that must not block.
-   *
-   * @return Shared pointer to the real-time callback group.
-   */
-  rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
-
-  /**
-   * @brief Executes one cycle of real-time localization tasks.
-   *
-   * Typically called from a real-time timer. Invokes the plugin's update method.
-   */
-  bool maps_manager_cycle_rt(bool trigger = false);
-
-private:
-  /**
-   * @brief Callback group intended for real-time map operations.
-   */
-  rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
-
-  /**
-   * @brief Timer that triggers the periodic map update cycle.
-   */
-  rclcpp::TimerBase::SharedPtr maps_manager_main_timer_;
-
-  /**
-   * @brief List of active map instances in memory.
-   */
-  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
-
-  /**
    * @brief Executes one cycle of non-real-time operations.
    *
    * Reserved for diagnostics, visualization, or heavy I/O.
    */
-  void maps_manager_cycle_nort();
+  void cycle();
+
+private:
+  /**
+   * @brief List of active map instances in memory.
+   */
+  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
 
   /**
    * @brief Plugin loader for MapsManagerBase-based implementations.

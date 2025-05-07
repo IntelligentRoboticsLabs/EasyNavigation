@@ -85,7 +85,7 @@ public:
     odom_.pose.pose.position.x = 10;
   }
 
-  virtual void update_nort(const easynav::NavState & nav_state) override
+  virtual void update(const easynav::NavState & nav_state) override
   {
     (void) nav_state;
     odom_.pose.pose.position.x = 10;

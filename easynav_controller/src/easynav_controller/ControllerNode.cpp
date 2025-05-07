@@ -33,8 +33,11 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-ControllerNode::ControllerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("controller_node", options)
+ControllerNode::ControllerNode(
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
+: LifecycleNode("controller_node", options),
+  nav_state_(nav_state)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
@@ -86,9 +89,6 @@ ControllerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  controller_main_timer_ = create_timer(1ms, std::bind(&ControllerNode::controller_cycle_rt, this),
-    realtime_cbg_);
-
   return CallbackReturnT::SUCCESS;
 }
 
@@ -96,8 +96,6 @@ CallbackReturnT
 ControllerNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
-  controller_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -135,15 +133,11 @@ ControllerNode::get_cmd_vel() const
   return controller_method_->get_cmd_vel();
 }
 
-void
-ControllerNode::controller_cycle_rt()
+bool
+ControllerNode::cycle_rt(bool trigger)
 {
-  controller_method_->update(nav_state_);
-}
-
-void
-ControllerNode::controller_cycle_nort()
-{
+  controller_method_->internal_update_rt(*nav_state_, trigger);
+  return true;
 }
 
 }  // namespace easynav

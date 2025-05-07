@@ -70,11 +70,18 @@ public:
 
   bool internal_update_rt(const NavState & nav_state, bool trigger = false)
   {
-    if (isTime2Run() || trigger) {
-      update_rt();
+    if (isTime2RunRT() || trigger) {
+      update_rt(nav_state);
       return true;
     } else {
       return false;
+    }
+  }
+
+  void internal_update(const NavState & nav_state)
+  {
+    if (isTime2Run()) {
+      update(nav_state);
     }
   }
 
@@ -86,7 +93,7 @@ protected:
    *
    * @param nav_state The current state of the navigation system.
    */
-  virtual void update_rt(const NavState & nav_state) {}
+  virtual void update_rt(const NavState & nav_state) = 0;
 
   /**
    * @brief Run the localization method and update the robot's estimated localization.
@@ -95,7 +102,7 @@ protected:
    *
    * @param nav_state The current state of the navigation system.
    */
-  virtual void update_nort(const NavState & nav_state) {}
+  virtual void update(const NavState & nav_state) = 0;
 
 };
 

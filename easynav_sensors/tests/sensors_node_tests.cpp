@@ -21,6 +21,7 @@
 #include "sensor_msgs/msg/point_cloud2.hpp"
 #include "easynav_common/types/Perceptions.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_common/RTTFBuffer.hpp"
 
 #include "lifecycle_msgs/msg/transition.hpp"
 #include "lifecycle_msgs/msg/state.hpp"
@@ -389,6 +390,8 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
       fused_perception = msg;
     });
 
+  easynav::RTTFBuffer::getInstance(test_node->get_clock());
+
   auto tf_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(*test_node);
   geometry_msgs::msg::TransformStamped transform;
   transform.header.frame_id = "odom";
@@ -438,9 +441,14 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
     while (test_node->now() - start < 1s) {
       transform.header.stamp = test_node->now();
       transform.child_frame_id = "base_laser_1";
+
+      easynav::RTTFBuffer::getInstance()->setTransform(transform, "easynav", false);
       tf_broadcaster->sendTransform(transform);
+
       transform.header.stamp = test_node->now();
       transform.child_frame_id = "base_laser_2";
+  
+      easynav::RTTFBuffer::getInstance()->setTransform(transform, "easynav", false);
       tf_broadcaster->sendTransform(transform);
 
       auto time1 = test_node->now();
@@ -480,9 +488,14 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
     while (test_node->now() - start < 1s) {
       transform.header.stamp = test_node->now();
       transform.child_frame_id = "base_laser_1";
+
+      easynav::RTTFBuffer::getInstance()->setTransform(transform, "easynav", false);
       tf_broadcaster->sendTransform(transform);
+
       transform.header.stamp = test_node->now();
       transform.child_frame_id = "base_laser_2";
+
+      easynav::RTTFBuffer::getInstance()->setTransform(transform, "easynav", false);
       tf_broadcaster->sendTransform(transform);
 
       auto time1 = test_node->now();

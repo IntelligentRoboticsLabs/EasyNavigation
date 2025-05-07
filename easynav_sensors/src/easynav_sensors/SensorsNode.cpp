@@ -37,11 +37,8 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-SensorsNode::SensorsNode(
-    const std::shared_ptr<const NavState> & nav_state,
-    const rclcpp::NodeOptions & options)
-: LifecycleNode("sensors_node", options),
-  nav_state_(nav_state)
+SensorsNode::SensorsNode(const rclcpp::NodeOptions & options)
+: LifecycleNode("sensors_node", options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
@@ -117,10 +114,6 @@ SensorsNode::on_configure(const rclcpp_lifecycle::State & state)
     }
   }
 
-  tf_buffer_ = std::make_shared<tf2_ros::Buffer>(get_clock());
-  tf_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf_buffer_, shared_from_this(),
-    true);
-
   return CallbackReturnT::SUCCESS;
 }
 
@@ -128,8 +121,6 @@ CallbackReturnT
 SensorsNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
-  sensors_main_timer_ = create_timer(100ms, std::bind(&SensorsNode::sensors_cycle_nort, this));
 
   percept_pub_->on_activate();
 
@@ -142,7 +133,6 @@ SensorsNode::on_deactivate(const rclcpp_lifecycle::State & state)
   (void)state;
 
   percept_pub_->on_deactivate();
-  sensors_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -175,21 +165,20 @@ SensorsNode::get_real_time_cbg()
 }
 
 bool
-SensorsNode::localizer_cycle_rt(bool trigger)
+SensorsNode::cycle_rt(bool trigger)
 {
   (void)trigger;
 
   bool trigger_perceptions = false;
   for (const auto & perception : perceptions_) {
-    trigger_perceptions = trigger_perceptions || perception.new_data;
-    perception.new_data = false;
+    trigger_perceptions = trigger_perceptions || perception->new_data;
+    perception->new_data = false;
   }
   return trigger_perceptions;
 }
 
-
 void
-SensorsNode::sensors_cycle_nort()
+SensorsNode::cycle()
 {
   for (auto & perception : perceptions_) {
     if (perception->valid && (now() - perception->stamp).seconds() > forget_time_) {
@@ -198,17 +187,18 @@ SensorsNode::sensors_cycle_nort()
   }
 
   if (percept_pub_->get_subscription_count() > 0) {
+    std::cerr << "1*" << std::endl;
     auto fused = PerceptionsOpsView(perceptions_)
-      .fuse(perception_default_frame_, *tf_buffer_)
-      ->as_points(0);
+      .fuse(perception_default_frame_);
+    
+    auto fused_points = fused->as_points(0);
 
-    percept_pub_->publish(points_to_rosmsg(fused));
+    auto msg = points_to_rosmsg(fused_points);
+    msg.header.frame_id = perception_default_frame_;
+    msg.header.stamp = fused->get_perceptions()[0]->stamp;
+
+    percept_pub_->publish(msg);
   }
-}
-
-void
-SensorsNode::sensors_cycle_rt()
-{
 }
 
 }  // namespace easynav

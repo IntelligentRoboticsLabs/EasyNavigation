@@ -144,25 +144,21 @@ public:
    *
    * Typically called from a real-time timer. Invokes the plugin's update method.
    */
-  bool localizer_cycle_rt(bool trigger = false);
+  bool cycle_rt(bool trigger = false);
 
-private:
   /**
    * @brief Executes one cycle of non-real-time localization tasks.
    *
    * May be used for diagnostics, debugging, or deferred operations.
    */
-  void localizer_cycle_nort();
+  void cycle();
+
+private:
 
   /**
    * @brief Callback group intended for real-time tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
-
-  /**
-   * @brief Timer that triggers the periodic localization cycle.
-   */
-  rclcpp::TimerBase::SharedPtr localizer_main_timer_;
 
   /**
    * @brief Pointer to the dynamically loaded localization method.

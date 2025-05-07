@@ -89,7 +89,7 @@ public:
    *
    * @param nav_state The current navigation state of the system.
    */
-  virtual void update_nort(const NavState & nav_state) override;
+  virtual void update(const NavState & nav_state) override;
 
 private:
   /**
