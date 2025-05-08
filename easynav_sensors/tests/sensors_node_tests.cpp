@@ -40,15 +40,24 @@
 class SensorsNodeTestCase : public ::testing::Test
 {
 protected:
+  ~SensorsNodeTestCase()
+  {
+    rclcpp::shutdown();
+  }
+
   void SetUp()
   {
-    rclcpp::init(0, nullptr);
+    if (!initialized) {
+      rclcpp::init(0, nullptr);
+      initialized = true;
+    }
   }
 
   void TearDown()
   {
-    rclcpp::shutdown();
   }
+
+  bool initialized {false};
 };
 
 sensor_msgs::msg::LaserScan get_scan_test_1(rclcpp::Time ts)

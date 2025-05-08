@@ -163,7 +163,7 @@ LocalizerNode::get_odom() const
   if (localizer_method_ == nullptr) {
     return nav_msgs::msg::Odometry();
   }
-  
+
   return localizer_method_->get_odom();
 }
 
