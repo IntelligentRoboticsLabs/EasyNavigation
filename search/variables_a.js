@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['timestamp_0',['timestamp',['../structeasynav_1_1NavState.html#a82cfc6eea9da58302d9ef75acc35298b',1,'easynav::NavState']]]
+  ['stamp_0',['stamp',['../structeasynav_1_1Perception.html#a3ace6024cedb403facddccc6842dce24',1,'easynav::Perception']]],
+  ['subscription_1',['subscription',['../structeasynav_1_1Perception.html#a809515a5f8c318880eb15f1d6be6f2a3',1,'easynav::Perception']]]
 ];

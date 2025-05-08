@@ -128,6 +128,12 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a2b3c13c546cbcb92bdf965736235e7fb" id="r_a2b3c13c546cbcb92bdf965736235e7fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b3c13c546cbcb92bdf965736235e7fb">cycle</a> ()</td></tr>
+<tr class="memdesc:a2b3c13c546cbcb92bdf965736235e7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes one cycle of non real-time sensor operations.  <br /></td></tr>
+<tr class="separator:a2b3c13c546cbcb92bdf965736235e7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abd57db5038191835adcd95d518a52af6" id="r_abd57db5038191835adcd95d518a52af6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd57db5038191835adcd95d518a52af6">cycle_rt</a> (bool trigger=false)</td></tr>
+<tr class="memdesc:abd57db5038191835adcd95d518a52af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes one cycle of real-time sensor operations.  <br /></td></tr>
+<tr class="separator:abd57db5038191835adcd95d518a52af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2866d54d00e57a2be948b70ae44f76eb" id="r_a2866d54d00e57a2be948b70ae44f76eb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespaceeasynav.html#aaf5526be35ee28b08c0fa269875118e2">Perceptions</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2866d54d00e57a2be948b70ae44f76eb">get_perceptions</a> () const</td></tr>
 <tr class="memdesc:a2866d54d00e57a2be948b70ae44f76eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current set of active perceptions.  <br /></td></tr>
 <tr class="separator:a2866d54d00e57a2be948b70ae44f76eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,9 +161,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5629e27f739777bfe6b081a54f41ef30" id="r_a5629e27f739777bfe6b081a54f41ef30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5629e27f739777bfe6b081a54f41ef30">SensorsNode</a> (const rclcpp::NodeOptions &amp;options=rclcpp::NodeOptions())</td></tr>
 <tr class="memdesc:a5629e27f739777bfe6b081a54f41ef30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> lifecycle node with the specified options.  <br /></td></tr>
 <tr class="separator:a5629e27f739777bfe6b081a54f41ef30"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2aa00d17220f5888dfce6c3486e72809" id="r_a2aa00d17220f5888dfce6c3486e72809"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2aa00d17220f5888dfce6c3486e72809">set_state</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;nav_state)</td></tr>
-<tr class="memdesc:a2aa00d17220f5888dfce6c3486e72809"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the node's behavior based on the provided navigation state.  <br /></td></tr>
-<tr class="separator:a2aa00d17220f5888dfce6c3486e72809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84e306309c2bba62ee5dc10a2573a960" id="r_a84e306309c2bba62ee5dc10a2573a960"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84e306309c2bba62ee5dc10a2573a960">~SensorsNode</a> ()</td></tr>
 <tr class="memdesc:a84e306309c2bba62ee5dc10a2573a960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> object.  <br /></td></tr>
 <tr class="separator:a84e306309c2bba62ee5dc10a2573a960"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -234,6 +237,46 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a2b3c13c546cbcb92bdf965736235e7fb" name="a2b3c13c546cbcb92bdf965736235e7fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2b3c13c546cbcb92bdf965736235e7fb">&#9670;&#160;</a></span>cycle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void cycle </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes one cycle of non real-time sensor operations. </p>
+<p>This function manages background tasks not requiring strict real-time execution. </p>
+
+</div>
+</div>
+<a id="abd57db5038191835adcd95d518a52af6" name="abd57db5038191835adcd95d518a52af6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abd57db5038191835adcd95d518a52af6">&#9670;&#160;</a></span>cycle_rt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool cycle_rt </td>
+          <td>(</td>
+          <td class="paramtype">bool</td>          <td class="paramname"><span class="paramname"><em>trigger</em></span><span class="paramdefsep"> = </span><span class="paramdefval">false</span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes one cycle of real-time sensor operations. </p>
+<p>This function manages background tasks not requiring strict real-time execution. </p>
+
+</div>
+</div>
 <a id="a2866d54d00e57a2be948b70ae44f76eb" name="a2866d54d00e57a2be948b70ae44f76eb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2866d54d00e57a2be948b70ae44f76eb">&#9670;&#160;</a></span>get_perceptions()</h2>
 
@@ -427,31 +470,6 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating shutdown is complete. </dd></dl>
-
-</div>
-</div>
-<a id="a2aa00d17220f5888dfce6c3486e72809" name="a2aa00d17220f5888dfce6c3486e72809"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2aa00d17220f5888dfce6c3486e72809">&#9670;&#160;</a></span>set_state()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void set_state </td>
-          <td>(</td>
-          <td class="paramtype">const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>nav_state</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Updates the node's behavior based on the provided navigation state. </p>
-<p>This may affect which perceptions are fused or published. </p><dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">nav_state</td><td>The latest navigation state information. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>

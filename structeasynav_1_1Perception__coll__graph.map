@@ -1,13 +1,13 @@
 <map id="Perception" name="Perception">
-<area shape="rect" id="Node000001" title="Represents a single sensor perception used for mapping and localization." alt="" coords="270,94,353,120"/>
+<area shape="rect" id="Node000001" title="Represents a single sensor perception used for mapping and localization." alt="" coords="270,109,353,135"/>
 <area shape="rect" id="Node000002" title=" " alt="" coords="5,5,191,31"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="143,35,282,91,280,96,141,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="132,37,220,83,278,106,276,111,218,87,130,41"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="214,5,264,31"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="254,43,270,68,296,92,292,96,266,72,249,46"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="250,45,270,83,295,107,292,111,266,87,245,47"/>
 <area shape="rect" id="Node000004" title=" " alt="" coords="289,5,342,31"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="316,47,316,55,314,94,309,93,310,55,311,46"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="316,47,316,55,314,108,309,108,310,55,311,46"/>
 <area shape="rect" id="Node000005" title=" " alt="" coords="373,5,418,31"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="386,46,368,72,337,96,333,91,364,68,382,43"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="442,5,522,31"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="458,43,414,72,354,96,352,91,411,68,455,39"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="390,46,381,67,368,87,338,111,334,106,364,83,376,64,385,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="445,5,524,31"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="478,47,466,68,449,87,426,101,402,111,354,121,353,115,400,105,424,96,446,83,462,65,473,44"/>
 </map>

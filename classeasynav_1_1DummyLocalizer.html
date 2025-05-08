@@ -134,6 +134,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:adbea5f6d7a91b4a1f7fa21d5a46c18aa" id="r_adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbea5f6d7a91b4a1f7fa21d5a46c18aa">update</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;nav_state) override</td></tr>
 <tr class="memdesc:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the localization estimate based on the current navigation state.  <br /></td></tr>
 <tr class="separator:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5db051e53c7c2d58cfb962b83358a592" id="r_a5db051e53c7c2d58cfb962b83358a592"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5db051e53c7c2d58cfb962b83358a592">update_rt</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;nav_state) override</td></tr>
+<tr class="memdesc:a5db051e53c7c2d58cfb962b83358a592"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the localization estimate based on the current navigation state.  <br /></td></tr>
+<tr class="separator:a5db051e53c7c2d58cfb962b83358a592"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aef89e5a5bfb7d4e13c0a91b843471c2a" id="r_aef89e5a5bfb7d4e13c0a91b843471c2a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aef89e5a5bfb7d4e13c0a91b843471c2a">~DummyLocalizer</a> ()=default</td></tr>
 <tr class="memdesc:aef89e5a5bfb7d4e13c0a91b843471c2a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default destructor.  <br /></td></tr>
 <tr class="separator:aef89e5a5bfb7d4e13c0a91b843471c2a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -266,6 +269,40 @@ Public Member Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">void update </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>nav_state</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel override">override</span><span class="mlabel virtual">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Updates the localization estimate based on the current navigation state. </p>
+<p>This method is intended to run the localization logic and update the odometry. In this dummy implementation, it does nothing.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">nav_state</td><td>The current navigation state of the system. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a5db051e53c7c2d58cfb962b83358a592" name="a5db051e53c7c2d58cfb962b83358a592"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5db051e53c7c2d58cfb962b83358a592">&#9670;&#160;</a></span>update_rt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void update_rt </td>
           <td>(</td>
           <td class="paramtype">const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;</td>          <td class="paramname"><span class="paramname"><em>nav_state</em></span></td><td>)</td>
           <td></td>

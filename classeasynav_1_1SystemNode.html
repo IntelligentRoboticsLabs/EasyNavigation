@@ -152,6 +152,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a38b74771f6ab23805f990786e4d6f806" id="r_a38b74771f6ab23805f990786e4d6f806"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38b74771f6ab23805f990786e4d6f806">on_shutdown</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
 <tr class="memdesc:a38b74771f6ab23805f990786e4d6f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the <a class="el" href="classeasynav_1_1SystemNode.html" title="ROS 2 lifecycle node that coordinates all major modules of the Easy Navigation system.">SystemNode</a> node.  <br /></td></tr>
 <tr class="separator:a38b74771f6ab23805f990786e4d6f806"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acd948c2ed9cfe6512e5b610caaa25961" id="r_acd948c2ed9cfe6512e5b610caaa25961"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acd948c2ed9cfe6512e5b610caaa25961">system_cycle_rt</a> ()</td></tr>
+<tr class="memdesc:acd948c2ed9cfe6512e5b610caaa25961"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes one cycle of real-time system operations.  <br /></td></tr>
+<tr class="separator:acd948c2ed9cfe6512e5b610caaa25961"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abff1721399712e8fc6091a43b83d95aa" id="r_abff1721399712e8fc6091a43b83d95aa"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abff1721399712e8fc6091a43b83d95aa">SystemNode</a> (const rclcpp::NodeOptions &amp;options=rclcpp::NodeOptions())</td></tr>
 <tr class="memdesc:abff1721399712e8fc6091a43b83d95aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classeasynav_1_1SystemNode.html" title="ROS 2 lifecycle node that coordinates all major modules of the Easy Navigation system.">SystemNode</a> lifecycle node with the specified options.  <br /></td></tr>
 <tr class="separator:abff1721399712e8fc6091a43b83d95aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -424,6 +427,26 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating shutdown is complete. </dd></dl>
+
+</div>
+</div>
+<a id="acd948c2ed9cfe6512e5b610caaa25961" name="acd948c2ed9cfe6512e5b610caaa25961"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acd948c2ed9cfe6512e5b610caaa25961">&#9670;&#160;</a></span>system_cycle_rt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void system_cycle_rt </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Executes one cycle of real-time system operations. </p>
+<p>This function is called periodically by the real-time timer to manage control, localization, planning, and other tightly coupled tasks. </p>
 
 </div>
 </div>
