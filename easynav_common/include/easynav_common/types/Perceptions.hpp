@@ -77,6 +77,7 @@ struct Perception
   std::string frame_id;                     ///< Frame ID associated with the data.
   bool valid = false;                       ///< Whether the perception is valid or usable.
   rclcpp::SubscriptionBase::SharedPtr subscription; ///< ROS 2 subscription linked to the data source.
+  bool new_data = false;
 };
 
 /**
@@ -240,8 +241,9 @@ public:
    * @return A shared pointer to a new PerceptionsOpsView wrapping the fused perception.
    */
   std::shared_ptr<PerceptionsOpsView> fuse(
-    const std::string & target_frame,
-    tf2_ros::Buffer & tf_buffer) const;
+    const std::string & target_frame) const;
+
+  const Perceptions & get_perceptions() const {return perceptions_;}
 
 private:
   std::optional<Perceptions> owned_;

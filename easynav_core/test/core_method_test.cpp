@@ -79,6 +79,12 @@ public:
     return odom_;
   }
 
+  virtual void update_rt(const easynav::NavState & nav_state) override
+  {
+    (void) nav_state;
+    odom_.pose.pose.position.x = 10;
+  }
+
   virtual void update(const easynav::NavState & nav_state) override
   {
     (void) nav_state;
@@ -138,7 +144,7 @@ TEST_F(CoreMethodTestCase, TestDerivedLocalizer)
     "initialize should set odom x position";
 
   easynav::NavState state;
-  localizer.update(state);
+  localizer.update_rt(state);
   const auto odom_update = localizer.get_odom();
   EXPECT_EQ(odom_update.pose.pose.position.x, 10.0) <<
     "initialize should set odom x position";

@@ -51,7 +51,9 @@ public:
    * @brief Constructs a MapsManagerNode lifecycle node with the specified options.
    * @param options Node options to configure the MapsManagerNode node.
    */
-  explicit MapsManagerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit MapsManagerNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destructor.
@@ -119,52 +121,19 @@ public:
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Returns the real-time callback group.
-   *
-   * This callback group is used for low-latency tasks that must not block.
-   *
-   * @return Shared pointer to the real-time callback group.
-   */
-  rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
-
-  /**
-   * @brief Set the current navigation state for the system.
-   *
-   * This state is passed to map manager plugins during update cycles.
-   *
-   * @param nav_state The current navigation state.
-   */
-  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
-
-private:
-  /**
-   * @brief Callback group intended for real-time map operations.
-   */
-  rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
-
-  /**
-   * @brief Timer that triggers the periodic map update cycle.
-   */
-  rclcpp::TimerBase::SharedPtr maps_manager_main_timer_;
-
-  /**
-   * @brief List of active map instances in memory.
-   */
-  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
-
-  /**
-   * @brief Executes one cycle of real-time operations for all map managers.
-   *
-   * Calls each map plugin’s update and/or publishing interface.
-   */
-  void maps_manager_cycle_rt();
-
-  /**
    * @brief Executes one cycle of non-real-time operations.
    *
    * Reserved for diagnostics, visualization, or heavy I/O.
    */
-  void maps_manager_cycle_nort();
+  void cycle();
+
+  std::map<std::string, std::shared_ptr<MapsTypeBase>> get_maps() {return maps_;}
+
+private:
+  /**
+   * @brief List of active map instances in memory.
+   */
+  std::map<std::string, std::shared_ptr<MapsTypeBase>> maps_;
 
   /**
    * @brief Plugin loader for MapsManagerBase-based implementations.
@@ -179,7 +148,7 @@ private:
   /**
    * @brief Latest known navigation state.
    */
-  NavState nav_state_;
+  const std::shared_ptr<const NavState> nav_state_;
 };
 
 }  // namespace easynav

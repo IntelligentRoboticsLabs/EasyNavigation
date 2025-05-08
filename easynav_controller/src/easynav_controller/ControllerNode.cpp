@@ -33,8 +33,11 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-ControllerNode::ControllerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("controller_node", options)
+ControllerNode::ControllerNode(
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
+: LifecycleNode("controller_node", options),
+  nav_state_(nav_state)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
@@ -54,6 +57,13 @@ ControllerNode::~ControllerNode()
   if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
     trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
   }
+
+  std::vector<std::string> controller_types;
+  get_parameter("controller_types", controller_types);
+  for (const auto & controller_type : controller_types) {
+    controller_loader_->unloadLibraryForClass(controller_type);
+  }
+  controller_method_ = nullptr;
 }
 
 
@@ -64,18 +74,42 @@ ControllerNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  try {
-    controller_method_ =
-      controller_loader_->createSharedInstance("easynav_controller/DummyController");
-    if (!controller_method_->initialize(shared_from_this(), "dummy_controller")) {
-      RCLCPP_ERROR(get_logger(),
-        "Unable to configure plugin easynav::DummyController.");
-      return  CallbackReturnT::FAILURE;
-    }
-  } catch (pluginlib::PluginlibException & ex) {
+  std::vector<std::string> controller_types;
+  declare_parameter("controller_types", controller_types);
+  get_parameter("controller_types", controller_types);
+
+  if (controller_types.size() > 1) {
     RCLCPP_ERROR(get_logger(),
-      "Unable to load plugin easynav::DummyController. Error: %s", ex.what());
-    return  CallbackReturnT::FAILURE;
+      "You must instance one controller.  [%lu] found", controller_types.size());
+    return CallbackReturnT::FAILURE;
+  }
+
+  for (const auto & controller_type : controller_types) {
+    std::string plugin;
+    declare_parameter(controller_type + std::string(".plugin"), plugin);
+    get_parameter(controller_type + std::string(".plugin"), plugin);
+
+    try {
+      RCLCPP_INFO(get_logger(),
+        "Loading ControllerMethodBase %s [%s]", controller_type.c_str(), plugin.c_str());
+
+      controller_method_ = controller_loader_->createSharedInstance(plugin);
+
+      auto result = controller_method_->initialize(shared_from_this(), controller_type);
+
+      if (!result) {
+        RCLCPP_ERROR(get_logger(),
+          "Unable to initialize [%s]. Error: %s", plugin.c_str(), result.error().c_str());
+        return CallbackReturnT::FAILURE;
+      }
+
+      RCLCPP_INFO(get_logger(),
+        "Loaded ControllerMethodBase %s [%s]", controller_type.c_str(), plugin.c_str());
+    } catch (pluginlib::PluginlibException & ex) {
+      RCLCPP_ERROR(get_logger(),
+        "Unable to load plugin easynav::ControllerMethodBase. Error: %s", ex.what());
+      return CallbackReturnT::FAILURE;
+    }
   }
 
   return CallbackReturnT::SUCCESS;
@@ -86,9 +120,6 @@ ControllerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  controller_main_timer_ = create_timer(1ms, std::bind(&ControllerNode::controller_cycle_rt, this),
-    realtime_cbg_);
-
   return CallbackReturnT::SUCCESS;
 }
 
@@ -96,8 +127,6 @@ CallbackReturnT
 ControllerNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
-  controller_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -132,18 +161,19 @@ ControllerNode::get_real_time_cbg()
 geometry_msgs::msg::TwistStamped
 ControllerNode::get_cmd_vel() const
 {
+  if (controller_method_ == nullptr) {
+    return geometry_msgs::msg::TwistStamped();
+  }
+
   return controller_method_->get_cmd_vel();
 }
 
-void
-ControllerNode::controller_cycle_rt()
+bool
+ControllerNode::cycle_rt(bool trigger)
 {
-  controller_method_->update(nav_state_);
-}
+  if (controller_method_ == nullptr) {return false;}
 
-void
-ControllerNode::controller_cycle_nort()
-{
+  return controller_method_->internal_update_rt(*nav_state_, trigger);
 }
 
 }  // namespace easynav

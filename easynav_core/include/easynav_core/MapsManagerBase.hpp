@@ -65,20 +65,18 @@ public:
    *
    * @return An Odometry message representing the current localization state.
    */
-  [[nodiscard]] virtual std::shared_ptr<MapsTypeBase> get_static_map() = 0;
+  [[nodiscard]] virtual std::map<std::string, std::shared_ptr<MapsTypeBase>> get_maps() = 0;
 
-  /**
-   * @brief Get the current localization state.
-   *
-   * This method should return the last known localization of the robot.
-   * It should not run the localization algorithm (see update method).
-   *
-   * @return An Odometry message representing the current localization state.
-   */
-  [[nodiscard]] virtual std::shared_ptr<MapsTypeBase> get_dynamyc_map() = 0;
+  void internal_update(const NavState & nav_state)
+  {
+    if (isTime2Run()) {
+      update(nav_state);
+    }
+  }
 
+protected:
   /**
-   * @brief Run the localization method and update the robot's estimated localization.
+   * @brief Run the localization method and update in non real-time the robot's estimated localization.
    *
    * This method will be called by the system's LocalizerNode to run the localization algorithm.
    *

@@ -48,7 +48,7 @@ geometry_msgs::msg::TwistStamped DummyController::get_cmd_vel()
   return cmd_vel_;
 }
 
-void DummyController::update(const NavState & nav_state)
+void DummyController::update_rt(const NavState & nav_state)
 {
   cmd_vel_.header.stamp = nav_state.timestamp;
   cmd_vel_.header.frame_id = "base_link";

@@ -67,8 +67,16 @@ public:
    */
   [[nodiscard]] virtual nav_msgs::msg::Path get_path() = 0;
 
+  void internal_update(const NavState & nav_state)
+  {
+    if (isTime2Run()) {
+      update(nav_state);
+    }
+  }
+
+protected:
   /**
-   * @brief Run the path planning method and update the navigation route.
+   * @brief Run the path planning method and update in non real-time the navigation route.
    *
    * This method will be called by the system's PlannerNode to run the path planning algorithm.
    *

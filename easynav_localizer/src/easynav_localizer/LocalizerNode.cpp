@@ -32,8 +32,11 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-LocalizerNode::LocalizerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("localizer_node", options)
+LocalizerNode::LocalizerNode(
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
+: LifecycleNode("localizer_node", options),
+  nav_state_(nav_state)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
@@ -52,6 +55,13 @@ LocalizerNode::~LocalizerNode()
   if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
     trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
   }
+
+  std::vector<std::string> localizer_types;
+  get_parameter("localizer_types", localizer_types);
+  for (const auto & localizer_type : localizer_types) {
+    localizer_loader_->unloadLibraryForClass(localizer_type);
+  }
+  localizer_method_ = nullptr;
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -61,17 +71,42 @@ LocalizerNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  try {
-    localizer_method_ = localizer_loader_->createSharedInstance("easynav_localizer/DummyLocalizer");
-    auto result = localizer_method_->initialize(shared_from_this(), "dummy_localizer");
-    if (!result) {
+  std::vector<std::string> localizer_types;
+  declare_parameter("localizer_types", localizer_types);
+  get_parameter("localizer_types", localizer_types);
+
+  if (localizer_types.size() > 1) {
+    RCLCPP_ERROR(get_logger(),
+      "You must instance one localizer.  [%lu] found", localizer_types.size());
+    return CallbackReturnT::FAILURE;
+  }
+
+  for (const auto & localizer_type : localizer_types) {
+    std::string plugin;
+    declare_parameter(localizer_type + std::string(".plugin"), plugin);
+    get_parameter(localizer_type + std::string(".plugin"), plugin);
+
+    try {
+      RCLCPP_INFO(get_logger(),
+        "Loading LocalizerMethodBase %s [%s]", localizer_type.c_str(), plugin.c_str());
+
+      localizer_method_ = localizer_loader_->createSharedInstance(plugin);
+
+      auto result = localizer_method_->initialize(shared_from_this(), localizer_type);
+
+      if (!result) {
+        RCLCPP_ERROR(get_logger(),
+          "Unable to initialize [%s]. Error: %s", plugin.c_str(), result.error().c_str());
+        return CallbackReturnT::FAILURE;
+      }
+
+      RCLCPP_INFO(get_logger(),
+        "Loaded LocalizerMethodBase %s [%s]", localizer_type.c_str(), plugin.c_str());
+    } catch (pluginlib::PluginlibException & ex) {
       RCLCPP_ERROR(get_logger(),
-        "Unable to initialize [dummy_localizer]. Error: %s", result.error().c_str());
+        "Unable to load plugin easynav::LocalizerMethodBase. Error: %s", ex.what());
       return CallbackReturnT::FAILURE;
     }
-  } catch (pluginlib::PluginlibException & ex) {
-    RCLCPP_ERROR(get_logger(),
-      "Unable to load plugin easynav::DummyLocalizer. Error: %s", ex.what());
   }
 
   return CallbackReturnT::SUCCESS;
@@ -82,9 +117,6 @@ LocalizerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  localizer_main_timer_ = create_timer(1ms, std::bind(&LocalizerNode::localizer_cycle_nort, this),
-    realtime_cbg_);
-
   return CallbackReturnT::SUCCESS;
 }
 
@@ -92,8 +124,6 @@ CallbackReturnT
 LocalizerNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
-  localizer_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -125,21 +155,32 @@ LocalizerNode::get_real_time_cbg()
   return realtime_cbg_;
 }
 
+// ToDo[@fmrico]: Change these methods to std::expect<nav_msgs::msg::Odometry>
+
 nav_msgs::msg::Odometry
 LocalizerNode::get_odom() const
 {
+  if (localizer_method_ == nullptr) {
+    return nav_msgs::msg::Odometry();
+  }
+
   return localizer_method_->get_odom();
 }
 
-void
-LocalizerNode::localizer_cycle_rt()
+bool
+LocalizerNode::cycle_rt(bool trigger)
 {
-  localizer_method_->update(nav_state_);
+  if (localizer_method_ == nullptr) {return false;}
+
+  return localizer_method_->internal_update_rt(*nav_state_, trigger);
 }
 
 void
-LocalizerNode::localizer_cycle_nort()
+LocalizerNode::cycle()
 {
+  if (localizer_method_ == nullptr) {return;}
+
+  localizer_method_->internal_update(*nav_state_);
 }
 
 }  // namespace easynav

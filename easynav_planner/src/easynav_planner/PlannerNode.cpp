@@ -33,11 +33,12 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-PlannerNode::PlannerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("planner_node", options)
+PlannerNode::PlannerNode(
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
+: LifecycleNode("planner_node", options),
+  nav_state_(nav_state)
 {
-  realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
-
   planner_loader_ = std::make_unique<pluginlib::ClassLoader<easynav::PlannerMethodBase>>(
     "easynav_core", "easynav::PlannerMethodBase");
 
@@ -54,6 +55,13 @@ PlannerNode::~PlannerNode()
   if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
     trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
   }
+
+  std::vector<std::string> planner_types;
+  get_parameter("planner_types", planner_types);
+  for (const auto & planner_type : planner_types) {
+    planner_loader_->unloadLibraryForClass(planner_type);
+  }
+  planner_method_ = nullptr;
 }
 
 using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
@@ -63,17 +71,42 @@ PlannerNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  try {
-    planner_method_ = planner_loader_->createSharedInstance("easynav_planner/DummyPlanner");
-    auto result = planner_method_->initialize(shared_from_this(), "dummy_planner");
-    if (!result) {
+  std::vector<std::string> planner_types;
+  declare_parameter("planner_types", planner_types);
+  get_parameter("planner_types", planner_types);
+
+  if (planner_types.size() > 1) {
+    RCLCPP_ERROR(get_logger(),
+      "You must instance one planner.  [%lu] found", planner_types.size());
+    return CallbackReturnT::FAILURE;
+  }
+
+  for (const auto & planner_type : planner_types) {
+    std::string plugin;
+    declare_parameter(planner_type + std::string(".plugin"), plugin);
+    get_parameter(planner_type + std::string(".plugin"), plugin);
+
+    try {
+      RCLCPP_INFO(get_logger(),
+        "Loading PlannerMethodBase %s [%s]", planner_type.c_str(), plugin.c_str());
+
+      planner_method_ = planner_loader_->createSharedInstance(plugin);
+
+      auto result = planner_method_->initialize(shared_from_this(), planner_type);
+
+      if (!result) {
+        RCLCPP_ERROR(get_logger(),
+          "Unable to initialize [%s]. Error: %s", plugin.c_str(), result.error().c_str());
+        return CallbackReturnT::FAILURE;
+      }
+
+      RCLCPP_INFO(get_logger(),
+        "Loaded PlannerMethodBase %s [%s]", planner_type.c_str(), plugin.c_str());
+    } catch (pluginlib::PluginlibException & ex) {
       RCLCPP_ERROR(get_logger(),
-        "Unable to initialize [dummy_planner]. Error: %s", result.error().c_str());
+        "Unable to load plugin easynav::PlannerMethodBase. Error: %s", ex.what());
       return CallbackReturnT::FAILURE;
     }
-  } catch (pluginlib::PluginlibException & ex) {
-    RCLCPP_ERROR(get_logger(),
-      "Unable to load plugin easynav::DummyPlanner. Error: %s", ex.what());
   }
 
   return CallbackReturnT::SUCCESS;
@@ -84,9 +117,6 @@ PlannerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  planner_main_timer_ = create_timer(1ms, std::bind(&PlannerNode::planner_cycle_nort, this),
-    realtime_cbg_);
-
   return CallbackReturnT::SUCCESS;
 }
 
@@ -94,8 +124,6 @@ CallbackReturnT
 PlannerNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
-  planner_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -121,27 +149,22 @@ PlannerNode::on_error(const rclcpp_lifecycle::State & state)
   return CallbackReturnT::SUCCESS;
 }
 
-rclcpp::CallbackGroup::SharedPtr
-PlannerNode::get_real_time_cbg()
-{
-  return realtime_cbg_;
-}
-
 nav_msgs::msg::Path
 PlannerNode::get_path() const
 {
+  if (planner_method_ == nullptr) {
+    return nav_msgs::msg::Path();
+  }
+
   return planner_method_->get_path();
 }
 
 void
-PlannerNode::planner_cycle_nort()
+PlannerNode::cycle()
 {
-  planner_method_->update(nav_state_);
-}
+  if (planner_method_ == nullptr) {return;}
 
-void
-PlannerNode::planner_cycle_rt()
-{
+  planner_method_->internal_update(*nav_state_);
 }
 
 }  // namespace easynav

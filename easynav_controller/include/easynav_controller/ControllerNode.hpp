@@ -52,7 +52,9 @@ public:
    * @brief Constructs a ControllerNode lifecycle node with the specified options.
    * @param options Node options to configure the ControllerNode node.
    */
-  explicit ControllerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit ControllerNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destroys the ControllerNode object.
@@ -131,22 +133,18 @@ public:
   [[nodiscard]] geometry_msgs::msg::TwistStamped get_cmd_vel() const;
 
   /**
-   * @brief Set the current navigation state.
+   * @brief Executes one cycle of real-time controller logic.
    *
-   * @param nav_state The current state of the navigation system.
+   * This method is invoked periodically by a high-priority timer and is expected
+   * to compute control commands based on the current navigation state and input data.
    */
-  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+  bool cycle_rt(bool trigger = false);
 
 private:
   /**
    * @brief Callback group intended for real-time tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
-
-  /**
-   * @brief Timer that triggers the periodic controller tasks cycle.
-   */
-  rclcpp::TimerBase::SharedPtr controller_main_timer_;
 
   /**
    * @brief Pointer to the controller method.
@@ -160,22 +158,7 @@ private:
    *
    * This is the current state of the navigation system.
    */
-  NavState nav_state_;
-
-  /**
-   * @brief Executes one cycle of real-time controller logic.
-   *
-   * This method is invoked periodically by a high-priority timer and is expected
-   * to compute control commands based on the current navigation state and input data.
-   */
-  void controller_cycle_rt();
-
-  /**
-   * @brief Executes one cycle of non-real-time controller logic.
-   *
-   * This method handles background tasks such as diagnostics, logging, or dynamic reconfiguration.
-   */
-  void controller_cycle_nort();
+  const std::shared_ptr<const NavState> nav_state_;
 
   /**
    * @brief Pluginlib loader used to dynamically load controller implementations.
