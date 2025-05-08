@@ -28,6 +28,7 @@
 #include "lifecycle_msgs/msg/state.hpp"
 
 #include "easynav_maps_manager/MapsManagerNode.hpp"
+#include "easynav_core/MapsManagerBase.hpp"
 
 namespace easynav
 {
@@ -37,6 +38,9 @@ using namespace std::chrono_literals;
 MapsManagerNode::MapsManagerNode(const rclcpp::NodeOptions & options)
 : LifecycleNode("maps_manager_node", options)
 {
+  maps_manager_loader_ = std::make_unique<pluginlib::ClassLoader<MapsManagerBase>>(
+    "easynav_core", "easynav::MapsManagerBase");
+
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 }
 
@@ -60,6 +64,41 @@ MapsManagerNode::on_configure(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
+  std::vector<std::string> map_types;
+  declare_parameter("map_types", map_types);
+  get_parameter("map_types", map_types);
+
+  for (const auto & map_type : map_types) {
+    std::string plugin;
+    declare_parameter(map_type + std::string(".plugin"), plugin);
+    get_parameter(map_type + std::string(".plugin"), plugin);
+
+    try {
+      RCLCPP_INFO(get_logger(),
+        "Loading MapsManagerBase %s [%s]", map_type.c_str(), plugin.c_str());
+
+      std::shared_ptr<MapsManagerBase> instance;
+      instance = maps_manager_loader_->createSharedInstance(plugin);
+
+      auto result = instance->initialize(shared_from_this(), map_type);
+
+      if (!result) {
+        RCLCPP_ERROR(get_logger(),
+          "Unable to initialize [%s]. Error: %s", plugin.c_str(), result.error().c_str());
+        return CallbackReturnT::FAILURE;
+      }
+
+      maps_managers_.push_back(instance);
+
+      RCLCPP_INFO(get_logger(),
+        "Loaded MapsManagerBase %s [%s]", map_type.c_str(), plugin.c_str());
+    } catch (pluginlib::PluginlibException & ex) {
+      RCLCPP_ERROR(get_logger(),
+        "Unable to load plugin easynav::MapsManagerBase. Error: %s", ex.what());
+      return CallbackReturnT::FAILURE;
+    }
+  }
+
   return CallbackReturnT::SUCCESS;
 }
 
@@ -68,7 +107,7 @@ MapsManagerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  maps_manager_main_timer_ = create_timer(1ms,
+  maps_manager_main_timer_ = create_timer(10ms,
     std::bind(&MapsManagerNode::maps_manager_cycle_nort, this), realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
@@ -119,6 +158,9 @@ MapsManagerNode::maps_manager_cycle_rt()
 void
 MapsManagerNode::maps_manager_cycle_nort()
 {
+  for (auto & map_manager : maps_managers_) {
+    map_manager->update(nav_state_);
+  }
 }
 
 }  // namespace easynav

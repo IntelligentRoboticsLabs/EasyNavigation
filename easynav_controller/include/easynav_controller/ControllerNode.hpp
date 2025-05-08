@@ -18,7 +18,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the ControllerNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the ControllerNode class, a ROS 2 lifecycle node for speed computation in Easy Navigation.
 
 #ifndef EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
 #define EASYNAV_CONTROLLER__CONTROLLERNODE_HPP_
@@ -26,6 +26,7 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "easynav_core/ControllerMethodBase.hpp"
+#include "pluginlib/class_loader.hpp"
 
 namespace easynav
 {
@@ -162,19 +163,27 @@ private:
   NavState nav_state_;
 
   /**
-   * @brief Executes one cycle of real-time system operations.
+   * @brief Executes one cycle of real-time controller logic.
    *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
+   * This method is invoked periodically by a high-priority timer and is expected
+   * to compute control commands based on the current navigation state and input data.
    */
   void controller_cycle_rt();
 
   /**
-   * @brief Executes one cycle of non-real-time system operations.
+   * @brief Executes one cycle of non-real-time controller logic.
    *
-   * This function manages background tasks not requiring strict real-time execution.
+   * This method handles background tasks such as diagnostics, logging, or dynamic reconfiguration.
    */
   void controller_cycle_nort();
+
+  /**
+   * @brief Pluginlib loader used to dynamically load controller implementations.
+   *
+   * This allows runtime selection and loading of different controller strategies
+   * that inherit from ControllerMethodBase, using ROS pluginlib.
+   */
+  std::unique_ptr<pluginlib::ClassLoader<easynav::ControllerMethodBase>> controller_loader_;
 };
 
 }  // namespace easynav

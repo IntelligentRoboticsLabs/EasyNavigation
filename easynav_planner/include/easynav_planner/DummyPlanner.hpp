@@ -18,13 +18,14 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the DummyPlanner method.
+/// \brief Declaration of the DummyPlanner class, a default fallback planner plugin.
 
 #ifndef EASYNAV_PLANNER__DUMMYPLANNER_HPP_
 #define EASYNAV_PLANNER__DUMMYPLANNER_HPP_
 
-#include "nav_msgs/msg/path.hpp"
+#include <expected>
 
+#include "nav_msgs/msg/path.hpp"
 #include "easynav_core/PlannerMethodBase.hpp"
 
 namespace easynav
@@ -32,39 +33,47 @@ namespace easynav
 
 /**
  * @class DummyPlanner
- * @brief A default "dummy" implementation for the Planner Method.
+ * @brief A default "do-nothing" implementation of PlannerMethodBase.
  *
- * This planning method does nothing. It serves as an example, and will be used as a default plugin implementation
- * if the navigation system configuration does not specify one.
+ * This planner serves as a fallback when no actual planning plugin is specified.
+ * It returns an empty or default path and does not perform any path planning logic.
  */
 class DummyPlanner : public easynav::PlannerMethodBase
 {
 public:
+  /**
+   * @brief Default constructor.
+   */
   DummyPlanner() = default;
+
+  /**
+   * @brief Destructor.
+   */
   ~DummyPlanner() = default;
 
   /**
-   * @brief Initialize the planning method.
+   * @brief Optional initialization logic.
    *
-   * It is not required to override this method. Only if the derived class
-   * requires further initialization than the provided by the base class.
+   * Called after the base initialize method. This dummy version performs no additional setup.
+   *
+   * @return std::expected<void, std::string> Success or error message.
    */
-  virtual void on_initialize() override;
+  virtual std::expected<void, std::string> on_initialize() override;
 
   /**
    * @brief Get the current path.
    *
-   * This method should return the last path computed.
-   * It should not run the planning algorithm (see update method).
+   * Returns the most recent (or default) path. This method should not trigger any planning logic.
    *
-   * @return A TwistStamped message with the current path.
+   * @return nav_msgs::msg::Path The stored or placeholder path.
    */
   [[nodiscard]] virtual nav_msgs::msg::Path get_path() override;
 
   /**
-   * @brief Run the path planning method and update the path.
+   * @brief Dummy update method.
    *
-   * This method will be called by the system's PlannerNode to run the planning algorithm.
+   * Called to update the internal path based on the current navigation state.
+   * This dummy version does not modify the path.
    *
    * @param nav_state The current state of the navigation system.
    */
@@ -72,10 +81,9 @@ public:
 
 private:
   /**
-   * @brief Current robot velocity command.
+   * @brief Stored path message (may be empty in the dummy implementation).
    */
   nav_msgs::msg::Path path_ {};
-
 };
 
 }  // namespace easynav

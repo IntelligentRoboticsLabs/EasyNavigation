@@ -26,21 +26,24 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 #include "easynav_core/PlannerMethodBase.hpp"
+#include "pluginlib/class_loader.hpp"
+#include "nav_msgs/msg/path.hpp"
+#include "easynav_common/types/NavState.hpp"
 
 namespace easynav
 {
 
 /// \file
-/// \brief Declaration of the PlannerNode class, a ROS 2 lifecycle node for calculating paths tasks in Easy Navigation.
+/// \brief Declaration of the PlannerNode class, a ROS 2 lifecycle node for computing navigation paths in Easy Navigation.
 
 /**
  * @class PlannerNode
- * @brief ROS 2 lifecycle node that manages calculating paths for the Easy Navigation system.
+ * @brief ROS 2 lifecycle node that manages path planning for the Easy Navigation system.
  *
- * This node provides the interface between the planner module in EasyNav and the ROS 2 ecosystem.
- * It handles lifecycle transitions, real-time scheduling of periodic tasks, and parameter setup.
+ * This node provides the interface between the planner plugin and the ROS 2 ecosystem.
+ * It manages lifecycle transitions, real-time callback scheduling, and invokes the underlying
+ * PlannerMethodBase implementation to generate navigation paths.
  */
-
 class PlannerNode : public rclcpp_lifecycle::LifecycleNode
 {
 public:
@@ -69,7 +72,7 @@ public:
 
   /**
    * @brief Activates the PlannerNode node.
-   * This starts periodic navigation control cycles.
+   * This starts periodic planning updates.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS if activation is successful.
@@ -87,7 +90,7 @@ public:
 
   /**
    * @brief Cleans up the PlannerNode node.
-   * Releases resources and resets the internal state.
+   * Releases resources and resets internal state.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
@@ -96,7 +99,7 @@ public:
 
   /**
    * @brief Shuts down the PlannerNode node.
-   * Called on final shutdown of the node's lifecycle.
+   * Called during the final shutdown phase.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
@@ -104,8 +107,9 @@ public:
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the PlannerNode node.
-   * This is called when a failure occurs during a lifecycle transition.
+   * @brief Handles errors during lifecycle transitions.
+   *
+   * This method is triggered if an error occurs while transitioning states.
    *
    * @param state The current lifecycle state.
    * @return CallbackReturnT::SUCCESS indicating error handling is complete.
@@ -115,24 +119,25 @@ public:
   /**
    * @brief Returns the real-time callback group.
    *
-   * This callback group can be used to assign callbacks that require
-   * low latency or have real-time constraints.
+   * This group is used to assign callbacks that require low latency or hard timing constraints.
    *
    * @return Shared pointer to the real-time callback group.
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
   /**
-   * @brief Get the current navigation path.
+   * @brief Get the most recent computed navigation path.
    *
-   * @return An Odometry message representing the current navigation path.
+   * @return nav_msgs::msg::Path representing the current navigation plan.
    */
   [[nodiscard]] nav_msgs::msg::Path get_path() const;
 
   /**
    * @brief Set the current navigation state.
    *
-   * @param nav_state The current state of the navigation system.
+   * This state is passed to the planner plugin during updates.
+   *
+   * @param nav_state The new navigation state.
    */
   inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
 
@@ -143,38 +148,42 @@ private:
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
   /**
-   * @brief Timer that triggers the periodic planner tasks cycle.
+   * @brief Timer that triggers the periodic planner update cycle.
    */
   rclcpp::TimerBase::SharedPtr planner_main_timer_;
 
   /**
-   * @brief Pointer to the planner method.
+   * @brief Pointer to the loaded planner method plugin.
    *
-   * This is the actual planning algorithm that will be used.
+   * This is the concrete implementation of the planning algorithm.
    */
   std::shared_ptr<PlannerMethodBase> planner_method_ {nullptr};
 
   /**
-   * @brief Current navigation state.
-   *
-   * This is the current state of the navigation system.
+   * @brief The current navigation state.
    */
   NavState nav_state_;
 
   /**
-   * @brief Executes one cycle of real-time system operations.
+   * @brief Real-time cycle execution.
    *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
+   * Invoked periodically to run the path planning algorithm in real time.
    */
   void planner_cycle_rt();
 
   /**
-   * @brief Executes one cycle of non-real-time system operations.
+   * @brief Non-real-time cycle execution.
    *
-   * This function manages background tasks not requiring strict real-time execution.
+   * Used for lower-priority updates or background processing.
    */
   void planner_cycle_nort();
+
+  /**
+   * @brief Plugin loader for planner methods.
+   *
+   * This loads the user-specified planning algorithm from a plugin.
+   */
+  std::unique_ptr<pluginlib::ClassLoader<easynav::PlannerMethodBase>> planner_loader_;
 };
 
 }  // namespace easynav

@@ -1,5 +1,5 @@
 <class_libraries>
-  <library path="easynav_dummy_planner">
+  <library path="dummy_planner">
     <class name="easynav_planner/DummyPlanner"  type="easynav::DummyPlanner" base_class_type="easynav::PlannerMethodBase">
       <description>
       A default "dummy" implementation for the Planner Method.
