@@ -127,11 +127,13 @@ public:
    */
   void cycle();
 
+  std::map<std::string, std::shared_ptr<MapsTypeBase>> get_maps() {return maps_;}
+
 private:
   /**
    * @brief List of active map instances in memory.
    */
-  std::vector<std::shared_ptr<MapsTypeBase>> maps_;
+  std::map<std::string, std::shared_ptr<MapsTypeBase>> maps_;
 
   /**
    * @brief Plugin loader for MapsManagerBase-based implementations.

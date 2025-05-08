@@ -138,7 +138,7 @@ public:
    * This method is invoked periodically by a high-priority timer and is expected
    * to compute control commands based on the current navigation state and input data.
    */
-    bool cycle_rt(bool trigger = false);
+  bool cycle_rt(bool trigger = false);
 
 private:
   /**

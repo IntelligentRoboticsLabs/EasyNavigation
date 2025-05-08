@@ -62,23 +62,10 @@ public:
    */
   virtual std::expected<void, std::string> on_initialize() override;
 
-  /**
-   * @brief Returns a shared pointer to the current static map.
-   *
-   * This dummy version returns a null or placeholder pointer.
-   *
-   * @return Shared pointer to a MapsTypeBase representing the static map.
-   */
-  [[nodiscard]] virtual std::shared_ptr<MapsTypeBase> get_static_map() override;
-
-  /**
-   * @brief Returns a shared pointer to the current dynamic map.
-   *
-   * This dummy version returns a null or placeholder pointer.
-   *
-   * @return Shared pointer to a MapsTypeBase representing the dynamic map.
-   */
-  [[nodiscard]] virtual std::shared_ptr<MapsTypeBase> get_dynamyc_map() override;
+  std::map<std::string, std::shared_ptr<MapsTypeBase>> get_maps()
+  {
+    return std::map<std::string, std::shared_ptr<MapsTypeBase>>();
+  }
 
   /**
    * @brief Dummy update method.

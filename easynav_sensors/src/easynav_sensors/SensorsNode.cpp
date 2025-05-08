@@ -187,10 +187,9 @@ SensorsNode::cycle()
   }
 
   if (percept_pub_->get_subscription_count() > 0) {
-    std::cerr << "1*" << std::endl;
     auto fused = PerceptionsOpsView(perceptions_)
       .fuse(perception_default_frame_);
-    
+
     auto fused_points = fused->as_points(0);
 
     auto msg = points_to_rosmsg(fused_points);

@@ -154,7 +154,6 @@ public:
   void cycle();
 
 private:
-
   /**
    * @brief Callback group intended for real-time tasks.
    */

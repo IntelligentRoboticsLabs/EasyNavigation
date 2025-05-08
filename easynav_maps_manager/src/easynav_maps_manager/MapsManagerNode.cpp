@@ -154,6 +154,11 @@ MapsManagerNode::cycle()
 {
   for (auto & map_manager : maps_managers_) {
     map_manager->internal_update(*nav_state_);
+
+    auto maps = map_manager->get_maps();
+    for (auto map : maps) {
+      maps_[map.first] = map.second;
+    }
   }
 }
 

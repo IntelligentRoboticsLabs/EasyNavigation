@@ -139,7 +139,7 @@ public:
    */
   void cycle();
 
-private:  
+private:
   /**
    * @brief Callback group intended for real-time sensor processing tasks.
    */

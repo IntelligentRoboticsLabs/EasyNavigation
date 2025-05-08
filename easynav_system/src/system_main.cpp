@@ -92,7 +92,7 @@ int main(int argc, char ** argv)
       while (rclcpp::ok()) {
         rate.sleep();
         if (system_node->get_current_state().id() ==
-          lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE)
+        lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE)
         {
           system_node->system_cycle_rt();
         }

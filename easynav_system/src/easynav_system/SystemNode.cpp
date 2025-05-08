@@ -177,13 +177,13 @@ SystemNode::system_cycle_rt()
 
   bool trigger_controller = controller_node_->cycle_rt(
     trigger_perceptions || trigger_localization);
-  
+
   if (trigger_controller) {
     nav_state_->cmd_vel = controller_node_->get_cmd_vel();
-    // vel_pub_->publish(nav_state_->cmd_vel); 
+    // vel_pub_->publish(nav_state_->cmd_vel);
   }
 
-  std::cerr << "rt: " << (now() - start).seconds() << std::endl; 
+  std::cerr << "rt: " << (now() - start).seconds() << std::endl;
 }
 
 void
@@ -200,7 +200,7 @@ SystemNode::system_cycle()
   nav_state_->odom = localizer_node_->get_odom();
 
   maps_manager_node_->cycle();
-
+  nav_state_->maps = maps_manager_node_->get_maps();
   // nav_state_->dynamic_map = maps_manager_node_->get_dynamic_map();
   // nav_state_->goal = goal_;
 
@@ -208,7 +208,7 @@ SystemNode::system_cycle()
 
   nav_state_->path = planner_node_->get_path();
 
-  std::cerr << "nort: " << (now() - start).seconds() << std::endl; 
+  std::cerr << "nort: " << (now() - start).seconds() << std::endl;
 }
 
 std::map<std::string, SystemNodeInfo>

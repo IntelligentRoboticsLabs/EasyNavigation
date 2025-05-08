@@ -345,6 +345,7 @@ TEST_F(SensorsNodeTestCase, percept_laserscan)
   {
     auto start = test_node->now();
     while (test_node->now() - start < 1s) {
+      sensors_node->cycle();
       ts = test_node->now();
       laser_pub->publish(get_scan_test_1(ts));
       exe.spin_some();
@@ -363,6 +364,7 @@ TEST_F(SensorsNodeTestCase, percept_laserscan)
   {
     auto start = test_node->now();
     while (test_node->now() - start < 1s) {
+      sensors_node->cycle();
       exe.spin_some();
     }
   }
@@ -390,7 +392,8 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
       fused_perception = msg;
     });
 
-  easynav::RTTFBuffer::getInstance(test_node->get_clock());
+  auto tf_buffer = easynav::RTTFBuffer::getInstance(test_node->get_clock());
+  tf2_ros::TransformListener tf_listener(*tf_buffer, test_node, true);
 
   auto tf_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(*test_node);
   geometry_msgs::msg::TransformStamped transform;
@@ -438,6 +441,21 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
 
   {
     auto start = test_node->now();
+    while (test_node->now() - start < 15ms) {
+      transform.header.stamp = test_node->now();
+      transform.child_frame_id = "base_laser_1";
+
+      easynav::RTTFBuffer::getInstance()->setTransform(transform, "easynav", false);
+      tf_broadcaster->sendTransform(transform);
+
+      transform.header.stamp = test_node->now();
+      transform.child_frame_id = "base_laser_2";
+
+      easynav::RTTFBuffer::getInstance()->setTransform(transform, "easynav", false);
+      tf_broadcaster->sendTransform(transform);
+    }
+
+    start = test_node->now();
     while (test_node->now() - start < 1s) {
       transform.header.stamp = test_node->now();
       transform.child_frame_id = "base_laser_1";
@@ -447,7 +465,7 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
 
       transform.header.stamp = test_node->now();
       transform.child_frame_id = "base_laser_2";
-  
+
       easynav::RTTFBuffer::getInstance()->setTransform(transform, "easynav", false);
       tf_broadcaster->sendTransform(transform);
 
@@ -456,6 +474,8 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
 
       laser1_pub->publish(get_scan_test_3(time1));
       laser2_pub->publish(get_scan_test_4(time2));
+
+      sensors_node->cycle();
       exe.spin_some();
     }
 
@@ -502,6 +522,7 @@ TEST_F(SensorsNodeTestCase, percept_fuse_laserscan)
       auto time2 = time1 - 10ms;
 
       laser1_pub->publish(get_scan_test_3(time1));
+      sensors_node->cycle();
       exe.spin_some();
     }
 
@@ -556,6 +577,7 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
     auto start = test_node->now();
     while (test_node->now() - start < 100ms) {
       exe.spin_some();
+      sensors_node->cycle();
     }
   }
 
@@ -575,6 +597,7 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
     while (test_node->now() - start < 1s) {
       ts = test_node->now();
       laser3d_pub->publish(get_pc2_test_0(ts));
+      sensors_node->cycle();
       exe.spin_some();
     }
   }
@@ -591,6 +614,7 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
   {
     auto start = test_node->now();
     while (test_node->now() - start < 1s) {
+      sensors_node->cycle();
       exe.spin_some();
     }
   }
@@ -602,12 +626,8 @@ TEST_F(SensorsNodeTestCase, percept_pc2)
   ASSERT_NE(perceptions[0]->subscription, nullptr);
 }
 
-
-/*
-TEST(SensorsNodeTestCase, percept_fuse_all)
+TEST_F(SensorsNodeTestCase, percept_fuse_all)
 {
-  rclcpp::init(0, nullptr);
-
   auto sensors_node = easynav::SensorsNode::make_shared();
   auto test_node = rclcpp::Node::make_shared("test_node");
   auto laser1_pub = test_node->create_publisher<sensor_msgs::msg::LaserScan>(
@@ -623,6 +643,9 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
     [&fused_perception](sensor_msgs::msg::PointCloud2::SharedPtr msg) {
       fused_perception = msg;
     });
+
+  auto tf_buffer = easynav::RTTFBuffer::getInstance(test_node->get_clock());
+  tf2_ros::TransformListener tf_listener(*tf_buffer, test_node, true);
 
   auto tf_broadcaster = std::make_shared<tf2_ros::TransformBroadcaster>(*test_node);
   geometry_msgs::msg::TransformStamped transform;
@@ -674,6 +697,19 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
 
   {
     auto start = test_node->now();
+
+    while (test_node->now() - start < 15ms) {
+      transform.header.stamp = test_node->now();
+      transform.child_frame_id = "base_laser_1";
+      tf_broadcaster->sendTransform(transform);
+      transform.header.stamp = test_node->now();
+      transform.child_frame_id = "base_laser_2";
+      tf_broadcaster->sendTransform(transform);
+      transform.header.stamp = test_node->now();
+      transform.child_frame_id = "base_lidar3d";
+      tf_broadcaster->sendTransform(transform);
+    }
+
     while (test_node->now() - start < 1s) {
       transform.header.stamp = test_node->now();
       transform.child_frame_id = "base_laser_1";
@@ -691,6 +727,7 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
       laser1_pub->publish(get_scan_test_3(time1));
       laser2_pub->publish(get_scan_test_4(time2));
       laser3d_pub->publish(get_pc2_test_0(time1));
+      sensors_node->cycle();
       exe.spin_some();
     }
 
@@ -698,7 +735,7 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
 
     ASSERT_EQ(perceptions.size(), 3u);
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
-    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.001);
+    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.02);
     ASSERT_EQ(perceptions[0]->valid, true);
     ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
@@ -707,7 +744,7 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
     ASSERT_NE(perceptions[1]->subscription, nullptr);
     ASSERT_LT(perceptions[1]->stamp, perceptions[0]->stamp);
     ASSERT_EQ(perceptions[2]->data.size(), 16u);
-    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.001);
+    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.02);
     ASSERT_EQ(perceptions[2]->valid, true);
     ASSERT_NE(perceptions[2]->subscription, nullptr);
     ASSERT_NE(fused_perception, nullptr);
@@ -737,6 +774,7 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
       auto time2 = time1 - 10ms;
 
       laser1_pub->publish(get_scan_test_3(time1));
+      sensors_node->cycle();
       exe.spin_some();
     }
 
@@ -744,7 +782,7 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
 
     ASSERT_EQ(perceptions.size(), 3u);
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
-    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.001);
+    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.02);
     ASSERT_EQ(perceptions[0]->valid, true);
     ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
@@ -764,5 +802,4 @@ TEST(SensorsNodeTestCase, percept_fuse_all)
       ASSERT_EQ(p.z, 1.0);
     }
   }
-  rclcpp::shutdown();
-}*/
+}

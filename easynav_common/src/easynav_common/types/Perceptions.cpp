@@ -144,7 +144,7 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
       perception->frame_id = msg->header.frame_id;
       perception->stamp = msg->header.stamp;
       perception->valid = true;
-       perception->new_data = true;
+      perception->new_data = true;
     }, options);
 }
 

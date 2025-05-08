@@ -33,8 +33,8 @@ namespace easynav
 using namespace std::chrono_literals;
 
 LocalizerNode::LocalizerNode(
-    const std::shared_ptr<const NavState> & nav_state,
-    const rclcpp::NodeOptions & options)
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
 : LifecycleNode("localizer_node", options),
   nav_state_(nav_state)
 {
@@ -78,7 +78,7 @@ LocalizerNode::on_configure(const rclcpp_lifecycle::State & state)
   if (localizer_types.size() != 1) {
     RCLCPP_ERROR(get_logger(),
       "You must instance one localizer.  [%lu] found", localizer_types.size());
-      return CallbackReturnT::FAILURE;
+    return CallbackReturnT::FAILURE;
   }
 
   for (const auto & localizer_type : localizer_types) {

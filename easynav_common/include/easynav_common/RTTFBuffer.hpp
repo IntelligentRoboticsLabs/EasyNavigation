@@ -28,26 +28,29 @@ namespace easynav
 {
 
 class RTTFBuffer {
- public:
-  static std::shared_ptr<tf2_ros::Buffer> getInstance(const rclcpp::Clock::SharedPtr& clock) {
+public:
+  static std::shared_ptr<tf2_ros::Buffer> getInstance(const rclcpp::Clock::SharedPtr & clock)
+  {
     if (!instance_) {
       instance_ = std::make_shared<tf2_ros::Buffer>(clock);
     }
     return instance_;
   }
 
-  static std::shared_ptr<tf2_ros::Buffer> getInstance() {
+  static std::shared_ptr<tf2_ros::Buffer> getInstance()
+  {
     if (!instance_) {
       throw std::runtime_error("RTTFBuffer not initialized");
     }
     return instance_;
   }
 
-  static void removeInstance() {
+  static void removeInstance()
+  {
     instance_.reset();
   }
 
- private:
+private:
   static std::shared_ptr<tf2_ros::Buffer> instance_;
 };
 

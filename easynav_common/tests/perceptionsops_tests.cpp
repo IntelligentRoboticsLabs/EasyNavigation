@@ -129,7 +129,7 @@ TEST_F(PerceptionsOpsTest, DownsampleTest)
 TEST_F(PerceptionsOpsTest, FuseOperation)
 {
   auto node = std::make_shared<rclcpp_lifecycle::LifecycleNode>("test_fuse_node");
-  
+
   auto tf_buffer = easynav::RTTFBuffer::getInstance(node->get_clock());
   tf2_ros::TransformListener tf_listener(*tf_buffer);
 

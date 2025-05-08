@@ -88,7 +88,7 @@ public:
 
     last_ts_ = parent_node_->now();
     rt_last_ts_ = parent_node_->now();
-   
+
     return on_initialize();
   }
 

@@ -32,21 +32,10 @@ std::expected<void, std::string> DummyMapsManager::on_initialize()
   return {};
 }
 
-std::shared_ptr<MapsTypeBase>
-DummyMapsManager::get_static_map()
-{
-  return nullptr;
-}
-
-std::shared_ptr<MapsTypeBase>
-DummyMapsManager::get_dynamyc_map()
-{
-  return nullptr;
-}
-
 void
 DummyMapsManager::update(const NavState & nav_state)
 {
+  (void)nav_state;
 }
 
 }  // namespace easynav
