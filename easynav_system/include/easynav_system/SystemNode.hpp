@@ -33,6 +33,7 @@
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 #include "easynav_planner/PlannerNode.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_system/GoalManager.hpp"
 
 namespace easynav
 {
@@ -174,6 +175,11 @@ private:
    * @brief The current navigation state.
    */
   NavState nav_state_;
+
+  /**
+   * @brief Goal manager for handling navigation goals.
+   */
+  GoalManager goal_manager_;
 
   /**
    * @brief Executes one cycle of real-time system operations.

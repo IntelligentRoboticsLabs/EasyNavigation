@@ -86,6 +86,15 @@ SystemNode::on_configure(const rclcpp_lifecycle::State & state)
     }
   }
 
+  if (const auto res = goal_manager_.initialize(shared_from_this()); !res) {
+    RCLCPP_ERROR(
+      rclcpp::get_logger("SystemNode"),
+      "Failed to initialize GoalManager: %s",
+      res.error().c_str()
+    );
+    return CallbackReturnT::FAILURE;
+  }
+
   return CallbackReturnT::SUCCESS;
 }
 

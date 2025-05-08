@@ -11,6 +11,7 @@
 
   <depend>rclcpp</depend>
   <depend>rclcpp_lifecycle</depend>
+  <depend>easynav_interfaces</depend>
   <depend>easynav_common</depend>
   <depend>easynav_controller</depend>
   <depend>easynav_localizer</depend>
