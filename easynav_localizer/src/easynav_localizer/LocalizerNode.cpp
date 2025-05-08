@@ -75,7 +75,7 @@ LocalizerNode::on_configure(const rclcpp_lifecycle::State & state)
   declare_parameter("localizer_types", localizer_types);
   get_parameter("localizer_types", localizer_types);
 
-  if (localizer_types.size() != 1) {
+  if (localizer_types.size() > 1) {
     RCLCPP_ERROR(get_logger(),
       "You must instance one localizer.  [%lu] found", localizer_types.size());
     return CallbackReturnT::FAILURE;
@@ -155,21 +155,31 @@ LocalizerNode::get_real_time_cbg()
   return realtime_cbg_;
 }
 
+// ToDo[@fmrico]: Change these methods to std::expect<nav_msgs::msg::Odometry>
+
 nav_msgs::msg::Odometry
 LocalizerNode::get_odom() const
 {
+  if (localizer_method_ == nullptr) {
+    return nav_msgs::msg::Odometry();
+  }
+  
   return localizer_method_->get_odom();
 }
 
 bool
 LocalizerNode::cycle_rt(bool trigger)
 {
+  if (localizer_method_ == nullptr) {return false;}
+
   return localizer_method_->internal_update_rt(*nav_state_, trigger);
 }
 
 void
 LocalizerNode::cycle()
 {
+  if (localizer_method_ == nullptr) {return;}
+
   localizer_method_->internal_update(*nav_state_);
 }
 

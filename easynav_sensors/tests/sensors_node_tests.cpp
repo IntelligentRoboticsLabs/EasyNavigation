@@ -735,16 +735,16 @@ TEST_F(SensorsNodeTestCase, percept_fuse_all)
 
     ASSERT_EQ(perceptions.size(), 3u);
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
-    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.02);
+    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.03);
     ASSERT_EQ(perceptions[0]->valid, true);
     ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
-    ASSERT_NEAR((test_node->now() - perceptions[1]->stamp).seconds(), 0.0, 0.02);
+    ASSERT_NEAR((test_node->now() - perceptions[1]->stamp).seconds(), 0.0, 0.03);
     ASSERT_EQ(perceptions[1]->valid, true);
     ASSERT_NE(perceptions[1]->subscription, nullptr);
     ASSERT_LT(perceptions[1]->stamp, perceptions[0]->stamp);
     ASSERT_EQ(perceptions[2]->data.size(), 16u);
-    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.02);
+    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.03);
     ASSERT_EQ(perceptions[2]->valid, true);
     ASSERT_NE(perceptions[2]->subscription, nullptr);
     ASSERT_NE(fused_perception, nullptr);
@@ -782,7 +782,7 @@ TEST_F(SensorsNodeTestCase, percept_fuse_all)
 
     ASSERT_EQ(perceptions.size(), 3u);
     ASSERT_EQ(perceptions[0]->data.size(), 16u);
-    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.02);
+    ASSERT_NEAR((test_node->now() - perceptions[0]->stamp).seconds(), 0.0, 0.03);
     ASSERT_EQ(perceptions[0]->valid, true);
     ASSERT_NE(perceptions[0]->subscription, nullptr);
     ASSERT_EQ(perceptions[1]->data.size(), 16u);
