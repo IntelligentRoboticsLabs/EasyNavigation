@@ -27,6 +27,7 @@
 #include "tf2_ros/transform_listener.h"
 
 #include "easynav_common/types/Perceptions.hpp"
+#include "easynav_common/RTTFBuffer.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
@@ -128,8 +129,9 @@ TEST_F(PerceptionsOpsTest, DownsampleTest)
 TEST_F(PerceptionsOpsTest, FuseOperation)
 {
   auto node = std::make_shared<rclcpp_lifecycle::LifecycleNode>("test_fuse_node");
-  tf2_ros::Buffer tf_buffer(node->get_clock());
-  tf2_ros::TransformListener tf_listener(tf_buffer);
+
+  auto tf_buffer = easynav::RTTFBuffer::getInstance(node->get_clock());
+  tf2_ros::TransformListener tf_listener(*tf_buffer);
 
   // Publish two transform
   geometry_msgs::msg::TransformStamped tf1;
@@ -156,8 +158,8 @@ TEST_F(PerceptionsOpsTest, FuseOperation)
   tf2.transform.rotation.y = 0.0;
   tf2.transform.rotation.z = 0.0;
 
-  tf_buffer.setTransform(tf1, "default_authority", false);
-  tf_buffer.setTransform(tf2, "default_authority", false);
+  tf_buffer->setTransform(tf1, "default_authority", false);
+  tf_buffer->setTransform(tf2, "default_authority", false);
 
   // Create perceptions
   easynav::Perceptions perceptions;
@@ -174,17 +176,17 @@ TEST_F(PerceptionsOpsTest, FuseOperation)
   p2->valid = true;
   perceptions.push_back(p2);
 
-  tf_buffer.setTransform(tf1, "default_authority", false);
-  tf_buffer.setTransform(tf2, "default_authority", false);
+  tf_buffer->setTransform(tf1, "default_authority", false);
+  tf_buffer->setTransform(tf2, "default_authority", false);
 
   tf1.header.stamp = node->now();
   tf2.header.stamp = node->now();
 
-  tf_buffer.setTransform(tf1, "default_authority", false);
-  tf_buffer.setTransform(tf2, "default_authority", false);
+  tf_buffer->setTransform(tf1, "default_authority", false);
+  tf_buffer->setTransform(tf2, "default_authority", false);
 
   auto fused = easynav::PerceptionsOpsView(perceptions)
-    .fuse("odom", tf_buffer)
+    .fuse("odom")
     ->as_points();
 
   EXPECT_FLOAT_EQ(fused[0].x, 2.0f);

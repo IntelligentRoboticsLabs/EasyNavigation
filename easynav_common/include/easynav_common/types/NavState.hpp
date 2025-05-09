@@ -61,7 +61,7 @@ struct NavState
   /**
   * @brief The current list of map representations.
   */
-  std::vector<std::shared_ptr<MapsTypeBase>> maps;
+  std::map<std::string, std::shared_ptr<MapsTypeBase>> maps;
 
   /**
   * @brief The current path.

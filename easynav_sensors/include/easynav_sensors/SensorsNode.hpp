@@ -126,33 +126,24 @@ public:
   const Perceptions get_perceptions() const {return perceptions_;}
 
   /**
-   * @brief Updates the node's behavior based on the provided navigation state.
+   * @brief Executes one cycle of real-time sensor operations.
    *
-   * This may affect which perceptions are fused or published.
-   * @param nav_state The latest navigation state information.
+   * This function manages background tasks not requiring strict real-time execution.
    */
-  void set_state(const NavState & nav_state);
+  bool cycle_rt(bool trigger = false);
+
+  /**
+   * @brief Executes one cycle of non real-time sensor operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void cycle();
 
 private:
   /**
    * @brief Callback group intended for real-time sensor processing tasks.
    */
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
-
-  /**
-   * @brief Timer that triggers the periodic sensor fusion cycle.
-   */
-  rclcpp::TimerBase::SharedPtr sensors_main_timer_;
-
-  /**
-   * @brief Buffer storing transformations between frames.
-   */
-  std::shared_ptr<tf2_ros::Buffer> tf_buffer_;
-
-  /**
-   * @brief Transform listener that populates the tf buffer.
-   */
-  std::shared_ptr<tf2_ros::TransformListener> tf_listener_;
 
   /**
    * @brief Publisher for fused perception messages.
@@ -163,21 +154,6 @@ private:
    * @brief The latest fused perception message to be published.
    */
   sensor_msgs::msg::PointCloud2 perecption_msg_;
-
-  /**
-   * @brief Executes one cycle of real-time system operations.
-   *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
-   */
-  void sensors_cycle_rt();
-
-  /**
-   * @brief Executes one cycle of non-real-time system operations.
-   *
-   * This function manages background tasks not requiring strict real-time execution.
-   */
-  void sensors_cycle_nort();
 
   /**
    * @brief Container storing current perceptions

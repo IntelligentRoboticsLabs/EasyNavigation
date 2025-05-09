@@ -67,6 +67,34 @@ public:
    */
   [[nodiscard]] virtual nav_msgs::msg::Odometry get_odom() = 0;
 
+
+  bool internal_update_rt(const NavState & nav_state, bool trigger = false)
+  {
+    if (isTime2RunRT() || trigger) {
+      update_rt(nav_state);
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void internal_update(const NavState & nav_state)
+  {
+    if (isTime2Run()) {
+      update(nav_state);
+    }
+  }
+
+protected:
+  /**
+   * @brief Run the localization method and update the robot's estimated localization.
+   *
+   * This method will be called by the system's LocalizerNode to run the localization algorithm.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
+  virtual void update_rt(const NavState & nav_state) = 0;
+
   /**
    * @brief Run the localization method and update the robot's estimated localization.
    *
@@ -75,6 +103,7 @@ public:
    * @param nav_state The current state of the navigation system.
    */
   virtual void update(const NavState & nav_state) = 0;
+
 };
 
 }  // namespace easynav

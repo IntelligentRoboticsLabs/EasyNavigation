@@ -35,13 +35,14 @@ namespace easynav
 
 using namespace std::chrono_literals;
 
-MapsManagerNode::MapsManagerNode(const rclcpp::NodeOptions & options)
-: LifecycleNode("maps_manager_node", options)
+MapsManagerNode::MapsManagerNode(
+  const std::shared_ptr<const NavState> & nav_state,
+  const rclcpp::NodeOptions & options)
+: LifecycleNode("maps_manager_node", options),
+  nav_state_(nav_state)
 {
   maps_manager_loader_ = std::make_unique<pluginlib::ClassLoader<MapsManagerBase>>(
     "easynav_core", "easynav::MapsManagerBase");
-
-  realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 }
 
 MapsManagerNode::~MapsManagerNode()
@@ -54,6 +55,15 @@ MapsManagerNode::~MapsManagerNode()
   }
   if (get_current_state().id() != lifecycle_msgs::msg::State::PRIMARY_STATE_UNCONFIGURED) {
     trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_UNCONFIGURED_SHUTDOWN);
+  }
+
+  std::vector<std::string> map_types;
+  declare_parameter("map_types", map_types);
+  for (const auto & map_type : map_types) {
+    maps_manager_loader_->unloadLibraryForClass(map_type);
+  }
+  for (auto & map_manager : maps_managers_) {
+    map_manager = nullptr;
   }
 }
 
@@ -107,9 +117,6 @@ MapsManagerNode::on_activate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
 
-  maps_manager_main_timer_ = create_timer(10ms,
-    std::bind(&MapsManagerNode::maps_manager_cycle_nort, this), realtime_cbg_);
-
   return CallbackReturnT::SUCCESS;
 }
 
@@ -117,8 +124,6 @@ CallbackReturnT
 MapsManagerNode::on_deactivate(const rclcpp_lifecycle::State & state)
 {
   (void)state;
-
-  maps_manager_main_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
 }
@@ -144,22 +149,16 @@ MapsManagerNode::on_error(const rclcpp_lifecycle::State & state)
   return CallbackReturnT::SUCCESS;
 }
 
-rclcpp::CallbackGroup::SharedPtr
-MapsManagerNode::get_real_time_cbg()
-{
-  return realtime_cbg_;
-}
-
 void
-MapsManagerNode::maps_manager_cycle_rt()
-{
-}
-
-void
-MapsManagerNode::maps_manager_cycle_nort()
+MapsManagerNode::cycle()
 {
   for (auto & map_manager : maps_managers_) {
-    map_manager->update(nav_state_);
+    map_manager->internal_update(*nav_state_);
+
+    auto maps = map_manager->get_maps();
+    for (auto map : maps) {
+      maps_[map.first] = map.second;
+    }
   }
 }
 

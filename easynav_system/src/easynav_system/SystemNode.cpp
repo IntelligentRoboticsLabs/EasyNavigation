@@ -46,10 +46,12 @@ SystemNode::SystemNode(const rclcpp::NodeOptions & options)
 {
   realtime_cbg_ = create_callback_group(rclcpp::CallbackGroupType::MutuallyExclusive, false);
 
-  controller_node_ = ControllerNode::make_shared();
-  localizer_node_ = LocalizerNode::make_shared();
-  maps_manager_node_ = MapsManagerNode::make_shared();
-  planner_node_ = PlannerNode::make_shared();
+  nav_state_ = std::make_shared<NavState>();
+
+  controller_node_ = ControllerNode::make_shared(nav_state_);
+  localizer_node_ = LocalizerNode::make_shared(nav_state_);
+  maps_manager_node_ = MapsManagerNode::make_shared(nav_state_);
+  planner_node_ = PlannerNode::make_shared(nav_state_);
   sensors_node_ = SensorsNode::make_shared();
 }
 
@@ -116,10 +118,7 @@ SystemNode::on_activate(const rclcpp_lifecycle::State & state)
     }
   }
 
-  system_main_rt_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle_rt, this),
-    realtime_cbg_);
-
-  system_main_nort_timer_ = create_timer(1ms, std::bind(&SystemNode::system_cycle_nort, this),
+  system_main_nort_timer_ = create_timer(300ms, std::bind(&SystemNode::system_cycle, this),
     realtime_cbg_);
 
   return CallbackReturnT::SUCCESS;
@@ -143,7 +142,6 @@ SystemNode::on_deactivate(const rclcpp_lifecycle::State & state)
     }
   }
 
-  system_main_rt_timer_->cancel();
   system_main_nort_timer_->cancel();
 
   return CallbackReturnT::SUCCESS;
@@ -179,32 +177,47 @@ SystemNode::get_real_time_cbg()
 void
 SystemNode::system_cycle_rt()
 {
-  // nav_state_.perceptions = sensors_node_->get_perceptions();
-  // localizer_node_->set_state(nav_state_);
-  // nav_state_.position = localizer_node_->get_robot_position();
-  // nav_state_.path = planner_node_->get_path();
-  // controller_node_->set_state(nav_state_);
-  // nav_state_.out_cmd_vel = controller_node_->get_cmd();
-  // vel_pub_->publish(vel_twist_stamped);  // Move to the controller?
+  auto start = now();
+  bool trigger_perceptions = sensors_node_->cycle_rt();
+  nav_state_->perceptions = sensors_node_->get_perceptions();
+
+  bool trigger_localization = localizer_node_->cycle_rt(trigger_perceptions);
+  nav_state_->odom = localizer_node_->get_odom();
+
+  bool trigger_controller = controller_node_->cycle_rt(
+    trigger_perceptions || trigger_localization);
+
+  if (trigger_controller) {
+    nav_state_->cmd_vel = controller_node_->get_cmd_vel();
+    // vel_pub_->publish(nav_state_->cmd_vel);
+  }
+
+  std::cerr << "rt: " << (now() - start).seconds() << std::endl;
 }
 
 void
-SystemNode::system_cycle_nort()
+SystemNode::system_cycle()
 {
-  std::cerr << "*" << std::endl;
-  nav_state_.perceptions = sensors_node_->get_perceptions();
-  // nav_state_.position = localizer_node_->get_robot_position();
-  maps_manager_node_->set_nav_state(nav_state_);
-  // nav_state_.dynamic_map = maps_manager_node_->get_dynamic_map();
-  // planner_node_->set_state(nav_state_);
+  auto start = now();
+  sensors_node_->cycle();
 
-  //  const auto & perceptions = sensors_node_->get_perceptions();
-  //  const auto & position = localizer_node_->get_robot_position();
-  //  maps_manager_node_->set_perceptions(perceptions);
-  //
-  //  const auto & dynamic_map = maps_manager_node_->get_dynamic_map();
-  //
-  //  planner_node_->set_input(dynamic_map, position);
+
+  nav_state_->perceptions = sensors_node_->get_perceptions();
+
+  localizer_node_->cycle();
+
+  nav_state_->odom = localizer_node_->get_odom();
+
+  maps_manager_node_->cycle();
+  nav_state_->maps = maps_manager_node_->get_maps();
+  // nav_state_->dynamic_map = maps_manager_node_->get_dynamic_map();
+  // nav_state_->goal = goal_;
+
+  planner_node_->cycle();
+
+  nav_state_->path = planner_node_->get_path();
+
+  std::cerr << "nort: " << (now() - start).seconds() << std::endl;
 }
 
 std::map<std::string, SystemNodeInfo>
@@ -214,9 +227,8 @@ SystemNode::get_system_nodes()
 
   ret[controller_node_->get_name()] = {controller_node_, controller_node_->get_real_time_cbg()};
   ret[localizer_node_->get_name()] = {localizer_node_, localizer_node_->get_real_time_cbg()};
-  ret[maps_manager_node_->get_name()] = {maps_manager_node_,
-    maps_manager_node_->get_real_time_cbg()};
-  ret[planner_node_->get_name()] = {planner_node_, planner_node_->get_real_time_cbg()};
+  ret[maps_manager_node_->get_name()] = {maps_manager_node_, nullptr};
+  ret[planner_node_->get_name()] = {planner_node_, nullptr};
   ret[sensors_node_->get_name()] = {sensors_node_, sensors_node_->get_real_time_cbg()};
 
   return ret;

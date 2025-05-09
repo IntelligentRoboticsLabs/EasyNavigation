@@ -54,7 +54,9 @@ public:
    * @brief Constructs a PlannerNode lifecycle node with the specified options.
    * @param options Node options to configure the PlannerNode node.
    */
-  explicit PlannerNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
+  explicit PlannerNode(
+    const std::shared_ptr<const NavState> & nav_state,
+    const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
   /**
    * @brief Destroys the PlannerNode object.
@@ -117,15 +119,6 @@ public:
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Returns the real-time callback group.
-   *
-   * This group is used to assign callbacks that require low latency or hard timing constraints.
-   *
-   * @return Shared pointer to the real-time callback group.
-   */
-  rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
-
-  /**
    * @brief Get the most recent computed navigation path.
    *
    * @return nav_msgs::msg::Path representing the current navigation plan.
@@ -133,25 +126,13 @@ public:
   [[nodiscard]] nav_msgs::msg::Path get_path() const;
 
   /**
-   * @brief Set the current navigation state.
+   * @brief Non-real-time cycle execution.
    *
-   * This state is passed to the planner plugin during updates.
-   *
-   * @param nav_state The new navigation state.
+   * Used for lower-priority updates or background processing.
    */
-  inline void set_nav_state(const NavState nav_state) {nav_state_ = nav_state;}
+  void cycle();
 
 private:
-  /**
-   * @brief Callback group intended for real-time tasks.
-   */
-  rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
-
-  /**
-   * @brief Timer that triggers the periodic planner update cycle.
-   */
-  rclcpp::TimerBase::SharedPtr planner_main_timer_;
-
   /**
    * @brief Pointer to the loaded planner method plugin.
    *
@@ -162,21 +143,7 @@ private:
   /**
    * @brief The current navigation state.
    */
-  NavState nav_state_;
-
-  /**
-   * @brief Real-time cycle execution.
-   *
-   * Invoked periodically to run the path planning algorithm in real time.
-   */
-  void planner_cycle_rt();
-
-  /**
-   * @brief Non-real-time cycle execution.
-   *
-   * Used for lower-priority updates or background processing.
-   */
-  void planner_cycle_nort();
+  const std::shared_ptr<const NavState> nav_state_;
 
   /**
    * @brief Plugin loader for planner methods.

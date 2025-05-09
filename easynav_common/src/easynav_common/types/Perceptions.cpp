@@ -34,7 +34,7 @@
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
 #include "easynav_common/types/Perceptions.hpp"
-
+#include "easynav_common/RTTFBuffer.hpp"
 
 namespace easynav
 {
@@ -71,12 +71,6 @@ convert(const sensor_msgs::msg::LaserScan & scan, pcl::PointCloud<pcl::PointXYZ>
   }
 }
 
-/**
- * @brief Converts a Perception into a ROS PointCloud2 message.
- *
- * @param perception The input Perception.
- * @return sensor_msgs::msg::PointCloud2 The resulting PointCloud2 message.
- */
 sensor_msgs::msg::PointCloud2
 perception_to_rosmsg(const Perception & perception)
 {
@@ -125,6 +119,7 @@ create_typed_subscription<sensor_msgs::msg::LaserScan>(
       perception->frame_id = msg->header.frame_id;
       perception->stamp = msg->header.stamp;
       perception->valid = true;
+      perception->new_data = true;
     }, options);
 }
 
@@ -149,6 +144,7 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
       perception->frame_id = msg->header.frame_id;
       perception->stamp = msg->header.stamp;
       perception->valid = true;
+      perception->new_data = true;
     }, options);
 }
 
@@ -288,8 +284,7 @@ PerceptionsOpsView::as_points(int idx) const
 
 std::shared_ptr<PerceptionsOpsView>
 PerceptionsOpsView::fuse(
-  const std::string & target_frame,
-  tf2_ros::Buffer & tf_buffer) const
+  const std::string & target_frame) const
 {
   auto fused = std::make_shared<Perception>();
   fused->valid = true;
@@ -302,8 +297,8 @@ PerceptionsOpsView::fuse(
 
     geometry_msgs::msg::TransformStamped tf;
     try {
-      tf = tf_buffer.lookupTransform(
-        target_frame, p->frame_id, tf2_ros::fromMsg(p->stamp), tf2::durationFromSec(0.0));
+      tf = RTTFBuffer::getInstance()->lookupTransform(
+        target_frame, p->frame_id, tf2_ros::fromMsg(p->stamp), tf2::durationFromSec(0.1));
     } catch (const tf2::TransformException & ex) {
       RCLCPP_WARN(rclcpp::get_logger("PerceptionsOpsView"), "TF failed: %s", ex.what());
       continue;

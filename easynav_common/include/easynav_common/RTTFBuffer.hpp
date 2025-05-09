@@ -17,28 +17,45 @@
 // You should have received a copy of the GNU General Public License
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
-/// \file
-/// \brief Implementation of the DummyMapsManager class.
 
-#include <expected>
+#ifndef EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_
+#define EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_
 
-#include "easynav_maps_manager/DummyMapsManager.hpp"
+#include "tf2_ros/buffer.h"
+#include "rclcpp/rclcpp.hpp"
 
 namespace easynav
 {
 
-std::expected<void, std::string> DummyMapsManager::on_initialize()
-{
-  return {};
-}
+class RTTFBuffer {
+public:
+  static std::shared_ptr<tf2_ros::Buffer> getInstance(const rclcpp::Clock::SharedPtr & clock)
+  {
+    if (!instance_) {
+      instance_ = std::make_shared<tf2_ros::Buffer>(clock);
+    }
+    return instance_;
+  }
 
-void
-DummyMapsManager::update(const NavState & nav_state)
-{
-  (void)nav_state;
-}
+  static std::shared_ptr<tf2_ros::Buffer> getInstance()
+  {
+    if (!instance_) {
+      throw std::runtime_error("RTTFBuffer not initialized");
+    }
+    return instance_;
+  }
+
+  static void removeInstance()
+  {
+    instance_.reset();
+  }
+
+private:
+  static std::shared_ptr<tf2_ros::Buffer> instance_;
+};
+
+std::shared_ptr<tf2_ros::Buffer> RTTFBuffer::instance_ = nullptr;
 
 }  // namespace easynav
 
-#include <pluginlib/class_list_macros.hpp>
-PLUGINLIB_EXPORT_CLASS(easynav::DummyMapsManager, easynav::MapsManagerBase)
+#endif  // EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_

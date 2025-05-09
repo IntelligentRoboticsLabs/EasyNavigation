@@ -25,6 +25,7 @@
 
 #include "easynav_system/SystemNode.hpp"
 
+#include "easynav_common/RTTFBuffer.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
@@ -42,10 +43,17 @@ int main(int argc, char ** argv)
   exe_rt.add_callback_group(system_node->get_real_time_cbg(),
     system_node->get_node_base_interface());
 
+  auto tf_node = rclcpp::Node::make_shared("tf_node");
+  exe_rt.add_node(tf_node);
+
+  auto tf_buffer = easynav::RTTFBuffer::getInstance(tf_node->get_clock());
+
   for (auto & node : system_node->get_system_nodes()) {
     exe_nort.add_node(node.second.node_ptr->get_node_base_interface());
-    exe_rt.add_callback_group(node.second.realtime_cbg,
-      node.second.node_ptr->get_node_base_interface());
+    if (node.second.realtime_cbg != nullptr) {
+      exe_rt.add_callback_group(node.second.realtime_cbg,
+        node.second.node_ptr->get_node_base_interface());
+    }
   }
 
   system_node->trigger_transition(lifecycle_msgs::msg::Transition::TRANSITION_CONFIGURE);
@@ -78,7 +86,18 @@ int main(int argc, char ** argv)
         throw std::runtime_error{std::string("failed to set sched: ") + std::strerror(errno)};
       }
 
-      exe_rt.spin();
+      tf2_ros::TransformListener tf_listener(*tf_buffer, tf_node, true);
+
+      rclcpp::Rate rate(100);
+      while (rclcpp::ok()) {
+        rate.sleep();
+        if (system_node->get_current_state().id() ==
+        lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE)
+        {
+          system_node->system_cycle_rt();
+        }
+        exe_rt.spin_some();
+      }
     });
 
   exe_nort.spin();
