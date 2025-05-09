@@ -25,47 +25,116 @@
 namespace easynav
 {
 
-std::expected<void, std::string>
-GoalManager::initialize(rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node)
+GoalManager::GoalManager(
+  const std::shared_ptr<const NavState> & nav_state,
+  rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node)
+: parent_node_(parent_node),
+  nav_state_(nav_state)
 {
-  parent_node_ = parent_node;
+  status_ = IDLE;
 
-  goal_sub_ = parent_node_->create_subscription<geometry_msgs::msg::PoseStamped>(
-    "goal", 10,
-    std::bind(&GoalManager::goal_callback, this, std::placeholders::_1)
+  parent_node_->declare_parameter("allow_preempt_goal", allow_preempt_goal_);
+  parent_node_->get_parameter("allow_preempt_goal", allow_preempt_goal_);
+
+  control_sub_ = parent_node_->create_subscription<easynav_interfaces::msg::NavigationControl>(
+    std::string(parent_node_->get_name()) + "control", 100,
+    std::bind(&GoalManager::control_callback, this, std::placeholders::_1)
   );
 
-  cancel_goal_sub_ = parent_node_->create_subscription<std_msgs::msg::Empty::SharedPtr>(
-    "cancel_goal", 10,
-    std::bind(&GoalManager::cancel_goal_callback, this, std::placeholders::_1)
+  comanded_pose_sub_ = parent_node_->create_subscription<geometry_msgs::msg::PoseStamped>(
+    "goal_pose", 100,
+    std::bind(&GoalManager::comanded_pose_callback, this, std::placeholders::_1)
   );
 
-  pause_goal_sub_ = parent_node_->create_subscription<std_msgs::msg::Empty::SharedPtr>(
-    "pause_goal", 10,
-    std::bind(&GoalManager::pause_goal_callback, this, std::placeholders::_1)
-  );
+  control_pub_ = parent_node_->create_publisher<easynav_interfaces::msg::NavigationControl>(
+    std::string(parent_node_->get_name()) + "control", 100);
 
-  status_pub_ = parent_node_->create_publisher<easynav_interfaces::msg::NavigationStatus>(
-    "nav_feedback", 10);
-
-  return {};
+  id_ = "easynav_system";
 }
 
-void GoalManager::goal_callback(const geometry_msgs::msg::PoseStamped::SharedPtr msg)
+void
+GoalManager::control_callback(easynav_interfaces::msg::NavigationControl::UniquePtr msg)
 {
-  goal_ = *msg;
-  // TODO: Handle (new?) goal
+  if (msg->user_id == id_) {return;}  // Avoid self messages
+
+  easynav_interfaces::msg::NavigationControl response;
+  response = *msg;
+  response.header.stamp = parent_node_->now();
+  response.seq = msg->seq + 1;
+  response.user_id = id_;
+
+  switch (msg->status) {
+    case easynav_interfaces::msg::NavigationControl::REQUEST:
+      if (status_ == IDLE || allow_preempt_goal_) {
+        if (!msg->goals.goals.empty()) {
+          nav_start_time_ = parent_node_->now();
+
+          goals_ = msg->goals;
+          response.status_message = "Goal accepted";
+          response.status = easynav_interfaces::msg::NavigationControl::ACCEPT;
+        } else {
+          response.status_message = "Goals are empty";
+          response.status = easynav_interfaces::msg::NavigationControl::REJECT;
+        }
+      } else {
+        response.status_message = "Goal rejected; unable to preemp current active goal";
+        response.status = easynav_interfaces::msg::NavigationControl::REJECT;
+      }
+      break;
+    case easynav_interfaces::msg::NavigationControl::CANCEL:
+      if (status_ == IDLE) {
+        response.status_message = "Nothing to cancel; easynav is idle";
+        response.status = easynav_interfaces::msg::NavigationControl::ERROR;
+      } else {
+        status_ = IDLE;
+        response.status_message = "Goal cancelled";
+        response.status = easynav_interfaces::msg::NavigationControl::CANCELLED;
+      }
+      break;
+    default:
+      RCLCPP_WARN(parent_node_->get_logger(), "Received erroneous control message %d", msg->status);
+      response.status_message = "Unable to process message";
+      response.status = easynav_interfaces::msg::NavigationControl::ERROR;
+      break;
+  }
+
+  control_pub_->publish(response);
+  last_control_ = std::move(msg);
 }
 
-void GoalManager::cancel_goal_callback(const std_msgs::msg::Empty::SharedPtr)
+void
+GoalManager::comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr msg)
 {
-  // TODO: Handle goal cancellation
+  easynav_interfaces::msg::NavigationControl command;
+  command.header.stamp = parent_node_->now();
+  command.seq = last_control_->seq + 1;
+  command.user_id = id_ + "_command";
+  command.status = easynav_interfaces::msg::NavigationControl::REQUEST;
+  command.goals.goals.push_back(*msg);
+
+  control_pub_->publish(command);
+  *last_control_ = command;
 }
 
-void GoalManager::pause_goal_callback(const std_msgs::msg::Empty::SharedPtr)
+void
+GoalManager::update()
 {
-  // TODO: Handle goal pause
-}
+  if (status_ == IDLE) {return;}
 
+  easynav_interfaces::msg::NavigationControl feedback;
+  feedback.header.stamp = parent_node_->now();
+  feedback.seq = last_control_->seq + 1;
+  feedback.user_id = id_;
+
+  feedback.goals = nav_state_->goals;
+  feedback.current_pose.header = nav_state_->odom.header;
+  feedback.current_pose.pose = nav_state_->odom.pose.pose;
+  feedback.navigation_time = parent_node_->now() - nav_start_time_;
+
+  // ToDo[@fmrico]: Complete feedback info
+
+  control_pub_->publish(feedback);
+  *last_control_ = feedback;
+}
 
 }  // namespace easynav

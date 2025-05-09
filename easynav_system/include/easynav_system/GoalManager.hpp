@@ -30,9 +30,11 @@
 #include "rclcpp/macros.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
-#include "easynav_interfaces/msg/navigation_status.hpp"
+#include "easynav_interfaces/msg/navigation_control.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
-#include "std_msgs/msg/empty.hpp"
+#include "nav_msgs/msg/goals.hpp"
+
+#include "easynav_common/types/NavState.hpp"
 
 namespace easynav
 {
@@ -40,31 +42,42 @@ namespace easynav
 class GoalManager
 {
 public:
-  using NavigationStatus = easynav_interfaces::msg::NavigationStatus;
-
   RCLCPP_SMART_PTR_DEFINITIONS(GoalManager)
 
-  GoalManager() = default;
+  GoalManager(
+    const std::shared_ptr<const NavState> & nav_state,
+    rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node);
 
-  std::expected<void, std::string>
-  initialize(rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node);
+  [[nodiscard]] inline nav_msgs::msg::Goals get_goals() const {return goals_;}
+  [[nodiscard]] inline int get_state() const {return status_;}
 
-  [[nodiscard]] inline geometry_msgs::msg::PoseStamped get_goal() const {return goal_;}
+  void update();
+
+  static const int IDLE = 0;
+  static const int ACTIVE = 1;
 
 private:
   rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_;
-  geometry_msgs::msg::PoseStamped goal_;
+  nav_msgs::msg::Goals goals_;
 
-  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr goal_sub_;
-  rclcpp::Subscription<std_msgs::msg::Empty::SharedPtr>::SharedPtr cancel_goal_sub_;
-  rclcpp::Subscription<std_msgs::msg::Empty::SharedPtr>::SharedPtr pause_goal_sub_;
+  rclcpp::Publisher<easynav_interfaces::msg::NavigationControl>::SharedPtr control_pub_;
+  rclcpp::Subscription<easynav_interfaces::msg::NavigationControl>::SharedPtr control_sub_;
+  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr comanded_pose_sub_;
 
-  rclcpp::Publisher<NavigationStatus>::SharedPtr status_pub_;
-  NavigationStatus nav_status_;
+  easynav_interfaces::msg::NavigationControl::UniquePtr last_control_;
 
-  void goal_callback(const geometry_msgs::msg::PoseStamped::SharedPtr msg);
-  void cancel_goal_callback(const std_msgs::msg::Empty::SharedPtr msg);
-  void pause_goal_callback(const std_msgs::msg::Empty::SharedPtr msg);
+  std::string id_;
+  bool allow_preempt_goal_ {true};
+  rclcpp::Time nav_start_time_;
+  /**
+   * @brief The current navigation state.
+   */
+  const std::shared_ptr<const NavState> nav_state_;
+
+  void control_callback(easynav_interfaces::msg::NavigationControl::UniquePtr msg);
+  void comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr msg);
+
+  int status_ {IDLE};
 };
 
 }  // namespace easynav

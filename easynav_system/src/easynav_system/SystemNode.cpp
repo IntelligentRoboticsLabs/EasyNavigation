@@ -88,14 +88,7 @@ SystemNode::on_configure(const rclcpp_lifecycle::State & state)
     }
   }
 
-  if (const auto res = goal_manager_.initialize(shared_from_this()); !res) {
-    RCLCPP_ERROR(
-      rclcpp::get_logger("SystemNode"),
-      "Failed to initialize GoalManager: %s",
-      res.error().c_str()
-    );
-    return CallbackReturnT::FAILURE;
-  }
+  goal_manager_ = GoalManager::make_shared(nav_state_, shared_from_this());
 
   return CallbackReturnT::SUCCESS;
 }
@@ -187,6 +180,9 @@ SystemNode::system_cycle_rt()
   bool trigger_controller = controller_node_->cycle_rt(
     trigger_perceptions || trigger_localization);
 
+
+  if (goal_manager_->get_state() == GoalManager::IDLE) {return;}
+
   if (trigger_controller) {
     nav_state_->cmd_vel = controller_node_->get_cmd_vel();
     // vel_pub_->publish(nav_state_->cmd_vel);
@@ -201,7 +197,6 @@ SystemNode::system_cycle()
   auto start = now();
   sensors_node_->cycle();
 
-
   nav_state_->perceptions = sensors_node_->get_perceptions();
 
   localizer_node_->cycle();
@@ -212,6 +207,10 @@ SystemNode::system_cycle()
   nav_state_->maps = maps_manager_node_->get_maps();
   // nav_state_->dynamic_map = maps_manager_node_->get_dynamic_map();
   // nav_state_->goal = goal_;
+
+  if (goal_manager_->get_state() == GoalManager::IDLE) {return;}
+  goal_manager_->update();
+  nav_state_->goals = goal_manager_->get_goals();
 
   planner_node_->cycle();
 

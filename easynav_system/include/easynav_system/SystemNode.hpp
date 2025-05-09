@@ -143,6 +143,13 @@ public:
    */
   void system_cycle_rt();
 
+  /**
+   * @brief Executes one cycle of non-real-time system operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void system_cycle();
+
 private:
   /**
    * @brief Callback group intended for real-time system operations.
@@ -187,22 +194,7 @@ private:
   /**
    * @brief Goal manager for handling navigation goals.
    */
-  GoalManager goal_manager_;
-
-  /**
-   * @brief Executes one cycle of real-time system operations.
-   *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
-   */
-  void system_cycle_rt();
-
-  /**
-   * @brief Executes one cycle of non-real-time system operations.
-   *
-   * This function manages background tasks not requiring strict real-time execution.
-   */
-  void system_cycle();
+  GoalManager::SharedPtr goal_manager_;
 };
 
 }  // namespace easynav
