@@ -31,13 +31,13 @@ GoalManager::GoalManager(
 : parent_node_(parent_node),
   nav_state_(nav_state)
 {
-  status_ = IDLE;
+  state_ = State::IDLE;
 
   parent_node_->declare_parameter("allow_preempt_goal", allow_preempt_goal_);
   parent_node_->get_parameter("allow_preempt_goal", allow_preempt_goal_);
 
   control_sub_ = parent_node_->create_subscription<easynav_interfaces::msg::NavigationControl>(
-    std::string(parent_node_->get_name()) + "control", 100,
+    "easynav_control", 100,
     std::bind(&GoalManager::control_callback, this, std::placeholders::_1)
   );
 
@@ -47,15 +47,35 @@ GoalManager::GoalManager(
   );
 
   control_pub_ = parent_node_->create_publisher<easynav_interfaces::msg::NavigationControl>(
-    std::string(parent_node_->get_name()) + "control", 100);
+    "easynav_control", 100);
 
   id_ = "easynav_system";
 }
 
 void
+GoalManager::accept_request(
+  const easynav_interfaces::msg::NavigationControl & msg,
+  easynav_interfaces::msg::NavigationControl & response)
+{
+  nav_start_time_ = parent_node_->now();
+
+  RCLCPP_DEBUG(parent_node_->get_logger(), "Accepted navigation request");
+
+  goals_ = msg.goals;
+  current_client_id_ = msg.user_id;
+  response.status_message = "Goal accepted";
+  response.type = easynav_interfaces::msg::NavigationControl::ACCEPT;
+  response.nav_current_user_id = current_client_id_;
+  state_ = State::ACTIVE;
+}
+
+
+void
 GoalManager::control_callback(easynav_interfaces::msg::NavigationControl::UniquePtr msg)
 {
   if (msg->user_id == id_) {return;}  // Avoid self messages
+
+  RCLCPP_DEBUG(parent_node_->get_logger(), "Managing navigation control message received");
 
   easynav_interfaces::msg::NavigationControl response;
   response = *msg;
@@ -63,43 +83,142 @@ GoalManager::control_callback(easynav_interfaces::msg::NavigationControl::Unique
   response.seq = msg->seq + 1;
   response.user_id = id_;
 
-  switch (msg->status) {
+  switch (msg->type) {
     case easynav_interfaces::msg::NavigationControl::REQUEST:
-      if (status_ == IDLE || allow_preempt_goal_) {
-        if (!msg->goals.goals.empty()) {
-          nav_start_time_ = parent_node_->now();
+      RCLCPP_DEBUG(parent_node_->get_logger(), "Navigation request");
+      if (msg->goals.goals.empty()) {
+        RCLCPP_DEBUG(parent_node_->get_logger(), "Rejected navigation request (empty goals)");
 
-          goals_ = msg->goals;
-          response.status_message = "Goal accepted";
-          response.status = easynav_interfaces::msg::NavigationControl::ACCEPT;
-        } else {
-          response.status_message = "Goals are empty";
-          response.status = easynav_interfaces::msg::NavigationControl::REJECT;
-        }
+        response.status_message = "Goals are empty";
+        response.type = easynav_interfaces::msg::NavigationControl::REJECT;
+        response.nav_current_user_id = msg->user_id;
       } else {
-        response.status_message = "Goal rejected; unable to preemp current active goal";
-        response.status = easynav_interfaces::msg::NavigationControl::REJECT;
+        if (state_ == State::IDLE) {
+          accept_request(*msg, response);
+        } else {
+          if (allow_preempt_goal_) {
+            if (msg->user_id != current_client_id_) {
+              set_preempted();
+            }
+            accept_request(*msg, response);
+          } else {
+            RCLCPP_DEBUG(parent_node_->get_logger(),
+              "Rejected navigation request (unable to preempt)");
+
+            response.status_message = "Goal rejected; unable to preemp current active goal";
+            response.type = easynav_interfaces::msg::NavigationControl::REJECT;
+            response.nav_current_user_id = msg->user_id;
+          }
+        }
       }
       break;
     case easynav_interfaces::msg::NavigationControl::CANCEL:
-      if (status_ == IDLE) {
-        response.status_message = "Nothing to cancel; easynav is idle";
-        response.status = easynav_interfaces::msg::NavigationControl::ERROR;
+      RCLCPP_DEBUG(parent_node_->get_logger(), "Navigation cancelation requested");
+
+      if (current_client_id_ != msg->user_id) {
+        RCLCPP_DEBUG(parent_node_->get_logger(), "Navigation cancelation rejected (not yours)");
+        response.status_message = "Trying to cancel a navigation not commanded by you";
+        response.type = easynav_interfaces::msg::NavigationControl::REJECT;
+        response.nav_current_user_id = msg->user_id;
       } else {
-        status_ = IDLE;
-        response.status_message = "Goal cancelled";
-        response.status = easynav_interfaces::msg::NavigationControl::CANCELLED;
+        if (state_ == State::IDLE) {
+          RCLCPP_DEBUG(parent_node_->get_logger(),
+            "Navigation cancelation rejected (not navigating)");
+          response.status_message = "Nothing to cancel; easynav is idle";
+          response.type = easynav_interfaces::msg::NavigationControl::ERROR;
+          response.nav_current_user_id = msg->user_id;
+        } else {
+          RCLCPP_DEBUG(parent_node_->get_logger(), "Navigation cancelation accepted");
+          state_ = State::IDLE;
+          goals_.goals.clear();
+          response.status_message = "Goal cancelled";
+          response.type = easynav_interfaces::msg::NavigationControl::CANCELLED;
+          response.nav_current_user_id = current_client_id_;
+          state_ = State::IDLE;
+        }
       }
       break;
     default:
-      RCLCPP_WARN(parent_node_->get_logger(), "Received erroneous control message %d", msg->status);
+      RCLCPP_WARN(parent_node_->get_logger(), "Received erroneous control message %d", msg->type);
       response.status_message = "Unable to process message";
-      response.status = easynav_interfaces::msg::NavigationControl::ERROR;
+      response.type = easynav_interfaces::msg::NavigationControl::ERROR;
+      response.nav_current_user_id = msg->user_id;
       break;
   }
 
   control_pub_->publish(response);
   last_control_ = std::move(msg);
+}
+
+void
+GoalManager::set_preempted()
+{
+  goals_.goals.clear();
+
+  easynav_interfaces::msg::NavigationControl response;
+  response = *last_control_;
+  response.header.stamp = parent_node_->now();
+  response.seq = last_control_->seq + 1;
+  response.user_id = id_;
+  response.type = easynav_interfaces::msg::NavigationControl::CANCELLED;
+  response.nav_current_user_id = current_client_id_;
+  response.status_message = "Navigation preempted by others";
+
+  control_pub_->publish(response);
+}
+
+void
+GoalManager::set_finished()
+{
+  state_ = State::IDLE;
+  goals_.goals.clear();
+
+  easynav_interfaces::msg::NavigationControl response;
+  response = *last_control_;
+  response.header.stamp = parent_node_->now();
+  response.seq = last_control_->seq + 1;
+  response.user_id = id_;
+  response.type = easynav_interfaces::msg::NavigationControl::FINISHED;
+  response.nav_current_user_id = current_client_id_;
+  response.status_message = "Navigation succesfully finished";
+
+  control_pub_->publish(response);
+}
+
+void
+GoalManager::set_error(const std::string & reason)
+{
+  state_ = State::IDLE;
+  goals_.goals.clear();
+
+  easynav_interfaces::msg::NavigationControl response;
+  response = *last_control_;
+  response.header.stamp = parent_node_->now();
+  response.seq = last_control_->seq + 1;
+  response.user_id = id_;
+  response.type = easynav_interfaces::msg::NavigationControl::ERROR;
+  response.nav_current_user_id = current_client_id_;
+  response.status_message = reason;
+
+  control_pub_->publish(response);
+}
+
+void
+GoalManager::set_failed(const std::string & reason)
+{
+  state_ = State::IDLE;
+  goals_.goals.clear();
+
+  easynav_interfaces::msg::NavigationControl response;
+  response = *last_control_;
+  response.header.stamp = parent_node_->now();
+  response.seq = last_control_->seq + 1;
+  response.user_id = id_;
+  response.type = easynav_interfaces::msg::NavigationControl::FAILED;
+  response.nav_current_user_id = current_client_id_;
+  response.status_message = reason;
+
+  control_pub_->publish(response);
 }
 
 void
@@ -109,7 +228,7 @@ GoalManager::comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr m
   command.header.stamp = parent_node_->now();
   command.seq = last_control_->seq + 1;
   command.user_id = id_ + "_command";
-  command.status = easynav_interfaces::msg::NavigationControl::REQUEST;
+  command.type = easynav_interfaces::msg::NavigationControl::REQUEST;
   command.goals.goals.push_back(*msg);
 
   control_pub_->publish(command);
@@ -119,12 +238,14 @@ GoalManager::comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr m
 void
 GoalManager::update()
 {
-  if (status_ == IDLE) {return;}
+  if (state_ == State::IDLE) {return;}
 
   easynav_interfaces::msg::NavigationControl feedback;
+  feedback.type = easynav_interfaces::msg::NavigationControl::FEEDBACK;
   feedback.header.stamp = parent_node_->now();
   feedback.seq = last_control_->seq + 1;
   feedback.user_id = id_;
+  feedback.nav_current_user_id = current_client_id_;
 
   feedback.goals = nav_state_->goals;
   feedback.current_pose.header = nav_state_->odom.header;
@@ -133,6 +254,7 @@ GoalManager::update()
 
   // ToDo[@fmrico]: Complete feedback info
 
+  RCLCPP_DEBUG(parent_node_->get_logger(), "Sending navigation feedback");
   control_pub_->publish(feedback);
   *last_control_ = feedback;
 }

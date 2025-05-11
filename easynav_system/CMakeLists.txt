@@ -34,19 +34,12 @@ set(dependencies
 
 include_directories(include)
 
-add_library(goal_manager SHARED
-  src/easynav_system/GoalManager.cpp
-)
-ament_target_dependencies(goal_manager ${dependencies})
-
-
 add_library(${PROJECT_NAME} SHARED
   src/easynav_system/SystemNode.cpp
+  src/easynav_system/GoalManager.cpp
+  src/easynav_system/GoalManagerClient.cpp
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
-target_link_libraries(${PROJECT_NAME}
-  goal_manager
-)
 
 add_executable(system_main src/system_main.cpp)
 ament_target_dependencies(system_main ${dependencies})
@@ -69,6 +62,9 @@ if(BUILD_TESTING)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_gtest REQUIRED)
+  add_subdirectory(tests)
 endif()
 
 ament_export_include_directories(include)

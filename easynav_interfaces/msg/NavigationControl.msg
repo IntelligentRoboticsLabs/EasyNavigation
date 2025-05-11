@@ -5,13 +5,12 @@ uint8 REJECT=1
 uint8 ACCEPT=2   
 uint8 FEEDBACK=3
 uint8 FINISHED=4
-uint8 PREEMPTED=5
-uint8 FAILED=6
-uint8 CANCEL=7
-uint8 CANCELLED=8
-uint8 ERROR=9
+uint8 FAILED=5
+uint8 CANCEL=6
+uint8 CANCELLED=7
+uint8 ERROR=8
 
-uint8 status
+uint8 type
 
 # Message header
 std_msgs/Header header
@@ -21,6 +20,7 @@ int64 seq
 
 # A unique identifier for nav user
 string user_id
+string nav_current_user_id
 
 # The current goal reuested if status == REQUEST
 # Inform the current goal reuested otherwise

@@ -18,80 +18,72 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the GoalManager class.
+/// \brief Declaration of the GoalManagerClient class.
 
-#ifndef EASYNAV_SYSTEM__GOALMANAGER_HPP_
-#define EASYNAV_SYSTEM__GOALMANAGER_HPP_
+#ifndef EASYNAV_SYSTEM__GOALMANAGERCLIENT_HPP_
+#define EASYNAV_SYSTEM__GOALMANAGERCLIENT_HPP_
 
-#include <expected>
 
-#include "rclcpp/subscription.hpp"
-#include "rclcpp/publisher.hpp"
-#include "rclcpp/macros.hpp"
+#include "rclcpp/rclcpp.hpp"
 #include "rclcpp_lifecycle/lifecycle_node.hpp"
 
 #include "easynav_interfaces/msg/navigation_control.hpp"
 #include "geometry_msgs/msg/pose_stamped.hpp"
 #include "nav_msgs/msg/goals.hpp"
 
-#include "easynav_common/types/NavState.hpp"
 
 namespace easynav
 {
 
-class GoalManager
+using namespace std::placeholders;
+
+class GoalManagerClient
 {
 public:
-  RCLCPP_SMART_PTR_DEFINITIONS(GoalManager)
+  RCLCPP_SMART_PTR_DEFINITIONS(GoalManagerClient)
 
   enum class State
   {
     IDLE,
-    ACTIVE
+    SENT_GOAL,
+    SENT_PREEMPT,
+    ACCEPTED_AND_NAVIGATING,
+    NAVIGATION_FINISHED,
+    NAVIGATION_REJECTED,
+    NAVIGATION_FAILED,
+    NAVIGATION_CANCELLED,
+    ERROR
   };
 
-  GoalManager(
-    const std::shared_ptr<const NavState> & nav_state,
-    rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node);
+  GoalManagerClient(rclcpp::Node::SharedPtr node);
 
-  [[nodiscard]] inline nav_msgs::msg::Goals get_goals() const {return goals_;}
-  [[nodiscard]] inline State get_state() const {return state_;}
+  void send_goal(const geometry_msgs::msg::PoseStamped & goal);
+  void send_goals(const nav_msgs::msg::Goals & goals);
+  void cancel();
+  void reset();
 
-  void set_finished();
-  void set_failed(const std::string & reason);
-  void set_error(const std::string & reason);
-
-  void update();
+  [[nodiscard]] State get_state() const {return state_;}
+  [[nodiscard]] const easynav_interfaces::msg::NavigationControl & get_last_control() const;
+  [[nodiscard]] const easynav_interfaces::msg::NavigationControl & get_feedback() const;
+  [[nodiscard]] const easynav_interfaces::msg::NavigationControl & get_result() const;
 
 private:
-  rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_;
-  nav_msgs::msg::Goals goals_;
+  rclcpp::Node::SharedPtr node_;
 
   rclcpp::Publisher<easynav_interfaces::msg::NavigationControl>::SharedPtr control_pub_;
   rclcpp::Subscription<easynav_interfaces::msg::NavigationControl>::SharedPtr control_sub_;
-  rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr comanded_pose_sub_;
 
   easynav_interfaces::msg::NavigationControl::UniquePtr last_control_;
+  easynav_interfaces::msg::NavigationControl last_feedback_;
+  easynav_interfaces::msg::NavigationControl last_result_;
 
   std::string id_;
   std::string current_client_id_;
-  bool allow_preempt_goal_ {true};
-  rclcpp::Time nav_start_time_;
-  /**
-   * @brief The current navigation state.
-   */
-  const std::shared_ptr<const NavState> nav_state_;
-
-  void accept_request(
-    const easynav_interfaces::msg::NavigationControl & msg,
-    easynav_interfaces::msg::NavigationControl & response);
-  void control_callback(easynav_interfaces::msg::NavigationControl::UniquePtr msg);
-  void comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr msg);
-  void set_preempted();
-
   State state_;
+
+  void control_callback(easynav_interfaces::msg::NavigationControl::UniquePtr msg);
 };
 
 }  // namespace easynav
 
-#endif  // EASYNAV_SYSTEM__GOALMANAGER_HPP_
+#endif  // EASYNAV_SYSTEM__GOALMANAGERCLIENT_HPP_
