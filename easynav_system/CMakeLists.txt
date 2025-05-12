@@ -12,6 +12,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
+find_package(easynav_interfaces)
 find_package(easynav_common)
 find_package(easynav_controller)
 find_package(easynav_localizer)
@@ -22,6 +23,7 @@ find_package(easynav_sensors)
 set(dependencies
   rclcpp
   rclcpp_lifecycle
+  easynav_interfaces
   easynav_common
   easynav_controller
   easynav_localizer
@@ -33,7 +35,10 @@ set(dependencies
 include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED
-  src/easynav_system/SystemNode.cpp)
+  src/easynav_system/SystemNode.cpp
+  src/easynav_system/GoalManager.cpp
+  src/easynav_system/GoalManagerClient.cpp
+)
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
 add_executable(system_main src/system_main.cpp)
@@ -57,6 +62,9 @@ if(BUILD_TESTING)
   set(ament_cmake_copyright_FOUND TRUE)
   set(ament_cmake_cpplint_FOUND TRUE)
   ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_gtest REQUIRED)
+  add_subdirectory(tests)
 endif()
 
 ament_export_include_directories(include)
