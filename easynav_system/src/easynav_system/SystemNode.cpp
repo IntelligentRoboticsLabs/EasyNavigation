@@ -53,6 +53,9 @@ SystemNode::SystemNode(const rclcpp::NodeOptions & options)
   maps_manager_node_ = MapsManagerNode::make_shared(nav_state_);
   planner_node_ = PlannerNode::make_shared(nav_state_);
   sensors_node_ = SensorsNode::make_shared();
+
+  vel_pub_stamped_ = create_publisher<geometry_msgs::msg::TwistStamped>("cmd_vel_stamped", 100);
+  vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 100);
 }
 
 SystemNode::~SystemNode()
@@ -185,7 +188,13 @@ SystemNode::system_cycle_rt()
 
   if (trigger_controller) {
     nav_state_->cmd_vel = controller_node_->get_cmd_vel();
-    // vel_pub_->publish(nav_state_->cmd_vel);
+    if (vel_pub_stamped_->get_subscription_count()) {
+      vel_pub_stamped_->publish(nav_state_->cmd_vel);
+    }
+    
+    if (vel_pub_->get_subscription_count()) {
+      vel_pub_->publish(nav_state_->cmd_vel.twist);
+    }
   }
 
   RCLCPP_DEBUG_STREAM(get_logger(), "rt: " << (now() - start).seconds());
