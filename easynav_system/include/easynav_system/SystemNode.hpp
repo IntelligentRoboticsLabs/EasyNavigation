@@ -33,6 +33,7 @@
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 #include "easynav_planner/PlannerNode.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_system/GoalManager.hpp"
 
 namespace easynav
 {
@@ -142,6 +143,13 @@ public:
    */
   void system_cycle_rt();
 
+  /**
+   * @brief Executes one cycle of non-real-time system operations.
+   *
+   * This function manages background tasks not requiring strict real-time execution.
+   */
+  void system_cycle();
+
 private:
   /**
    * @brief Callback group intended for real-time system operations.
@@ -184,11 +192,9 @@ private:
   std::shared_ptr<NavState> nav_state_;
 
   /**
-   * @brief Executes one cycle of non-real-time system operations.
-   *
-   * This function manages background tasks not requiring strict real-time execution.
+   * @brief Goal manager for handling navigation goals.
    */
-  void system_cycle();
+  GoalManager::SharedPtr goal_manager_;
 };
 
 }  // namespace easynav

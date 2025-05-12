@@ -71,7 +71,7 @@ struct NavState
   /**
   * @brief The current goal (list of goals).
   */
-  nav_msgs::msg::Goals goal;
+  nav_msgs::msg::Goals goals;
 
   /**
    * @brief The current velocity command.

@@ -1,27 +1,24 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>easynav_system</name>
+  <name>easynav_interfaces</name>
   <version>0.0.1</version>
-  <description>Easy Navigation: System package.</description>
+  <description>Easy Navigation: Message, Service, and Action definitions.</description>
   <maintainer email="fmrico@gmail.com">fmrico</maintainer>
   <license>GPL-3.0-only</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
+  <buildtool_depend>rosidl_default_generators</buildtool_depend>
 
-  <depend>rclcpp</depend>
-  <depend>rclcpp_lifecycle</depend>
-  <depend>easynav_interfaces</depend>
-  <depend>easynav_common</depend>
-  <depend>easynav_controller</depend>
-  <depend>easynav_localizer</depend>
-  <depend>easynav_maps_manager</depend>
-  <depend>easynav_planner</depend>
-  <depend>easynav_sensors</depend>
+  <depend>builtin_interfaces</depend>
+  <depend>std_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>nav_msgs</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
-  <test_depend>ament_cmake_gtest</test_depend>
+
+  <member_of_group>rosidl_interface_packages</member_of_group>
 
   <export>
     <build_type>ament_cmake</build_type>
