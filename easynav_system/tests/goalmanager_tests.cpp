@@ -54,14 +54,231 @@ protected:
 
 using namespace std::chrono_literals;
 
+
+TEST_F(GoalManagerTestCase, initpose_topic)
+{
+  auto nav_state = std::make_shared<easynav::NavState>();
+  auto client_node = rclcpp::Node::make_shared("client_node");
+  auto system_node = rclcpp_lifecycle::LifecycleNode::make_shared("system_node");
+
+  // client_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
+  // system_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
+
+  rclcpp::executors::SingleThreadedExecutor exe;
+  exe.add_node(client_node);
+  exe.add_node(system_node->get_node_base_interface());
+
+  easynav_interfaces::msg::NavigationControl last_control;
+
+  auto pose_pub = client_node->create_publisher<geometry_msgs::msg::PoseStamped>(
+    "goal_pose", 100);
+  auto control_sub = client_node->create_subscription<easynav_interfaces::msg::NavigationControl>(
+    "easynav_control", 100,
+    [&last_control](easynav_interfaces::msg::NavigationControl::UniquePtr msg) {
+      last_control = *msg;
+    });
+
+  auto gm_server = easynav::GoalManager::make_shared(nav_state, system_node);
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::IDLE);
+
+
+  // Navigation 1 succesfull
+  RCLCPP_INFO(client_node->get_logger(), "Navigation 1 succesfull");
+
+  geometry_msgs::msg::PoseStamped goal;
+  goal.header.frame_id = "map";
+  goal.header.stamp = client_node->now();
+  goal.pose.position.x = 5.0;
+
+  pose_pub->publish(goal);
+
+  rclcpp::Rate rate(20);
+  auto start = client_node->now();
+  while (client_node->now() - start < 400ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+    rate.sleep();
+  }
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::ACTIVE);
+
+  nav_msgs::msg::Goals req_goals = gm_server->get_goals();
+  ASSERT_EQ(req_goals.goals.size(), 1);
+  ASSERT_EQ(req_goals.goals[0], goal);
+
+  ASSERT_EQ(last_control.type, easynav_interfaces::msg::NavigationControl::FEEDBACK);
+  ASSERT_EQ(last_control.user_id, std::string("easynav_system"));
+  ASSERT_EQ(last_control.goals.goals.size(), 1u);
+  ASSERT_EQ(last_control.goals.goals, req_goals.goals);
+
+  start = client_node->now();
+  while (client_node->now() - start < 200ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+  }
+
+  gm_server->set_finished();
+
+  start = client_node->now();
+  while (client_node->now() - start < 400ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+    rate.sleep();
+  }
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::IDLE);
+
+  req_goals = gm_server->get_goals();
+  ASSERT_TRUE(req_goals.goals.empty());
+
+  ASSERT_EQ(last_control.type, easynav_interfaces::msg::NavigationControl::FINISHED);
+  ASSERT_EQ(last_control.user_id, std::string("easynav_system"));
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::IDLE);
+}
+
+TEST_F(GoalManagerTestCase, initpose_topic_with_preempt)
+{
+  auto nav_state = std::make_shared<easynav::NavState>();
+  auto client_node = rclcpp::Node::make_shared("client_node");
+  auto system_node = rclcpp_lifecycle::LifecycleNode::make_shared("system_node");
+
+  // client_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
+  // system_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
+
+  rclcpp::executors::SingleThreadedExecutor exe;
+  exe.add_node(client_node);
+  exe.add_node(system_node->get_node_base_interface());
+
+  easynav_interfaces::msg::NavigationControl last_control;
+
+  auto pose_pub = client_node->create_publisher<geometry_msgs::msg::PoseStamped>(
+    "goal_pose", 100);
+  auto control_sub = client_node->create_subscription<easynav_interfaces::msg::NavigationControl>(
+    "easynav_control", 100,
+    [&last_control](easynav_interfaces::msg::NavigationControl::UniquePtr msg) {
+      last_control = *msg;
+    });
+
+  auto gm_server = easynav::GoalManager::make_shared(nav_state, system_node);
+  auto gm_client = easynav::GoalManagerClient::make_shared(client_node);
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::IDLE);
+  ASSERT_EQ(gm_client->get_state(), easynav::GoalManagerClient::State::IDLE);
+
+ // Navigation 1 succesfull
+  RCLCPP_INFO(client_node->get_logger(), "Navigation 1 succesfull");
+
+  geometry_msgs::msg::PoseStamped goal;
+  goal.header.frame_id = "map";
+  goal.header.stamp = client_node->now();
+  goal.pose.position.x = 5.0;
+
+  gm_client->send_goal(goal);
+
+  rclcpp::Rate rate(20);
+  auto start = client_node->now();
+  while (client_node->now() - start < 400ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+    rate.sleep();
+  }
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::ACTIVE);
+  ASSERT_EQ(gm_client->get_state(), easynav::GoalManagerClient::State::ACCEPTED_AND_NAVIGATING);
+
+  nav_msgs::msg::Goals req_goals = gm_server->get_goals();
+  ASSERT_EQ(req_goals.header, goal.header);
+  ASSERT_EQ(req_goals.goals.size(), 1);
+  ASSERT_EQ(req_goals.goals[0], goal);
+
+  last_control = gm_client->get_last_control();
+  auto last_feedback = gm_client->get_feedback();
+
+  ASSERT_EQ(last_control, last_feedback);
+  ASSERT_EQ(last_control.type, easynav_interfaces::msg::NavigationControl::FEEDBACK);
+  ASSERT_EQ(last_control.user_id, std::string("easynav_system"));
+  ASSERT_EQ(last_control.goals.goals.size(), 1u);
+  ASSERT_EQ(last_control.goals.goals, req_goals.goals);
+
+  start = client_node->now();
+  while (client_node->now() - start < 200ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+  }
+
+  goal.pose.position.x = 6.0;
+
+  // Navigation 2 preempt
+  RCLCPP_INFO(client_node->get_logger(), "Navigation 2 preempt");
+
+  pose_pub->publish(goal);
+
+  start = client_node->now();
+  while (client_node->now() - start < 400ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+    rate.sleep();
+  }
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::ACTIVE);
+  ASSERT_EQ(gm_client->get_state(), easynav::GoalManagerClient::State::NAVIGATION_CANCELLED);
+
+  req_goals = gm_server->get_goals();
+  ASSERT_EQ(req_goals.goals.size(), 1);
+  ASSERT_EQ(req_goals.goals[0], goal);
+
+  ASSERT_EQ(last_control.type, easynav_interfaces::msg::NavigationControl::FEEDBACK);
+  ASSERT_EQ(last_control.user_id, std::string("easynav_system"));
+  ASSERT_EQ(last_control.goals.goals.size(), 1u);
+  ASSERT_EQ(last_control.goals.goals, req_goals.goals);
+
+  start = client_node->now();
+  while (client_node->now() - start < 200ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+  }
+
+  gm_server->set_finished();
+
+  start = client_node->now();
+  while (client_node->now() - start < 400ms) {
+    gm_server->update();
+    nav_state->goals = gm_server->get_goals();
+    exe.spin_some();
+    rate.sleep();
+  }
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::IDLE);
+
+  req_goals = gm_server->get_goals();
+  ASSERT_TRUE(req_goals.goals.empty());
+
+  ASSERT_EQ(last_control.type, easynav_interfaces::msg::NavigationControl::FINISHED);
+  ASSERT_EQ(last_control.user_id, std::string("easynav_system"));
+
+  gm_client->reset();
+
+  ASSERT_EQ(gm_server->get_state(), easynav::GoalManager::State::IDLE);
+  ASSERT_EQ(gm_client->get_state(), easynav::GoalManagerClient::State::IDLE);
+}
+
 TEST_F(GoalManagerTestCase, simple_nav_node)
 {
   auto nav_state = std::make_shared<easynav::NavState>();
   auto client_node = rclcpp::Node::make_shared("client_node");
   auto system_node = rclcpp_lifecycle::LifecycleNode::make_shared("system_node");
 
-  client_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
-  system_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
+  // client_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
+  // system_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
 
   rclcpp::executors::SingleThreadedExecutor exe;
   exe.add_node(client_node);
@@ -704,9 +921,9 @@ TEST_F(GoalManagerTestCase, two_clients)
   auto client_node2 = rclcpp::Node::make_shared("client_node2");
   auto system_node = rclcpp_lifecycle::LifecycleNode::make_shared("system_node");
 
-  client_node1->get_logger().set_level(rclcpp::Logger::Level::Debug);
-  client_node2->get_logger().set_level(rclcpp::Logger::Level::Debug);
-  system_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
+  // client_node1->get_logger().set_level(rclcpp::Logger::Level::Debug);
+  // client_node2->get_logger().set_level(rclcpp::Logger::Level::Debug);
+  // system_node->get_logger().set_level(rclcpp::Logger::Level::Debug);
 
   rclcpp::executors::SingleThreadedExecutor exe;
   exe.add_node(client_node1);

@@ -50,6 +50,7 @@ GoalManager::GoalManager(
     "easynav_control", 100);
 
   id_ = "easynav_system";
+  last_control_ = std::make_unique<easynav_interfaces::msg::NavigationControl>();
 }
 
 void
@@ -62,6 +63,7 @@ GoalManager::accept_request(
   RCLCPP_DEBUG(parent_node_->get_logger(), "Accepted navigation request");
 
   goals_ = msg.goals;
+
   current_client_id_ = msg.user_id;
   response.status_message = "Goal accepted";
   response.type = easynav_interfaces::msg::NavigationControl::ACCEPT;
@@ -224,15 +226,14 @@ GoalManager::set_failed(const std::string & reason)
 void
 GoalManager::comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr msg)
 {
-  easynav_interfaces::msg::NavigationControl command;
-  command.header.stamp = parent_node_->now();
-  command.seq = last_control_->seq + 1;
-  command.user_id = id_ + "_command";
-  command.type = easynav_interfaces::msg::NavigationControl::REQUEST;
-  command.goals.goals.push_back(*msg);
+  auto command = std::make_unique<easynav_interfaces::msg::NavigationControl>();
+  command->header = msg->header;
+  command->seq = last_control_->seq + 1;
+  command->user_id = id_ + "_initpose";
+  command->type = easynav_interfaces::msg::NavigationControl::REQUEST;
+  command->goals.goals.push_back(*msg);
 
-  control_pub_->publish(command);
-  *last_control_ = command;
+  control_callback(std::move(command));
 }
 
 void
