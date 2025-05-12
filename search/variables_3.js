@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['goal_0',['goal',['../structeasynav_1_1NavState.html#a5438a766488770784a4ded304c7f0504',1,'easynav::NavState']]]
+  ['goals_0',['goals',['../structeasynav_1_1NavState.html#a6df08ba39bcad4ded0f0c203d2dacabd',1,'easynav::NavState']]]
 ];
