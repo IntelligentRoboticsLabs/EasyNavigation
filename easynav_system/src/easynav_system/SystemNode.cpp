@@ -191,7 +191,6 @@ SystemNode::system_cycle_rt()
     if (vel_pub_stamped_->get_subscription_count()) {
       vel_pub_stamped_->publish(nav_state_->cmd_vel);
     }
-    
     if (vel_pub_->get_subscription_count()) {
       vel_pub_->publish(nav_state_->cmd_vel.twist);
     }
