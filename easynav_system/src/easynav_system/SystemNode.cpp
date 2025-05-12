@@ -188,7 +188,7 @@ SystemNode::system_cycle_rt()
     // vel_pub_->publish(nav_state_->cmd_vel);
   }
 
-  std::cerr << "rt: " << (now() - start).seconds() << std::endl;
+  RCLCPP_DEBUG_STREAM(get_logger(), "rt: " << (now() - start).seconds());
 }
 
 void
@@ -216,7 +216,7 @@ SystemNode::system_cycle()
 
   nav_state_->path = planner_node_->get_path();
 
-  std::cerr << "nort: " << (now() - start).seconds() << std::endl;
+  RCLCPP_DEBUG_STREAM(get_logger(), "nort: " << (now() - start).seconds());
 }
 
 std::map<std::string, SystemNodeInfo>
