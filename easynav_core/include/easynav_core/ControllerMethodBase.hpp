@@ -35,38 +35,37 @@ namespace easynav
  * @class ControllerMethodBase
  * @brief Abstract base class for control methods in Easy Navigation.
  *
- * This class serves as a template for implementing various
- * control algorithms in the Easy Navigation framework.
- *
- * The actual planning method should be implemented by extending this base class
- * and registering the derived class as a plugin with pluginlib,
- * which will be loaded at runtime in the system.
+ * This class defines the interface for control algorithm implementations.
+ * Derived classes must implement the control logic and provide access to the computed command.
  */
 class ControllerMethodBase : public MethodBase
 {
 public:
-  /**
-   * @brief Default constructor for ControllerMethodBase.
-   */
+  /// @brief Default constructor.
   ControllerMethodBase() = default;
 
-  /**
-   * @brief Virtual destructor for ControllerMethodBase.
-   *
-   * This ensures proper cleanup of derived classes.
-   */
+  /// @brief Virtual destructor.
   virtual ~ControllerMethodBase() = default;
 
   /**
    * @brief Get the current control command.
    *
-   * This method should return the last control command computed.
-   * It should not run the control algorithm (see update method).
+   * Should return the last control command previously computed by the controller.
+   * This function must not invoke the control algorithm itself.
    *
-   * @return A TwistStamped message with the current control command.
+   * @return A TwistStamped message containing the control command.
    */
   [[nodiscard]] virtual geometry_msgs::msg::TwistStamped get_cmd_vel() = 0;
 
+  /**
+   * @brief Helper to run the real-time control method if appropriate.
+   *
+   * Invokes update_rt() only if the method is due or forced by trigger.
+   *
+   * @param nav_state The current state of the navigation system.
+   * @param trigger Force execution regardless of timing.
+   * @return True if update_rt() was called, false otherwise.
+   */
   bool internal_update_rt(const NavState & nav_state, bool trigger = false)
   {
     if (isTime2RunRT() || trigger) {
@@ -79,9 +78,9 @@ public:
 
 protected:
   /**
-   * @brief Run the control method and update in real-time the control command.
+   * @brief Run the control method and update the control command.
    *
-   * This method will be called by the system's ControllerNode to run the control algorithm.
+   * Called by the system to compute a new control command using the current navigation state.
    *
    * @param nav_state The current state of the navigation system.
    */

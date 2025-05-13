@@ -33,40 +33,34 @@ namespace easynav
 
 /**
  * @class MapsManagerBase
- * @brief Abstract base class for localization methods in Easy Navigation.
+ * @brief Abstract base class for map management in Easy Navigation.
  *
- * This class serves as a template for implementing various localization
- * algorithms in the Easy Navigation framework.
- *
- * The actual localization method should be implemented by extending this base class
- * and registering the derived class as a plugin with pluginlib,
- * which will be loaded at runtime in the system.
+ * This class defines the interface for components responsible for generating or maintaining maps.
+ * Derived classes must implement the update and get_maps methods.
  */
 class MapsManagerBase : public MethodBase
 {
 public:
-  /**
-   * @brief Default constructor for MapsManagerBase.
-   */
+  /// @brief Default constructor.
   MapsManagerBase() = default;
 
-  /**
-   * @brief Virtual destructor for MapsManagerBase.
-   *
-   * This ensures proper cleanup of derived classes.
-   */
+  /// @brief Virtual destructor.
   virtual ~MapsManagerBase() = default;
 
   /**
-   * @brief Get the current localization state.
+   * @brief Get the current set of maps.
    *
-   * This method should return the last known localization of the robot.
-   * It should not run the localization algorithm (see update method).
+   * Should return the last generated or updated maps, without performing computation.
    *
-   * @return An Odometry message representing the current localization state.
+   * @return A map from identifiers to map representations.
    */
   [[nodiscard]] virtual std::map<std::string, std::shared_ptr<MapsTypeBase>> get_maps() = 0;
 
+  /**
+   * @brief Helper to run the update method if it is time to do so.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
   void internal_update(const NavState & nav_state)
   {
     if (isTime2Run()) {
@@ -76,9 +70,9 @@ public:
 
 protected:
   /**
-   * @brief Run the localization method and update in non real-time the robot's estimated localization.
+   * @brief Run the map update logic.
    *
-   * This method will be called by the system's LocalizerNode to run the localization algorithm.
+   * Called periodically by the system to update map data using the current navigation state.
    *
    * @param nav_state The current state of the navigation system.
    */

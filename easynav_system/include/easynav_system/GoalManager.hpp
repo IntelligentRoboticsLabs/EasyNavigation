@@ -39,56 +39,119 @@
 namespace easynav
 {
 
+/**
+ * @class GoalManager
+ * @brief Handles navigation goals, their lifecycle, and command interface.
+ *
+ * Manages goal state, handles external control messages, and interacts with navigation components.
+ */
 class GoalManager
 {
 public:
   RCLCPP_SMART_PTR_DEFINITIONS(GoalManager)
 
+  /**
+   * @enum State
+   * @brief Current internal goal state.
+   */
   enum class State
   {
-    IDLE,
-    ACTIVE
+    IDLE,   ///< No active goal.
+    ACTIVE  ///< A goal is currently being pursued.
   };
 
+  /**
+   * @brief Constructor.
+   * @param nav_state Shared pointer to navigation state.
+   * @param parent_node Lifecycle node for parameter and interface management.
+   */
   GoalManager(
     const std::shared_ptr<const NavState> & nav_state,
     rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node);
 
+  /**
+   * @brief Get current goals.
+   * @return Goals message.
+   */
   [[nodiscard]] inline nav_msgs::msg::Goals get_goals() const {return goals_;}
+
+  /**
+   * @brief Get current internal goal state.
+   * @return GoalManager::State value.
+   */
   [[nodiscard]] inline State get_state() const {return state_;}
 
+  /**
+   * @brief Mark the current goal as successfully completed.
+   */
   void set_finished();
+
+  /**
+   * @brief Mark the current goal as failed.
+   * @param reason Textual explanation.
+   */
   void set_failed(const std::string & reason);
+
+  /**
+   * @brief Mark the system as in error state.
+   * @param reason Textual explanation.
+   */
   void set_error(const std::string & reason);
 
+  /**
+   * @brief Update internal logic, including preemption and timeout checks.
+   */
   void update();
 
 private:
+  /// @brief Lifecycle node.
   rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_;
+
+  /// @brief Currently active goals.
   nav_msgs::msg::Goals goals_;
 
+  /// @brief Publisher for goal control responses.
   rclcpp::Publisher<easynav_interfaces::msg::NavigationControl>::SharedPtr control_pub_;
+
+  /// @brief Subscription to external goal control commands.
   rclcpp::Subscription<easynav_interfaces::msg::NavigationControl>::SharedPtr control_sub_;
+
+  /// @brief Subscription to pose-stamped goals (GUI or RViz).
   rclcpp::Subscription<geometry_msgs::msg::PoseStamped>::SharedPtr comanded_pose_sub_;
 
+  /// @brief Last received navigation control message.
   easynav_interfaces::msg::NavigationControl::UniquePtr last_control_;
 
+  /// @brief My ID.
   std::string id_;
+
+  /// @brief ID of the client who sent the current goal.
   std::string current_client_id_;
+
+  /// @brief Whether goal preemption is allowed.
   bool allow_preempt_goal_ {true};
+
+  /// @brief Timestamp when the current navigation started.
   rclcpp::Time nav_start_time_;
-  /**
-   * @brief The current navigation state.
-   */
+
+  /// @brief Shared pointer to current navigation state.
   const std::shared_ptr<const NavState> nav_state_;
 
+  /// @brief Handle new goal request and populate the response.
   void accept_request(
     const easynav_interfaces::msg::NavigationControl & msg,
     easynav_interfaces::msg::NavigationControl & response);
+
+  /// @brief Handle incoming control messages.
   void control_callback(easynav_interfaces::msg::NavigationControl::UniquePtr msg);
+
+  /// @brief Handle goal poses received via PoseStamped messages.
   void comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr msg);
+
+  /// @brief Mark current goal as preempted.
   void set_preempted();
 
+  /// @brief Internal goal state.
   State state_;
 };
 

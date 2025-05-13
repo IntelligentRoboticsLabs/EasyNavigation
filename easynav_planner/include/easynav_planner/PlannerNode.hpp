@@ -18,7 +18,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core.
+/// \brief Declaration of the PlannerNode class, a ROS 2 lifecycle node for computing navigation paths in Easy Navigation.
 
 #ifndef EASYNAV_PLANNER__PLANNERNODE_HPP_
 #define EASYNAV_PLANNER__PLANNERNODE_HPP_
@@ -33,16 +33,11 @@
 namespace easynav
 {
 
-/// \file
-/// \brief Declaration of the PlannerNode class, a ROS 2 lifecycle node for computing navigation paths in Easy Navigation.
-
 /**
  * @class PlannerNode
- * @brief ROS 2 lifecycle node that manages path planning for the Easy Navigation system.
+ * @brief ROS 2 lifecycle node that manages path planning in Easy Navigation.
  *
- * This node provides the interface between the planner plugin and the ROS 2 ecosystem.
- * It manages lifecycle transitions, real-time callback scheduling, and invokes the underlying
- * PlannerMethodBase implementation to generate navigation paths.
+ * Handles lifecycle transitions, plugin loading, and invokes the planner to compute paths.
  */
 class PlannerNode : public rclcpp_lifecycle::LifecycleNode
 {
@@ -51,105 +46,78 @@ public:
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a PlannerNode lifecycle node with the specified options.
-   * @param options Node options to configure the PlannerNode node.
+   * @brief Constructor.
+   * @param nav_state Shared pointer to the navigation state.
+   * @param options Optional node configuration.
    */
   explicit PlannerNode(
     const std::shared_ptr<const NavState> & nav_state,
     const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
-  /**
-   * @brief Destroys the PlannerNode object.
-   */
+  /// @brief Destructor.
   ~PlannerNode();
 
   /**
-   * @brief Configures the PlannerNode node.
-   * This is typically where parameters and interfaces are declared.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if configuration is successful.
+   * @brief Configure the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if configuration succeeded.
    */
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the PlannerNode node.
-   * This starts periodic planning updates.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if activation is successful.
+   * @brief Activate the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if activation succeeded.
    */
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the PlannerNode node.
-   * Control loops are stopped and interfaces are disabled.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if deactivation is successful.
+   * @brief Deactivate the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if deactivation succeeded.
    */
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the PlannerNode node.
-   * Releases resources and resets internal state.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
+   * @brief Clean up the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if cleanup succeeded.
    */
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the PlannerNode node.
-   * Called during the final shutdown phase.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
+   * @brief Shutdown the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if shutdown succeeded.
    */
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors during lifecycle transitions.
-   *
-   * This method is triggered if an error occurs while transitioning states.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating error handling is complete.
+   * @brief Handle lifecycle transition errors.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if error handling completed.
    */
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Get the most recent computed navigation path.
-   *
-   * @return nav_msgs::msg::Path representing the current navigation plan.
+   * @brief Get the current planned path.
+   * @return Path message with the last computed path.
    */
   [[nodiscard]] nav_msgs::msg::Path get_path() const;
 
   /**
-   * @brief Non-real-time cycle execution.
-   *
-   * Used for lower-priority updates or background processing.
+   * @brief Execute a non-real-time cycle.
    */
   void cycle();
 
 private:
-  /**
-   * @brief Pointer to the loaded planner method plugin.
-   *
-   * This is the concrete implementation of the planning algorithm.
-   */
+  /// @brief Loaded planner plugin.
   std::shared_ptr<PlannerMethodBase> planner_method_ {nullptr};
 
-  /**
-   * @brief The current navigation state.
-   */
+  /// @brief Shared navigation state.
   const std::shared_ptr<const NavState> nav_state_;
 
-  /**
-   * @brief Plugin loader for planner methods.
-   *
-   * This loads the user-specified planning algorithm from a plugin.
-   */
+  /// @brief Plugin loader for planner methods.
   std::unique_ptr<pluginlib::ClassLoader<easynav::PlannerMethodBase>> planner_loader_;
 };
 

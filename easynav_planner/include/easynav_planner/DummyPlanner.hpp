@@ -35,54 +35,37 @@ namespace easynav
  * @class DummyPlanner
  * @brief A default "do-nothing" implementation of PlannerMethodBase.
  *
- * This planner serves as a fallback when no actual planning plugin is specified.
- * It returns an empty or default path and does not perform any path planning logic.
+ * Used as a fallback when no real planner is configured.
  */
 class DummyPlanner : public easynav::PlannerMethodBase
 {
 public:
-  /**
-   * @brief Default constructor.
-   */
+  /// @brief Default constructor.
   DummyPlanner() = default;
 
-  /**
-   * @brief Destructor.
-   */
+  /// @brief Destructor.
   ~DummyPlanner() = default;
 
   /**
-   * @brief Optional initialization logic.
-   *
-   * Called after the base initialize method. This dummy version performs no additional setup.
-   *
-   * @return std::expected<void, std::string> Success or error message.
+   * @brief Initialization hook.
+   * @return Success or error message.
    */
   virtual std::expected<void, std::string> on_initialize() override;
 
   /**
    * @brief Get the current path.
-   *
-   * Returns the most recent (or default) path. This method should not trigger any planning logic.
-   *
-   * @return nav_msgs::msg::Path The stored or placeholder path.
+   * @return Stored (empty) path.
    */
   [[nodiscard]] virtual nav_msgs::msg::Path get_path() override;
 
   /**
    * @brief Dummy update method.
-   *
-   * Called to update the internal path based on the current navigation state.
-   * This dummy version does not modify the path.
-   *
-   * @param nav_state The current state of the navigation system.
+   * @param nav_state Current navigation state.
    */
   virtual void update(const NavState & nav_state) override;
 
 private:
-  /**
-   * @brief Stored path message (may be empty in the dummy implementation).
-   */
+  /// @brief Stored path message (unused in dummy).
   nav_msgs::msg::Path path_ {};
 };
 

@@ -40,10 +40,9 @@ namespace easynav
 
 /**
  * @class SensorsNode
- * @brief ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.
+ * @brief ROS 2 lifecycle node that manages sensor fusion in Easy Navigation.
  *
- * This node handles the collection, transformation, and fusion of perception data from multiple sensor sources,
- * managing lifecycle transitions and real-time scheduling of tasks.
+ * Collects, transforms, and publishes fused perception data from multiple sources.
  */
 class SensorsNode : public rclcpp_lifecycle::LifecycleNode
 {
@@ -52,122 +51,97 @@ public:
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a SensorsNode lifecycle node with the specified options.
-   * @param options Node options to configure the SensorsNode node.
+   * @brief Constructor.
+   * @param options Node configuration options.
    */
   explicit SensorsNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
-  /**
-   * @brief Destroys the SensorsNode object.
-   */
+  /// @brief Destructor.
   ~SensorsNode();
 
   /**
-   * @brief Configures the SensorsNode node.
-   * Declares parameters, initializes tf buffers, and prepares internal structures.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if configuration is successful.
+   * @brief Configure the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if configuration succeeded.
    */
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the SensorsNode node.
-   * Starts periodic tasks such as perception fusion and publishing.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if activation is successful.
+   * @brief Activate the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if activation succeeded.
    */
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the SensorsNode node.
-   * Stops periodic tasks and publishers.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if deactivation is successful.
+   * @brief Deactivate the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if deactivation succeeded.
    */
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the SensorsNode node.
-   * Releases resources such as subscriptions, timers, and tf listeners.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
+   * @brief Cleanup the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if cleanup succeeded.
    */
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the SensorsNode node.
-   * Performs final resource release and shutdown procedures.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
+   * @brief Shutdown the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if shutdown succeeded.
    */
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the SensorsNode node.
-   * Called when an error occurs during a lifecycle transition.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating error handling is complete.
+   * @brief Handle lifecycle transition errors.
+   * @param state Lifecycle state.
+   * @return SUCCESS if error was handled.
    */
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Returns the real-time callback group.
-   *
-   * Callbacks requiring low latency or real-time constraints should use this group.
-   * @return Shared pointer to the real-time callback group.
+   * @brief Get the callback group for real-time tasks.
+   * @return Shared pointer to the callback group.
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
   /**
-   * @brief Retrieves the current set of active perceptions.
-   *
-   * @return Const reference to the list of perceptions.
+   * @brief Get the current set of perceptions.
+   * @return Copy of the internal Perceptions container.
    */
   const Perceptions get_perceptions() const {return perceptions_;}
 
   /**
-   * @brief Executes one cycle of real-time sensor operations.
-   *
-   * This function manages background tasks not requiring strict real-time execution.
+   * @brief Run one real-time sensor processing cycle.
+   * @param trigger Force execution regardless of frequency.
+   * @return True if cycle executed.
    */
   bool cycle_rt(bool trigger = false);
 
   /**
-   * @brief Executes one cycle of non real-time sensor operations.
-   *
-   * This function manages background tasks not requiring strict real-time execution.
+   * @brief Run one non-real-time processing cycle.
    */
   void cycle();
 
 private:
-  /**
-   * @brief Callback group intended for real-time sensor processing tasks.
-   */
+  /// @brief Callback group for real-time operations.
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
-  /**
-   * @brief Publisher for fused perception messages.
-   */
+  /// @brief Publisher for the fused perception point cloud.
   rclcpp_lifecycle::LifecyclePublisher<sensor_msgs::msg::PointCloud2>::SharedPtr percept_pub_;
 
-  /**
-   * @brief The latest fused perception message to be published.
-   */
+  /// @brief Last fused perception message.
   sensor_msgs::msg::PointCloud2 perecption_msg_;
 
-  /**
-   * @brief Container storing current perceptions
-   */
+  /// @brief Current set of active perceptions.
   Perceptions perceptions_;
 
-  /**
-   * @brief Maximum age (in seconds) after which a perception is discarded.
-   */
+  /// @brief Maximum time (seconds) a perception remains valid.
   double forget_time_;
 
-  /**
-   * @brief Target frame to which all perceptions will be transformed before fusion.
-   */
+  /// @brief Target frame for perception fusion.
   std::string perception_default_frame_;
 };
 

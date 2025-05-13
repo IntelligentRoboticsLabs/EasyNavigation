@@ -35,38 +35,32 @@ namespace easynav
  * @class PlannerMethodBase
  * @brief Abstract base class for path planning methods in Easy Navigation.
  *
- * This class serves as a template for implementing various
- * path planning algorithms in the Easy Navigation framework.
- *
- * The actual planning method should be implemented by extending this base class
- * and registering the derived class as a plugin with pluginlib,
- * which will be loaded at runtime in the system.
+ * This class defines the interface for implementing planning algorithms.
+ * Derived classes must implement the update and get_path methods.
  */
 class PlannerMethodBase : public MethodBase
 {
 public:
-  /**
-   * @brief Default constructor for PlannerMethodBase.
-   */
+  /// @brief Default constructor.
   PlannerMethodBase() = default;
 
-  /**
-   * @brief Virtual destructor for PlannerMethodBase.
-   *
-   * This ensures proper cleanup of derived classes.
-   */
+  /// @brief Virtual destructor.
   virtual ~PlannerMethodBase() = default;
 
   /**
    * @brief Get the current path.
    *
-   * This method should return the last path computed.
-   * It should not run the path planning algorithm (see update method).
+   * Should return the last computed path without triggering a new computation.
    *
-   * @return A Path message with the current route data.
+   * @return A Path message representing the current planned path.
    */
   [[nodiscard]] virtual nav_msgs::msg::Path get_path() = 0;
 
+  /**
+   * @brief Helper to run the planner update if it is time.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
   void internal_update(const NavState & nav_state)
   {
     if (isTime2Run()) {
@@ -76,9 +70,9 @@ public:
 
 protected:
   /**
-   * @brief Run the path planning method and update in non real-time the navigation route.
+   * @brief Run the path planning algorithm and update the route.
    *
-   * This method will be called by the system's PlannerNode to run the path planning algorithm.
+   * Called periodically by the system to compute or refine a navigation path.
    *
    * @param nav_state The current state of the navigation system.
    */

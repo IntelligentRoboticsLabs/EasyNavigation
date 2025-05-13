@@ -35,39 +35,34 @@ namespace easynav
  * @class LocalizerMethodBase
  * @brief Abstract base class for localization methods in Easy Navigation.
  *
- * This class serves as a template for implementing various localization
- * algorithms in the Easy Navigation framework.
- *
- * The actual localization method should be implemented by extending this base class
- * and registering the derived class as a plugin with pluginlib,
- * which will be loaded at runtime in the system.
+ * This class defines the interface for localization algorithm implementations.
+ * Derived classes must implement the update and get_odom methods.
  */
 class LocalizerMethodBase : public MethodBase
 {
 public:
-  /**
-   * @brief Default constructor for LocalizerMethodBase.
-   */
+  /// @brief Default constructor.
   LocalizerMethodBase() = default;
 
-  /**
-   * @brief Virtual destructor for LocalizerMethodBase.
-   *
-   * This ensures proper cleanup of derived classes.
-   */
+  /// @brief Virtual destructor.
   virtual ~LocalizerMethodBase() = default;
 
   /**
    * @brief Get the current localization state.
    *
-   * This method should return the last known localization of the robot.
-   * It should not run the localization algorithm (see update method).
+   * Should return the last estimated pose of the robot.
    *
-   * @return An Odometry message representing the current localization state.
+   * @return An Odometry message representing the current estimated state.
    */
   [[nodiscard]] virtual nav_msgs::msg::Odometry get_odom() = 0;
 
-
+  /**
+   * @brief Helper to run the real-time update if appropriate.
+   *
+   * @param nav_state The current state of the navigation system.
+   * @param trigger Force execution regardless of timing.
+   * @return True if update_rt() was called, false otherwise.
+   */
   bool internal_update_rt(const NavState & nav_state, bool trigger = false)
   {
     if (isTime2RunRT() || trigger) {
@@ -78,6 +73,11 @@ public:
     }
   }
 
+  /**
+   * @brief Helper to run the non-real-time update if appropriate.
+   *
+   * @param nav_state The current state of the navigation system.
+   */
   void internal_update(const NavState & nav_state)
   {
     if (isTime2Run()) {
@@ -87,23 +87,18 @@ public:
 
 protected:
   /**
-   * @brief Run the localization method and update the robot's estimated localization.
-   *
-   * This method will be called by the system's LocalizerNode to run the localization algorithm.
+   * @brief Run the real-time localization update.
    *
    * @param nav_state The current state of the navigation system.
    */
   virtual void update_rt(const NavState & nav_state) = 0;
 
   /**
-   * @brief Run the localization method and update the robot's estimated localization.
-   *
-   * This method will be called by the system's LocalizerNode to run the localization algorithm.
+   * @brief Run the non-real-time localization update.
    *
    * @param nav_state The current state of the navigation system.
    */
   virtual void update(const NavState & nav_state) = 0;
-
 };
 
 }  // namespace easynav
