@@ -18,7 +18,7 @@
 <area shape="poly" id="edge34_Node000001_Node000029" title=" " alt="" coords="1401,49,1120,97,1119,92,1400,44"/>
 <area shape="rect" id="Node000031" href="$MapsManagerNode_8hpp.html" title="Declaration of the MapsManagerNode class, a ROS 2 lifecycle node for map handling in Easy Navigation." alt="" coords="635,94,800,135"/>
 <area shape="poly" id="edge40_Node000001_Node000031" title=" " alt="" coords="1400,42,816,105,815,100,1400,37"/>
-<area shape="rect" id="Node000033" href="$PlannerNode_8hpp.html" title="Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="1289,102,1511,127"/>
+<area shape="rect" id="Node000033" href="$PlannerNode_8hpp.html" title="Declaration of the PlannerNode class, a ROS 2 lifecycle node for computing navigation paths in Easy N..." alt="" coords="1289,102,1511,127"/>
 <area shape="poly" id="edge46_Node000001_Node000033" title=" " alt="" coords="1489,49,1429,94,1426,90,1486,44"/>
 <area shape="rect" id="Node000035" href="$SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="1664,102,1893,127"/>
 <area shape="poly" id="edge53_Node000001_Node000035" title=" " alt="" coords="1574,44,1728,94,1726,99,1573,49"/>
@@ -33,7 +33,7 @@
 <area shape="poly" id="edge9_Node000007_Node000010" title=" " alt="" coords="1949,227,1742,277,1741,272,1947,221"/>
 <area shape="rect" id="Node000011" title=" " alt="" coords="2298,279,2467,304"/>
 <area shape="poly" id="edge10_Node000007_Node000011" title=" " alt="" coords="2110,221,2319,272,2317,277,2108,227"/>
-<area shape="rect" id="Node000012" href="$Perceptions_8hpp.html" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="1863,360,2025,401"/>
+<area shape="rect" id="Node000012" href="$Perceptions_8hpp.html" title="Defines data structures and utilities for representing and processing sensor perceptions." alt="" coords="1863,360,2025,401"/>
 <area shape="poly" id="edge12_Node000007_Node000012" title=" " alt="" coords="2024,225,2010,266,1989,313,1969,348,1964,346,1984,311,2005,264,2019,223"/>
 <area shape="rect" id="Node000025" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="1410,271,1571,312"/>
 <area shape="poly" id="edge27_Node000007_Node000025" title=" " alt="" coords="1948,224,1935,226,1763,250,1587,274,1586,268,1762,244,1934,221,1947,219"/>

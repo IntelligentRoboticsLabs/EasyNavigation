@@ -129,7 +129,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a10e0034ffa7008e6189d2ec96abfe200"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current path.  <br /></td></tr>
 <tr class="separator:a10e0034ffa7008e6189d2ec96abfe200"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa09f4316ce265b452c96e6d74101cd76" id="r_aa09f4316ce265b452c96e6d74101cd76"><td class="memItemLeft" align="right" valign="top">virtual std::expected&lt; void, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa09f4316ce265b452c96e6d74101cd76">on_initialize</a> () override</td></tr>
-<tr class="memdesc:aa09f4316ce265b452c96e6d74101cd76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Optional initialization logic.  <br /></td></tr>
+<tr class="memdesc:aa09f4316ce265b452c96e6d74101cd76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization hook.  <br /></td></tr>
 <tr class="separator:aa09f4316ce265b452c96e6d74101cd76"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adbea5f6d7a91b4a1f7fa21d5a46c18aa" id="r_adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adbea5f6d7a91b4a1f7fa21d5a46c18aa">update</a> (const <a class="el" href="structeasynav_1_1NavState.html">NavState</a> &amp;nav_state) override</td></tr>
 <tr class="memdesc:adbea5f6d7a91b4a1f7fa21d5a46c18aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Dummy update method.  <br /></td></tr>
@@ -140,7 +140,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A default "do-nothing" implementation of PlannerMethodBase. </p>
-<p>This planner serves as a fallback when no actual planning plugin is specified. It returns an empty or default path and does not perform any path planning logic. </p>
+<p>Used as a fallback when no real planner is configured. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a17e0443632add3355bdb6e8e8c81cf68" name="a17e0443632add3355bdb6e8e8c81cf68"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a17e0443632add3355bdb6e8e8c81cf68">&#9670;&#160;</a></span>DummyPlanner()</h2>
@@ -221,8 +221,7 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Get the current path. </p>
-<p>Returns the most recent (or default) path. This method should not trigger any planning logic.</p>
-<dl class="section return"><dt>Returns</dt><dd>nav_msgs::msg::Path The stored or placeholder path. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>Stored (empty) path. </dd></dl>
 
 </div>
 </div>
@@ -249,9 +248,8 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Optional initialization logic. </p>
-<p>Called after the base initialize method. This dummy version performs no additional setup.</p>
-<dl class="section return"><dt>Returns</dt><dd>std::expected&lt;void, std::string&gt; Success or error message. </dd></dl>
+<p>Initialization hook. </p>
+<dl class="section return"><dt>Returns</dt><dd>Success or error message. </dd></dl>
 
 </div>
 </div>
@@ -279,10 +277,9 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Dummy update method. </p>
-<p>Called to update the internal path based on the current navigation state. This dummy version does not modify the path.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">nav_state</td><td>The current state of the navigation system. </td></tr>
+    <tr><td class="paramname">nav_state</td><td>Current navigation state. </td></tr>
   </table>
   </dd>
 </dl>

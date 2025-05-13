@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['has_5ferror_0',['has_error',['../classeasynav_1_1Result.html#a1638ad74ba770725108c9e3b0ff88e08',1,'easynav::Result']]],
-  ['has_5fvalue_1',['has_value',['../classeasynav_1_1Result.html#a78ae320e307335bd655f8767da418e36',1,'easynav::Result']]]
+  ['main_0',['main',['../system__main_8cpp.html#a3c04138a5bfe5d72780bb7e82a18e627',1,'system_main.cpp']]],
+  ['mapsmanagernode_1',['MapsManagerNode',['../classeasynav_1_1MapsManagerNode.html#a878ed93cdec47a71e628e452b66e3455',1,'easynav::MapsManagerNode']]],
+  ['mapstypebase_2',['MapsTypeBase',['../classeasynav_1_1MapsTypeBase.html#ae083a5e858aaea0f6dede71e82cbed13',1,'easynav::MapsTypeBase']]]
 ];

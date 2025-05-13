@@ -4,7 +4,7 @@
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="752,54,407,111,406,106,752,49"/>
 <area shape="rect" id="Node000004" href="$SystemNode_8hpp.html" title="Declaration of the SystemNode class, the central coordinator node for Easy Navigation components." alt="" coords="564,205,790,246"/>
 <area shape="poly" id="edge20_Node000001_Node000004" title=" " alt="" coords="820,74,697,207,693,203,816,71"/>
-<area shape="rect" id="Node000007" href="$PlannerNode_8hpp.html" title="Declaration of the PlannerNode lifecycle node, ROS 2 interface for EasyNav core." alt="" coords="452,109,678,150"/>
+<area shape="rect" id="Node000007" href="$PlannerNode_8hpp.html" title="Declaration of the PlannerNode class, a ROS 2 lifecycle node for computing navigation paths in Easy N..." alt="" coords="452,109,678,150"/>
 <area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="756,69,626,111,624,106,755,64"/>
 <area shape="rect" id="Node000009" href="$SensorsNode_8hpp.html" title="Declaration of the SensorsNode class, a ROS 2 lifecycle node for sensor fusion tasks in Easy Navigati..." alt="" coords="814,109,1047,150"/>
 <area shape="poly" id="edge11_Node000001_Node000009" title=" " alt="" coords="887,72,916,107,912,110,883,75"/>

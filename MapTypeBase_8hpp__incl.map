@@ -1,6 +1,6 @@
 <map id="easynav_common/include/easynav_common/types/MapTypeBase.hpp" name="easynav_common/include/easynav_common/types/MapTypeBase.hpp">
 <area shape="rect" id="Node000001" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="865,5,1036,61"/>
-<area shape="rect" id="Node000002" href="$Perceptions_8hpp.html" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="870,109,1031,150"/>
+<area shape="rect" id="Node000002" href="$Perceptions_8hpp.html" title="Defines data structures and utilities for representing and processing sensor perceptions." alt="" coords="870,109,1031,150"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="953,62,953,94,948,94,948,62"/>
 <area shape="rect" id="Node000003" title=" " alt="" coords="5,205,59,231"/>
 <area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="870,136,687,142,456,155,232,174,141,186,71,200,68,201,66,196,70,195,140,181,232,169,455,150,686,137,870,130"/>

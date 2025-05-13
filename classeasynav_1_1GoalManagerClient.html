@@ -96,6 +96,9 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
+<p>Client-side interface for interacting with <a class="el" href="classeasynav_1_1GoalManager.html" title="Handles navigation goals, their lifecycle, and command interface.">GoalManager</a>.  
+ <a href="#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="GoalManagerClient_8hpp_source.html">GoalManagerClient.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-types" name="pub-types"></a>
@@ -114,30 +117,43 @@ Public Types</h2></td></tr>
 &#160;&#160;<a class="el" href="#a5d74787dedbc4e11c1ab15bf487e61f8abb1ca97ec761fc37101737ba0aa2e7c5">ERROR</a>
 <br />
  }</td></tr>
+<tr class="memdesc:a5d74787dedbc4e11c1ab15bf487e61f8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal state of the client-side goal manager.  <a href="#a5d74787dedbc4e11c1ab15bf487e61f8">More...</a><br /></td></tr>
 <tr class="separator:a5d74787dedbc4e11c1ab15bf487e61f8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a02d5fa6b14e221f3012a794b905be166" id="r_a02d5fa6b14e221f3012a794b905be166"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a02d5fa6b14e221f3012a794b905be166">cancel</a> ()</td></tr>
+<tr class="memdesc:a02d5fa6b14e221f3012a794b905be166"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cancel the current goal.  <br /></td></tr>
 <tr class="separator:a02d5fa6b14e221f3012a794b905be166"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a227df6bbba807c9d97f2df1873f4854c" id="r_a227df6bbba807c9d97f2df1873f4854c"><td class="memItemLeft" align="right" valign="top">const easynav_interfaces::msg::NavigationControl &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a227df6bbba807c9d97f2df1873f4854c">get_feedback</a> () const</td></tr>
+<tr class="memdesc:a227df6bbba807c9d97f2df1873f4854c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the most recent feedback received.  <br /></td></tr>
 <tr class="separator:a227df6bbba807c9d97f2df1873f4854c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a701a1d40354575d541cdf2ae83c21853" id="r_a701a1d40354575d541cdf2ae83c21853"><td class="memItemLeft" align="right" valign="top">const easynav_interfaces::msg::NavigationControl &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a701a1d40354575d541cdf2ae83c21853">get_last_control</a> () const</td></tr>
+<tr class="memdesc:a701a1d40354575d541cdf2ae83c21853"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the last control message sent or received.  <br /></td></tr>
 <tr class="separator:a701a1d40354575d541cdf2ae83c21853"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a37d4e38e41a7d49a5b5c6f8d4c594f85" id="r_a37d4e38e41a7d49a5b5c6f8d4c594f85"><td class="memItemLeft" align="right" valign="top">const easynav_interfaces::msg::NavigationControl &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a37d4e38e41a7d49a5b5c6f8d4c594f85">get_result</a> () const</td></tr>
+<tr class="memdesc:a37d4e38e41a7d49a5b5c6f8d4c594f85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the last result message received.  <br /></td></tr>
 <tr class="separator:a37d4e38e41a7d49a5b5c6f8d4c594f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab9991f968ed0004142db909407daf154" id="r_ab9991f968ed0004142db909407daf154"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#a5d74787dedbc4e11c1ab15bf487e61f8">State</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ab9991f968ed0004142db909407daf154">get_state</a> () const</td></tr>
+<tr class="memdesc:ab9991f968ed0004142db909407daf154"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current internal state.  <br /></td></tr>
 <tr class="separator:ab9991f968ed0004142db909407daf154"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa39a4f81674fe9666d93c1768fb87311" id="r_aa39a4f81674fe9666d93c1768fb87311"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa39a4f81674fe9666d93c1768fb87311">GoalManagerClient</a> (rclcpp::Node::SharedPtr node)</td></tr>
+<tr class="memdesc:aa39a4f81674fe9666d93c1768fb87311"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:aa39a4f81674fe9666d93c1768fb87311"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad20897c5c8bd47f5d4005989bead0e55" id="r_ad20897c5c8bd47f5d4005989bead0e55"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad20897c5c8bd47f5d4005989bead0e55">reset</a> ()</td></tr>
+<tr class="memdesc:ad20897c5c8bd47f5d4005989bead0e55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reset internal client state.  <br /></td></tr>
 <tr class="separator:ad20897c5c8bd47f5d4005989bead0e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a59905ae9a8aa37cbed4a7d6c23c701bb" id="r_a59905ae9a8aa37cbed4a7d6c23c701bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59905ae9a8aa37cbed4a7d6c23c701bb">send_goal</a> (const geometry_msgs::msg::PoseStamped &amp;goal)</td></tr>
+<tr class="memdesc:a59905ae9a8aa37cbed4a7d6c23c701bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a single goal to the <a class="el" href="classeasynav_1_1GoalManager.html" title="Handles navigation goals, their lifecycle, and command interface.">GoalManager</a>.  <br /></td></tr>
 <tr class="separator:a59905ae9a8aa37cbed4a7d6c23c701bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a56e2a6e14899715118e7ae5d66b58b71" id="r_a56e2a6e14899715118e7ae5d66b58b71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56e2a6e14899715118e7ae5d66b58b71">send_goals</a> (const nav_msgs::msg::Goals &amp;goals)</td></tr>
+<tr class="memdesc:a56e2a6e14899715118e7ae5d66b58b71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Send a list of goals to the <a class="el" href="classeasynav_1_1GoalManager.html" title="Handles navigation goals, their lifecycle, and command interface.">GoalManager</a>.  <br /></td></tr>
 <tr class="separator:a56e2a6e14899715118e7ae5d66b58b71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Client-side interface for interacting with <a class="el" href="classeasynav_1_1GoalManager.html" title="Handles navigation goals, their lifecycle, and command interface.">GoalManager</a>. </p>
+<p>Sends navigation goals, handles feedback and result updates, and manages goal lifecycle state. </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a id="a5d74787dedbc4e11c1ab15bf487e61f8" name="a5d74787dedbc4e11c1ab15bf487e61f8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5d74787dedbc4e11c1ab15bf487e61f8">&#9670;&#160;</a></span>State</h2>
 
@@ -157,6 +173,8 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Internal state of the client-side goal manager. </p>
 <table class="fieldtable">
 <tr><th colspan="2">Enumerator</th></tr><tr><td class="fieldname"><a id="a5d74787dedbc4e11c1ab15bf487e61f8aa5daf7f2ebbba4975d61dab1c40188c7" name="a5d74787dedbc4e11c1ab15bf487e61f8aa5daf7f2ebbba4975d61dab1c40188c7"></a>IDLE&#160;</td><td class="fielddoc"></td></tr>
 <tr><td class="fieldname"><a id="a5d74787dedbc4e11c1ab15bf487e61f8a0dc68ee6149277f47030aea75e220d05" name="a5d74787dedbc4e11c1ab15bf487e61f8a0dc68ee6149277f47030aea75e220d05"></a>SENT_GOAL&#160;</td><td class="fielddoc"></td></tr>
@@ -187,6 +205,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Constructor. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">node</td><td>Shared pointer to a ROS 2 node. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
@@ -204,6 +230,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Cancel the current goal. </p>
 
 </div>
 </div>
@@ -230,6 +258,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get the most recent feedback received. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the last feedback message. </dd></dl>
+
 </div>
 </div>
 <a id="a701a1d40354575d541cdf2ae83c21853" name="a701a1d40354575d541cdf2ae83c21853"></a>
@@ -254,6 +285,9 @@ Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Get the last control message sent or received. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the last control message. </dd></dl>
 
 </div>
 </div>
@@ -280,6 +314,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get the last result message received. </p>
+<dl class="section return"><dt>Returns</dt><dd>Reference to the last result message. </dd></dl>
+
 </div>
 </div>
 <a id="ab9991f968ed0004142db909407daf154" name="ab9991f968ed0004142db909407daf154"></a>
@@ -305,6 +342,9 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
+<p>Get the current internal state. </p>
+<dl class="section return"><dt>Returns</dt><dd>Current <a class="el" href="#a5d74787dedbc4e11c1ab15bf487e61f8" title="Internal state of the client-side goal manager.">State</a>. </dd></dl>
+
 </div>
 </div>
 <a id="ad20897c5c8bd47f5d4005989bead0e55" name="ad20897c5c8bd47f5d4005989bead0e55"></a>
@@ -321,6 +361,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Reset internal client state. </p>
 
 </div>
 </div>
@@ -339,6 +381,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Send a single goal to the <a class="el" href="classeasynav_1_1GoalManager.html" title="Handles navigation goals, their lifecycle, and command interface.">GoalManager</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">goal</td><td>PoseStamped representing the goal. </td></tr>
+  </table>
+  </dd>
+</dl>
+
 </div>
 </div>
 <a id="a56e2a6e14899715118e7ae5d66b58b71" name="a56e2a6e14899715118e7ae5d66b58b71"></a>
@@ -355,6 +405,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p>Send a list of goals to the <a class="el" href="classeasynav_1_1GoalManager.html" title="Handles navigation goals, their lifecycle, and command interface.">GoalManager</a>. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">goals</td><td>List of goals to navigate. </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

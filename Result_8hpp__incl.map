@@ -1,9 +1,0 @@
-<map id="easynav_common/include/easynav_common/Result.hpp" name="easynav_common/include/easynav_common/Result.hpp">
-<area shape="rect" id="Node000001" title="Definition of the Result class, a generic outcome container inspired by Rust&#39;s Result&lt;T,..." alt="" coords="31,5,226,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,66,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="107,48,63,86,60,82,104,44"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="90,94,168,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="132,46,132,78,126,78,126,46"/>
-<area shape="rect" id="Node000004" title=" " alt="" coords="192,94,269,120"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="156,44,204,82,201,86,152,49"/>
-</map>

@@ -96,7 +96,7 @@ $(function(){ initResizable(false); });
 </div><!--header-->
 <div class="contents">
 
-<p>ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.  
+<p>ROS 2 lifecycle node that manages sensor fusion in Easy Navigation.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="SensorsNode_8hpp_source.html">SensorsNode.hpp</a>&gt;</code></p>
@@ -105,7 +105,7 @@ Inheritance diagram for SensorsNode:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1SensorsNode__inherit__graph.png" border="0" usemap="#aSensorsNode_inherit__map" alt="Inheritance graph"/></div>
 <map name="aSensorsNode_inherit__map" id="aSensorsNode_inherit__map">
-<area shape="rect" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system." alt="" coords="7,79,108,105"/>
+<area shape="rect" title="ROS 2 lifecycle node that manages sensor fusion in Easy Navigation." alt="" coords="7,79,108,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,110,31"/>
 <area shape="poly" title=" " alt="" coords="60,46,60,79,55,79,55,46"/>
 </map>
@@ -115,7 +115,7 @@ Collaboration diagram for SensorsNode:</div>
 <div class="dyncontent">
 <div class="center"><img src="classeasynav_1_1SensorsNode__coll__graph.png" border="0" usemap="#aSensorsNode_coll__map" alt="Collaboration graph"/></div>
 <map name="aSensorsNode_coll__map" id="aSensorsNode_coll__map">
-<area shape="rect" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system." alt="" coords="7,79,108,105"/>
+<area shape="rect" title="ROS 2 lifecycle node that manages sensor fusion in Easy Navigation." alt="" coords="7,79,108,105"/>
 <area shape="rect" title=" " alt="" coords="5,5,110,31"/>
 <area shape="poly" title=" " alt="" coords="60,46,60,79,55,79,55,46"/>
 </map>
@@ -129,45 +129,45 @@ Public Types</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2b3c13c546cbcb92bdf965736235e7fb" id="r_a2b3c13c546cbcb92bdf965736235e7fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2b3c13c546cbcb92bdf965736235e7fb">cycle</a> ()</td></tr>
-<tr class="memdesc:a2b3c13c546cbcb92bdf965736235e7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes one cycle of non real-time sensor operations.  <br /></td></tr>
+<tr class="memdesc:a2b3c13c546cbcb92bdf965736235e7fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run one non-real-time processing cycle.  <br /></td></tr>
 <tr class="separator:a2b3c13c546cbcb92bdf965736235e7fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd57db5038191835adcd95d518a52af6" id="r_abd57db5038191835adcd95d518a52af6"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abd57db5038191835adcd95d518a52af6">cycle_rt</a> (bool trigger=false)</td></tr>
-<tr class="memdesc:abd57db5038191835adcd95d518a52af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Executes one cycle of real-time sensor operations.  <br /></td></tr>
+<tr class="memdesc:abd57db5038191835adcd95d518a52af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Run one real-time sensor processing cycle.  <br /></td></tr>
 <tr class="separator:abd57db5038191835adcd95d518a52af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2866d54d00e57a2be948b70ae44f76eb" id="r_a2866d54d00e57a2be948b70ae44f76eb"><td class="memItemLeft" align="right" valign="top">const <a class="el" href="namespaceeasynav.html#aaf5526be35ee28b08c0fa269875118e2">Perceptions</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2866d54d00e57a2be948b70ae44f76eb">get_perceptions</a> () const</td></tr>
-<tr class="memdesc:a2866d54d00e57a2be948b70ae44f76eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the current set of active perceptions.  <br /></td></tr>
+<tr class="memdesc:a2866d54d00e57a2be948b70ae44f76eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the current set of perceptions.  <br /></td></tr>
 <tr class="separator:a2866d54d00e57a2be948b70ae44f76eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8366fef9515c0b0cd47949fbfc018641" id="r_a8366fef9515c0b0cd47949fbfc018641"><td class="memItemLeft" align="right" valign="top">rclcpp::CallbackGroup::SharedPtr&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a8366fef9515c0b0cd47949fbfc018641">get_real_time_cbg</a> ()</td></tr>
-<tr class="memdesc:a8366fef9515c0b0cd47949fbfc018641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the real-time callback group.  <br /></td></tr>
+<tr class="memdesc:a8366fef9515c0b0cd47949fbfc018641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get the callback group for real-time tasks.  <br /></td></tr>
 <tr class="separator:a8366fef9515c0b0cd47949fbfc018641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a26f6915d7f6c74f8cf2e766e352ef4a1" id="r_a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a26f6915d7f6c74f8cf2e766e352ef4a1">on_activate</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activates the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Activate the node.  <br /></td></tr>
 <tr class="separator:a26f6915d7f6c74f8cf2e766e352ef4a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a51a30cb3859b0fc27bd0aafaa778acb2" id="r_a51a30cb3859b0fc27bd0aafaa778acb2"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a51a30cb3859b0fc27bd0aafaa778acb2">on_cleanup</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a51a30cb3859b0fc27bd0aafaa778acb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleans up the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a51a30cb3859b0fc27bd0aafaa778acb2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Cleanup the node.  <br /></td></tr>
 <tr class="separator:a51a30cb3859b0fc27bd0aafaa778acb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a316621c227e6363944e9d141fc227697" id="r_a316621c227e6363944e9d141fc227697"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a316621c227e6363944e9d141fc227697">on_configure</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a316621c227e6363944e9d141fc227697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a316621c227e6363944e9d141fc227697"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configure the node.  <br /></td></tr>
 <tr class="separator:a316621c227e6363944e9d141fc227697"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afc8a8fa2ed2c7efe041cde46ce4c3c9b" id="r_afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afc8a8fa2ed2c7efe041cde46ce4c3c9b">on_deactivate</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivates the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node.  <br /></td></tr>
+<tr class="memdesc:afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deactivate the node.  <br /></td></tr>
 <tr class="separator:afc8a8fa2ed2c7efe041cde46ce4c3c9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b0782b915f4798a61ae8b9e56ebd5fb" id="r_a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9b0782b915f4798a61ae8b9e56ebd5fb">on_error</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handles errors in the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Handle lifecycle transition errors.  <br /></td></tr>
 <tr class="separator:a9b0782b915f4798a61ae8b9e56ebd5fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38b74771f6ab23805f990786e4d6f806" id="r_a38b74771f6ab23805f990786e4d6f806"><td class="memItemLeft" align="right" valign="top"><a class="el" href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">CallbackReturnT</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a38b74771f6ab23805f990786e4d6f806">on_shutdown</a> (const rclcpp_lifecycle::State &amp;state)</td></tr>
-<tr class="memdesc:a38b74771f6ab23805f990786e4d6f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shuts down the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node.  <br /></td></tr>
+<tr class="memdesc:a38b74771f6ab23805f990786e4d6f806"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shutdown the node.  <br /></td></tr>
 <tr class="separator:a38b74771f6ab23805f990786e4d6f806"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5629e27f739777bfe6b081a54f41ef30" id="r_a5629e27f739777bfe6b081a54f41ef30"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5629e27f739777bfe6b081a54f41ef30">SensorsNode</a> (const rclcpp::NodeOptions &amp;options=rclcpp::NodeOptions())</td></tr>
-<tr class="memdesc:a5629e27f739777bfe6b081a54f41ef30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> lifecycle node with the specified options.  <br /></td></tr>
+<tr class="memdesc:a5629e27f739777bfe6b081a54f41ef30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <br /></td></tr>
 <tr class="separator:a5629e27f739777bfe6b081a54f41ef30"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84e306309c2bba62ee5dc10a2573a960" id="r_a84e306309c2bba62ee5dc10a2573a960"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a84e306309c2bba62ee5dc10a2573a960">~SensorsNode</a> ()</td></tr>
-<tr class="memdesc:a84e306309c2bba62ee5dc10a2573a960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> object.  <br /></td></tr>
+<tr class="memdesc:a84e306309c2bba62ee5dc10a2573a960"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <br /></td></tr>
 <tr class="separator:a84e306309c2bba62ee5dc10a2573a960"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system. </p>
-<p>This node handles the collection, transformation, and fusion of perception data from multiple sensor sources, managing lifecycle transitions and real-time scheduling of tasks. </p>
+<div class="textblock"><p>ROS 2 lifecycle node that manages sensor fusion in Easy Navigation. </p>
+<p>Collects, transforms, and publishes fused perception data from multiple sources. </p>
 </div><h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="ad09d90f1fe35c9e2f2fd7fc1902312f4" name="ad09d90f1fe35c9e2f2fd7fc1902312f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad09d90f1fe35c9e2f2fd7fc1902312f4">&#9670;&#160;</a></span>CallbackReturnT</h2>
@@ -207,10 +207,10 @@ Public Member Functions</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> lifecycle node with the specified options. </p>
+<p>Constructor. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">options</td><td>Node options to configure the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node. </td></tr>
+    <tr><td class="paramname">options</td><td>Node configuration options. </td></tr>
   </table>
   </dd>
 </dl>
@@ -232,7 +232,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Destroys the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> object. </p>
+<p>Destructor. </p>
 
 </div>
 </div>
@@ -252,8 +252,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes one cycle of non real-time sensor operations. </p>
-<p>This function manages background tasks not requiring strict real-time execution. </p>
+<p>Run one non-real-time processing cycle. </p>
 
 </div>
 </div>
@@ -272,8 +271,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Executes one cycle of real-time sensor operations. </p>
-<p>This function manages background tasks not requiring strict real-time execution. </p>
+<p>Run one real-time sensor processing cycle. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">trigger</td><td>Force execution regardless of frequency. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if cycle executed. </dd></dl>
 
 </div>
 </div>
@@ -292,8 +297,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Retrieves the current set of active perceptions. </p>
-<dl class="section return"><dt>Returns</dt><dd>Const reference to the list of perceptions. </dd></dl>
+<p>Get the current set of perceptions. </p>
+<dl class="section return"><dt>Returns</dt><dd>Copy of the internal <a class="el" href="namespaceeasynav.html#aaf5526be35ee28b08c0fa269875118e2" title="Alias for a vector of shared pointers to Perception objects.">Perceptions</a> container. </dd></dl>
 
 </div>
 </div>
@@ -312,8 +317,8 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the real-time callback group. </p>
-<p>Callbacks requiring low latency or real-time constraints should use this group. </p><dl class="section return"><dt>Returns</dt><dd>Shared pointer to the real-time callback group. </dd></dl>
+<p>Get the callback group for real-time tasks. </p>
+<dl class="section return"><dt>Returns</dt><dd>Shared pointer to the callback group. </dd></dl>
 
 </div>
 </div>
@@ -332,14 +337,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Activates the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node. </p>
-<p>Starts periodic tasks such as perception fusion and publishing. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Activate the node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
+    <tr><td class="paramname">state</td><td>Lifecycle state. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS if activation is successful. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>SUCCESS if activation succeeded. </dd></dl>
 
 </div>
 </div>
@@ -358,14 +363,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Cleans up the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node. </p>
-<p>Releases resources such as subscriptions, timers, and tf listeners. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Cleanup the node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
+    <tr><td class="paramname">state</td><td>Lifecycle state. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating cleanup is complete. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>SUCCESS if cleanup succeeded. </dd></dl>
 
 </div>
 </div>
@@ -384,14 +389,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Configures the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node. </p>
-<p>Declares parameters, initializes tf buffers, and prepares internal structures. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Configure the node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
+    <tr><td class="paramname">state</td><td>Lifecycle state. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS if configuration is successful. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>SUCCESS if configuration succeeded. </dd></dl>
 
 </div>
 </div>
@@ -410,14 +415,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Deactivates the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node. </p>
-<p>Stops periodic tasks and publishers. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Deactivate the node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
+    <tr><td class="paramname">state</td><td>Lifecycle state. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS if deactivation is successful. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>SUCCESS if deactivation succeeded. </dd></dl>
 
 </div>
 </div>
@@ -436,14 +441,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Handles errors in the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node. </p>
-<p>Called when an error occurs during a lifecycle transition. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Handle lifecycle transition errors. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
+    <tr><td class="paramname">state</td><td>Lifecycle state. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating error handling is complete. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>SUCCESS if error was handled. </dd></dl>
 
 </div>
 </div>
@@ -462,14 +467,14 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Shuts down the <a class="el" href="classeasynav_1_1SensorsNode.html" title="ROS 2 lifecycle node that manages sensor fusion for the Easy Navigation system.">SensorsNode</a> node. </p>
-<p>Performs final resource release and shutdown procedures. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Shutdown the node. </p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">state</td><td>The current lifecycle state. </td></tr>
+    <tr><td class="paramname">state</td><td>Lifecycle state. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>CallbackReturnT::SUCCESS indicating shutdown is complete. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>SUCCESS if shutdown succeeded. </dd></dl>
 
 </div>
 </div>

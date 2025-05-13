@@ -27,7 +27,7 @@
 <area shape="poly" id="edge12_Node000010_Node000013" title=" " alt="" coords="1451,138,1304,187,1302,182,1450,133"/>
 <area shape="rect" id="Node000014" title=" " alt="" coords="1359,183,1533,223"/>
 <area shape="poly" id="edge14_Node000010_Node000014" title=" " alt="" coords="1497,137,1471,172,1467,169,1492,134"/>
-<area shape="rect" id="Node000015" href="$Perceptions_8hpp.html" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="1509,271,1671,312"/>
+<area shape="rect" id="Node000015" href="$Perceptions_8hpp.html" title="Defines data structures and utilities for representing and processing sensor perceptions." alt="" coords="1509,271,1671,312"/>
 <area shape="poly" id="edge15_Node000010_Node000015" title=" " alt="" coords="1522,134,1547,182,1579,256,1574,258,1542,184,1517,136"/>
 <area shape="rect" id="Node000028" href="$MapTypeBase_8hpp.html" title="Declaration of the MapsTypeBase template class, an abstract interface to represent map types." alt="" coords="1608,183,1769,223"/>
 <area shape="poly" id="edge30_Node000010_Node000028" title=" " alt="" coords="1551,133,1635,173,1633,178,1548,138"/>

@@ -12,7 +12,7 @@
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="1531,43,1749,91,1930,134,2109,180,2119,183,2118,188,2108,185,1929,139,1748,97,1530,48"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="1451,102,1630,127"/>
 <area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="1467,45,1518,89,1514,93,1464,49"/>
-<area shape="rect" id="Node000008" href="$Perceptions_8hpp.html" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="1265,94,1427,135"/>
+<area shape="rect" id="Node000008" href="$Perceptions_8hpp.html" title="Defines data structures and utilities for representing and processing sensor perceptions." alt="" coords="1265,94,1427,135"/>
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="1423,49,1381,86,1377,82,1419,45"/>
 <area shape="rect" id="Node000021" title=" " alt="" coords="1935,183,2096,223"/>
 <area shape="poly" id="edge26_Node000001_Node000021" title=" " alt="" coords="1508,44,1938,175,1936,180,1507,49"/>

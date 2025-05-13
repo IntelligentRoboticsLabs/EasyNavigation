@@ -117,54 +117,56 @@ $(function(){ initResizable(false); });
 <div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span><span class="preprocessor">#include &quot;tf2_ros/buffer.h&quot;</span></div>
 <div class="line"><a id="l00025" name="l00025"></a><span class="lineno">   25</span><span class="preprocessor">#include &quot;rclcpp/rclcpp.hpp&quot;</span></div>
 <div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
+<div class="foldopen" id="foldopen00027" data-start="{" data-end="}">
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="namespaceeasynav.html">   27</a></span><span class="keyword">namespace </span><a class="code hl_namespace" href="namespaceeasynav.html">easynav</a></div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>{</div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
-<div class="foldopen" id="foldopen00030" data-start="{" data-end="};">
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html">   30</a></span><span class="keyword">class </span><a class="code hl_class" href="classeasynav_1_1RTTFBuffer.html">RTTFBuffer</a> {</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span><span class="keyword">public</span>:</div>
-<div class="foldopen" id="foldopen00032" data-start="{" data-end="}">
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html#acd2bc5a56125b7b4adf21b7301152f9e">   32</a></span>  <span class="keyword">static</span> std::shared_ptr&lt;tf2_ros::Buffer&gt; <a class="code hl_function" href="classeasynav_1_1RTTFBuffer.html#acd2bc5a56125b7b4adf21b7301152f9e">getInstance</a>(<span class="keyword">const</span> rclcpp::Clock::SharedPtr &amp; clock)</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>  {</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    <span class="keywordflow">if</span> (!instance_) {</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>      instance_ = std::make_shared&lt;tf2_ros::Buffer&gt;(clock);</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    }</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    <span class="keywordflow">return</span> instance_;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>  }</div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span></div>
+<div class="foldopen" id="foldopen00034" data-start="{" data-end="};">
+<div class="line"><a id="l00034" name="l00034"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html">   34</a></span><span class="keyword">class </span><a class="code hl_class" href="classeasynav_1_1RTTFBuffer.html">RTTFBuffer</a> {</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span><span class="keyword">public</span>:</div>
+<div class="foldopen" id="foldopen00036" data-start="{" data-end="}">
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html#acd2bc5a56125b7b4adf21b7301152f9e">   36</a></span>  <span class="keyword">static</span> std::shared_ptr&lt;tf2_ros::Buffer&gt; <a class="code hl_function" href="classeasynav_1_1RTTFBuffer.html#acd2bc5a56125b7b4adf21b7301152f9e">getInstance</a>(<span class="keyword">const</span> rclcpp::Clock::SharedPtr &amp; clock)</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>  {</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    <span class="keywordflow">if</span> (!instance_) {</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>      instance_ = std::make_shared&lt;tf2_ros::Buffer&gt;(clock);</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    }</div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="keywordflow">return</span> instance_;</div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>  }</div>
 </div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
-<div class="foldopen" id="foldopen00040" data-start="{" data-end="}">
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html#ace6ec00e360ad9c38af8a5fa6be4e9b7">   40</a></span>  <span class="keyword">static</span> std::shared_ptr&lt;tf2_ros::Buffer&gt; <a class="code hl_function" href="classeasynav_1_1RTTFBuffer.html#ace6ec00e360ad9c38af8a5fa6be4e9b7">getInstance</a>()</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>  {</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordflow">if</span> (!instance_) {</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>      <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;RTTFBuffer not initialized&quot;</span>);</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    }</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordflow">return</span> instance_;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>  }</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
+<div class="foldopen" id="foldopen00044" data-start="{" data-end="}">
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html#ace6ec00e360ad9c38af8a5fa6be4e9b7">   44</a></span>  <span class="keyword">static</span> std::shared_ptr&lt;tf2_ros::Buffer&gt; <a class="code hl_function" href="classeasynav_1_1RTTFBuffer.html#ace6ec00e360ad9c38af8a5fa6be4e9b7">getInstance</a>()</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>  {</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordflow">if</span> (!instance_) {</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>      <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;RTTFBuffer not initialized&quot;</span>);</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    }</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <span class="keywordflow">return</span> instance_;</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>  }</div>
 </div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="foldopen" id="foldopen00048" data-start="{" data-end="}">
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html#a932098eab97158326f0fe7a8283b319f">   48</a></span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classeasynav_1_1RTTFBuffer.html#a932098eab97158326f0fe7a8283b319f">removeInstance</a>()</div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>  {</div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    instance_.reset();</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>  }</div>
-</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>  <span class="keyword">static</span> std::shared_ptr&lt;tf2_ros::Buffer&gt; instance_;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>};</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="foldopen" id="foldopen00052" data-start="{" data-end="}">
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno"><a class="line" href="classeasynav_1_1RTTFBuffer.html#a932098eab97158326f0fe7a8283b319f">   52</a></span>  <span class="keyword">static</span> <span class="keywordtype">void</span> <a class="code hl_function" href="classeasynav_1_1RTTFBuffer.html#a932098eab97158326f0fe7a8283b319f">removeInstance</a>()</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>  {</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    instance_.reset();</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>  }</div>
 </div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span> </div>
-<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>std::shared_ptr&lt;tf2_ros::Buffer&gt; RTTFBuffer::instance_ = <span class="keyword">nullptr</span>;</div>
-<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span> </div>
-<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>}  <span class="comment">// namespace easynav</span></div>
+<div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>  <span class="keyword">static</span> std::shared_ptr&lt;tf2_ros::Buffer&gt; instance_;</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>};</div>
+</div>
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
-<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="preprocessor">#endif  </span><span class="comment">// EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_</span></div>
-<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html">easynav::RTTFBuffer</a></div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:30</div></div>
-<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html_a932098eab97158326f0fe7a8283b319f"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html#a932098eab97158326f0fe7a8283b319f">easynav::RTTFBuffer::removeInstance</a></div><div class="ttdeci">static void removeInstance()</div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:48</div></div>
-<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html_acd2bc5a56125b7b4adf21b7301152f9e"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html#acd2bc5a56125b7b4adf21b7301152f9e">easynav::RTTFBuffer::getInstance</a></div><div class="ttdeci">static std::shared_ptr&lt; tf2_ros::Buffer &gt; getInstance(const rclcpp::Clock::SharedPtr &amp;clock)</div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:32</div></div>
-<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html_ace6ec00e360ad9c38af8a5fa6be4e9b7"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html#ace6ec00e360ad9c38af8a5fa6be4e9b7">easynav::RTTFBuffer::getInstance</a></div><div class="ttdeci">static std::shared_ptr&lt; tf2_ros::Buffer &gt; getInstance()</div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:40</div></div>
-<div class="ttc" id="anamespaceeasynav_html"><div class="ttname"><a href="namespaceeasynav.html">easynav</a></div><div class="ttdef"><b>Definition</b> Result.hpp:31</div></div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>std::shared_ptr&lt;tf2_ros::Buffer&gt; RTTFBuffer::instance_ = <span class="keyword">nullptr</span>;</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span> </div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>}  <span class="comment">// namespace easynav</span></div>
+</div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span><span class="preprocessor">#endif  </span><span class="comment">// EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_</span></div>
+<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html">easynav::RTTFBuffer</a></div><div class="ttdoc">Provides functionality for RTTFBuffer.</div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:34</div></div>
+<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html_a932098eab97158326f0fe7a8283b319f"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html#a932098eab97158326f0fe7a8283b319f">easynav::RTTFBuffer::removeInstance</a></div><div class="ttdeci">static void removeInstance()</div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:52</div></div>
+<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html_acd2bc5a56125b7b4adf21b7301152f9e"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html#acd2bc5a56125b7b4adf21b7301152f9e">easynav::RTTFBuffer::getInstance</a></div><div class="ttdeci">static std::shared_ptr&lt; tf2_ros::Buffer &gt; getInstance(const rclcpp::Clock::SharedPtr &amp;clock)</div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:36</div></div>
+<div class="ttc" id="aclasseasynav_1_1RTTFBuffer_html_ace6ec00e360ad9c38af8a5fa6be4e9b7"><div class="ttname"><a href="classeasynav_1_1RTTFBuffer.html#ace6ec00e360ad9c38af8a5fa6be4e9b7">easynav::RTTFBuffer::getInstance</a></div><div class="ttdeci">static std::shared_ptr&lt; tf2_ros::Buffer &gt; getInstance()</div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:44</div></div>
+<div class="ttc" id="anamespaceeasynav_html"><div class="ttname"><a href="namespaceeasynav.html">easynav</a></div><div class="ttdef"><b>Definition</b> RTTFBuffer.hpp:28</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

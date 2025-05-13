@@ -12,7 +12,7 @@
 <area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="510,45,553,89,549,92,506,48"/>
 <area shape="rect" id="Node000007" title=" " alt="" coords="570,360,730,401"/>
 <area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="607,43,646,63,662,76,677,92,693,123,702,157,704,192,702,227,687,294,668,347,663,345,682,292,697,227,699,192,696,158,688,125,672,96,659,80,643,67,605,48"/>
-<area shape="rect" id="Node000008" href="$Perceptions_8hpp.html" title="Definitions for handling sensor perceptions, including point cloud conversion, fusion,..." alt="" coords="1354,271,1515,312"/>
+<area shape="rect" id="Node000008" href="$Perceptions_8hpp.html" title="Defines data structures and utilities for representing and processing sensor perceptions." alt="" coords="1354,271,1515,312"/>
 <area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="607,38,666,58,695,73,720,92,735,108,743,126,748,160,754,192,763,207,777,221,806,232,859,243,1010,261,1184,274,1339,283,1338,289,1184,280,1009,266,858,248,805,237,774,226,758,211,749,194,743,161,738,127,730,111,717,96,692,78,664,63,605,43"/>
 <area shape="rect" id="Node000021" href="$NavState_8hpp.html" title="A blackboard&#45;like structure to hold the current state of the navigation system." alt="" coords="1294,94,1455,135"/>
 <area shape="poly" id="edge22_Node000001_Node000021" title=" " alt="" coords="606,36,1279,101,1278,106,606,41"/>

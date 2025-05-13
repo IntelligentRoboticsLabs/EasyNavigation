@@ -1,7 +1,13 @@
 var searchData=
 [
-  ['perception_5fto_5frosmsg_0',['perception_to_rosmsg',['../namespaceeasynav.html#a0716085143bfc8e70347602bfc04a5e6',1,'easynav']]],
-  ['perceptionsopsview_1',['PerceptionsOpsView',['../classeasynav_1_1PerceptionsOpsView.html#a5c8f9c9dafd295500259636b2f266bb7',1,'easynav::PerceptionsOpsView::PerceptionsOpsView(const Perceptions &amp;perceptions)'],['../classeasynav_1_1PerceptionsOpsView.html#a0645573972acd50ac3e7ec1407f31bf8',1,'easynav::PerceptionsOpsView::PerceptionsOpsView(Perceptions &amp;&amp;perceptions)']]],
-  ['plannernode_2',['PlannerNode',['../classeasynav_1_1PlannerNode.html#a9e015dea1576fa524a7f470a04592b6b',1,'easynav::PlannerNode']]],
-  ['points_5fto_5frosmsg_3',['points_to_rosmsg',['../namespaceeasynav.html#a4adf6aa9d2208b93442fc96f4e732147',1,'easynav']]]
+  ['send_5fgoal_0',['send_goal',['../classeasynav_1_1GoalManagerClient.html#a59905ae9a8aa37cbed4a7d6c23c701bb',1,'easynav::GoalManagerClient']]],
+  ['send_5fgoals_1',['send_goals',['../classeasynav_1_1GoalManagerClient.html#a56e2a6e14899715118e7ae5d66b58b71',1,'easynav::GoalManagerClient']]],
+  ['sensorsnode_2',['SensorsNode',['../classeasynav_1_1SensorsNode.html#a5629e27f739777bfe6b081a54f41ef30',1,'easynav::SensorsNode']]],
+  ['set_5ferror_3',['set_error',['../classeasynav_1_1GoalManager.html#a80f7c2db5701e01e05b2cedd201475ca',1,'easynav::GoalManager']]],
+  ['set_5ffailed_4',['set_failed',['../classeasynav_1_1GoalManager.html#aba0b434a98a49412f596d6436137a62e',1,'easynav::GoalManager']]],
+  ['set_5ffinished_5',['set_finished',['../classeasynav_1_1GoalManager.html#a4401bd0ec06534a826ad07b558390774',1,'easynav::GoalManager']]],
+  ['setup_6',['SetUp',['../classPerceptionsOpsTest.html#a1b06560e0e01a806b92c2386220d0b57',1,'PerceptionsOpsTest::SetUp()'],['../classSensorsNodeTestCase.html#a1b06560e0e01a806b92c2386220d0b57',1,'SensorsNodeTestCase::SetUp()'],['../classGoalManagerTestCase.html#a1b06560e0e01a806b92c2386220d0b57',1,'GoalManagerTestCase::SetUp()']]],
+  ['system_5fcycle_7',['system_cycle',['../classeasynav_1_1SystemNode.html#acca79767d43dedc09e182e9125a847f3',1,'easynav::SystemNode']]],
+  ['system_5fcycle_5frt_8',['system_cycle_rt',['../classeasynav_1_1SystemNode.html#acd948c2ed9cfe6512e5b610caaa25961',1,'easynav::SystemNode']]],
+  ['systemnode_9',['SystemNode',['../classeasynav_1_1SystemNode.html#abff1721399712e8fc6091a43b83d95aa',1,'easynav::SystemNode']]]
 ];

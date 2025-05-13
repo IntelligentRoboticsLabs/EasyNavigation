@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['err_0',['Err',['../classeasynav_1_1Result.html#a32d09532fa9d251a0ba1d29aa74c4f1b',1,'easynav::Result']]],
-  ['error_1',['error',['../classeasynav_1_1Result.html#a2c701edbd06d95945db2533ec27eeb1f',1,'easynav::Result']]]
+  ['filter_0',['filter',['../classeasynav_1_1PerceptionsOpsView.html#a99bfa7c25d3b07ddce4449ec9884e647',1,'easynav::PerceptionsOpsView']]],
+  ['fuse_1',['fuse',['../classeasynav_1_1PerceptionsOpsView.html#ad4eb072668b83e7aed65227f58d38a5c',1,'easynav::PerceptionsOpsView']]]
 ];
