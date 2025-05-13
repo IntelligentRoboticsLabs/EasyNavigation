@@ -18,7 +18,7 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 /// \file
-/// \brief Declaration of the base class MethodBase used in plugin-based EasyNav modules.
+/// \brief Declaration of the base class MethodBase used in plugin-based EasyNav method components.
 
 #ifndef EASYNAV_CORE__METHODBASE_HPP_
 #define EASYNAV_CORE__METHODBASE_HPP_
@@ -35,40 +35,26 @@ namespace easynav
  * @class MethodBase
  * @brief Base class for Easy Navigation method plugins.
  *
- * This abstract base class provides common functionality for all plugin-based
- * modules in Easy Navigation, including access to the parent lifecycle node
- * and the plugin name.
+ * Provides lifecycle integration and update-rate management
+ * for components such as localizers, controllers, or map managers.
  */
 class MethodBase
 {
 public:
-  /**
-   * @brief Default constructor for MethodBase.
-   */
+  /// @brief Default constructor.
   MethodBase() = default;
 
-  /**
-   * @brief Virtual destructor for MethodBase.
-   *
-   * Ensures proper destruction of derived classes.
-   */
+  /// @brief Virtual destructor.
   virtual ~MethodBase() = default;
 
   /**
-   * @brief Initializes the module method with the given parent node and plugin name.
+   * @brief Initializes the method with the given node and plugin name.
    *
-   * This method should be called to set up any necessary resources or configuration
-   * required by the module. By default, it stores the provided lifecycle node and
-   * plugin name, and delegates additional initialization to the virtual on_initialize() method.
+   * Also reads update frequencies and sets up internal state.
    *
    * @param parent_node Shared pointer to the parent lifecycle node.
-   * @param plugin_name Name of the plugin (used for logging or namespacing).
-   * @return std::expected<void, std::string> Returns:
-   *         - `void` if initialization succeeds,
-   *         - a `std::string` containing the error message if it fails.
-   *
-   * @note If this method is overridden in a derived class, it should explicitly call
-   *       the base class implementation to ensure proper setup of the parent node and plugin name.
+   * @param plugin_name Name of the plugin (used for parameters and logging).
+   * @return std::expected<void, std::string> indicating success or failure.
    */
   virtual std::expected<void, std::string>
   initialize(
@@ -93,23 +79,18 @@ public:
   }
 
   /**
-   * @brief Called during initialization for custom setup by the derived class.
+   * @brief Hook for custom setup logic in derived classes.
    *
-   * This method is automatically called by initialize(), and is intended to be overridden
-   * by derived plugins if they need to perform additional setup or resource allocation.
+   * Called from initialize(). Can be overridden to implement extra initialization steps.
    *
-   * @return std::expected<void, std::string> Returns:
-   *         - `void` if successful,
-   *         - a `std::string` with the error message on failure.
+   * @return std::expected<void, std::string> indicating success or failure.
    */
   virtual std::expected<void, std::string> on_initialize() {return {};}
 
   /**
    * @brief Get a shared pointer to the parent lifecycle node.
    *
-   * Useful for accessing parameters, logging, and other ROS interfaces in derived classes.
-   *
-   * @return A shared pointer to the parent rclcpp_lifecycle::LifecycleNode.
+   * @return Shared pointer to the lifecycle node.
    */
   [[nodiscard]] std::shared_ptr<rclcpp_lifecycle::LifecycleNode>
   get_node() const
@@ -118,11 +99,9 @@ public:
   }
 
   /**
-   * @brief Get the plugin name assigned during initialization.
+   * @brief Get the name assigned to the plugin.
    *
-   * Typically used for namespacing, logging or plugin-specific configuration.
-   *
-   * @return A const reference to the plugin name string.
+   * @return Plugin name as a constant reference.
    */
   [[nodiscard]] const std::string &
   get_plugin_name() const
@@ -130,6 +109,13 @@ public:
     return plugin_name_;
   }
 
+  /**
+   * @brief Check whether it is time to run a real-time update.
+   *
+   * Uses the configured real-time frequency to determine whether sufficient time has elapsed.
+   *
+   * @return True if update should run, false otherwise.
+   */
   bool isTime2RunRT()
   {
     if ((parent_node_->now() - rt_last_ts_).seconds() > (1.0 / rt_frequency_)) {
@@ -140,6 +126,13 @@ public:
     }
   }
 
+  /**
+   * @brief Check whether it is time to run a normal (non-RT) update.
+   *
+   * Uses the configured frequency to determine whether sufficient time has elapsed.
+   *
+   * @return True if update should run, false otherwise.
+   */
   bool isTime2Run()
   {
     if ((parent_node_->now() - last_ts_).seconds() > (1.0 / frequency_)) {
@@ -151,18 +144,10 @@ public:
   }
 
 private:
-  /**
-   * @brief Pointer to the parent lifecycle node.
-   *
-   * Provides access to parameters, logging, and other ROS-related functionality.
-   */
+  /// @brief Shared pointer to the parent lifecycle node.
   std::shared_ptr<rclcpp_lifecycle::LifecycleNode> parent_node_ {nullptr};
 
-  /**
-   * @brief Name assigned to the plugin during initialization.
-   *
-   * Used for identification, namespacing, and logging.
-   */
+  /// @brief Name assigned to the plugin.
   std::string plugin_name_;
 
   float rt_frequency_, frequency_;

@@ -43,7 +43,7 @@ namespace easynav
 
 /**
  * @struct SystemNodeInfo
- * @brief Structure holding pointers to runtime info of each node.
+ * @brief Structure holding runtime information for a subnode.
  */
 struct SystemNodeInfo
 {
@@ -53,10 +53,10 @@ struct SystemNodeInfo
 
 /**
  * @class SystemNode
- * @brief ROS 2 lifecycle node that coordinates all major modules of the Easy Navigation system.
+ * @brief ROS 2 lifecycle node coordinating all Easy Navigation components.
  *
- * This node manages the lifecycle, scheduling, and interactions between the Controller, Localizer,
- * Planner, Maps Manager, and Sensors modules, providing a unified interface to ROS 2.
+ * Manages lifecycle transitions, real-time execution, and communication
+ * between planner, controller, localizer, map manager, and sensor nodes.
  */
 class SystemNode : public rclcpp_lifecycle::LifecycleNode
 {
@@ -65,141 +65,110 @@ public:
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a SystemNode lifecycle node with the specified options.
-   * @param options Node options to configure the SystemNode node.
+   * @brief Constructor.
+   * @param options Node options.
    */
   explicit SystemNode(const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
-  /**
-   * @brief Destroys the SystemNode object.
-   */
+  /// @brief Destructor.
   ~SystemNode();
 
   /**
-   * @brief Configures the SystemNode node.
-   * Declares parameters and initializes submodules (maps manager, planner, etc.).
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if configuration is successful.
+   * @brief Configure the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if configuration succeeded.
    */
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the SystemNode node.
-   * Starts periodic cycles and activates all submodules.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if activation is successful.
+   * @brief Activate the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if activation succeeded.
    */
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the SystemNode node.
-   * Stops periodic tasks and deactivates all submodules.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if deactivation is successful.
+   * @brief Deactivate the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if deactivation succeeded.
    */
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the SystemNode node.
-   * Resets submodules and releases allocated resources.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
+   * @brief Cleanup the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if cleanup succeeded.
    */
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the SystemNode node.
-   * Performs final shutdown procedures.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
+   * @brief Shutdown the node.
+   * @param state Lifecycle state.
+   * @return SUCCESS if shutdown succeeded.
    */
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the SystemNode node.
-   * Called when an error occurs during a lifecycle transition.
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating error handling is complete.
+   * @brief Handle lifecycle transition error.
+   * @param state Lifecycle state.
+   * @return SUCCESS if error handled.
    */
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Returns the real-time callback group.
-   *
-   * Callbacks requiring low latency or real-time constraints should use this group.
-   * @return Shared pointer to the real-time callback group.
+   * @brief Get the real-time callback group.
+   * @return Shared pointer to the callback group.
    */
   rclcpp::CallbackGroup::SharedPtr get_real_time_cbg();
 
   /**
-   * @brief Retrieves references to all system nodes managed by SystemNode.
-   *
-   * @return A map associating node names with their node pointers and callback groups.
+   * @brief Get all system nodes managed by this coordinator.
+   * @return Map of node names to node information.
    */
   std::map<std::string, SystemNodeInfo> get_system_nodes();
 
   /**
-   * @brief Executes one cycle of real-time system operations.
-   *
-   * This function is called periodically by the real-time timer to manage control,
-   * localization, planning, and other tightly coupled tasks.
+   * @brief Real-time system cycle.
    */
   void system_cycle_rt();
 
   /**
-   * @brief Executes one cycle of non-real-time system operations.
-   *
-   * This function manages background tasks not requiring strict real-time execution.
+   * @brief Non-real-time system cycle.
    */
   void system_cycle();
 
 private:
-  /**
-   * @brief Callback group intended for real-time system operations.
-   */
+  /// @brief Real-time callback group.
   rclcpp::CallbackGroup::SharedPtr realtime_cbg_;
 
-  /**
-   * @brief Timer that triggers the non-real-time system cycle.
-   */
+  /// @brief Timer for non-real-time updates.
   rclcpp::TimerBase::SharedPtr system_main_nort_timer_;
 
-  /**
-   * @brief Controller module node.
-   */
+  /// @brief Controller node.
   ControllerNode::SharedPtr controller_node_;
 
-  /**
-   * @brief Localizer module node.
-   */
+  /// @brief Localizer node.
   LocalizerNode::SharedPtr localizer_node_;
 
-  /**
-   * @brief Maps Manager module node.
-   */
+  /// @brief Maps manager node.
   MapsManagerNode::SharedPtr maps_manager_node_;
 
-  /**
-   * @brief Planner module node.
-   */
+  /// @brief Planner node.
   PlannerNode::SharedPtr planner_node_;
 
-  /**
-   * @brief Sensors module node.
-   */
+  /// @brief Sensors node.
   SensorsNode::SharedPtr sensors_node_;
 
-  /**
-   * @brief The current navigation state.
-   */
+  /// @brief Shared navigation state.
   std::shared_ptr<NavState> nav_state_;
 
-  /**
-   * @brief Goal manager for handling navigation goals.
-   */
+  /// @brief Goal manager.
   GoalManager::SharedPtr goal_manager_;
 
+  /// @brief Publisher for velocity command (stamped).
   rclcpp::Publisher<geometry_msgs::msg::TwistStamped>::SharedPtr vel_pub_stamped_;
+
+  /// @brief Publisher for velocity command (legacy Twist).
   rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr vel_pub_;
 };
 

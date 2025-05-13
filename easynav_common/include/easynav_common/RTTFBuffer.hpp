@@ -27,6 +27,10 @@
 namespace easynav
 {
 
+/**
+ * @class RTTFBuffer
+ * @brief Provides functionality for RTTFBuffer.
+ */
 class RTTFBuffer {
 public:
   static std::shared_ptr<tf2_ros::Buffer> getInstance(const rclcpp::Clock::SharedPtr & clock)

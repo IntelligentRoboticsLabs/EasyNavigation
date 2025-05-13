@@ -43,39 +43,25 @@ namespace easynav
  */
 struct NavState
 {
-  /**
-   * @brief The timestamp of the current navigation state.
-   */
+  /// @brief The timestamp of the current navigation state.
   rclcpp::Time timestamp;
 
-  /**
-   * @brief The current position of the robot in global coordinates.
-   */
+  /// @brief The current position of the robot in global coordinates.
   nav_msgs::msg::Odometry odom;
 
-  /**
-  * @brief The current perception data.
-  */
+  /// @brief The current perception data.
   Perceptions perceptions;
 
-  /**
-  * @brief The current list of map representations.
-  */
+  /// @brief The current list of map representations.
   std::map<std::string, std::shared_ptr<MapsTypeBase>> maps;
 
-  /**
-  * @brief The current path.
-  */
+  /// @brief The current path.
   nav_msgs::msg::Path path;
 
-  /**
-  * @brief The current goal (list of goals).
-  */
+  /// @brief The current goal (list of goals).
   nav_msgs::msg::Goals goals;
 
-  /**
-   * @brief The current velocity command.
-   */
+  /// @brief The current velocity command.
   geometry_msgs::msg::TwistStamped cmd_vel;
 };
 

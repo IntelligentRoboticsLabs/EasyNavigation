@@ -35,11 +35,9 @@ namespace easynav
 
 /**
  * @class MapsManagerNode
- * @brief ROS 2 lifecycle node that manages mapping-related tasks for the Easy Navigation system.
+ * @brief ROS 2 lifecycle node that manages map-related plugins in Easy Navigation.
  *
- * This node acts as the orchestrator for multiple map manager plugins, each responsible
- * for a specific type of map representation. It handles lifecycle state transitions,
- * loads plugins dynamically, and schedules map updates in real-time or background cycles.
+ * Handles lifecycle transitions, plugin loading, and periodic map updates.
  */
 class MapsManagerNode : public rclcpp_lifecycle::LifecycleNode
 {
@@ -48,106 +46,81 @@ public:
   using CallbackReturnT = rclcpp_lifecycle::node_interfaces::LifecycleNodeInterface::CallbackReturn;
 
   /**
-   * @brief Constructs a MapsManagerNode lifecycle node with the specified options.
-   * @param options Node options to configure the MapsManagerNode node.
+   * @brief Constructor.
+   * @param nav_state Shared pointer to navigation state.
+   * @param options Node options.
    */
   explicit MapsManagerNode(
     const std::shared_ptr<const NavState> & nav_state,
     const rclcpp::NodeOptions & options = rclcpp::NodeOptions());
 
-  /**
-   * @brief Destructor.
-   */
+  /// @brief Destructor.
   ~MapsManagerNode();
 
   /**
-   * @brief Configures the MapsManagerNode node.
-   *
-   * Loads parameters, instantiates maps manager plugins, and prepares internal structures.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if configuration is successful.
+   * @brief Configure the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if configuration succeeds.
    */
   CallbackReturnT on_configure(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Activates the MapsManagerNode node.
-   *
-   * Starts timers and enables execution of map-related tasks.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if activation is successful.
+   * @brief Activate the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if activation succeeds.
    */
   CallbackReturnT on_activate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Deactivates the MapsManagerNode node.
-   *
-   * Stops timers and disables map-related interfaces.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS if deactivation is successful.
+   * @brief Deactivate the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if deactivation succeeds.
    */
   CallbackReturnT on_deactivate(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Cleans up the MapsManagerNode node.
-   *
-   * Releases all resources and resets the internal state.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating cleanup is complete.
+   * @brief Cleanup the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if cleanup succeeds.
    */
   CallbackReturnT on_cleanup(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Shuts down the MapsManagerNode node.
-   *
-   * Called at final shutdown of the lifecycle node.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating shutdown is complete.
+   * @brief Shutdown the node.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if shutdown succeeds.
    */
   CallbackReturnT on_shutdown(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Handles errors in the MapsManagerNode node.
-   *
-   * Invoked when a transition fails and recovery or diagnostics are needed.
-   *
-   * @param state The current lifecycle state.
-   * @return CallbackReturnT::SUCCESS indicating error handling is complete.
+   * @brief Handle errors during lifecycle transitions.
+   * @param state Current lifecycle state.
+   * @return SUCCESS if error was handled.
    */
   CallbackReturnT on_error(const rclcpp_lifecycle::State & state);
 
   /**
-   * @brief Executes one cycle of non-real-time operations.
-   *
-   * Reserved for diagnostics, visualization, or heavy I/O.
+   * @brief Execute one update cycle (non real-time).
    */
   void cycle();
 
+  /**
+   * @brief Get the currently available maps.
+   * @return Map of map IDs to map instances.
+   */
   std::map<std::string, std::shared_ptr<MapsTypeBase>> get_maps() {return maps_;}
 
 private:
-  /**
-   * @brief List of active map instances in memory.
-   */
+  /// @brief Active map instances.
   std::map<std::string, std::shared_ptr<MapsTypeBase>> maps_;
 
-  /**
-   * @brief Plugin loader for MapsManagerBase-based implementations.
-   */
+  /// @brief Plugin loader for map manager implementations.
   std::unique_ptr<pluginlib::ClassLoader<MapsManagerBase>> maps_manager_loader_;
 
-  /**
-   * @brief List of active map manager plugin instances.
-   */
+  /// @brief Active map manager plugins.
   std::vector<std::shared_ptr<MapsManagerBase>> maps_managers_;
 
-  /**
-   * @brief Latest known navigation state.
-   */
+  /// @brief Shared navigation state reference.
   const std::shared_ptr<const NavState> nav_state_;
 };
 

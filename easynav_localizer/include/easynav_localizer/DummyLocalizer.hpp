@@ -33,70 +33,54 @@ namespace easynav
 
 /**
  * @class DummyLocalizer
- * @brief A default "do-nothing" implementation of the LocalizerMethodBase.
+ * @brief A default "do-nothing" implementation of LocalizerMethodBase.
  *
- * This class implements the interface required by the Easy Navigation framework
- * for localization but does not perform any actual computation. It is useful as
- * a placeholder, example, or fallback when no real localization plugin is configured.
+ * This class complies with the localization interface but does not perform real computation.
+ * It is intended as a placeholder, fallback, or example plugin.
  */
 class DummyLocalizer : public easynav::LocalizerMethodBase
 {
 public:
-  /**
-   * @brief Default constructor.
-   */
+  /// @brief Default constructor.
   DummyLocalizer() = default;
 
-  /**
-   * @brief Default destructor.
-   */
+  /// @brief Default destructor.
   ~DummyLocalizer() = default;
 
   /**
-   * @brief Initialize the localization method.
+   * @brief Plugin-specific initialization logic.
    *
-   * This override may be used to set up internal resources. By default, it simply succeeds.
-   *
-   * @return std::expected<void, std::string> Returns success or an error message.
+   * @return Success or an error message.
    */
   virtual std::expected<void, std::string> on_initialize() override;
 
   /**
-   * @brief Retrieve the current robot odometry.
+   * @brief Get the last stored odometry estimate.
    *
-   * Returns the last stored odometry message representing the estimated robot pose.
-   * This method should not perform any actual localization computation.
-   *
-   * @return nav_msgs::msg::Odometry Current localization estimate.
+   * @return Odometry message with current localization estimate.
    */
   [[nodiscard]] virtual nav_msgs::msg::Odometry get_odom() override;
 
   /**
-   * @brief Updates the localization estimate based on the current navigation state.
+   * @brief Update the localization using the current navigation state.
    *
-   * This method is intended to run the localization logic and update the odometry.
-   * In this dummy implementation, it does nothing.
+   * This dummy version performs no actual computation.
    *
-   * @param nav_state The current navigation state of the system.
+   * @param nav_state The current navigation state.
    */
   virtual void update_rt(const NavState & nav_state) override;
 
   /**
-   * @brief Updates the localization estimate based on the current navigation state.
+   * @brief Update the localization using the current navigation state.
    *
-   * This method is intended to run the localization logic and update the odometry.
-   * In this dummy implementation, it does nothing.
+   * This dummy version performs no actual computation.
    *
-   * @param nav_state The current navigation state of the system.
+   * @param nav_state The current navigation state.
    */
   virtual void update(const NavState & nav_state) override;
 
 private:
-  /**
-   * @brief Internal representation of the robot's current odometry.
-   *
-   * Stores the estimated position and velocity of the robot.
-   */
+  /// @brief Internal odometry placeholder.
   nav_msgs::msg::Odometry odom_ {};
 };
 

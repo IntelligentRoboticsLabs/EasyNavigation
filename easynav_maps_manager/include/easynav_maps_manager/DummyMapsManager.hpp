@@ -36,32 +36,27 @@ namespace easynav
  * @class DummyMapsManager
  * @brief A default "do-nothing" implementation of MapsManagerBase.
  *
- * This class fulfills the interface for a map manager in EasyNav but does not
- * manage or modify any actual map data. It is intended to be used as a placeholder
- * or fallback when no real implementation is specified in the configuration.
+ * Serves as a placeholder or fallback when no real map manager is provided.
  */
 class DummyMapsManager : public easynav::MapsManagerBase
 {
 public:
-  /**
-   * @brief Default constructor.
-   */
+  /// @brief Default constructor.
   DummyMapsManager() = default;
 
-  /**
-   * @brief Default destructor.
-   */
+  /// @brief Default destructor.
   ~DummyMapsManager() = default;
 
   /**
-   * @brief Initialize the dummy maps manager.
-   *
-   * Optionally overridden in derived classes to perform setup logic.
-   *
-   * @return std::expected<void, std::string> Success or error message.
+   * @brief Initialize the plugin.
+   * @return Success or error message.
    */
   virtual std::expected<void, std::string> on_initialize() override;
 
+  /**
+   * @brief Return the current maps.
+   * @return An empty map.
+   */
   std::map<std::string, std::shared_ptr<MapsTypeBase>> get_maps()
   {
     return std::map<std::string, std::shared_ptr<MapsTypeBase>>();
@@ -69,11 +64,7 @@ public:
 
   /**
    * @brief Dummy update method.
-   *
-   * This function is intended to update the internal map data based on the current
-   * navigation state. In this dummy implementation, it performs no action.
-   *
-   * @param nav_state The current state of the navigation system.
+   * @param nav_state The current navigation state.
    */
   virtual void update(const NavState & nav_state) override;
 };
