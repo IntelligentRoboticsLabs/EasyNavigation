@@ -231,6 +231,7 @@ GoalManager::comanded_pose_callback(geometry_msgs::msg::PoseStamped::UniquePtr m
   command->seq = last_control_->seq + 1;
   command->user_id = id_ + "_initpose";
   command->type = easynav_interfaces::msg::NavigationControl::REQUEST;
+  command->goals.header = msg->header;
   command->goals.goals.push_back(*msg);
 
   control_callback(std::move(command));
