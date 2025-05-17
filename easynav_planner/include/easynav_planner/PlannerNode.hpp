@@ -111,14 +111,14 @@ public:
   void cycle();
 
 private:
-  /// @brief Loaded planner plugin.
-  std::shared_ptr<PlannerMethodBase> planner_method_ {nullptr};
-
   /// @brief Shared navigation state.
   const std::shared_ptr<const NavState> nav_state_;
 
   /// @brief Plugin loader for planner methods.
-  std::unique_ptr<pluginlib::ClassLoader<easynav::PlannerMethodBase>> planner_loader_;
+  std::unique_ptr<pluginlib::ClassLoader<PlannerMethodBase>> planner_loader_;
+
+  /// @brief Loaded planner plugin.
+  std::shared_ptr<PlannerMethodBase> planner_method_ {nullptr};
 };
 
 }  // namespace easynav

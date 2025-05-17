@@ -213,10 +213,9 @@ SystemNode::system_cycle()
 
   maps_manager_node_->cycle();
   nav_state_->maps = maps_manager_node_->get_maps();
-  // nav_state_->dynamic_map = maps_manager_node_->get_dynamic_map();
-  // nav_state_->goal = goal_;
 
   if (goal_manager_->get_state() == GoalManager::State::IDLE) {return;}
+
   goal_manager_->update();
   nav_state_->goals = goal_manager_->get_goals();
 

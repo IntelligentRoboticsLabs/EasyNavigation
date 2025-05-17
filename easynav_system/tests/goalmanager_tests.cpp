@@ -107,6 +107,8 @@ TEST_F(GoalManagerTestCase, initpose_topic)
   nav_msgs::msg::Goals req_goals = gm_server->get_goals();
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
+  ASSERT_EQ(req_goals.header.stamp, goal.header.stamp);
 
   ASSERT_EQ(last_control.type, easynav_interfaces::msg::NavigationControl::FEEDBACK);
   ASSERT_EQ(last_control.user_id, std::string("easynav_system"));
@@ -234,6 +236,7 @@ TEST_F(GoalManagerTestCase, initpose_topic_with_preempt)
   req_goals = gm_server->get_goals();
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   ASSERT_EQ(last_control.type, easynav_interfaces::msg::NavigationControl::FEEDBACK);
   ASSERT_EQ(last_control.user_id, std::string("easynav_system"));
@@ -317,6 +320,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   auto last_control = gm_client->get_last_control();
   auto last_feedback = gm_client->get_feedback();
@@ -386,6 +390,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -447,6 +452,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -483,6 +489,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -547,6 +554,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -611,6 +619,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -676,6 +685,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -742,6 +752,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -807,6 +818,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -832,6 +844,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   req_goals = gm_server->get_goals();
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_TRUE(req_goals.goals.empty());
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -873,6 +886,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -898,6 +912,7 @@ TEST_F(GoalManagerTestCase, simple_nav_node)
   req_goals = gm_server->get_goals();
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_TRUE(req_goals.goals.empty());
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client->get_last_control();
   last_feedback = gm_client->get_feedback();
@@ -966,6 +981,7 @@ TEST_F(GoalManagerTestCase, two_clients)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   auto last_control = gm_client1->get_last_control();
   auto last_feedback = gm_client1->get_feedback();
@@ -1038,6 +1054,7 @@ TEST_F(GoalManagerTestCase, two_clients)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client2->get_last_control();
   last_feedback = gm_client2->get_feedback();
@@ -1110,6 +1127,7 @@ TEST_F(GoalManagerTestCase, two_clients)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client2->get_last_control();
   last_feedback = gm_client2->get_feedback();
@@ -1196,6 +1214,7 @@ TEST_F(GoalManagerTestCase, two_clients)
   ASSERT_EQ(req_goals.header, goal.header);
   ASSERT_EQ(req_goals.goals.size(), 1);
   ASSERT_EQ(req_goals.goals[0], goal);
+  ASSERT_EQ(req_goals.header.frame_id, "map");
 
   last_control = gm_client2->get_last_control();
   last_feedback = gm_client2->get_feedback();

@@ -27,6 +27,7 @@
 #include "lifecycle_msgs/msg/state.hpp"
 
 #include "easynav_planner/PlannerNode.hpp"
+#include "easynav_core/PlannerMethodBase.hpp"
 
 namespace easynav
 {
@@ -39,7 +40,7 @@ PlannerNode::PlannerNode(
 : LifecycleNode("planner_node", options),
   nav_state_(nav_state)
 {
-  planner_loader_ = std::make_unique<pluginlib::ClassLoader<easynav::PlannerMethodBase>>(
+  planner_loader_ = std::make_unique<pluginlib::ClassLoader<PlannerMethodBase>>(
     "easynav_core", "easynav::PlannerMethodBase");
 
 }
@@ -104,7 +105,7 @@ PlannerNode::on_configure(const rclcpp_lifecycle::State & state)
         "Loaded PlannerMethodBase %s [%s]", planner_type.c_str(), plugin.c_str());
     } catch (pluginlib::PluginlibException & ex) {
       RCLCPP_ERROR(get_logger(),
-        "Unable to load plugin easynav::PlannerMethodBase. Error: %s", ex.what());
+        "Unable to load plugin %s. Error: %s", plugin.c_str(), ex.what());
       return CallbackReturnT::FAILURE;
     }
   }
