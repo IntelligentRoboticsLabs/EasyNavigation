@@ -35,6 +35,7 @@
 
 #include "easynav_common/types/Perceptions.hpp"
 #include "easynav_common/RTTFBuffer.hpp"
+#include "easynav_common/YTSession.hpp"
 
 namespace easynav
 {
@@ -114,6 +115,8 @@ create_typed_subscription<sensor_msgs::msg::LaserScan>(
     topic,
     rclcpp::SensorDataQoS().reliable(),
     [perception](sensor_msgs::msg::LaserScan::UniquePtr msg) {
+      EASYNAV_TRACE_NAMED_EVENT("Lambda::LaserScan");
+
       convert(*msg, perception->data);
 
       perception->frame_id = msg->header.frame_id;
@@ -139,6 +142,8 @@ create_typed_subscription<sensor_msgs::msg::PointCloud2>(
     topic,
     rclcpp::SensorDataQoS().reliable(),
     [perception](sensor_msgs::msg::PointCloud2::UniquePtr msg) {
+      EASYNAV_TRACE_NAMED_EVENT("Lambda::PointCloud2");
+
       pcl::fromROSMsg(*msg, perception->data);
 
       perception->frame_id = msg->header.frame_id;

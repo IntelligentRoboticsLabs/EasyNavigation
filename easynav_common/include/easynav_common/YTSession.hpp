@@ -18,40 +18,44 @@
 // along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
-#ifndef EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_
-#define EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_
+#ifndef EASYNAV_COMMON_TYPES__YTSESSION_HPP_
+#define EASYNAV_COMMON_TYPES__YTSESSION_HPP_
 
 #include "easynav_common/Singleton.hpp"
 
-#include "tf2_ros/buffer.h"
-#include "rclcpp/rclcpp.hpp"
+#include "yaets/tracing.hpp"
 
 namespace easynav
 {
 
 /**
- * @class RTTFBuffer
- * @brief Provides functionality for RTTFBuffer.
+ * @class YTSession
+ * @brief A Yaets Tracing Session
  */
-class RTTFBuffer : public tf2_ros::Buffer, public Singleton<RTTFBuffer>
+class YTSession : public yaets::TraceSession, public Singleton<YTSession>
 {
 public:
-  explicit RTTFBuffer(const rclcpp::Clock::SharedPtr & clock)
-  : tf2_ros::Buffer(clock)
+  explicit YTSession()
+  : yaets::TraceSession("/tmp/easynav.log")
   {}
 
-  explicit RTTFBuffer()
-  : Buffer(std::make_shared<rclcpp::Clock>(RCL_ROS_TIME))
+  ~YTSession()
   {
-    RCLCPP_WARN(rclcpp::get_logger("RTTFBuffer"),
-      "You should be creating this RTTFBuffer with your clock."
-      "Using default clock RCL_ROS_TIME");
+    stop();
   }
 
-  SINGLETON_DEFINITIONS(RTTFBuffer)
+  SINGLETON_DEFINITIONS(YTSession)
 };
+
+#ifdef EASYNAV_DEBUG_WITH_YAETS
+  #define EASYNAV_TRACE_EVENT TRACE_EVENT(YTSession::get())
+  #define EASYNAV_TRACE_NAMED_EVENT(name) yaets::TraceGuard guard(YTSession::get(), name);
+#else
+  #define EASYNAV_TRACE_EVENT(...) ((void)0)
+  #define EASYNAV_TRACE_NAMED_EVENT(...) ((void)0)
+#endif
 
 }  // namespace easynav
 
 
-#endif  // EASYNAV_COMMON_TYPES__RTTFBUFFER_HPP_
+#endif  // EASYNAV_COMMON_TYPES__YTSESSION_HPP_
