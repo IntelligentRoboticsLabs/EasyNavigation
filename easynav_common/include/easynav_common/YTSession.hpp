@@ -51,8 +51,8 @@ public:
   #define EASYNAV_TRACE_EVENT TRACE_EVENT(YTSession::get())
   #define EASYNAV_TRACE_NAMED_EVENT(name) yaets::TraceGuard guard(YTSession::get(), name);
 #else
-  #define EASYNAV_TRACE_EVENT(...) ((void)0)
-  #define EASYNAV_TRACE_NAMED_EVENT(...) ((void)0)
+  #define EASYNAV_TRACE_EVENT ((void)0)
+  #define EASYNAV_TRACE_NAMED_EVENT(name) ((void)0)
 #endif
 
 }  // namespace easynav

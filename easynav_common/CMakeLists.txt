@@ -11,11 +11,7 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 
 # build with "colcon build --cmake-clean-cache ..." to propagate the value
-option(DebugWithYaets "Enable Yaets tracing with TRACE_EVENT" ON)
-
-if(DebugWithYaets)
-  add_compile_definitions(EASYNAV_DEBUG_WITH_YAETS)
-endif()
+option(EASYNAV_TRACING "Enable Yaets tracing with TRACE_EVENT" ON)
 
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
@@ -46,10 +42,11 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
-if(DebugWithYaets)
-  target_compile_definitions(easynav_common INTERFACE EASYNAV_DEBUG_WITH_YAETS=1)
+if(EASYNAV_TRACING)
+  message(STATUS "Yaets tracing is ENABLED")
+  target_compile_definitions(easynav_common PUBLIC EASYNAV_DEBUG_WITH_YAETS)
 else()
-  target_compile_definitions(easynav_common INTERFACE EASYNAV_DEBUG_WITH_YAETS=0)
+  message(STATUS "Yaets tracing is DISABLED")
 endif()
 
 install(DIRECTORY include/
