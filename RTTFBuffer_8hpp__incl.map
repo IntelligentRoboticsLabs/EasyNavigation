@@ -1,7 +1,15 @@
 <map id="easynav_common/include/easynav_common/RTTFBuffer.hpp" name="easynav_common/include/easynav_common/RTTFBuffer.hpp">
-<area shape="rect" id="Node000001" title=" " alt="" coords="14,5,240,46"/>
-<area shape="rect" id="Node000002" title=" " alt="" coords="5,94,113,120"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="112,48,81,84,77,80,108,45"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="137,94,256,120"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="146,45,178,80,174,84,142,48"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="193,5,418,46"/>
+<area shape="rect" id="Node000002" href="$Singleton_8hpp.html" title=" " alt="" coords="20,94,228,120"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="261,49,167,90,165,85,259,44"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="252,94,359,120"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="308,46,308,78,303,78,303,46"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="383,94,503,120"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="341,44,410,84,408,88,339,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,168,73,193"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="112,122,66,160,63,156,108,118"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="96,168,152,193"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="127,120,127,152,122,152,122,120"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="176,168,227,193"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="139,118,179,155,176,159,136,122"/>
 </map>

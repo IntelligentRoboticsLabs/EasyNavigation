@@ -108,59 +108,73 @@ $(function(){ initResizable(false); });
 <code>#include &quot;sensor_msgs/msg/point_cloud2.hpp&quot;</code><br />
 <code>#include &quot;<a class="el" href="Perceptions_8hpp_source.html">easynav_common/types/Perceptions.hpp</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="RTTFBuffer_8hpp_source.html">easynav_common/RTTFBuffer.hpp</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="YTSession_8hpp_source.html">easynav_common/YTSession.hpp</a>&quot;</code><br />
 </div><div class="textblock"><div class="dynheader">
 Include dependency graph for Perceptions.cpp:</div>
 <div class="dyncontent">
 <div class="center"><img src="Perceptions_8cpp__incl.png" border="0" usemap="#aeasynav__common_2src_2easynav__common_2types_2Perceptions_8cpp" alt=""/></div>
 <map name="aeasynav__common_2src_2easynav__common_2types_2Perceptions_8cpp" id="aeasynav__common_2src_2easynav__common_2types_2Perceptions_8cpp">
-<area shape="rect" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="605,5,771,61"/>
+<area shape="rect" title="Definition of the Perception struct and the Perceptions container used for sensor data input." alt="" coords="704,5,869,61"/>
 <area shape="rect" title=" " alt="" coords="5,205,59,231"/>
-<area shape="poly" title=" " alt="" coords="605,45,446,69,354,87,265,112,209,132,155,155,67,200,65,195,153,150,207,127,263,106,353,82,445,64,604,40"/>
+<area shape="poly" title=" " alt="" coords="704,42,614,50,505,64,388,84,273,112,215,131,159,155,68,200,65,195,157,150,213,126,271,106,387,79,505,59,613,45,703,37"/>
 <area shape="rect" title=" " alt="" coords="83,205,141,231"/>
-<area shape="poly" title=" " alt="" coords="606,55,502,80,390,112,271,152,154,200,152,201,150,196,152,195,269,147,389,106,501,75,604,50"/>
-<area shape="rect" title=" " alt="" coords="962,116,1011,142"/>
-<area shape="poly" title=" " alt="" coords="772,51,859,75,950,107,952,107,950,112,948,111,857,80,770,56"/>
-<area shape="rect" title=" " alt="" coords="1036,116,1113,142"/>
-<area shape="poly" title=" " alt="" coords="772,47,891,73,1023,106,1030,108,1028,114,1022,112,890,78,771,52"/>
+<area shape="poly" title=" " alt="" coords="704,50,563,75,405,112,278,151,154,200,152,201,150,196,152,195,276,146,403,106,562,70,703,44"/>
+<area shape="rect" title=" " alt="" coords="1035,116,1085,142"/>
+<area shape="poly" title=" " alt="" coords="871,55,946,78,1024,107,1025,107,1023,112,1022,111,944,83,869,60"/>
+<area shape="rect" title=" " alt="" coords="1109,116,1187,142"/>
+<area shape="poly" title=" " alt="" coords="870,49,978,74,1097,106,1103,108,1102,114,1095,112,977,80,869,54"/>
 <area shape="rect" title=" " alt="" coords="165,205,283,231"/>
-<area shape="poly" title=" " alt="" coords="615,64,490,111,268,201,266,196,488,107,613,59"/>
+<area shape="poly" title=" " alt="" coords="704,59,527,112,387,159,271,202,269,197,385,154,526,106,703,54"/>
 <area shape="rect" title=" " alt="" coords="308,198,444,238"/>
-<area shape="poly" title=" " alt="" coords="643,64,424,192,421,187,640,59"/>
+<area shape="poly" title=" " alt="" coords="727,64,435,193,433,189,725,59"/>
 <area shape="rect" title=" " alt="" coords="468,205,657,231"/>
-<area shape="poly" title=" " alt="" coords="672,63,582,194,577,191,667,60"/>
+<area shape="poly" title=" " alt="" coords="755,63,591,197,587,193,752,59"/>
 <area shape="rect" title=" " alt="" coords="681,198,842,238"/>
-<area shape="poly" title=" " alt="" coords="696,61,706,103,722,149,741,184,737,186,718,151,701,104,691,62"/>
+<area shape="poly" title=" " alt="" coords="786,62,769,183,763,182,780,61"/>
 <area shape="rect" title=" " alt="" coords="865,198,1026,238"/>
-<area shape="poly" title=" " alt="" coords="702,60,728,105,745,128,766,148,807,173,851,192,849,197,804,178,762,152,741,131,723,108,697,63"/>
-<area shape="rect" href="Perceptions_8hpp.html" title="Defines data structures and utilities for representing and processing sensor perceptions." alt="" coords="777,109,938,150"/>
-<area shape="poly" title=" " alt="" coords="738,59,810,99,807,103,736,64"/>
-<area shape="rect" href="RTTFBuffer_8hpp.html" title=" " alt="" coords="2064,116,2285,142"/>
-<area shape="poly" title=" " alt="" coords="771,37,2049,117,2049,123,771,42"/>
-<area shape="poly" title=" " alt="" coords="777,136,408,157,212,176,132,187,71,200,68,201,66,196,70,195,131,182,212,171,408,152,776,131"/>
-<area shape="poly" title=" " alt="" coords="776,132,654,135,498,144,325,165,238,180,154,200,149,202,148,197,153,195,237,175,324,160,497,139,654,129,776,127"/>
-<area shape="poly" title=" " alt="" coords="777,139,559,161,428,178,296,200,281,204,280,198,296,195,427,173,558,156,776,134"/>
-<area shape="poly" title=" " alt="" coords="777,145,633,168,460,200,459,194,632,163,776,140"/>
-<area shape="poly" title=" " alt="" coords="791,153,619,203,618,198,789,148"/>
-<area shape="poly" title=" " alt="" coords="837,152,796,189,793,185,834,148"/>
-<area shape="poly" title=" " alt="" coords="879,148,917,185,913,189,875,152"/>
-<area shape="rect" title=" " alt="" coords="1235,205,1301,231"/>
-<area shape="poly" title=" " alt="" coords="939,145,950,147,1027,159,1087,167,1148,176,1223,195,1229,197,1227,202,1222,200,1147,181,1087,172,1026,165,949,152,938,150"/>
-<area shape="rect" title=" " alt="" coords="1325,205,1494,231"/>
-<area shape="poly" title=" " alt="" coords="939,145,950,147,1052,162,1132,171,1211,180,1314,195,1337,199,1336,204,1313,200,1211,185,1131,177,1051,168,949,152,938,150"/>
-<area shape="rect" title=" " alt="" coords="1518,205,1636,231"/>
-<area shape="poly" title=" " alt="" coords="939,145,950,147,1106,164,1228,169,1350,175,1506,195,1522,198,1521,204,1505,200,1350,180,1228,174,1105,169,949,152,938,151"/>
-<area shape="rect" title=" " alt="" coords="1660,205,1785,231"/>
-<area shape="poly" title=" " alt="" coords="939,145,950,147,1056,159,1145,165,1299,168,1453,173,1543,181,1648,195,1666,198,1665,204,1648,200,1542,186,1452,178,1299,174,1145,171,1055,164,949,152,938,151"/>
-<area shape="rect" title=" " alt="" coords="1809,205,1964,231"/>
-<area shape="poly" title=" " alt="" coords="939,145,950,147,1078,161,1187,168,1373,171,1560,173,1669,181,1798,195,1822,199,1821,204,1797,200,1669,186,1560,179,1373,176,1187,173,1078,166,949,152,938,151"/>
-<area shape="rect" title=" " alt="" coords="1988,205,2097,231"/>
-<area shape="poly" title=" " alt="" coords="939,146,950,147,1105,162,1238,168,1354,168,1464,165,1573,162,1689,164,1821,174,1976,195,1992,198,1991,203,1976,200,1821,179,1689,170,1573,168,1464,170,1355,173,1238,174,1105,168,949,152,938,151"/>
-<area shape="rect" title=" " alt="" coords="1050,198,1211,238"/>
-<area shape="poly" title=" " alt="" coords="920,148,1055,190,1053,195,919,153"/>
-<area shape="rect" title=" " alt="" coords="2121,205,2228,231"/>
-<area shape="poly" title=" " alt="" coords="2177,143,2177,189,2172,189,2172,143"/>
-<area shape="rect" title=" " alt="" coords="2252,205,2372,231"/>
-<area shape="poly" title=" " alt="" coords="2195,140,2281,194,2278,199,2192,145"/>
+<area shape="poly" title=" " alt="" coords="796,60,812,104,824,127,839,148,863,170,890,188,887,192,860,174,835,151,820,130,807,106,791,62"/>
+<area shape="rect" href="Perceptions_8hpp.html" title="Defines data structures and utilities for representing and processing sensor perceptions." alt="" coords="850,109,1011,150"/>
+<area shape="poly" title=" " alt="" coords="830,59,890,98,887,103,827,64"/>
+<area shape="rect" href="RTTFBuffer_8hpp.html" title=" " alt="" coords="2377,116,2599,142"/>
+<area shape="poly" title=" " alt="" coords="870,34,1467,58,1881,79,2303,106,2364,112,2364,117,2302,112,1880,84,1467,63,870,40"/>
+<area shape="rect" href="YTSession_8hpp.html" title=" " alt="" coords="2072,116,2290,142"/>
+<area shape="poly" title=" " alt="" coords="870,37,2057,117,2056,122,870,43"/>
+<area shape="poly" title=" " alt="" coords="850,136,670,143,445,155,228,174,139,186,71,200,68,201,66,196,70,195,138,181,227,169,445,150,670,138,849,130"/>
+<area shape="poly" title=" " alt="" coords="850,137,486,159,293,177,214,188,154,200,149,202,148,197,153,195,213,183,292,172,486,153,849,131"/>
+<area shape="poly" title=" " alt="" coords="850,138,601,158,449,176,296,200,281,204,280,198,296,195,448,171,601,153,849,133"/>
+<area shape="poly" title=" " alt="" coords="850,142,675,165,460,200,459,195,674,160,849,137"/>
+<area shape="poly" title=" " alt="" coords="850,152,629,204,628,199,849,147"/>
+<area shape="poly" title=" " alt="" coords="893,153,814,193,812,188,891,148"/>
+<area shape="poly" title=" " alt="" coords="937,150,942,182,937,183,931,151"/>
+<area shape="rect" title=" " alt="" coords="1368,205,1434,231"/>
+<area shape="poly" title=" " alt="" coords="1012,145,1023,147,1117,160,1191,166,1264,174,1357,195,1362,197,1361,202,1355,200,1263,180,1190,171,1116,165,1022,152,1011,150"/>
+<area shape="rect" title=" " alt="" coords="1458,205,1627,231"/>
+<area shape="poly" title=" " alt="" coords="1012,145,1023,147,1142,163,1235,171,1328,179,1447,195,1471,199,1470,204,1446,200,1327,185,1234,177,1141,168,1022,152,1011,150"/>
+<area shape="rect" title=" " alt="" coords="1652,205,1770,231"/>
+<area shape="poly" title=" " alt="" coords="1012,145,1023,147,1116,158,1196,164,1331,168,1467,174,1546,181,1639,195,1656,198,1655,204,1638,200,1545,187,1466,179,1331,174,1195,170,1116,164,1022,152,1011,151"/>
+<area shape="rect" title=" " alt="" coords="1794,205,1918,231"/>
+<area shape="poly" title=" " alt="" coords="1012,145,1023,147,1138,160,1236,166,1402,168,1569,172,1667,180,1782,195,1800,198,1799,204,1781,200,1666,185,1569,177,1402,173,1235,171,1137,165,1022,152,1011,151"/>
+<area shape="rect" title=" " alt="" coords="1942,205,2098,231"/>
+<area shape="poly" title=" " alt="" coords="1012,145,1023,147,1161,162,1277,169,1477,171,1676,172,1793,180,1931,195,1956,199,1955,204,1930,200,1793,185,1676,178,1477,176,1277,174,1160,167,1022,152,1011,151"/>
+<area shape="rect" title=" " alt="" coords="1049,205,1159,231"/>
+<area shape="poly" title=" " alt="" coords="971,148,1068,196,1065,200,969,153"/>
+<area shape="rect" title=" " alt="" coords="1183,198,1345,238"/>
+<area shape="poly" title=" " alt="" coords="1007,148,1174,191,1173,196,1006,153"/>
+<area shape="rect" href="Singleton_8hpp.html" title=" " alt="" coords="2265,205,2474,231"/>
+<area shape="poly" title=" " alt="" coords="2473,145,2400,198,2397,193,2470,140"/>
+<area shape="rect" title=" " alt="" coords="2497,205,2604,231"/>
+<area shape="poly" title=" " alt="" coords="2499,141,2535,191,2531,194,2495,144"/>
+<area shape="rect" title=" " alt="" coords="2628,205,2748,231"/>
+<area shape="poly" title=" " alt="" coords="2517,140,2647,196,2645,201,2515,145"/>
+<area shape="rect" title=" " alt="" coords="2250,286,2318,312"/>
+<area shape="poly" title=" " alt="" coords="2358,233,2310,278,2306,274,2355,229"/>
+<area shape="rect" title=" " alt="" coords="2341,286,2398,312"/>
+<area shape="poly" title=" " alt="" coords="2372,231,2372,270,2367,270,2367,231"/>
+<area shape="rect" title=" " alt="" coords="2421,286,2472,312"/>
+<area shape="poly" title=" " alt="" coords="2383,229,2426,273,2423,277,2379,233"/>
+<area shape="poly" title=" " alt="" coords="2209,140,2330,196,2328,201,2207,145"/>
+<area shape="rect" title=" " alt="" coords="2122,205,2241,231"/>
+<area shape="poly" title=" " alt="" coords="2184,143,2184,189,2179,189,2179,143"/>
 </map>
 </div>
 </div><table class="memberdecls">
