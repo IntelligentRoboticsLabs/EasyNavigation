@@ -30,6 +30,7 @@
 #include "easynav_maps_manager/MapsManagerNode.hpp"
 #include "easynav_planner/PlannerNode.hpp"
 #include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_common/YTSession.hpp"
 
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp/macros.hpp"
@@ -173,6 +174,8 @@ SystemNode::get_real_time_cbg()
 void
 SystemNode::system_cycle_rt()
 {
+  EASYNAV_TRACE_EVENT;
+
   auto start = now();
   bool trigger_perceptions = sensors_node_->cycle_rt();
   nav_state_->perceptions = sensors_node_->get_perceptions();
@@ -180,11 +183,10 @@ SystemNode::system_cycle_rt()
   bool trigger_localization = localizer_node_->cycle_rt(trigger_perceptions);
   nav_state_->odom = localizer_node_->get_odom();
 
+  if (goal_manager_->get_state() == GoalManager::State::IDLE) {return;}
+
   bool trigger_controller = controller_node_->cycle_rt(
     trigger_perceptions || trigger_localization);
-
-
-  if (goal_manager_->get_state() == GoalManager::State::IDLE) {return;}
 
   if (trigger_controller) {
     nav_state_->cmd_vel = controller_node_->get_cmd_vel();
@@ -202,6 +204,8 @@ SystemNode::system_cycle_rt()
 void
 SystemNode::system_cycle()
 {
+  EASYNAV_TRACE_EVENT;
+
   auto start = now();
   sensors_node_->cycle();
 

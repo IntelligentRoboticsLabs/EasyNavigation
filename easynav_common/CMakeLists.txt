@@ -9,6 +9,10 @@ set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
+
+# build with "colcon build --cmake-clean-cache ..." to propagate the value
+option(EASYNAV_TRACING "Enable Yaets tracing with TRACE_EVENT" ON)
+
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp_lifecycle REQUIRED)
 find_package(geometry_msgs REQUIRED)
@@ -18,12 +22,14 @@ find_package(pcl_ros REQUIRED)
 find_package(tf2 REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(tf2_eigen REQUIRED)
+find_package(yaets REQUIRED)
 
 set(dependencies
   rclcpp_lifecycle
   geometry_msgs
   nav_msgs
   pcl_ros
+  yaets
 )
 
 include_directories(include)
@@ -36,6 +42,12 @@ target_include_directories(${PROJECT_NAME} PUBLIC
   $<INSTALL_INTERFACE:include>
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
+if(EASYNAV_TRACING)
+  message(STATUS "Yaets tracing is ENABLED")
+  target_compile_definitions(easynav_common PUBLIC EASYNAV_DEBUG_WITH_YAETS)
+else()
+  message(STATUS "Yaets tracing is DISABLED")
+endif()
 
 install(DIRECTORY include/
   DESTINATION include/
@@ -60,11 +72,8 @@ if(BUILD_TESTING)
 endif()
 
 ament_export_include_directories(include)
-ament_export_libraries(
-  easynav_configuration
-)
 ament_export_targets(
-  export_${PROJECT_NAME}
+  export_${PROJECT_NAME} HAS_LIBRARY_TARGET
 )
 ament_export_dependencies(${dependencies})
 ament_package()

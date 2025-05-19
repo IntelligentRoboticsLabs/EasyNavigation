@@ -13,6 +13,7 @@
   <depend>pcl_ros</depend>
   <depend>geometry_msgs</depend>
   <depend>nav_msgs</depend>
+  <depend>yaets</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

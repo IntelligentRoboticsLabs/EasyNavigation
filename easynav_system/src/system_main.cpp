@@ -90,12 +90,12 @@ int main(int argc, char ** argv)
 
       rclcpp::Rate rate(100);
       while (rclcpp::ok()) {
-        rate.sleep();
         if (system_node->get_current_state().id() ==
         lifecycle_msgs::msg::State::PRIMARY_STATE_ACTIVE)
         {
           system_node->system_cycle_rt();
         }
+        rate.sleep();
         exe_rt.spin_some();
       }
     });
