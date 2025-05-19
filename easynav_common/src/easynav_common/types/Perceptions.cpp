@@ -303,7 +303,7 @@ PerceptionsOpsView::fuse(
     geometry_msgs::msg::TransformStamped tf;
     try {
       tf = RTTFBuffer::getInstance()->lookupTransform(
-        target_frame, p->frame_id, tf2_ros::fromMsg(p->stamp), tf2::durationFromSec(0.1));
+        target_frame, p->frame_id, tf2_ros::fromMsg(p->stamp), tf2::durationFromSec(0.0));
     } catch (const tf2::TransformException & ex) {
       RCLCPP_WARN(rclcpp::get_logger("PerceptionsOpsView"), "TF failed: %s", ex.what());
       continue;
