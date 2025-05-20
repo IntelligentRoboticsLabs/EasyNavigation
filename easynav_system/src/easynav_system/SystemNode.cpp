@@ -121,8 +121,7 @@ SystemNode::on_activate(const rclcpp_lifecycle::State & state)
     }
   }
 
-  system_main_nort_timer_ = create_timer(300ms, std::bind(&SystemNode::system_cycle, this),
-    realtime_cbg_);
+  system_main_nort_timer_ = create_timer(30ms, std::bind(&SystemNode::system_cycle, this));
 
   return CallbackReturnT::SUCCESS;
 }
