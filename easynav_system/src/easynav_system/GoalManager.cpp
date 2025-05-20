@@ -20,6 +20,7 @@
 /// \file
 /// \brief Implementation of the GoalManager class.
 
+#include "tf2_geometry_msgs/tf2_geometry_msgs.hpp"
 #include "easynav_system/GoalManager.hpp"
 
 namespace easynav
@@ -259,6 +260,35 @@ GoalManager::update()
   RCLCPP_DEBUG(parent_node_->get_logger(), "Sending navigation feedback");
   control_pub_->publish(feedback);
   *last_control_ = feedback;
+}
+
+void
+GoalManager::check_goals(
+  const geometry_msgs::msg::Pose & current_pose,
+  double position_tolerance, double angle_tolerance)
+{
+  if (goals_.goals.empty()) {return;}
+
+  const auto & first_goal = goals_.goals.front().pose;
+
+  double dx = current_pose.position.x - first_goal.position.x;
+  double dy = current_pose.position.y - first_goal.position.y;
+  double dz = current_pose.position.z - first_goal.position.z;
+  double distance = std::sqrt(dx * dx + dy * dy + dz * dz);
+
+  if (distance > position_tolerance) {
+    return;
+  }
+
+  tf2::Quaternion q_current, q_goal;
+  tf2::fromMsg(current_pose.orientation, q_current);
+  tf2::fromMsg(first_goal.orientation, q_goal);
+
+  double angle_diff = q_current.angleShortestPath(q_goal);
+
+  if (angle_diff <= angle_tolerance) {
+    goals_.goals.erase(goals_.goals.begin());
+  }
 }
 
 }  // namespace easynav

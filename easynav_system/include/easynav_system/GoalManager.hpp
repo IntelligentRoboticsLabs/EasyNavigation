@@ -103,6 +103,10 @@ public:
    */
   void update();
 
+  void check_goals(
+    const geometry_msgs::msg::Pose & current_pose,
+    double position_tolerance, double angle_tolerance);
+
 private:
   /// @brief Lifecycle node.
   rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_;
