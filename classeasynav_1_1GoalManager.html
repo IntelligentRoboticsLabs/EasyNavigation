@@ -111,6 +111,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:a3a63cbc52bbc79133fa4672575ab8429" id="r_a3a63cbc52bbc79133fa4672575ab8429"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3a63cbc52bbc79133fa4672575ab8429">check_goals</a> (const geometry_msgs::msg::Pose &amp;current_pose, double position_tolerance, double angle_tolerance)</td></tr>
+<tr class="memdesc:a3a63cbc52bbc79133fa4672575ab8429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check if the robot is currently at the first goal.  <br /></td></tr>
+<tr class="separator:a3a63cbc52bbc79133fa4672575ab8429"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a359cd66ef7d1c77e72245ad7e592c993" id="r_a359cd66ef7d1c77e72245ad7e592c993"><td class="memItemLeft" align="right" valign="top">nav_msgs::msg::Goals&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a359cd66ef7d1c77e72245ad7e592c993">get_goals</a> () const</td></tr>
 <tr class="memdesc:a359cd66ef7d1c77e72245ad7e592c993"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get current goals.  <br /></td></tr>
 <tr class="separator:a359cd66ef7d1c77e72245ad7e592c993"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -199,6 +202,43 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a3a63cbc52bbc79133fa4672575ab8429" name="a3a63cbc52bbc79133fa4672575ab8429"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3a63cbc52bbc79133fa4672575ab8429">&#9670;&#160;</a></span>check_goals()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void check_goals </td>
+          <td>(</td>
+          <td class="paramtype">const geometry_msgs::msg::Pose &amp;</td>          <td class="paramname"><span class="paramname"><em>current_pose</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>position_tolerance</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double</td>          <td class="paramname"><span class="paramname"><em>angle_tolerance</em></span>&#160;)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Check if the robot is currently at the first goal. </p>
+<p>Compares the current pose against the first target in the list using positional and angular tolerances.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">current_pose</td><td>Current pose of the robot. </td></tr>
+    <tr><td class="paramname">position_tolerance</td><td>Maximum allowed positional error (meters). </td></tr>
+    <tr><td class="paramname">angle_tolerance</td><td>Maximum allowed angular error (radians). </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a359cd66ef7d1c77e72245ad7e592c993" name="a359cd66ef7d1c77e72245ad7e592c993"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a359cd66ef7d1c77e72245ad7e592c993">&#9670;&#160;</a></span>get_goals()</h2>
 
