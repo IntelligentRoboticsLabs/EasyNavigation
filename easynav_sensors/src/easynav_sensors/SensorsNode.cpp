@@ -31,6 +31,7 @@
 #include "sensor_msgs/msg/point_cloud2.hpp"
 
 #include "easynav_sensors/SensorsNode.hpp"
+#include "easynav_common/YTSession.hpp"
 
 namespace easynav
 {
@@ -167,6 +168,8 @@ SensorsNode::get_real_time_cbg()
 bool
 SensorsNode::cycle_rt(bool trigger)
 {
+  EASYNAV_TRACE_EVENT;
+
   (void)trigger;
 
   bool trigger_perceptions = false;
@@ -180,6 +183,8 @@ SensorsNode::cycle_rt(bool trigger)
 void
 SensorsNode::cycle()
 {
+  EASYNAV_TRACE_EVENT;
+
   for (auto & perception : perceptions_) {
     if (perception->valid && (now() - perception->stamp).seconds() > forget_time_) {
       perception->valid = false;

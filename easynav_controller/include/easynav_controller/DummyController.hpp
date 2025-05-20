@@ -82,6 +82,8 @@ private:
    */
   geometry_msgs::msg::TwistStamped cmd_vel_ {};
 
+  double cycle_time_rt_;
+  double cycle_time_nort_;
 };
 
 }  // namespace easynav
