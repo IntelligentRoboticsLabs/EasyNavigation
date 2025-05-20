@@ -138,11 +138,6 @@ public:
   void system_cycle();
 
 private:
-  bool at_goal(
-    const geometry_msgs::msg::Pose & current_pose,
-    const nav_msgs::msg::Path & path,
-    double position_tolerance, double angle_tolerance) const;
-
   double position_tolerance_ {0.03};
   double angle_tolerance_ {0.01};
 
