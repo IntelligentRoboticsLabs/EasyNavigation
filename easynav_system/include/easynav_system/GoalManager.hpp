@@ -103,6 +103,21 @@ public:
    */
   void update();
 
+
+  /**
+   * @brief Check if the robot is currently at the first goal.
+   *
+   * Compares the current pose against the first target in the list using
+   * positional and angular tolerances.
+   *
+   * @param current_pose Current pose of the robot.
+   * @param position_tolerance Maximum allowed positional error (meters).
+   * @param angle_tolerance Maximum allowed angular error (radians).
+   */
+  void check_goals(
+    const geometry_msgs::msg::Pose & current_pose,
+    double position_tolerance, double angle_tolerance);
+
 private:
   /// @brief Lifecycle node.
   rclcpp_lifecycle::LifecycleNode::SharedPtr parent_node_;

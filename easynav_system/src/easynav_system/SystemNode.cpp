@@ -57,6 +57,9 @@ SystemNode::SystemNode(const rclcpp::NodeOptions & options)
 
   vel_pub_stamped_ = create_publisher<geometry_msgs::msg::TwistStamped>("cmd_vel_stamped", 100);
   vel_pub_ = create_publisher<geometry_msgs::msg::Twist>("cmd_vel", 100);
+
+  declare_parameter("position_tolerance", position_tolerance_);
+  declare_parameter("angle_tolerance", angle_tolerance_);
 }
 
 SystemNode::~SystemNode()
@@ -91,6 +94,9 @@ SystemNode::on_configure(const rclcpp_lifecycle::State & state)
       return CallbackReturnT::FAILURE;
     }
   }
+
+  get_parameter("position_tolerance", position_tolerance_);
+  get_parameter("angle_tolerance", angle_tolerance_);
 
   goal_manager_ = GoalManager::make_shared(nav_state_, shared_from_this());
 
@@ -221,7 +227,15 @@ SystemNode::system_cycle()
   if (goal_manager_->get_state() == GoalManager::State::IDLE) {return;}
 
   goal_manager_->update();
+  goal_manager_->check_goals(nav_state_->odom.pose.pose,
+    position_tolerance_, angle_tolerance_);
+
   nav_state_->goals = goal_manager_->get_goals();
+
+  if (nav_state_->goals.goals.empty()) {
+    goal_manager_->set_finished();
+    return;
+  }
 
   planner_node_->cycle();
 

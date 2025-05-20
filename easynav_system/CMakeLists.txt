@@ -19,6 +19,9 @@ find_package(easynav_localizer)
 find_package(easynav_maps_manager)
 find_package(easynav_planner)
 find_package(easynav_sensors)
+find_package(geometry_msgs)
+find_package(tf2_geometry_msgs)
+find_package(tf2)
 
 set(dependencies
   rclcpp
@@ -30,6 +33,9 @@ set(dependencies
   easynav_maps_manager
   easynav_planner
   easynav_sensors
+  geometry_msgs
+  tf2_geometry_msgs
+  tf2
 )
 
 include_directories(include)
