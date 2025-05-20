@@ -138,7 +138,10 @@ public:
   void system_cycle();
 
 private:
+  /// @brief Positional tolerance in meters.
   double position_tolerance_ {0.03};
+
+  /// @brief Angular tolerance in radians.
   double angle_tolerance_ {0.01};
 
   /// @brief Real-time callback group.
