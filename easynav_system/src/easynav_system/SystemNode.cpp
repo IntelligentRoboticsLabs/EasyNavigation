@@ -181,20 +181,26 @@ SystemNode::system_cycle_rt()
 {
   EASYNAV_TRACE_EVENT;
 
-  auto start = now();
   bool trigger_perceptions = sensors_node_->cycle_rt();
   nav_state_->perceptions = sensors_node_->get_perceptions();
 
   bool trigger_localization = localizer_node_->cycle_rt(trigger_perceptions);
   nav_state_->odom = localizer_node_->get_odom();
 
-  if (goal_manager_->get_state() == GoalManager::State::IDLE) {return;}
+  bool trigger_controller = false;
+  bool robot_idle_stop = true;
 
-  bool trigger_controller = controller_node_->cycle_rt(
-    trigger_perceptions || trigger_localization);
-
-  if (trigger_controller) {
+  if (goal_manager_->get_state() == GoalManager::State::IDLE) {
+    robot_idle_stop = nav_state_->cmd_vel.twist == geometry_msgs::msg::Twist();
+    nav_state_->cmd_vel.header.stamp = now();
+    nav_state_->cmd_vel.twist = geometry_msgs::msg::Twist();
+  } else {
+    trigger_controller = controller_node_->cycle_rt(
+      trigger_perceptions || trigger_localization);
     nav_state_->cmd_vel = controller_node_->get_cmd_vel();
+  }
+
+  if (trigger_controller || !robot_idle_stop) {
     if (vel_pub_stamped_->get_subscription_count()) {
       vel_pub_stamped_->publish(nav_state_->cmd_vel);
     }
@@ -202,8 +208,6 @@ SystemNode::system_cycle_rt()
       vel_pub_->publish(nav_state_->cmd_vel.twist);
     }
   }
-
-  RCLCPP_DEBUG_STREAM(get_logger(), "rt: " << (now() - start).seconds());
 }
 
 void
@@ -211,7 +215,6 @@ SystemNode::system_cycle()
 {
   EASYNAV_TRACE_EVENT;
 
-  auto start = now();
   sensors_node_->cycle();
 
   nav_state_->perceptions = sensors_node_->get_perceptions();
@@ -239,8 +242,6 @@ SystemNode::system_cycle()
   planner_node_->cycle();
 
   nav_state_->path = planner_node_->get_path();
-
-  RCLCPP_DEBUG_STREAM(get_logger(), "nort: " << (now() - start).seconds());
 }
 
 std::map<std::string, SystemNodeInfo>
