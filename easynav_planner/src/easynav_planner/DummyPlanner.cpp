@@ -29,6 +29,14 @@ namespace easynav
 
 std::expected<void, std::string> DummyPlanner::on_initialize()
 {
+  auto node = get_node();
+  const auto & plugin_name = get_plugin_name();
+
+  node->declare_parameter<double>(plugin_name + ".cycle_time_rt", 0.01);
+  node->declare_parameter<double>(plugin_name + ".cycle_time_nort", 0.01);
+  node->get_parameter<double>(plugin_name + ".cycle_time_rt", cycle_time_rt_);
+  node->get_parameter<double>(plugin_name + ".cycle_time_nort", cycle_time_nort_);
+
   // Initialize the Path message
   path_.header.stamp = get_node()->now();
   path_.header.frame_id = "map";
@@ -44,6 +52,9 @@ nav_msgs::msg::Path DummyPlanner::get_path()
 
 void DummyPlanner::update(const NavState & nav_state)
 {
+  auto start = get_node()->now();
+  while ((get_node()->now() - start).seconds() < cycle_time_nort_) {}
+
   path_.header.stamp = nav_state.timestamp;
   path_.header.frame_id = "map";
   // Compute the current path...

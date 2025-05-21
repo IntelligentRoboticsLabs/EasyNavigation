@@ -27,6 +27,7 @@
 
 #include "nav_msgs/msg/odometry.hpp"
 #include "easynav_core/LocalizerMethodBase.hpp"
+#include "tf2_ros/transform_broadcaster.h"
 
 namespace easynav
 {
@@ -82,6 +83,11 @@ public:
 private:
   /// @brief Internal odometry placeholder.
   nav_msgs::msg::Odometry odom_ {};
+
+  std::unique_ptr<tf2_ros::TransformBroadcaster> tf_broadcaster_;
+
+  double cycle_time_rt_;
+  double cycle_time_nort_;
 };
 
 }  // namespace easynav

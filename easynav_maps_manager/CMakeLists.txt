@@ -28,7 +28,6 @@ include_directories(include)
 
 add_library(${PROJECT_NAME} SHARED
   src/easynav_maps_manager/MapsManagerNode.cpp
-  src/easynav_maps_manager/DummyMapsManager.cpp
 )
 target_include_directories(${PROJECT_NAME} PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
@@ -36,12 +35,26 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 )
 ament_target_dependencies(${PROJECT_NAME} ${dependencies})
 
+add_library(dummy_maps_manager SHARED
+  src/easynav_maps_manager/DummyMapsManager.cpp
+)
+target_include_directories(dummy_maps_manager PUBLIC
+  $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
+  $<INSTALL_INTERFACE:include>
+)
+ament_target_dependencies(dummy_maps_manager
+  easynav_core
+  pluginlib
+)
+
+
 install(DIRECTORY include/
   DESTINATION include/
 )
 
 install(TARGETS
   ${PROJECT_NAME}
+  dummy_maps_manager
   EXPORT export_${PROJECT_NAME}
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib

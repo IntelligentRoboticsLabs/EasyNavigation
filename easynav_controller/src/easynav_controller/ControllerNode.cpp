@@ -27,6 +27,7 @@
 #include "lifecycle_msgs/msg/state.hpp"
 
 #include "easynav_controller/ControllerNode.hpp"
+#include "easynav_common/YTSession.hpp"
 
 namespace easynav
 {
@@ -171,6 +172,8 @@ ControllerNode::get_cmd_vel() const
 bool
 ControllerNode::cycle_rt(bool trigger)
 {
+  EASYNAV_TRACE_EVENT;
+
   if (controller_method_ == nullptr) {return false;}
 
   return controller_method_->internal_update_rt(*nav_state_, trigger);

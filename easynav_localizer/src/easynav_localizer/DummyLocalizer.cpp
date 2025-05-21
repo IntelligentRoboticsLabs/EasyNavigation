@@ -23,22 +23,22 @@
 #include <expected>
 #include "easynav_localizer/DummyLocalizer.hpp"
 
+#include "easynav_common/RTTFBuffer.hpp"
+
 namespace easynav
 {
 
 std::expected<void, std::string> DummyLocalizer::on_initialize()
 {
-  // Initialize the odometry message
-  odom_.header.stamp = get_node()->now();
-  odom_.header.frame_id = "map";
-  odom_.child_frame_id = "base_link";
-  odom_.pose.pose.position.x = 0.0;
-  odom_.pose.pose.position.y = 0.0;
-  odom_.pose.pose.position.z = 0.0;
-  odom_.pose.pose.orientation.x = 0.0;
-  odom_.pose.pose.orientation.y = 0.0;
-  odom_.pose.pose.orientation.z = 0.0;
-  odom_.pose.pose.orientation.w = 1.0;
+  auto node = get_node();
+  const auto & plugin_name = get_plugin_name();
+
+  node->declare_parameter<double>(plugin_name + ".cycle_time_rt", 0.01);
+  node->declare_parameter<double>(plugin_name + ".cycle_time_nort", 0.01);
+  node->get_parameter<double>(plugin_name + ".cycle_time_rt", cycle_time_rt_);
+  node->get_parameter<double>(plugin_name + ".cycle_time_nort", cycle_time_nort_);
+
+  tf_broadcaster_ = std::make_unique<tf2_ros::TransformBroadcaster>(get_node());
 
   return {};
 }
@@ -50,20 +50,30 @@ nav_msgs::msg::Odometry DummyLocalizer::get_odom()
 
 void DummyLocalizer::update_rt(const NavState & nav_state)
 {
-  odom_.header.stamp = nav_state.timestamp;
-  odom_.header.frame_id = "map";
-  odom_.child_frame_id = "base_link";
-  // Compute the current robot position...
-  // odom_.pose.pose.position.x += 1.0;
+  auto start = get_node()->now();
+  while ((get_node()->now() - start).seconds() < cycle_time_rt_) {}
+
+  geometry_msgs::msg::TransformStamped tf_msg;
+  tf_msg.header.stamp = get_node()->now();
+  tf_msg.header.frame_id = "map";
+  tf_msg.child_frame_id = "odom";
+
+  RTTFBuffer::getInstance()->setTransform(tf_msg, "easynav", false);
+  tf_broadcaster_->sendTransform(tf_msg);
 }
 
 void DummyLocalizer::update(const NavState & nav_state)
 {
-  odom_.header.stamp = nav_state.timestamp;
-  odom_.header.frame_id = "map";
-  odom_.child_frame_id = "base_link";
-  // Compute the current robot position...
-  // odom_.pose.pose.position.x += 1.0;
+  auto start = get_node()->now();
+  while ((get_node()->now() - start).seconds() < cycle_time_nort_) {}
+
+  geometry_msgs::msg::TransformStamped tf_msg;
+  tf_msg.header.stamp = get_node()->now();
+  tf_msg.header.frame_id = "map";
+  tf_msg.child_frame_id = "odom";
+
+  RTTFBuffer::getInstance()->setTransform(tf_msg, "easynav", false);
+  tf_broadcaster_->sendTransform(tf_msg);
 }
 
 }  // namespace easynav

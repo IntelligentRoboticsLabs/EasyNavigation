@@ -30,6 +30,14 @@ namespace easynav
 
 std::expected<void, std::string> DummyController::on_initialize()
 {
+  auto node = get_node();
+  const auto & plugin_name = get_plugin_name();
+
+  node->declare_parameter<double>(plugin_name + ".cycle_time_rt", 0.01);
+  node->declare_parameter<double>(plugin_name + ".cycle_time_nort", 0.01);
+  node->get_parameter<double>(plugin_name + ".cycle_time_rt", cycle_time_rt_);
+  node->get_parameter<double>(plugin_name + ".cycle_time_nort", cycle_time_nort_);
+
   // Initialize the odometry message
   cmd_vel_.header.stamp = get_node()->now();
   cmd_vel_.header.frame_id = "base_link";
@@ -50,6 +58,9 @@ geometry_msgs::msg::TwistStamped DummyController::get_cmd_vel()
 
 void DummyController::update_rt(const NavState & nav_state)
 {
+  auto start = get_node()->now();
+  while ((get_node()->now() - start).seconds() < cycle_time_rt_) {}
+
   cmd_vel_.header.stamp = nav_state.timestamp;
   cmd_vel_.header.frame_id = "base_link";
   // Compute the current command...

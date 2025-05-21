@@ -67,6 +67,10 @@ public:
    * @param nav_state The current navigation state.
    */
   virtual void update(const NavState & nav_state) override;
+
+private:
+  double cycle_time_rt_;
+  double cycle_time_nort_;
 };
 
 }  // namespace easynav
